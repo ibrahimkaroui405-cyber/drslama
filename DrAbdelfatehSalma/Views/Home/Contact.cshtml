@@ -6,38 +6,13 @@
 <!-- 1. HERO SECTION: DRAMATIC EDITORIAL SPLIT LAYOUT WITH COMPACT TRANSPARENT CTA CARD -->
 <!-- ============================================ -->
 <section class="relative min-h-[85vh] md:min-h-screen flex items-end md:items-center pt-24 md:pt-20 pb-16 md:pb-12 overflow-hidden bg-surface-container-low border-b border-gold/20">
-    <!-- Right-Side Visual Container with Background Office Image & Floating Transparent Card on Desktop -->
-    <div class="absolute inset-0 md:left-auto md:right-0 md:top-0 w-full md:w-1/2 h-full z-0 overflow-hidden bg-black flex items-center justify-center md:p-10">
-        <!-- Office Background Image -->
-        <img src="/images/office.png" alt="Cabinet Pr Slama Sousse Contact & Prise de Rendez-vous" class="w-full h-full object-cover object-center opacity-90 brightness-[0.98] transition-transform duration-[12s] hover:scale-105" />
-        <div class="absolute inset-0 bg-black/25"></div>
-
-        <!-- Desktop High-Fashion Gradient Transition from Left to Right -->
-        <div class="hidden md:block absolute inset-y-0 left-0 w-32 bg-gradient-to-r from-surface-container-low via-surface-container-low/50 to-transparent z-10 pointer-events-none"></div>
+    <!-- Right-Side Image (Full screen on mobile, 50% width on desktop) -->
+    <div class="absolute inset-0 md:left-auto md:right-0 md:top-0 w-full md:w-1/2 h-full z-0 overflow-hidden">
+        <!-- Desktop High-Fashion Gradient Transition -->
+        <div class="hidden md:block absolute inset-y-0 left-0 w-48 bg-gradient-to-r from-surface-container-low via-surface-container-low/70 to-transparent z-10 pointer-events-none"></div>
         <!-- Mobile Dark Gradient Overlay to ensure text readability -->
-        <div class="block md:hidden absolute inset-0 bg-gradient-to-t from-black/95 via-black/65 to-black/30 z-10 pointer-events-none"></div>
-
-        <!-- Compact Version of the Transparent Floating Card (Visible on Desktop only) -->
-        <div class="hidden md:block relative z-20 w-full max-w-sm sm:max-w-md bg-black/35 backdrop-blur-[3px] p-6 sm:p-8 rounded-2xl border border-white/30 shadow-2xl text-center text-white my-auto">
-            <span class="font-label-caps text-[8.5px] sm:text-[9px] tracking-[0.3em] text-white block mb-3 uppercase border border-white/40 inline-block px-3 py-1 bg-black/30 backdrop-blur-sm font-bold drop-shadow rounded-full">
-                CONSULTATION PRIVÉE • SOUSSE
-            </span>
-            <h3 class="font-display-lg text-xl sm:text-2xl md:text-3xl font-bold text-white mb-2.5 leading-tight drop-shadow-[0_2px_8px_rgba(0,0,0,0.85)]">
-                Planifiez votre <span class="italic font-normal text-gold">Soin.</span>
-            </h3>
-            <p class="font-body-md text-white/90 text-xs leading-relaxed max-w-xs sm:max-w-sm mx-auto drop-shadow-[0_1px_4px_rgba(0,0,0,0.85)] mb-5">
-                Une prise en charge confidentielle, rigoureuse et entièrement sur-mesure au cœur de Sousse.
-            </p>
-            <div class="flex flex-wrap gap-2.5 justify-center items-center">
-                <a href="#contact-form" class="bg-white hover:bg-neutral-100 text-primary font-label-caps text-[9.5px] tracking-wider px-5 py-2.5 rounded-full font-bold shadow-lg transition-all">
-                    CONTACTEZ-NOUS
-                </a>
-                <a href="tel:+21673200000" class="border border-white/60 bg-black/40 backdrop-blur-sm text-white hover:bg-white hover:text-primary font-label-caps text-[9.5px] tracking-wider px-4 py-2.5 rounded-full font-bold shadow transition-all flex items-center gap-1.5">
-                    <span class="material-symbols-outlined text-xs">phone</span>
-                    +216 73 200 000
-                </a>
-            </div>
-        </div>
+        <div class="block md:hidden absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-black/10 z-10 pointer-events-none"></div>
+        <img src="/images/office.png" alt="Cabinet Pr Slama Sousse Contact & Prise de Rendez-vous" class="w-full h-full object-cover object-center transition-all duration-700 brightness-[1.02] contrast-[1.03]" />
     </div>
 
     <!-- Content Area (Left Side: Editorial on Desktop, Clear High-Contrast on Mobile) -->
