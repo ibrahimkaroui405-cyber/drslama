@@ -9,88 +9,91 @@ public static class DbInitializer
     {
         context.Database.EnsureCreated();
 
-        // Ensure Reparatrices table exists in SQLite DB
-        try
+        if (context.Database.IsSqlite())
         {
-            context.Database.ExecuteSqlRaw(@"
-                CREATE TABLE IF NOT EXISTS ""Reparatrices"" (
-                    ""Id"" INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
-                    ""Slug"" TEXT NOT NULL,
-                    ""Title"" TEXT NOT NULL,
-                    ""Category"" TEXT NOT NULL,
-                    ""Subtitle"" TEXT NULL,
-                    ""ImageUrl"" TEXT NULL,
-                    ""Duree"" TEXT NULL,
-                    ""Anesthesie"" TEXT NULL,
-                    ""Eviction"" TEXT NULL,
-                    ""Hospitalisation"" TEXT NULL,
-                    ""Overview"" TEXT NULL,
-                    ""Indications"" TEXT NULL,
-                    ""Steps"" TEXT NULL,
-                    ""Faqs"" TEXT NULL
-                );
-            ");
-        }
-        catch { }
-
-        try
-        {
-            context.Database.ExecuteSqlRaw(@"
-                CREATE TABLE IF NOT EXISTS ""Actualites"" (
-                    ""Id"" INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
-                    ""Title"" TEXT NOT NULL,
-                    ""Excerpt"" TEXT NULL,
-                    ""Content"" TEXT NULL,
-                    ""Category"" TEXT NOT NULL DEFAULT 'congres',
-                    ""ImageUrl"" TEXT NULL,
-                    ""Tags"" TEXT NULL,
-                    ""DateLabel"" TEXT NULL,
-                    ""IsFeatured"" INTEGER NOT NULL DEFAULT 0,
-                    ""CreatedAt"" TEXT NOT NULL DEFAULT (datetime('now'))
-                );
-            ");
-        }
-        catch { }
-
-        // Ensure new columns in DemandesContact exist in SQLite safely
-        try
-        {
-            var conn = context.Database.GetDbConnection();
-            bool wasClosed = conn.State != System.Data.ConnectionState.Open;
-            if (wasClosed) conn.Open();
-            using (var cmd = conn.CreateCommand())
+            // Ensure Reparatrices table exists in SQLite DB
+            try
             {
-                cmd.CommandText = "PRAGMA table_info(\"DemandesContact\");";
-                var columns = new HashSet<string>(StringComparer.OrdinalIgnoreCase);
-                using (var reader = cmd.ExecuteReader())
-                {
-                    while (reader.Read())
-                    {
-                        var colName = reader["name"]?.ToString();
-                        if (!string.IsNullOrEmpty(colName)) columns.Add(colName);
-                    }
-                }
-
-                void AddColIfNotExists(string name, string typeDef)
-                {
-                    if (!columns.Contains(name))
-                    {
-                        using var alterCmd = conn.CreateCommand();
-                        alterCmd.CommandText = $"ALTER TABLE \"DemandesContact\" ADD COLUMN \"{name}\" {typeDef};";
-                        alterCmd.ExecuteNonQuery();
-                    }
-                }
-
-                AddColIfNotExists("Nom", "TEXT NULL");
-                AddColIfNotExists("Prenom", "TEXT NULL");
-                AddColIfNotExists("Indicatif", "TEXT NULL");
-                AddColIfNotExists("Objet", "TEXT NULL");
-                AddColIfNotExists("PhotoPath", "TEXT NULL");
-                AddColIfNotExists("ConsentAccepted", "INTEGER NOT NULL DEFAULT 1");
+                context.Database.ExecuteSqlRaw(@"
+                    CREATE TABLE IF NOT EXISTS ""Reparatrices"" (
+                        ""Id"" INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+                        ""Slug"" TEXT NOT NULL,
+                        ""Title"" TEXT NOT NULL,
+                        ""Category"" TEXT NOT NULL,
+                        ""Subtitle"" TEXT NULL,
+                        ""ImageUrl"" TEXT NULL,
+                        ""Duree"" TEXT NULL,
+                        ""Anesthesie"" TEXT NULL,
+                        ""Eviction"" TEXT NULL,
+                        ""Hospitalisation"" TEXT NULL,
+                        ""Overview"" TEXT NULL,
+                        ""Indications"" TEXT NULL,
+                        ""Steps"" TEXT NULL,
+                        ""Faqs"" TEXT NULL
+                    );
+                ");
             }
-            if (wasClosed) conn.Close();
+            catch { }
+
+            try
+            {
+                context.Database.ExecuteSqlRaw(@"
+                    CREATE TABLE IF NOT EXISTS ""Actualites"" (
+                        ""Id"" INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+                        ""Title"" TEXT NOT NULL,
+                        ""Excerpt"" TEXT NULL,
+                        ""Content"" TEXT NULL,
+                        ""Category"" TEXT NOT NULL DEFAULT 'congres',
+                        ""ImageUrl"" TEXT NULL,
+                        ""Tags"" TEXT NULL,
+                        ""DateLabel"" TEXT NULL,
+                        ""IsFeatured"" INTEGER NOT NULL DEFAULT 0,
+                        ""CreatedAt"" TEXT NOT NULL DEFAULT (datetime('now'))
+                    );
+                ");
+            }
+            catch { }
+
+            // Ensure new columns in DemandesContact exist in SQLite safely
+            try
+            {
+                var conn = context.Database.GetDbConnection();
+                bool wasClosed = conn.State != System.Data.ConnectionState.Open;
+                if (wasClosed) conn.Open();
+                using (var cmd = conn.CreateCommand())
+                {
+                    cmd.CommandText = "PRAGMA table_info(\"DemandesContact\");";
+                    var columns = new HashSet<string>(StringComparer.OrdinalIgnoreCase);
+                    using (var reader = cmd.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            var colName = reader["name"]?.ToString();
+                            if (!string.IsNullOrEmpty(colName)) columns.Add(colName);
+                        }
+                    }
+
+                    void AddColIfNotExists(string name, string typeDef)
+                    {
+                        if (!columns.Contains(name))
+                        {
+                            using var alterCmd = conn.CreateCommand();
+                            alterCmd.CommandText = $"ALTER TABLE \"DemandesContact\" ADD COLUMN \"{name}\" {typeDef};";
+                            alterCmd.ExecuteNonQuery();
+                        }
+                    }
+
+                    AddColIfNotExists("Nom", "TEXT NULL");
+                    AddColIfNotExists("Prenom", "TEXT NULL");
+                    AddColIfNotExists("Indicatif", "TEXT NULL");
+                    AddColIfNotExists("Objet", "TEXT NULL");
+                    AddColIfNotExists("PhotoPath", "TEXT NULL");
+                    AddColIfNotExists("ConsentAccepted", "INTEGER NOT NULL DEFAULT 1");
+                }
+                if (wasClosed) conn.Close();
+            }
+            catch { }
         }
-        catch { }
 
         // Automatic Migration / Cleanup of existing category names & video testimonial URLs
         var existingChirurgies = context.Chirurgies.ToList();
