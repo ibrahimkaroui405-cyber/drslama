@@ -1,0 +1,349 @@
+@{
+    ViewData["Title"] = "Détail de l'Intervention - Dr. Abdelfateh Slama";
+    string procedureId = (string)ViewBag.ProcedureId ?? "rhinoplastie";
+
+    string procTitle = "";
+    string procCategory = "";
+    string procImage = "";
+    string procSubtitle = "";
+    string procDuree = "";
+    string procAnesthesie = "";
+    string procEviction = "";
+    string procHospitalisation = "";
+    string procOverview = "";
+    List<string> procIndications = new List<string>();
+    List<string> procSteps = new List<string>();
+    List<string> procFaqs = new List<string>();
+
+    if (Model != null)
+    {
+        try
+        {
+            dynamic m = Model;
+            procTitle = m.Title ?? "";
+            procCategory = m.Category ?? "";
+            procImage = m.ImageUrl ?? "";
+            procSubtitle = m.Subtitle ?? "";
+            procDuree = m.Duree ?? "1h30";
+            procAnesthesie = m.Anesthesie ?? "Générale";
+            procEviction = m.Eviction ?? "7 jours";
+            procHospitalisation = m.Hospitalisation ?? "Ambulatoire";
+            procOverview = m.Overview ?? "";
+
+            string indStr = m.Indications ?? "";
+            if (!string.IsNullOrEmpty(indStr))
+            {
+                procIndications = indStr.Split(';', StringSplitOptions.RemoveEmptyEntries).ToList();
+            }
+            string stepStr = m.Steps ?? "";
+            if (!string.IsNullOrEmpty(stepStr))
+            {
+                procSteps = stepStr.Split(';', StringSplitOptions.RemoveEmptyEntries).ToList();
+            }
+            string faqStr = m.Faqs ?? "";
+            if (!string.IsNullOrEmpty(faqStr))
+            {
+                procFaqs = faqStr.Split(';', StringSplitOptions.RemoveEmptyEntries).ToList();
+            }
+        }
+        catch
+        {
+            // Fallback if dynamic read fails
+        }
+    }
+
+    if (string.IsNullOrEmpty(procTitle))
+    {
+        var procedureData = new Dictionary<string, (string Title, string Category, string Image, string Subtitle, string Duree, string Anesthesie, string Eviction, string Hospitalisation, string Overview, string[] Indications, string[] Steps, string[] Faqs)>()
+        {
+            { "rhinoplastie", (
+                "Rhinoplastie Ultrasonique",
+                "CHIRURGIE DU VISAGE & DU COU",
+                "/images/dr_slama_details.png",
+                "Remodelage structuré de la pyramide nasale et de la pointe par piézotome de haute précision.",
+                "2h00 – 2h30",
+                "Générale",
+                "7 à 10 jours",
+                "Ambulatoire (Jour Même)",
+                "La rhinoplastie ultrasonique révolutionne la chirurgie esthétique du nez en remplaçant les instruments traditionnels (martaux et ciseaux à os) par des vibrations piézo-électriques à haute fréquence. Cette technologie de pointe permet de sculpter et de polir les os nasaux avec une méticulosité micrométrique sans léser les cartilages, les vaisseaux sanguins ni les tissus mous environnants.",
+                new[] { "Bosse osseuse ou cartilagineuse marquée sur le profil", "Pointe du nez trop large, déviée ou tombante", "Asymétrie nasale ou séquelle de traumatisme antérieur", "Gêne respiratoire associée (Septoplastie fonctionnelle)" },
+                new[] { "Consultation initiale & Simulation 3D morphométrique haute définition", "Sculpture piézo-électrique ultrastructurelle des os sans briser la charpente nasale", "Pose d'une attelle thermo-formable légère retirée à J+7", "Suivi post-opératoire rigoureux à Sousse à 1 mois, 3 mois et 1 an" },
+                new[] {
+                    "Est-ce douloureux ? La rhinoplastie ultrasonique provoque peu de douleur, une simple gêne avec sensation de nez bouché les premiers jours.",
+                    "Quand verrai-je le résultat final ? Un affinement spectaculaire est visible dès le retrait de l'attelle à J+7. Le résultat définitif se stabilise entre 6 et 12 mois.",
+                    "Y a-t-il des cicatrices visibles ? Les incisions sont dissimulées à l'intérieur des narines et sur une fine bandelette sous la columelle."
+                }
+            )},
+            { "facelift", (
+                "Deep Plane Facelift",
+                "CHIRURGIE DU VISAGE & DU COU",
+                "/images/dr_slama_portrait.png",
+                "Rajeunissement structural profond du visage et du cou par repositionnement musculaire SMAS.",
+                "3h30 – 4h00",
+                "Générale",
+                "12 à 14 jours",
+                "1 Nuit d'Hospitalisation",
+                "Le Deep Plane Facelift est considéré comme l'étalon-or international de la chirurgie du rajeunissement facial.",
+                new[] { "Relâchement prononcé de l'ovale du visage et bajoues", "Perte de volume au niveau des pommettes", "Rides et fanons musculaires marqués au niveau du cou" },
+                new[] { "Bilan esthétique personnalisé et cartographie anatomique 3D", "Libération complète et élévation des plans profonds musculaires", "Redrapage cutané sans traction avec micro-sutures" },
+                new[] {
+                    "Combien de temps dure le résultat ? Le Deep Plane Facelift offre une pérennité exceptionnelle de 10 à 15 ans.",
+                    "Est-ce que mes traits seront modifiés ? Absolument pas. L'objectif est de retrouver la fraîcheur et la fermeté de votre visage d'il y a 10 ans."
+                }
+            )},
+            { "blepharoplastie", (
+                "Blépharoplastie Sur-Mesure",
+                "CHIRURGIE DU VISAGE & DU COU",
+                "/images/dr_slama_consultation.png",
+                "Sublimation du regard par chirurgie correctrice des paupières supérieures et inférieures.",
+                "1h00 – 1h45",
+                "Locale / Sédation",
+                "5 à 7 jours",
+                "Ambulatoire",
+                "La blépharoplastie restaure la fraîcheur et la luminosité du regard.",
+                new[] { "Paupières supérieures lourdes et tombantes", "Poches graisseuses sous les yeux", "Flétrissure cutanée autour des yeux" },
+                new[] { "Marquage millimétrique préalable", "Résection indolore de l'excès cutano-graisseux", "Fermeture par fils microscopiques" },
+                new[] {
+                    "Peut-on combiner paupières supérieures et inférieures ? Oui, lors de la même intervention.",
+                    "Où se situent les cicatrices ? Dans le pli naturel supérieur ou par voie transconjonctivale."
+                }
+            )},
+            { "augmentation-mammaire", (
+                "Augmentation Mammaire Sur-Mesure",
+                "CHIRURGIE DE LA POITRINE",
+                "/images/dr_slama_operating_suite.png",
+                "Harmonisation de la poitrine par prothèses en gel de silicone haute cohésivité ou lipofilling.",
+                "1h30",
+                "Générale",
+                "7 jours",
+                "Ambulatoire ou 1 Nuit",
+                "L'augmentation mammaire vise à corriger un hypotrophie mammaire, une asymétrie ou une perte de volume.",
+                new[] { "Poitrine jugée trop petite", "Asymétrie mammaire ou déflation après grossesse", "Recherche d'un galbe naturel" },
+                new[] { "Essayage de gabarits et choix du profil", "Incision minimale dissimulée", "Positionnement précis de la prothèse" },
+                new[] {
+                    "Quelle est la durée de vie des prothèses ? 10 à 15 ans ou plus avec suivi annuel.",
+                    "La sensibilité est-elle préservée ? Oui, la sensibilité est pleinement conservée dans la grande majorité des cas."
+                }
+            )}
+        };
+
+        var currentProc = procedureData.ContainsKey(procedureId) ? procedureData[procedureId] : procedureData["rhinoplastie"];
+        procTitle = currentProc.Title;
+        procCategory = currentProc.Category;
+        procImage = currentProc.Image;
+        procSubtitle = currentProc.Subtitle;
+        procDuree = currentProc.Duree;
+        procAnesthesie = currentProc.Anesthesie;
+        procEviction = currentProc.Eviction;
+        procHospitalisation = currentProc.Hospitalisation;
+        procOverview = currentProc.Overview;
+        procIndications = currentProc.Indications.ToList();
+        procSteps = currentProc.Steps.ToList();
+        procFaqs = currentProc.Faqs.ToList();
+    }
+
+    // Ensure procedure image is distinct and NOT identical to Contact header image (/images/hero_testimonials_real_photo.png) or Contact CTA image (/images/dr_slama_clinic_luxe.png)
+    if (string.IsNullOrEmpty(procImage) || procImage == "/images/hero_testimonials_real_photo.png" || procImage == "/images/dr_slama_clinic_luxe.png")
+    {
+        if (procCategory.Contains("POITRINE", StringComparison.OrdinalIgnoreCase))
+        {
+            procImage = "/images/medical_mammaire.png";
+        }
+        else if (procCategory.Contains("CORPS", StringComparison.OrdinalIgnoreCase) || procCategory.Contains("SILHOUETTE", StringComparison.OrdinalIgnoreCase))
+        {
+            procImage = "/images/medical_corps.png";
+        }
+        else if (procCategory.Contains("ESTHÉTIQUE", StringComparison.OrdinalIgnoreCase) || procCategory.Contains("INJECTION", StringComparison.OrdinalIgnoreCase))
+        {
+            procImage = "/images/medical_esthetique.png";
+        }
+        else
+        {
+            procImage = "/images/dr_slama_details.png";
+        }
+    }
+}
+
+<!-- ============================================ -->
+<!-- 1. HERO HEADER: EDITORIAL PROCEDURE SPLIT -->
+<!-- ============================================ -->
+<section class="relative min-h-[75vh] flex items-end md:items-center pt-24 pb-16 md:pb-16 overflow-hidden bg-surface-container-low border-b border-gold/20">
+    <div class="absolute inset-0 md:left-auto md:right-0 md:top-0 w-full md:w-1/2 h-full z-0 overflow-hidden">
+        <!-- Mobile Dark Gradient Overlay to ensure text readability -->
+        <div class="block md:hidden absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-black/10 z-10 pointer-events-none"></div>
+        <img src="@procImage" alt="@procTitle" class="w-full h-full object-cover object-center" />
+    </div>
+
+    <div class="relative z-20 w-full px-6 md:px-margin-desktop max-w-container-max mx-auto">
+        <div class="w-full md:w-5/12 lg:w-[42%] max-w-lg text-white md:text-primary">
+            <a asp-controller="Home" asp-action="Chirurgies" class="inline-flex items-center gap-2 font-label-caps text-xs tracking-widest text-white/70 md:text-primary/70 hover:text-gold mb-6 transition-colors font-bold">
+                <span class="material-symbols-outlined text-sm text-gold">arrow_back</span> RETOUR AUX INTERVENTIONS
+            </a>
+            <div class="flex items-center gap-3 mb-3 reveal-text">
+                <span class="w-8 h-[1px] bg-gold"></span>
+                <span class="font-label-caps text-gold font-bold block text-xs tracking-[0.25em] uppercase">@procCategory</span>
+            </div>
+            <h1 class="font-display-lg text-4xl md:text-6xl lg:text-7xl leading-tight font-bold text-white md:text-primary mb-6">
+                @procTitle
+            </h1>
+            <p class="font-body-lg text-white/90 md:text-primary/80 text-base md:text-lg leading-relaxed mb-8">
+                @procSubtitle
+            </p>
+
+            <!-- Quick Specs Strip -->
+            <div class="grid grid-cols-2 sm:grid-cols-4 gap-4 p-4 bg-white/90 backdrop-blur-md border border-gold/20 max-w-2xl shadow-sm">
+                <div>
+                    <span class="font-label-caps text-[8px] text-gold font-bold block">DURÉE</span>
+                    <span class="font-headline-sm text-xs md:text-sm font-bold text-primary">@procDuree</span>
+                </div>
+                <div>
+                    <span class="font-label-caps text-[8px] text-gold font-bold block">ANESTHÉSIE</span>
+                    <span class="font-headline-sm text-xs md:text-sm font-bold text-primary">@procAnesthesie</span>
+                </div>
+                <div>
+                    <span class="font-label-caps text-[8px] text-gold font-bold block">ÉVICTION</span>
+                    <span class="font-headline-sm text-xs md:text-sm font-bold text-primary">@procEviction</span>
+                </div>
+                <div>
+                    <span class="font-label-caps text-[8px] text-gold font-bold block">SÉJOUR</span>
+                    <span class="font-headline-sm text-xs md:text-sm font-bold text-primary">@procHospitalisation</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ============================================ -->
+<!-- 2. DETAILED OVERVIEW & INDICATIONS -->
+<!-- ============================================ -->
+<section class="py-20 px-6 md:px-margin-desktop bg-[#faf8f5] border-b border-gold/20">
+    <div class="max-w-container-max mx-auto">
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
+            
+            <!-- Left Narrative -->
+            <div class="lg:col-span-7">
+                <span class="font-label-caps text-[10px] tracking-[0.3em] text-gold font-bold block mb-3 uppercase">PHILOSOPHIE CHIRURGICALE</span>
+                <h2 class="font-display-lg text-3xl md:text-4xl font-bold text-primary mb-6">Présentation & Approche Médicale</h2>
+                
+                @{
+                    var overviewPoints = new List<string>();
+                    if (!string.IsNullOrWhiteSpace(procOverview))
+                    {
+                        var rawLines = procOverview.Split(new[] { "•", "", "\n", "\r" }, StringSplitOptions.RemoveEmptyEntries);
+                        if (rawLines.Length > 1)
+                        {
+                            foreach (var line in rawLines)
+                            {
+                                var trimmed = line.Trim().TrimStart('-', '•', '', ' ').Trim();
+                                if (!string.IsNullOrWhiteSpace(trimmed)) overviewPoints.Add(trimmed);
+                            }
+                        }
+                        else
+                        {
+                            var sentences = procOverview.Split(new[] { ". " }, StringSplitOptions.RemoveEmptyEntries);
+                            foreach (var sentence in sentences)
+                            {
+                                var trimmed = sentence.Trim().TrimStart('-', '•', '', ' ').Trim();
+                                if (!string.IsNullOrWhiteSpace(trimmed))
+                                {
+                                    if (!trimmed.EndsWith(".")) trimmed += ".";
+                                    overviewPoints.Add(trimmed);
+                                }
+                            }
+                        }
+                    }
+                }
+
+                <div class="space-y-4 mb-8">
+                    @if (overviewPoints.Any())
+                    {
+                        foreach (var point in overviewPoints)
+                        {
+                            <div class="flex items-start gap-4 bg-white p-5 border border-gold/20 shadow-sm">
+                                <span class="w-2.5 h-2.5 rounded-full bg-gold mt-2 flex-shrink-0"></span>
+                                <p class="font-body-md text-primary/90 text-base md:text-lg leading-relaxed font-medium">
+                                    @point
+                                </p>
+                            </div>
+                        }
+                    }
+                    else
+                    {
+                        <p class="font-body-md text-primary/80 text-base md:text-lg leading-relaxed">
+                            @procOverview
+                        </p>
+                    }
+                </div>
+            </div>
+
+            <!-- Right Sticky Consultation Card -->
+            <div class="lg:col-span-5 lg:sticky lg:top-28">
+                <div class="bg-white p-8 md:p-10 border border-gold/20 shadow-xl flex flex-col justify-between">
+                    <div>
+                        <span class="font-label-caps text-[9px] tracking-widest text-gold font-bold block mb-2 uppercase">DR. ABDELFATEH SLAMA • SOUSSE</span>
+                        <h3 class="font-display-lg text-2xl font-bold text-primary mb-4">Planifier une Consultation</h3>
+                        <p class="font-body-md text-xs text-primary/70 leading-relaxed mb-6">
+                            Chaque intervention fait l'objet d'un examen approfondi et d'une analyse morphologique 3D personnalisée dans notre cabinet de Sousse, Tunisie.
+                        </p>
+                        
+                        <div class="space-y-3 py-4 border-y border-gold/20 mb-8 font-body-md text-xs">
+                            <div class="flex items-center gap-3 text-primary/80">
+                                <span class="material-symbols-outlined text-sm text-gold">location_on</span>
+                                <span>Hôpital Sahloul, Sousse</span>
+                            </div>
+                            <div class="flex items-center gap-3 text-primary/80">
+                                <span class="material-symbols-outlined text-sm text-gold">schedule</span>
+                                <span>Du Lundi au Vendredi • 08h30 – 19h00</span>
+                            </div>
+                            <div class="flex items-center gap-3 text-primary/80">
+                                <span class="material-symbols-outlined text-sm text-gold">verified</span>
+                                <span>Plateau Technique de Pointe & Suivi Personnalisé</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="space-y-3">
+                        <a asp-controller="Home" asp-action="Contact" asp-route-procedure="@(Model?.Slug)" class="block w-full text-center gold-gradient text-white font-label-caps text-xs tracking-widest py-4 font-bold hover:opacity-90 transition-all shadow-md">
+                            RÉSERVER VOTRE CONSULTATION
+                        </a>
+                        <a href="tel:+21673200000" class="block w-full text-center border border-gold/30 text-gold font-label-caps text-xs tracking-widest py-4 hover:bg-gold hover:text-white transition-all font-bold">
+                            +216 73 200 000
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+<!-- ============================================ -->
+<!-- 3. FAQS SECTION -->
+<!-- ============================================ -->
+<section class="py-20 px-6 md:px-margin-desktop bg-white border-b border-gold/20">
+    <div class="max-w-container-max mx-auto">
+        
+        <!-- FAQ Accordion -->
+        <div class="max-w-4xl mx-auto">
+            <div class="text-center mb-12">
+                <span class="font-label-caps text-[10px] tracking-[0.3em] text-gold font-bold block mb-2 uppercase">INFORMATIONS PATIENTS</span>
+                <h2 class="font-display-lg text-3xl md:text-4xl font-bold text-primary">Questions Fréquentes</h2>
+            </div>
+
+            <div class="space-y-4">
+                @foreach (var faq in procFaqs)
+                {
+                    var parts = faq.Split('?');
+                    var question = parts[0] + "?";
+                    var answer = parts.Length > 1 ? parts[1].Trim() : "";
+
+                    <div class="bg-[#faf8f5] p-6 border border-gold/20">
+                        <h4 class="font-display-lg text-lg font-bold text-primary mb-3">@question</h4>
+                        <p class="font-body-md text-xs md:text-sm text-primary/75 leading-relaxed">@answer</p>
+                    </div>
+                }
+            </div>
+        </div>
+
+    </div>
+</section>

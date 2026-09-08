@@ -1,0 +1,83 @@
+@model DrAbdelfatehSalma.Models.Temoignage
+@{
+    Layout = "_AdminLayout";
+    ViewData["Title"] = "Ajouter un Témoignage";
+}
+
+<div class="max-w-4xl mx-auto space-y-8">
+    <div class="border-b border-gold/20 pb-6 flex items-center justify-between">
+        <div>
+            <h1 class="font-display-lg text-2xl font-bold text-white mb-1">Ajouter un Témoignage Patient</h1>
+            <p class="text-xs text-gray-400">Enregistrer un avis écrit ou une vidéo d'expérience patient.</p>
+        </div>
+        <a asp-controller="Admin" asp-action="Temoignages" class="text-xs text-gray-400 hover:text-white flex items-center gap-1 font-bold">
+            ← Annuler et retourner
+        </a>
+    </div>
+
+    <form asp-controller="Admin" asp-action="CreateTemoignage" method="post" enctype="multipart/form-data" class="space-y-6 bg-[#121419] p-8 border border-gold/20 shadow-xl">
+        
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div>
+                <label class="block text-xs font-bold text-gold uppercase mb-2">NOM OU INITIALES DU PATIENT *</label>
+                <input type="text" asp-for="PatientName" required placeholder="Ex: Caroline B." class="w-full p-3.5 bg-[#0c0d10] border border-gold/20 text-white text-xs focus:outline-none focus:border-gold" />
+            </div>
+
+            <div>
+                <label class="block text-xs font-bold text-gold uppercase mb-2">INFOS INTERVENTION & VILLE *</label>
+                <input type="text" asp-for="PatientInfo" required placeholder="Ex: RHINOPLASTIE ULTRASONIQUE • SOUSSE" class="w-full p-3.5 bg-[#0c0d10] border border-gold/20 text-white text-xs focus:outline-none focus:border-gold" />
+            </div>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <div>
+                <label class="block text-xs font-bold text-gold uppercase mb-2">TYPE DE TÉMOIGNAGE *</label>
+                <select asp-for="Type" class="w-full p-3.5 bg-[#0c0d10] border border-gold/20 text-white text-xs focus:outline-none focus:border-gold">
+                    <option value="text">Avis Écrit</option>
+                    <option value="video">Témoignage Vidéo</option>
+                </select>
+            </div>
+
+            <div>
+                <label class="block text-xs font-bold text-gold uppercase mb-2">NOTE / ÉTOILES (1 à 5)</label>
+                <input type="number" asp-for="Rating" min="1" max="5" class="w-full p-3.5 bg-[#0c0d10] border border-gold/20 text-white text-xs focus:outline-none focus:border-gold" />
+            </div>
+
+            <div>
+                <label class="block text-xs font-bold text-gold uppercase mb-2">SUIVI POST-OPÉRATOIRE</label>
+                <input type="text" asp-for="FollowUpTime" placeholder="Ex: 6 mois post-op" class="w-full p-3.5 bg-[#0c0d10] border border-gold/20 text-white text-xs focus:outline-none focus:border-gold" />
+            </div>
+        </div>
+
+        <div>
+            <label class="block text-xs font-bold text-gold uppercase mb-2">CITATION / AVIS ÉCRIT *</label>
+            <textarea asp-for="Quote" rows="4" required placeholder="Description ou retranscription de l'expérience du patient..." class="w-full p-3.5 bg-[#0c0d10] border border-gold/20 text-white text-xs"></textarea>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 p-4 bg-[#0c0d10] border border-gold/20 rounded">
+            <div>
+                <label class="block text-xs font-bold text-gold uppercase mb-2">📷 PHOTO PORTRAIT / COUVERTURE (Fichier ou URL)</label>
+                <input type="file" name="imageFile" accept="image/*" class="w-full p-2 bg-[#121419] border border-gold/20 text-white text-xs" />
+                <input type="text" asp-for="ImageUrl" placeholder="Ou URL image" class="w-full p-3.5 mt-2 bg-[#121419] border border-gold/20 text-white text-xs" />
+            </div>
+
+            <div>
+                <label class="block text-xs font-bold text-gold uppercase mb-2">🎬 FICHIER VIDÉO (Fichier ou URL)</label>
+                <input type="file" name="videoFile" accept="video/*" class="w-full p-2 bg-[#121419] border border-gold/20 text-white text-xs" />
+                <input type="text" asp-for="VideoUrl" placeholder="Ou URL (/videos/tem.mp4)" class="w-full p-3.5 mt-2 bg-[#121419] border border-gold/20 text-white text-xs" />
+            </div>
+        </div>
+
+        <div class="pt-4 border-t border-gold/20 flex items-center justify-between">
+            <label class="flex items-center gap-2 text-xs text-gold font-bold">
+                <input type="checkbox" asp-for="IsFeatured" class="rounded bg-[#0c0d10] border-gold/40 text-gold focus:ring-gold" />
+                Mettre en vedette sur le site
+            </label>
+
+            <button type="submit" class="gold-gradient text-white font-label-caps text-xs py-4 px-8 hover:opacity-90 font-bold tracking-widest shadow">
+                ENREGISTRER LE TÉMOIGNAGE
+            </button>
+        </div>
+
+    </form>
+</div>

@@ -1,0 +1,1092 @@
+@{
+    ViewData["Title"] = "Résultats & Galerie Avant / Après — Dr. Abdelfateh Slama Sousse";
+}
+
+<!-- ============================================ -->
+<!-- 1. HERO SECTION: DRAMATIC EDITORIAL SPLIT LAYOUT (100VH FULL SCREEN) -->
+<!-- ============================================ -->
+<section class="relative min-h-screen flex items-end md:items-center pt-20 pb-16 md:pb-0 overflow-hidden bg-surface-container-low border-b border-gold/20">
+    <!-- Background Architectural & Clinic Accent Image -->
+    <div class="absolute inset-0 md:left-auto md:right-0 md:top-0 w-full md:w-1/2 h-full z-0 overflow-hidden">
+        <!-- Soft High-Fashion Gradient Transition -->
+        <div class="hidden md:block absolute inset-y-0 left-0 w-24 md:w-48 bg-gradient-to-r from-surface-container-low via-surface-container-low/70 to-transparent z-10 pointer-events-none"></div>
+        <!-- Mobile Dark Gradient Overlay to ensure text readability -->
+        <div class="block md:hidden absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-black/10 z-10 pointer-events-none"></div>
+        <img src="/images/chergievisage.jpg" alt="Bloc Opératoire & Salle d'Opération de Chirurgie Plastique Sousse" class="w-full h-full object-cover object-center transition-all duration-700 opacity-90 brightness-[1.02]" />
+    </div>
+
+    <!-- Content Area -->
+    <div class="relative z-20 w-full px-6 md:px-margin-desktop max-w-container-max mx-auto">
+        <div class="w-full md:w-5/12 lg:w-[42%] max-w-lg text-white md:text-primary">
+            <div class="flex items-center gap-3 mb-4 reveal-text">
+                <span class="w-10 h-[1px] bg-gold"></span>
+                <span class="font-label-caps text-gold block animate-reveal font-bold tracking-widest uppercase text-xs">
+                    DR. ABDELFATEH SLAMA • SOUSSE
+                </span>
+            </div>
+            <h1 class="font-display-lg text-6xl md:text-[85px] lg:text-[95px] leading-[0.88] tracking-tighter text-white md:text-primary mb-8 italic">
+                Nos<br/>
+                <span class="not-italic font-black">Résultats</span>
+            </h1>
+            <p class="font-body-lg text-white/90 md:text-primary/80 text-base md:text-xl leading-relaxed">
+                L'art de la transformation sur-mesure. Découvrez des résultats réels, élégants et naturels, témoignant d'une maîtrise chirurgicale sans compromis.
+            </p>
+        </div>
+    </div>
+
+    <!-- Scroll Indicator -->
+    <div class="absolute bottom-10 left-6 md:left-margin-desktop flex items-center gap-4">
+        <div class="h-16 w-[1px] bg-gold"></div>
+        <span class="font-label-caps text-[10px] vertical-text text-gold font-bold" style="writing-mode: vertical-rl; transform: rotate(180deg);">SCROLL</span>
+    </div>
+</section>
+
+<!-- ============================================ -->
+<!-- 2. INTERACTIVE FEATURED BEFORE / AFTER SPOTLIGHT SLIDER -->
+<!-- ============================================ -->
+<section class="py-20 px-6 md:px-margin-desktop bg-white border-b border-gold/20">
+    <div class="max-w-container-max mx-auto">
+        
+        <div class="flex flex-col md:flex-row justify-between items-start md:items-end mb-12 gap-6">
+            <div>
+                <span class="font-label-caps text-gold font-bold block mb-3 uppercase tracking-widest">ÉCLIPSE INTERACTIVE</span>
+                <h2 class="font-display-lg text-3xl md:text-5xl font-bold text-primary">Cas Clinique d'Exception</h2>
+            </div>
+            <p class="font-body-md text-primary/70 text-sm max-w-md">
+                Faites glisser le curseur central de gauche à droite pour comparer l'état pré-opératoire et le résultat stabilisé à 8 mois.
+            </p>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center bg-white p-6 md:p-10 border border-gold/20 shadow-lg">
+            
+            <!-- Interactive Draggable Slider Container -->
+            <div class="lg:col-span-7">
+                <div class="relative w-full aspect-[4/3] overflow-hidden select-none border border-gold/30 shadow-xl group cursor-ew-resize" id="featured-ba-slider">
+                    <!-- AFTER Image (Base) -->
+                    <img src="/images/rhino_after.png" alt="Après - Rhinoplastie Ultrasonique" class="absolute inset-0 w-full h-full object-cover filter contrast-[1.03]" />
+                    <span class="absolute top-4 right-4 bg-black text-white font-label-caps text-[10px] px-3 py-1.5 font-bold z-10 tracking-widest shadow-md">
+                        APRÈS (8 MOIS)
+                    </span>
+
+                    <!-- BEFORE Image (Clipped) -->
+                    <img src="/images/rhino_before.png" alt="Avant - Rhinoplastie Ultrasonique" class="absolute inset-0 w-full h-full object-cover filter contrast-[1.03] z-10" id="ba-before-img" style="clip-path: inset(0 50% 0 0);" />
+                    <span class="absolute top-4 left-4 bg-white text-primary font-label-caps text-[10px] px-3 py-1.5 font-bold z-20 tracking-widest border border-gold/30 shadow-md">
+                        AVANT
+                    </span>
+
+                    <!-- Draggable Handle Bar -->
+                    <div class="ba-handle absolute top-0 bottom-0 w-1 bg-white z-30 shadow-2xl flex items-center justify-center" id="ba-handle" style="left: 50%;">
+                        <div class="w-10 h-10 rounded-full gold-gradient text-white border-2 border-white flex items-center justify-center shadow-2xl transition-transform group-hover:scale-110">
+                            <span class="material-symbols-outlined text-lg">unfold_more</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="flex justify-between items-center mt-3 text-xs font-label-caps text-primary/60">
+                    <span>◄ Glisser vers la gauche (AVANT)</span>
+                    <span>Glisser vers la droite (APRÈS) ►</span>
+                </div>
+            </div>
+
+            <!-- Case Information Panel -->
+            <div class="lg:col-span-5 flex flex-col justify-between h-full space-y-6">
+                <div>
+                    <div class="inline-block gold-gradient text-white font-label-caps text-[9px] px-3 py-1 font-bold tracking-widest uppercase mb-4 shadow">
+                        RHINOPLASTIE STRUCTURELLE ULTRASONIQUE
+                    </div>
+                    <h3 class="font-display-lg text-2xl md:text-3xl font-bold text-primary mb-4">
+                        Harmonisation de la Ligne Dorsale & Pointe Affinée
+                    </h3>
+                    <p class="font-body-md text-primary/80 text-sm leading-relaxed mb-6">
+                        Patiente de 29 ans présentant une bosse ostéo-cartilagineuse prononcée et un manquement de soutien au niveau du tiers inférieur du nez. Réalisation d'une rhinoplastie piézotome (ultrasons) préservant les structures osseuses tout en redéfinissant la pointe avec greffons cartilagineux autologues.
+                    </p>
+
+                    <div class="space-y-3 border-t border-b border-gold/20 py-5">
+                        <div class="flex justify-between text-xs">
+                            <span class="font-label-caps text-primary/50">PATIENTE :</span>
+                            <span class="font-bold text-primary">Femme, 29 ans (Sousse)</span>
+                        </div>
+                        <div class="flex justify-between text-xs">
+                            <span class="font-label-caps text-primary/50">TECHNIQUE :</span>
+                            <span class="font-bold text-primary">Piezo-Rhinoplastie Ouverte</span>
+                        </div>
+                        <div class="flex justify-between text-xs">
+                            <span class="font-label-caps text-primary/50">ANESTHÉSIE :</span>
+                            <span class="font-bold text-primary">Générale (Ambulatoire)</span>
+                        </div>
+                        <div class="flex justify-between text-xs">
+                            <span class="font-label-caps text-primary/50">SUIVI POST-OP :</span>
+                            <span class="font-bold text-primary">Résultat final à 8 mois</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="pt-2">
+                    <button onclick="openCaseModal('rhino-1')" class="w-full gold-gradient text-white font-label-caps text-[11px] tracking-widest py-4 px-6 hover:opacity-90 transition-all flex items-center justify-center gap-2 font-bold shadow-md">
+                        <span>CONSULTER LE DOSSIER CLINIQUE COMPLET</span>
+                        <span class="material-symbols-outlined text-sm">arrow_forward</span>
+                    </button>
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+</section>
+
+<!-- ============================================ -->
+<!-- 3. FILTER TABS & MAIN RESULTS CATALOG GRID -->
+<!-- ============================================ -->
+<section class="py-20 px-6 md:px-margin-desktop bg-white">
+    <div class="max-w-container-max mx-auto">
+        
+        <div class="text-center max-w-3xl mx-auto mb-12">
+            <span class="font-label-caps text-[10px] tracking-[0.3em] text-gold font-bold block mb-3 uppercase">GALERIE DE CHIRURGIE & MÉDECINE ESTHÉTIQUE</span>
+            <h2 class="font-display-lg text-4xl md:text-5xl font-bold text-primary mb-4">Explorez Nos Transformations</h2>
+            <p class="font-body-md text-primary/70 text-sm md:text-base">
+                Filtrez par type d'intervention pour visualiser la précision des gestes chirurgicaux et esthétiques du Dr. Slama.
+            </p>
+        </div>
+
+        <!-- Filter Buttons -->
+        <div class="flex flex-wrap gap-2.5 justify-center mb-12 border-b border-gold/20 pb-6">
+            <button onclick="filterResults('all')" id="res-btn-all" class="result-tab active px-6 py-3.5 font-label-caps text-xs tracking-widest gold-gradient text-white font-bold transition-all shadow-md">
+                TOUS LES RÉSULTATS (8)
+            </button>
+            <button onclick="filterResults('visage')" id="res-btn-visage" class="result-tab px-6 py-3.5 font-label-caps text-xs tracking-widest bg-white border border-gold/30 text-primary hover:border-gold hover:text-gold transition-all shadow-sm">
+                CHIRURGIE DU VISAGE (6)
+            </button>
+            <button onclick="filterResults('poitrine')" id="res-btn-poitrine" class="result-tab px-6 py-3.5 font-label-caps text-xs tracking-widest bg-white border border-gold/30 text-primary hover:border-gold hover:text-gold transition-all shadow-sm">
+                CHIRURGIE DU SEIN (POITRINE) (2)
+            </button>
+            <button onclick="filterResults('silhouette')" id="res-btn-silhouette" class="result-tab px-6 py-3.5 font-label-caps text-xs tracking-widest bg-white border border-gold/30 text-primary hover:border-gold hover:text-gold transition-all shadow-sm">
+                CHIRURGIE DE LA SILHOUETTE
+            </button>
+        </div>
+
+        <!-- Grid of Result Cards -->
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8" id="results-grid">
+            
+            <!-- CARD 1: Rhinoplastie Profil -->
+            <div class="result-card bg-white border border-black flex flex-col justify-between overflow-hidden group shadow-sm hover:shadow-xl transition-all duration-500" data-category="visage">
+                <div class="relative aspect-[4/3] overflow-hidden bg-neutral-100 border-b border-black select-none ba-card-slider">
+                    <img src="/images/rhino_after.png" alt="Après — Rhinoplastie Primaire" class="absolute inset-0 w-full h-full object-cover" />
+                    <span class="absolute top-3 right-3 bg-black text-white font-label-caps text-[9px] px-2.5 py-1 font-bold z-10 shadow">APRÈS</span>
+
+                    <img src="/images/rhino_before.png" alt="Avant — Rhinoplastie Primaire" class="ba-card-before absolute inset-0 w-full h-full object-cover z-10" style="clip-path: inset(0 50% 0 0);" />
+                    <span class="absolute top-3 left-3 bg-black text-white font-label-caps text-[9px] px-2.5 py-1 font-bold z-20 shadow">AVANT</span>
+
+                    <div class="ba-card-handle absolute top-0 bottom-0 w-[2px] bg-white z-30 shadow-2xl flex items-center justify-center cursor-ew-resize" style="left: 50%;">
+                        <div class="w-6 h-6 rounded-full bg-white text-black flex items-center justify-center shadow-lg text-[10px] font-bold border border-black/20">
+                            ↔
+                        </div>
+                    </div>
+
+                    <span class="absolute bottom-3 left-1/2 -translate-x-1/2 bg-black/90 text-white font-label-caps text-[8px] px-3 py-1 z-20 shadow-md pointer-events-none uppercase tracking-wider">RHINOPLASTIE</span>
+                </div>
+
+                <div class="p-6 flex flex-col justify-between flex-1">
+                    <div>
+                        <h3 class="font-display-lg text-2xl font-bold text-primary mb-2">
+                            Rhinoplastie Primaire Ultrasonique
+                        </h3>
+                        <p class="font-body-md text-xs text-primary/70 mb-4 leading-relaxed">
+                            Correction d'une déviation septale avec lissage du profil et projection contrôlée de la pointe.
+                        </p>
+                    </div>
+                    <div class="border-t border-black/10 pt-4 flex items-center justify-between">
+                        <span class="font-label-caps text-[10px] text-primary/50 font-semibold">PATIENTE 31 ANS</span>
+                        <button onclick="openCaseModal('rhino-1')" class="bg-primary text-white font-label-caps text-[9px] px-3.5 py-2 hover:bg-neutral-800 transition-all font-bold tracking-widest flex items-center gap-1.5 shadow">
+                            VOIR EN GRAND <span class="material-symbols-outlined text-xs">zoom_in</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- CARD 2: Deep Plane Facelift -->
+            <div class="result-card bg-white border border-black flex flex-col justify-between overflow-hidden group shadow-sm hover:shadow-xl transition-all duration-500" data-category="visage">
+                <div class="relative aspect-[4/3] overflow-hidden bg-neutral-100 border-b border-black select-none ba-card-slider">
+                    <img src="/images/facelift_after.png" alt="Après — Deep Plane Facelift" class="absolute inset-0 w-full h-full object-cover" />
+                    <span class="absolute top-3 right-3 bg-black text-white font-label-caps text-[9px] px-2.5 py-1 font-bold z-10 shadow">APRÈS</span>
+
+                    <img src="/images/facelift_before.png" alt="Avant — Deep Plane Facelift" class="ba-card-before absolute inset-0 w-full h-full object-cover z-10" style="clip-path: inset(0 50% 0 0);" />
+                    <span class="absolute top-3 left-3 bg-black text-white font-label-caps text-[9px] px-2.5 py-1 font-bold z-20 shadow">AVANT</span>
+
+                    <div class="ba-card-handle absolute top-0 bottom-0 w-[2px] bg-white z-30 shadow-2xl flex items-center justify-center cursor-ew-resize" style="left: 50%;">
+                        <div class="w-6 h-6 rounded-full bg-white text-black flex items-center justify-center shadow-lg text-[10px] font-bold border border-black/20">
+                            ↔
+                        </div>
+                    </div>
+
+                    <span class="absolute bottom-3 left-1/2 -translate-x-1/2 bg-black/90 text-white font-label-caps text-[8px] px-3 py-1 z-20 shadow-md pointer-events-none uppercase tracking-wider">LIFTING & VISAGE</span>
+                </div>
+
+                <div class="p-6 flex flex-col justify-between flex-1">
+                    <div>
+                        <h3 class="font-display-lg text-2xl font-bold text-primary mb-2">
+                            Deep Plane Facelift & Cou
+                        </h3>
+                        <p class="font-body-md text-xs text-primary/70 mb-4 leading-relaxed">
+                            Repositionnement profond des structures musculaires (SMAS) pour un rajeunissement naturel sans tension cutanée.
+                        </p>
+                    </div>
+                    <div class="border-t border-black/10 pt-4 flex items-center justify-between">
+                        <span class="font-label-caps text-[10px] text-primary/50 font-semibold">PATIENT 54 ANS</span>
+                        <button onclick="openCaseModal('lifting-1')" class="bg-primary text-white font-label-caps text-[9px] px-3.5 py-2 hover:bg-neutral-800 transition-all font-bold tracking-widest flex items-center gap-1.5 shadow">
+                            VOIR EN GRAND <span class="material-symbols-outlined text-xs">zoom_in</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- CARD 3: Augmentation Mammaire -->
+            <div class="result-card bg-white border border-black flex flex-col justify-between overflow-hidden group shadow-sm hover:shadow-xl transition-all duration-500" data-category="poitrine">
+                <div class="relative aspect-[4/3] overflow-hidden bg-neutral-100 border-b border-black select-none ba-card-slider">
+                    <img src="/images/rhino_after.png" alt="Après — Augmentation Mammaire" class="absolute inset-0 w-full h-full object-cover" />
+                    <span class="absolute top-3 right-3 bg-black text-white font-label-caps text-[9px] px-2.5 py-1 font-bold z-10 shadow">APRÈS</span>
+
+                    <img src="/images/rhino_before.png" alt="Avant — Augmentation Mammaire" class="ba-card-before absolute inset-0 w-full h-full object-cover z-10" style="clip-path: inset(0 50% 0 0);" />
+                    <span class="absolute top-3 left-3 bg-black text-white font-label-caps text-[9px] px-2.5 py-1 font-bold z-20 shadow">AVANT</span>
+
+                    <div class="ba-card-handle absolute top-0 bottom-0 w-[2px] bg-white z-30 shadow-2xl flex items-center justify-center cursor-ew-resize" style="left: 50%;">
+                        <div class="w-6 h-6 rounded-full bg-white text-black flex items-center justify-center shadow-lg text-[10px] font-bold border border-black/20">
+                            ↔
+                        </div>
+                    </div>
+
+                    <span class="absolute bottom-3 left-1/2 -translate-x-1/2 bg-black/90 text-white font-label-caps text-[8px] px-3 py-1 z-20 shadow-md pointer-events-none uppercase tracking-wider">CHIRURGIE MAMMAIRE</span>
+                </div>
+
+                <div class="p-6 flex flex-col justify-between flex-1">
+                    <div>
+                        <h3 class="font-display-lg text-2xl font-bold text-primary mb-2">
+                            Augmentation Mammaire Sur-Mesure
+                        </h3>
+                        <p class="font-body-md text-xs text-primary/70 mb-4 leading-relaxed">
+                            Prothèses ergonomiques haute résilience insérées sous le muscle pour un décolleté harmonieux et souple.
+                        </p>
+                    </div>
+                    <div class="border-t border-black/10 pt-4 flex items-center justify-between">
+                        <span class="font-label-caps text-[10px] text-primary/50 font-semibold">PATIENT 27 ANS</span>
+                        <button onclick="openCaseModal('mammaire-1')" class="bg-primary text-white font-label-caps text-[9px] px-3.5 py-2 hover:bg-neutral-800 transition-all font-bold tracking-widest flex items-center gap-1.5 shadow">
+                            VOIR EN GRAND <span class="material-symbols-outlined text-xs">zoom_in</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- CARD 4: Profiloplastie Médicale Injections -->
+            <div class="result-card bg-white border border-black flex flex-col justify-between overflow-hidden group shadow-sm hover:shadow-xl transition-all duration-500" data-category="visage">
+                <div class="relative aspect-[4/3] overflow-hidden bg-neutral-100 border-b border-black select-none ba-card-slider">
+                    <img src="/images/injections_after.png" alt="Après — Profiloplastie Médicale" class="absolute inset-0 w-full h-full object-cover" />
+                    <span class="absolute top-3 right-3 bg-black text-white font-label-caps text-[9px] px-2.5 py-1 font-bold z-10 shadow">APRÈS</span>
+
+                    <img src="/images/injections_before.png" alt="Avant — Profiloplastie Médicale" class="ba-card-before absolute inset-0 w-full h-full object-cover z-10" style="clip-path: inset(0 50% 0 0);" />
+                    <span class="absolute top-3 left-3 bg-black text-white font-label-caps text-[9px] px-2.5 py-1 font-bold z-20 shadow">AVANT</span>
+
+                    <div class="ba-card-handle absolute top-0 bottom-0 w-[2px] bg-white z-30 shadow-2xl flex items-center justify-center cursor-ew-resize" style="left: 50%;">
+                        <div class="w-6 h-6 rounded-full bg-white text-black flex items-center justify-center shadow-lg text-[10px] font-bold border border-black/20">
+                            ↔
+                        </div>
+                    </div>
+
+                    <span class="absolute bottom-3 left-1/2 -translate-x-1/2 bg-black/90 text-white font-label-caps text-[8px] px-3 py-1 z-20 shadow-md pointer-events-none uppercase tracking-wider">MÉDECINE ESTHÉTIQUE</span>
+                </div>
+
+                <div class="p-6 flex flex-col justify-between flex-1">
+                    <div>
+                        <h3 class="font-display-lg text-2xl font-bold text-primary mb-2">
+                            Profiloplastie par Injections HD
+                        </h3>
+                        <p class="font-body-md text-xs text-primary/70 mb-4 leading-relaxed">
+                            Rhinofiller à l'acide hyaluronique et projection du menton sans chirurgie avec précision anatomique.
+                        </p>
+                    </div>
+                    <div class="border-t border-black/10 pt-4 flex items-center justify-between">
+                        <span class="font-label-caps text-[10px] text-primary/50 font-semibold">PATIENTE 34 ANS</span>
+                        <button onclick="openCaseModal('injections-1')" class="bg-primary text-white font-label-caps text-[9px] px-3.5 py-2 hover:bg-neutral-800 transition-all font-bold tracking-widest flex items-center gap-1.5 shadow">
+                            VOIR EN GRAND <span class="material-symbols-outlined text-xs">zoom_in</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- CARD 5: Blepharoplastie 4 Paupières -->
+            <div class="result-card bg-white border border-black flex flex-col justify-between overflow-hidden group shadow-sm hover:shadow-xl transition-all duration-500" data-category="visage">
+                <div class="relative aspect-[4/3] overflow-hidden bg-neutral-100 border-b border-black select-none ba-card-slider">
+                    <img src="/images/bleph_after.png" alt="Après — Blépharoplastie" class="absolute inset-0 w-full h-full object-cover" />
+                    <span class="absolute top-3 right-3 bg-black text-white font-label-caps text-[9px] px-2.5 py-1 font-bold z-10 shadow">APRÈS</span>
+
+                    <img src="/images/bleph_before.png" alt="Avant — Blépharoplastie" class="ba-card-before absolute inset-0 w-full h-full object-cover z-10" style="clip-path: inset(0 50% 0 0);" />
+                    <span class="absolute top-3 left-3 bg-black text-white font-label-caps text-[9px] px-2.5 py-1 font-bold z-20 shadow">AVANT</span>
+
+                    <div class="ba-card-handle absolute top-0 bottom-0 w-[2px] bg-white z-30 shadow-2xl flex items-center justify-center cursor-ew-resize" style="left: 50%;">
+                        <div class="w-6 h-6 rounded-full bg-white text-black flex items-center justify-center shadow-lg text-[10px] font-bold border border-black/20">
+                            ↔
+                        </div>
+                    </div>
+
+                    <span class="absolute bottom-3 left-1/2 -translate-x-1/2 bg-black/90 text-white font-label-caps text-[8px] px-3 py-1 z-20 shadow-md pointer-events-none uppercase tracking-wider">CHIRURGIE DU REGARD</span>
+                </div>
+
+                <div class="p-6 flex flex-col justify-between flex-1">
+                    <div>
+                        <h3 class="font-display-lg text-2xl font-bold text-primary mb-2">
+                            Blépharoplastie Supérieure & Inférieure
+                        </h3>
+                        <p class="font-body-md text-xs text-primary/70 mb-4 leading-relaxed">
+                            Ablation de l'excès cutané palpébral et résection des poches graisseuses sous-orbitaires.
+                        </p>
+                    </div>
+                    <div class="border-t border-black/10 pt-4 flex items-center justify-between">
+                        <span class="font-label-caps text-[10px] text-primary/50 font-semibold">PATIENTE 48 ANS</span>
+                        <button onclick="openCaseModal('bleph-1')" class="bg-primary text-white font-label-caps text-[9px] px-3.5 py-2 hover:bg-neutral-800 transition-all font-bold tracking-widest flex items-center gap-1.5 shadow">
+                            VOIR EN GRAND <span class="material-symbols-outlined text-xs">zoom_in</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- CARD 6: Biostimulation Profhilo -->
+            <div class="result-card bg-white border border-black flex flex-col justify-between overflow-hidden group shadow-sm hover:shadow-xl transition-all duration-500" data-category="visage">
+                <div class="relative aspect-[4/3] overflow-hidden bg-neutral-100 border-b border-black select-none ba-card-slider">
+                    <img src="/images/facelift_after.png" alt="Après — Biostimulation Profhilo" class="absolute inset-0 w-full h-full object-cover" />
+                    <span class="absolute top-3 right-3 bg-black text-white font-label-caps text-[9px] px-2.5 py-1 font-bold z-10 shadow">APRÈS</span>
+
+                    <img src="/images/facelift_before.png" alt="Avant — Biostimulation Profhilo" class="ba-card-before absolute inset-0 w-full h-full object-cover z-10" style="clip-path: inset(0 50% 0 0);" />
+                    <span class="absolute top-3 left-3 bg-black text-white font-label-caps text-[9px] px-2.5 py-1 font-bold z-20 shadow">AVANT</span>
+
+                    <div class="ba-card-handle absolute top-0 bottom-0 w-[2px] bg-white z-30 shadow-2xl flex items-center justify-center cursor-ew-resize" style="left: 50%;">
+                        <div class="w-6 h-6 rounded-full bg-white text-black flex items-center justify-center shadow-lg text-[10px] font-bold border border-black/20">
+                            ↔
+                        </div>
+                    </div>
+
+                    <span class="absolute bottom-3 left-1/2 -translate-x-1/2 bg-black/90 text-white font-label-caps text-[8px] px-3 py-1 z-20 shadow-md pointer-events-none uppercase tracking-wider">BIOSTIMULATION</span>
+                </div>
+
+                <div class="p-6 flex flex-col justify-between flex-1">
+                    <div>
+                        <h3 class="font-display-lg text-2xl font-bold text-primary mb-2">
+                            Rajeunissement Cutané par Profhilo
+                        </h3>
+                        <p class="font-body-md text-xs text-primary/70 mb-4 leading-relaxed">
+                            Restructuration tissulaire et lissage du tiers inférieur du visage sans ajouter de volume artificiel.
+                        </p>
+                    </div>
+                    <div class="border-t border-black/10 pt-4 flex items-center justify-between">
+                        <span class="font-label-caps text-[10px] text-primary/50 font-semibold">PATIENTE 42 ANS</span>
+                        <button onclick="openCaseModal('profhilo-1')" class="bg-primary text-white font-label-caps text-[9px] px-3.5 py-2 hover:bg-neutral-800 transition-all font-bold tracking-widest flex items-center gap-1.5 shadow">
+                            VOIR EN GRAND <span class="material-symbols-outlined text-xs">zoom_in</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- CARD 7: Rhinoplastie Secondaire -->
+            <div class="result-card bg-white border border-black flex flex-col justify-between overflow-hidden group shadow-sm hover:shadow-xl transition-all duration-500" data-category="visage">
+                <div class="relative aspect-[4/3] overflow-hidden bg-neutral-100 border-b border-black select-none ba-card-slider">
+                    <img src="/images/rhino_after.png" alt="Après — Rhinoplastie Secondaire" class="absolute inset-0 w-full h-full object-cover" />
+                    <span class="absolute top-3 right-3 bg-black text-white font-label-caps text-[9px] px-2.5 py-1 font-bold z-10 shadow">APRÈS</span>
+
+                    <img src="/images/rhino_before.png" alt="Avant — Rhinoplastie Secondaire" class="ba-card-before absolute inset-0 w-full h-full object-cover z-10" style="clip-path: inset(0 50% 0 0);" />
+                    <span class="absolute top-3 left-3 bg-black text-white font-label-caps text-[9px] px-2.5 py-1 font-bold z-20 shadow">AVANT</span>
+
+                    <div class="ba-card-handle absolute top-0 bottom-0 w-[2px] bg-white z-30 shadow-2xl flex items-center justify-center cursor-ew-resize" style="left: 50%;">
+                        <div class="w-6 h-6 rounded-full bg-white text-black flex items-center justify-center shadow-lg text-[10px] font-bold border border-black/20">
+                            ↔
+                        </div>
+                    </div>
+
+                    <span class="absolute bottom-3 left-1/2 -translate-x-1/2 bg-black/90 text-white font-label-caps text-[8px] px-3 py-1 z-20 shadow-md pointer-events-none uppercase tracking-wider">RHINOPLASTIE</span>
+                </div>
+
+                <div class="p-6 flex flex-col justify-between flex-1">
+                    <div>
+                        <h3 class="font-display-lg text-2xl font-bold text-primary mb-2">
+                            Rhinoplastie Secondaire de Révision
+                        </h3>
+                        <p class="font-body-md text-xs text-primary/70 mb-4 leading-relaxed">
+                            Reconstruction de l'architecture cartilagineuse effondrée avec greffe costale autologue.
+                        </p>
+                    </div>
+                    <div class="border-t border-black/10 pt-4 flex items-center justify-between">
+                        <span class="font-label-caps text-[10px] text-primary/50 font-semibold">PATIENT 38 ANS</span>
+                        <button onclick="openCaseModal('rhino-2')" class="bg-primary text-white font-label-caps text-[9px] px-3.5 py-2 hover:bg-neutral-800 transition-all font-bold tracking-widest flex items-center gap-1.5 shadow">
+                            VOIR EN GRAND <span class="material-symbols-outlined text-xs">zoom_in</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- CARD 8: Mastopexie & Réduction Mammaire -->
+            <div class="result-card bg-white border border-black flex flex-col justify-between overflow-hidden group shadow-sm hover:shadow-xl transition-all duration-500" data-category="poitrine">
+                <div class="relative aspect-[4/3] overflow-hidden bg-neutral-100 border-b border-black select-none ba-card-slider">
+                    <img src="/images/injections_after.png" alt="Après — Mastopexie" class="absolute inset-0 w-full h-full object-cover" />
+                    <span class="absolute top-3 right-3 bg-black text-white font-label-caps text-[9px] px-2.5 py-1 font-bold z-10 shadow">APRÈS</span>
+
+                    <img src="/images/injections_before.png" alt="Avant — Mastopexie" class="ba-card-before absolute inset-0 w-full h-full object-cover z-10" style="clip-path: inset(0 50% 0 0);" />
+                    <span class="absolute top-3 left-3 bg-black text-white font-label-caps text-[9px] px-2.5 py-1 font-bold z-20 shadow">AVANT</span>
+
+                    <div class="ba-card-handle absolute top-0 bottom-0 w-[2px] bg-white z-30 shadow-2xl flex items-center justify-center cursor-ew-resize" style="left: 50%;">
+                        <div class="w-6 h-6 rounded-full bg-white text-black flex items-center justify-center shadow-lg text-[10px] font-bold border border-black/20">
+                            ↔
+                        </div>
+                    </div>
+
+                    <span class="absolute bottom-3 left-1/2 -translate-x-1/2 bg-black/90 text-white font-label-caps text-[8px] px-3 py-1 z-20 shadow-md pointer-events-none uppercase tracking-wider">CHIRURGIE MAMMAIRE</span>
+                </div>
+
+                <div class="p-6 flex flex-col justify-between flex-1">
+                    <div>
+                        <h3 class="font-display-lg text-2xl font-bold text-primary mb-2">
+                            Lifting Mammaire (Mastopexie)
+                        </h3>
+                        <p class="font-body-md text-xs text-primary/70 mb-4 leading-relaxed">
+                            Correction de la ptôse mammaire sévère avec remontée de l'aréole et galbe naturel préservé.
+                        </p>
+                    </div>
+                    <div class="border-t border-black/10 pt-4 flex items-center justify-between">
+                        <span class="font-label-caps text-[10px] text-primary/50 font-semibold">PATIENTE 41 ANS</span>
+                        <button onclick="openCaseModal('mammaire-2')" class="bg-primary text-white font-label-caps text-[9px] px-3.5 py-2 hover:bg-neutral-800 transition-all font-bold tracking-widest flex items-center gap-1.5 shadow">
+                            VOIR EN GRAND <span class="material-symbols-outlined text-xs">zoom_in</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+</section>
+
+<!-- ============================================ -->
+<!-- 4. STATISTICAL & CLINICAL METRICS BAR -->
+<!-- ============================================ -->
+<section class="py-20 px-6 md:px-margin-desktop bg-[#08090b] text-white border-y border-gold/20">
+    <div class="max-w-container-max mx-auto">
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-8 divide-y md:divide-y-0 md:divide-x divide-gold/20">
+            
+            <div class="pt-6 md:pt-0 md:px-6 text-center">
+                <span class="font-display-lg text-5xl md:text-6xl font-black text-gold block mb-2">15+</span>
+                <span class="font-label-caps text-[11px] font-bold tracking-widest text-white block mb-1">ANS D'EXPERTISE</span>
+                <p class="font-body-md text-xs text-white/60">Spécialisation exclusive en chirurgie faciale et mammaire à Sousse.</p>
+            </div>
+
+            <div class="pt-6 md:pt-0 md:px-6 text-center">
+                <span class="font-display-lg text-5xl md:text-6xl font-black text-gold block mb-2">99.4%</span>
+                <span class="font-label-caps text-[11px] font-bold tracking-widest text-white block mb-1">SATISFACTION CERTIFIÉE</span>
+                <p class="font-body-md text-xs text-white/60">Basé sur le suivi clinique régulier de plus de 2000 patients.</p>
+            </div>
+
+            <div class="pt-6 md:pt-0 md:px-6 text-center">
+                <span class="font-display-lg text-5xl md:text-6xl font-black text-gold block mb-2">0</span>
+                <span class="font-label-caps text-[11px] font-bold tracking-widest text-white block mb-1">CICATRICE VISIBLE</span>
+                <p class="font-body-md text-xs text-white/60">Utilisation systématique d'incisions dissimulées et micro-sutures.</p>
+            </div>
+
+            <div class="pt-6 md:pt-0 md:px-6 text-center">
+                <span class="font-display-lg text-5xl md:text-6xl font-black text-gold block mb-2">3D HD</span>
+                <span class="font-label-caps text-[11px] font-bold tracking-widest text-white block mb-1">SIMULATION PRÉ-OPÉRATOIRE</span>
+                <p class="font-body-md text-xs text-white/60">Validation visuelle tridimensionnelle du projet avant toute opération.</p>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+<!-- ============================================ -->
+<!-- 5. 3D MORPHOLOGICAL SIMULATION EXPLANATION -->
+<!-- ============================================ -->
+<section class="py-24 px-6 md:px-margin-desktop bg-white border-b border-gold/20">
+    <div class="max-w-container-max mx-auto">
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center">
+            
+            <div class="lg:col-span-6">
+                <span class="font-label-caps text-[10px] tracking-[0.3em] text-gold font-bold block mb-3 uppercase">PRÉVISIBILITÉ & SÉCURITÉ</span>
+                <h2 class="font-display-lg text-4xl md:text-5xl font-bold text-primary leading-tight mb-6">
+                    Comment Obtenir un Résultat Sur-Mesure & Naturel ?
+                </h2>
+                <p class="font-body-md text-primary/80 text-sm md:text-base leading-relaxed mb-8">
+                    Le succès d'une intervention esthétique réside dans l'anticipation rigoureuse des volumes et dans la maîtrise de l'anatomie. Le Dr. Slama associe technologie prédictive 3D et précision micro-chirurgicale.
+                </p>
+
+                <div class="space-y-6">
+                    <div class="flex items-start gap-4 p-5 bg-white border border-gold/20 shadow-sm">
+                        <span class="material-symbols-outlined text-gold text-2xl">view_in_ar</span>
+                        <div>
+                            <h4 class="font-headline-sm text-base font-bold text-primary mb-1">1. Numérisation & Simulation 3D Haute Définition</h4>
+                            <p class="font-body-md text-xs text-primary/70">Cartographie numérique tridimensionnelle permettant au patient de visualiser les modifications envisagées sous tous les angles.</p>
+                        </div>
+                    </div>
+
+                    <div class="flex items-start gap-4 p-5 bg-white border border-gold/20 shadow-sm">
+                        <span class="material-symbols-outlined text-gold text-2xl">straighten</span>
+                        <div>
+                            <h4 class="font-headline-sm text-base font-bold text-primary mb-1">2. Calcul du Nombre d'Or & Proportions Faciales</h4>
+                            <p class="font-body-md text-xs text-primary/70">Analyse rigoureuse de la ligne naso-labiale, du menton et des pommettes pour conserver l'authenticité de l'expression.</p>
+                        </div>
+                    </div>
+
+                    <div class="flex items-start gap-4 p-5 bg-white border border-gold/20 shadow-sm">
+                        <span class="material-symbols-outlined text-gold text-2xl">precision_manufacturing</span>
+                        <div>
+                            <h4 class="font-headline-sm text-base font-bold text-primary mb-1">3. Piézotome & Sutures d'Excellence</h4>
+                            <p class="font-body-md text-xs text-primary/70">Chirurgie à ultrasons évitant d'endommager les vaisseaux sanguins et garantissant une cicatrisation ultra-rapide.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="lg:col-span-6">
+                <div class="relative aspect-[4/3] overflow-hidden gold-border-light shadow-2xl group">
+                    <img src="/images/dr_slama_details.png" alt="Simulation 3D Chirurgie Sousse" class="w-full h-full object-cover group-hover:scale-105 transition-all duration-700" />
+                    
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent flex flex-col justify-end p-8 text-white">
+                        <span class="font-label-caps text-[9px] text-gold font-bold tracking-widest uppercase mb-1">CONSULTATION AVANCÉE</span>
+                        <h3 class="font-display-lg text-2xl font-bold">"Un résultat réussi est un résultat qui ne trahit pas son existence."</h3>
+                        <p class="font-body-md text-xs text-white/70 mt-2">— Dr. Abdelfateh Slama</p>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+<!-- ============================================ -->
+<!-- 6. ETHICS & PRIVACY STATEMENT -->
+<!-- ============================================ -->
+<section class="py-16 px-6 md:px-margin-desktop bg-white">
+    <div class="max-w-4xl mx-auto border border-gold/20 bg-white p-8 md:p-12 shadow-sm text-center">
+        <span class="material-symbols-outlined text-4xl text-gold mb-4">gavel</span>
+        <h3 class="font-display-lg text-2xl font-bold text-primary mb-3">Charte de Déontologie & Respect du Patient</h3>
+        <p class="font-body-md text-xs md:text-sm text-primary/75 leading-relaxed max-w-2xl mx-auto mb-6">
+            Toutes les images publiées dans cette galerie font l'objet d'une autorisation écrite et préalable accordée par nos patients, dans le respect strict du secret médical et de la législation en matière de protection des données. Les photographies sont certifiées non-retouchées informatiquement afin de présenter la réalité exacte du travail chirurgical.
+        </p>
+        <div class="inline-flex items-center gap-2 text-gold font-label-caps text-[10px] font-bold border-b border-gold pb-1">
+            <span>DISPOSITIFS ET PROTOCOLES MEDICAL GRADE D'EXCELLENCE</span>
+        </div>
+    </div>
+</section>
+
+<!-- ============================================ -->
+<!-- 7. FLOATING DARK GLASS CALL TO ACTION (CTA) -->
+<!-- ============================================ -->
+<section class="relative py-32 md:py-44 px-6 md:px-margin-desktop text-white text-center overflow-hidden bg-black">
+    <!-- Fully Visible Clinic Office Background Image -->
+    <div class="absolute inset-0 z-0">
+        <img src="/images/office.png" alt="Cabinet Dr Slama Sousse" class="w-full h-full object-cover object-center opacity-95 scale-100 transition-transform duration-[10s] hover:scale-105" />
+        <div class="absolute inset-0 bg-black/15"></div>
+    </div>
+
+    <!-- Crystal Transparent Floating Card -->
+    <div class="relative z-10 max-w-3xl mx-auto bg-black/25 backdrop-blur-[2px] p-8 md:p-12 border border-white/30 shadow-2xl rounded-2xl">
+        <span class="font-label-caps text-[10px] tracking-[0.4em] text-white block mb-6 uppercase border border-white/40 inline-block px-4 py-1.5 bg-black/30 backdrop-blur-sm font-bold drop-shadow">
+            CONSULTATION PRIVÉE & SIMULATION 3D
+        </span>
+        <h2 class="font-display-lg text-4xl md:text-6xl font-bold text-white mb-6 leading-tight drop-shadow-[0_3px_12px_rgba(0,0,0,0.85)]">
+            Projetez Votre Propre <span class="italic font-normal text-gold">Transformation.</span>
+        </h2>
+        <p class="font-body-lg text-white mb-10 text-base md:text-lg leading-relaxed max-w-xl mx-auto drop-shadow-[0_2px_8px_rgba(0,0,0,0.85)] font-medium">
+            Planifiez une première consultation confidentielle à Sousse pour obtenir une étude morphologique personnalisée et des conseils chirurgicaux adaptés.
+        </p>
+
+        <div class="flex flex-col sm:flex-row gap-5 justify-center items-center">
+            <a asp-controller="Home" asp-action="Contact" class="bg-white text-primary font-label-caps text-[11px] tracking-widest px-10 py-5 hover:bg-neutral-200 transition-all duration-300 w-full sm:w-auto text-center shadow-2xl font-bold">
+                CONTACTEZ-NOUS
+            </a>
+            <a href="tel:+21673200000" class="border border-white/60 bg-black/30 backdrop-blur-sm text-white font-label-caps text-[11px] tracking-widest px-10 py-5 hover:bg-white hover:text-primary transition-all duration-300 w-full sm:w-auto text-center flex items-center justify-center gap-3 font-bold shadow-lg">
+                <span class="material-symbols-outlined text-sm">phone</span>
+                +216 73 200 000
+            </a>
+        </div>
+    </div>
+</section>
+
+<!-- ============================================ -->
+<!-- ============================================ -->
+<!-- 8. CLINICAL CASE STUDY LIGHTBOX MODAL (MATCHING HOME PAGE DESIGN) -->
+<!-- ============================================ -->
+<div id="case-modal" class="fixed inset-0 z-50 hidden flex items-center justify-center p-4 md:p-8 bg-black/90 backdrop-blur-xl transition-all duration-300">
+    <!-- Backdrop Click Close -->
+    <div class="absolute inset-0" onclick="closeCaseModal()"></div>
+
+    <!-- Modal Content Window -->
+    <div class="relative z-10 w-full max-w-5xl bg-neutral-900 border border-white/20 shadow-2xl overflow-hidden flex flex-col max-h-[92vh] transition-transform duration-300">
+        
+        <!-- Modal Top Bar -->
+        <div class="flex justify-between items-center px-6 py-4 border-b border-gold/20 bg-black/80 backdrop-blur-md">
+            <div class="flex items-center gap-3">
+                <span id="modal-category" class="font-label-caps text-[9px] tracking-[0.25em] text-gold font-bold uppercase bg-gold/10 border border-gold/30 px-3 py-1">
+                    RHINOPLASTIE ULTRASONIQUE
+                </span>
+                <span class="text-white/40 text-xs hidden sm:inline">•</span>
+                <span class="font-label-caps text-[10px] text-white/60 tracking-widest hidden sm:inline">CLIQUEZ ET GLISSEZ LE CURSEUR POUR COMPARER AVANT / APRÈS</span>
+            </div>
+
+            <!-- Close Button -->
+            <button onclick="closeCaseModal()" class="w-10 h-10 rounded-full bg-white/10 hover:bg-white/20 text-white flex items-center justify-center transition-colors" title="Fermer (Échap)">
+                <span class="material-symbols-outlined text-xl">close</span>
+            </button>
+        </div>
+
+        <!-- Modal Body (Split: Interactive Large Slider on Left, Details on Right) -->
+        <div class="overflow-y-auto flex-1 p-6 md:p-8 grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+            
+            <!-- Left/Top: High-Res Interactive Before/After Drag Slider -->
+            <div class="lg:col-span-8">
+                <div id="modal-ba-slider" class="relative w-full aspect-[4/3] md:aspect-[16/10] overflow-hidden select-none border border-gold/30 bg-black shadow-2xl group cursor-ew-resize">
+                    <!-- AFTER Image -->
+                    <img id="modal-img-after" src="" alt="Après" class="absolute inset-0 w-full h-full object-cover" />
+                    <span class="absolute top-4 right-4 gold-gradient text-white font-label-caps text-[10px] px-3 py-1.5 font-bold z-10 tracking-widest shadow-md">
+                        APRÈS
+                    </span>
+
+                    <!-- BEFORE Image -->
+                    <img id="modal-img-before" src="" alt="Avant" class="modal-ba-before absolute inset-0 w-full h-full object-cover z-10" style="clip-path: inset(0 50% 0 0);" />
+                    <span class="absolute top-4 left-4 bg-black/90 text-white font-label-caps text-[10px] px-3 py-1.5 font-bold z-20 shadow-md border border-gold/30">
+                        AVANT
+                    </span>
+
+                    <!-- Draggable Handle Bar -->
+                    <div id="modal-ba-handle" class="modal-ba-handle absolute top-0 bottom-0 w-[2px] bg-white z-30 shadow-2xl flex items-center justify-center" style="left: 50%;">
+                        <div class="w-10 h-10 rounded-full gold-gradient text-white flex items-center justify-center shadow-2xl border border-white text-sm font-bold">
+                            ↔
+                        </div>
+                    </div>
+                </div>
+
+                <div class="flex justify-between items-center mt-3 text-xs font-label-caps text-white/50">
+                    <span>◄ Glisser vers la gauche (AVANT)</span>
+                    <span>Glisser vers la droite (APRÈS) ►</span>
+                </div>
+            </div>
+
+            <!-- Right/Bottom: Case Info & Navigation -->
+            <div class="lg:col-span-4 flex flex-col justify-between h-full space-y-6 text-white">
+                <div>
+                    <h3 id="modal-title" class="font-display-lg text-2xl md:text-4xl text-white mb-4 leading-tight">
+                        Rhinoplastie Primaire Ultrasonique
+                    </h3>
+                    <p id="modal-desc" class="font-body-md text-white/70 text-sm leading-relaxed mb-6">
+                        Correction d'une déviation septale avec lissage du profil et projection contrôlée de la pointe.
+                    </p>
+
+                    <div class="space-y-3 border-t border-b border-gold/20 py-5">
+                        <div class="flex justify-between text-xs">
+                            <span class="font-label-caps text-white/40">SPÉCIALISTE :</span>
+                            <span id="modal-spec" class="font-bold text-gold">Dr. Abdelfateh Slama</span>
+                        </div>
+                        <div class="flex justify-between text-xs">
+                            <span class="font-label-caps text-white/40">TECHNIQUE :</span>
+                            <span id="modal-tag1" class="font-bold text-white/90">Ultrasons Piezo</span>
+                        </div>
+                        <div class="flex justify-between text-xs">
+                            <span class="font-label-caps text-white/40">RÉCUPÉRATION :</span>
+                            <span id="modal-tag2" class="font-bold text-gold font-semibold">5 à 7 jours</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Navigation between cases & CTAs -->
+                <div class="space-y-4 pt-2">
+                    <div class="flex gap-3">
+                        <button onclick="navigateResultsPageModal(-1)" class="flex-1 bg-white/10 hover:bg-white/20 text-white font-label-caps text-[10px] tracking-widest py-3 px-4 transition-all flex items-center justify-center gap-2 border border-gold/30 font-bold">
+                            <span class="material-symbols-outlined text-sm text-gold">west</span>
+                            <span>PRÉCÉDENT</span>
+                        </button>
+                        <button onclick="navigateResultsPageModal(1)" class="flex-1 bg-white/10 hover:bg-white/20 text-white font-label-caps text-[10px] tracking-widest py-3 px-4 transition-all flex items-center justify-center gap-2 border border-gold/30 font-bold">
+                            <span>SUIVANT</span>
+                            <span class="material-symbols-outlined text-sm text-gold">east</span>
+                        </button>
+                    </div>
+
+                    <a asp-controller="Home" asp-action="Contact" class="w-full block text-center gold-gradient text-white hover:opacity-90 font-label-caps text-[11px] tracking-widest py-4 px-6 transition-all font-bold shadow-lg">
+                        PRENDRE RENDEZ-VOUS POUR CE SOIN →
+                    </a>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+<script>
+    // ============================================
+    // 1. FEATURED BEFORE/AFTER DRAGGABLE SLIDER JS
+    // ============================================
+    const slider = document.getElementById('featured-ba-slider');
+    const featuredBeforeImg = document.getElementById('ba-before-img');
+    const handle = document.getElementById('ba-handle');
+    let isDragging = false;
+
+    function updateSliderPosition(x) {
+        if (!slider || !featuredBeforeImg || !handle) return;
+        const rect = slider.getBoundingClientRect();
+        let offsetX = x - rect.left;
+        if (offsetX < 0) offsetX = 0;
+        if (offsetX > rect.width) offsetX = rect.width;
+        const percentage = (offsetX / rect.width) * 100;
+        featuredBeforeImg.style.clipPath = 'inset(0 ' + (100 - percentage) + '% 0 0)';
+        handle.style.left = percentage + '%';
+    }
+
+    if (slider) {
+        slider.addEventListener('mousedown', (e) => {
+            isDragging = true;
+            updateSliderPosition(e.clientX);
+        });
+
+        window.addEventListener('mousemove', (e) => {
+            if (!isDragging) return;
+            updateSliderPosition(e.clientX);
+        });
+
+        window.addEventListener('mouseup', () => {
+            isDragging = false;
+        });
+
+        // Touch support for mobile devices
+        slider.addEventListener('touchstart', (e) => {
+            isDragging = true;
+            updateSliderPosition(e.touches[0].clientX);
+        });
+
+        window.addEventListener('touchmove', (e) => {
+            if (!isDragging) return;
+            updateSliderPosition(e.touches[0].clientX);
+        });
+
+        window.addEventListener('touchend', () => {
+            isDragging = false;
+        });
+    }
+
+    // ============================================
+    // 2. TOGGLE CARD IMAGE (AVANT / APRÈS)
+    // ============================================
+    function toggleCardImage(cardId, view, imgSrc) {
+        const img = document.getElementById('img-' + cardId);
+        const btnBefore = document.getElementById('btn-' + cardId + '-before');
+        const btnAfter = document.getElementById('btn-' + cardId + '-after');
+
+        if (img) {
+            img.style.opacity = '0.4';
+            setTimeout(() => {
+                img.src = imgSrc;
+                img.style.opacity = '1';
+            }, 150);
+        }
+
+        if (view === 'before') {
+            btnBefore.className = 'flex-1 py-1 text-center font-label-caps text-[9px] bg-white text-primary font-bold shadow transition-all';
+            btnAfter.className = 'flex-1 py-1 text-center font-label-caps text-[9px] text-white/70 hover:text-white font-bold transition-all';
+        } else {
+            btnAfter.className = 'flex-1 py-1 text-center font-label-caps text-[9px] bg-white text-primary font-bold shadow transition-all';
+            btnBefore.className = 'flex-1 py-1 text-center font-label-caps text-[9px] text-white/70 hover:text-white font-bold transition-all';
+        }
+    }
+
+    // ============================================
+    // 3. FILTER RESULTS CATEGORY TABS
+    // ============================================
+    function filterResults(category) {
+        document.querySelectorAll('.result-tab').forEach(btn => {
+            btn.classList.remove('gold-gradient', 'text-white', 'shadow-md');
+            btn.classList.add('bg-white', 'text-primary', 'border-gold/30', 'shadow-sm');
+        });
+
+        const activeBtn = document.getElementById('res-btn-' + category);
+        if (activeBtn) {
+            activeBtn.classList.remove('bg-white', 'text-primary', 'border-gold/30', 'shadow-sm');
+            activeBtn.classList.add('gold-gradient', 'text-white', 'shadow-md');
+        }
+
+        const cards = document.querySelectorAll('.result-card');
+        cards.forEach(card => {
+            if (category === 'all' || card.dataset.category === category) {
+                card.style.display = 'flex';
+            } else {
+                card.style.display = 'none';
+            }
+        });
+    }
+
+    // ============================================
+    // 4. CLINICAL CASE LIGHTBOX MODAL DATA & CONTROLLER
+    // ============================================
+    const resultsPageData = [
+        {
+            id: 0,
+            key: 'rhino-1',
+            category: 'RHINOPLASTIE ULTRASONIQUE',
+            title: 'Rhinoplastie Primaire Ultrasonique',
+            desc: 'Correction d\'une déviation septale avec lissage du profil et projection contrôlée de la pointe. Sculpture osseuse haute précision par ultrasons Piezo.',
+            beforeImg: '/images/rhino_before.png',
+            afterImg: '/images/rhino_after.png',
+            spec: 'Dr. Abdelfateh Slama',
+            tag1: 'Ultrasons Piezo',
+            tag2: '5 à 7 jours'
+        },
+        {
+            id: 1,
+            key: 'lifting-1',
+            category: 'LIFTING & VISAGE',
+            title: 'Deep Plane Facelift & Cou',
+            desc: 'Repositionnement profond des structures musculaires (SMAS) pour un rajeunissement naturel du visage et du cou sans aucune tension cutanée.',
+            beforeImg: '/images/facelift_before.png',
+            afterImg: '/images/facelift_after.png',
+            spec: 'Dr. Abdelfateh Slama',
+            tag1: 'Repositionnement SMAS',
+            tag2: '10 à 14 jours'
+        },
+        {
+            id: 2,
+            key: 'mammaire-1',
+            category: 'CHIRURGIE MAMMAIRE',
+            title: 'Augmentation Mammaire Sur-Mesure',
+            desc: 'Prothèses ergonomiques haute résilience insérées sous le plan pectoral pour un décolleté harmonieux, naturel et très souple.',
+            beforeImg: '/images/rhino_before.png',
+            afterImg: '/images/rhino_after.png',
+            spec: 'Dr. Abdelfateh Slama',
+            tag1: 'Prothèses Ergonomiques',
+            tag2: '7 à 10 jours'
+        },
+        {
+            id: 3,
+            key: 'injections-1',
+            category: 'MÉDECINE ESTHÉTIQUE',
+            title: 'Profiloplastie par Injections HD',
+            desc: 'Rhinofiller à l\'acide hyaluronique et projection du menton sans chirurgie avec précision anatomique et résultat immédiat.',
+            beforeImg: '/images/injections_before.png',
+            afterImg: '/images/injections_after.png',
+            spec: 'Dr. Abdelfateh Slama',
+            tag1: 'Acide Hyaluronique HD',
+            tag2: 'Sans éviction sociale'
+        },
+        {
+            id: 4,
+            key: 'bleph-1',
+            category: 'CHIRURGIE DU REGARD',
+            title: 'Blépharoplastie Supérieure & Inférieure',
+            desc: 'Ablation de l\'excès cutané palpébral et résection des poches graisseuses sous-orbitaires pour rajeunir le regard.',
+            beforeImg: '/images/bleph_before.png',
+            afterImg: '/images/bleph_after.png',
+            spec: 'Dr. Abdelfateh Slama',
+            tag1: 'Résection 4 Paupières',
+            tag2: '5 à 7 jours'
+        },
+        {
+            id: 5,
+            key: 'profhilo-1',
+            category: 'BIOSTIMULATION',
+            title: 'Rajeunissement Cutané par Profhilo',
+            desc: 'Restructuration tissulaire et lissage du tiers inférieur du visage sans ajouter de volume artificiel grâce à la biostimulation.',
+            beforeImg: '/images/facelift_before.png',
+            afterImg: '/images/facelift_after.png',
+            spec: 'Dr. Abdelfateh Slama',
+            tag1: 'Acide Hyaluronique BAP',
+            tag2: 'Immédiat'
+        },
+        {
+            id: 6,
+            key: 'rhino-2',
+            category: 'RHINOPLASTIE SECONDAIRE',
+            title: 'Rhinoplastie Secondaire de Révision',
+            desc: 'Reconstruction de l\'architecture cartilagineuse effondrée avec greffe autologue et restauration de la fonction respiratoire.',
+            beforeImg: '/images/rhino_before.png',
+            afterImg: '/images/rhino_after.png',
+            spec: 'Dr. Abdelfateh Slama',
+            tag1: 'Greffe Cartilagineuse',
+            tag2: '10 à 14 jours'
+        },
+        {
+            id: 7,
+            key: 'mammaire-2',
+            category: 'CHIRURGIE MAMMAIRE',
+            title: 'Lifting Mammaire (Mastopexie)',
+            desc: 'Correction de la ptôse mammaire sévère avec remontée de l\'aréole et reconcentration du galbe naturel.',
+            beforeImg: '/images/injections_before.png',
+            afterImg: '/images/injections_after.png',
+            spec: 'Dr. Abdelfateh Slama',
+            tag1: 'Mastopexie T Inversé',
+            tag2: '7 à 10 jours'
+        }
+    ];
+
+    let currentResultsPageModalIndex = 0;
+
+    function openCaseModal(param) {
+        let index = 0;
+        if (typeof param === 'number') {
+            index = param;
+        } else if (typeof param === 'string') {
+            const foundIdx = resultsPageData.findIndex(item => item.key === param);
+            if (foundIdx !== -1) index = foundIdx;
+        }
+
+        currentResultsPageModalIndex = index;
+        const data = resultsPageData[index];
+        if (!data) return;
+
+        document.getElementById('modal-category').innerText = data.category;
+        document.getElementById('modal-title').innerText = data.title;
+        document.getElementById('modal-desc').innerText = data.desc;
+        document.getElementById('modal-tag1').innerText = data.tag1;
+        document.getElementById('modal-tag2').innerText = data.tag2;
+
+        const beforeImg = document.getElementById('modal-img-before');
+        const afterImg = document.getElementById('modal-img-after');
+        const handle = document.getElementById('modal-ba-handle');
+
+        if (beforeImg && afterImg && handle) {
+            beforeImg.src = data.beforeImg;
+            afterImg.src = data.afterImg;
+            beforeImg.style.clipPath = 'inset(0 50% 0 0)';
+            handle.style.left = '50%';
+        }
+
+        const modal = document.getElementById('case-modal');
+        if (modal) {
+            modal.classList.remove('hidden');
+            modal.classList.add('flex');
+            document.body.classList.add('overflow-hidden');
+        }
+    }
+
+    function closeCaseModal() {
+        const modal = document.getElementById('case-modal');
+        if (modal) {
+            modal.classList.add('hidden');
+            modal.classList.remove('flex');
+            document.body.classList.remove('overflow-hidden');
+        }
+    }
+
+    function navigateResultsPageModal(direction) {
+        let newIndex = currentResultsPageModalIndex + direction;
+        if (newIndex < 0) newIndex = resultsPageData.length - 1;
+        if (newIndex >= resultsPageData.length) newIndex = 0;
+        openCaseModal(newIndex);
+    }
+
+    function initModalSlider() {
+        const slider = document.getElementById('modal-ba-slider');
+        const beforeImg = document.getElementById('modal-img-before');
+        const handle = document.getElementById('modal-ba-handle');
+        let isDragging = false;
+
+        if (!slider || !beforeImg || !handle) return;
+
+        function setModalPos(clientX) {
+            const rect = slider.getBoundingClientRect();
+            let x = clientX - rect.left;
+            if (x < 0) x = 0;
+            if (x > rect.width) x = rect.width;
+            const pct = (x / rect.width) * 100;
+            beforeImg.style.clipPath = 'inset(0 ' + (100 - pct) + '% 0 0)';
+            handle.style.left = pct + '%';
+        }
+
+        slider.addEventListener('mousedown', (e) => {
+            isDragging = true;
+            setModalPos(e.clientX);
+        });
+
+        window.addEventListener('mousemove', (e) => {
+            if (!isDragging) return;
+            setModalPos(e.clientX);
+        });
+
+        window.addEventListener('mouseup', () => {
+            isDragging = false;
+        });
+
+        slider.addEventListener('touchstart', (e) => {
+            isDragging = true;
+            if (e.touches && e.touches[0]) setModalPos(e.touches[0].clientX);
+        });
+
+        window.addEventListener('touchmove', (e) => {
+            if (!isDragging) return;
+            if (e.touches && e.touches[0]) setModalPos(e.touches[0].clientX);
+        });
+
+        window.addEventListener('touchend', () => {
+            isDragging = false;
+        });
+    }
+
+    window.addEventListener('keydown', (e) => {
+        const modal = document.getElementById('case-modal');
+        if (!modal || modal.classList.contains('hidden')) return;
+
+        if (e.key === 'Escape') {
+            closeCaseModal();
+        } else if (e.key === 'ArrowLeft') {
+            navigateResultsPageModal(-1);
+        } else if (e.key === 'ArrowRight') {
+            navigateResultsPageModal(1);
+        }
+    });
+
+    function initResultCardSliders() {
+        document.querySelectorAll('.ba-card-slider').forEach(slider => {
+            const beforeImg = slider.querySelector('.ba-card-before');
+            const handle = slider.querySelector('.ba-card-handle');
+            let isDragging = false;
+
+            if (!slider || !beforeImg || !handle) return;
+
+            function setPos(clientX) {
+                const rect = slider.getBoundingClientRect();
+                let x = clientX - rect.left;
+                if (x < 0) x = 0;
+                if (x > rect.width) x = rect.width;
+                const pct = (x / rect.width) * 100;
+                beforeImg.style.clipPath = 'inset(0 ' + (100 - pct) + '% 0 0)';
+                handle.style.left = pct + '%';
+            }
+
+            slider.addEventListener('mousedown', (e) => {
+                isDragging = true;
+                setPos(e.clientX);
+            });
+
+            window.addEventListener('mousemove', (e) => {
+                if (!isDragging) return;
+                setPos(e.clientX);
+            });
+
+            window.addEventListener('mouseup', () => {
+                isDragging = false;
+            });
+
+            slider.addEventListener('touchstart', (e) => {
+                isDragging = true;
+                if (e.touches && e.touches[0]) {
+                    setPos(e.touches[0].clientX);
+                }
+            });
+
+            window.addEventListener('touchmove', (e) => {
+                if (!isDragging) return;
+                if (e.touches && e.touches[0]) {
+                    setPos(e.touches[0].clientX);
+                }
+            });
+
+            window.addEventListener('touchend', () => {
+                isDragging = false;
+            });
+        });
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+        initResultCardSliders();
+        initModalSlider();
+    });
+</script>
+}

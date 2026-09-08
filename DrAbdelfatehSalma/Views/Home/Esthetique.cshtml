@@ -1,0 +1,249 @@
+@model List<DrAbdelfatehSalma.Models.Esthetique>
+@{
+    ViewData["Title"] = "Médecine Esthétique - Pr. Abdelfateh Slama Sousse";
+    var defaultCats = new List<string> { "LIPOFILLING", "LES FILS TENSEURS", "INJECTION DE BOTOX, COMBLEMENT ET PRP" };
+    var categories = Model != null ? Model
+        .Select(c => c.Category)
+        .Where(c => !string.IsNullOrEmpty(c))
+        .Distinct(StringComparer.OrdinalIgnoreCase)
+        .ToList() : new List<string>();
+
+    foreach (var dCat in defaultCats)
+    {
+        if (!categories.Any(c => c.Equals(dCat, StringComparison.OrdinalIgnoreCase)))
+        {
+            categories.Add(dCat);
+        }
+    }
+}
+
+<!-- ============================================ -->
+<!-- 1. HERO SECTION: DRAMATIC EDITORIAL SPLIT LAYOUT (100VH FULL SCREEN) -->
+<!-- ============================================ -->
+<section class="relative min-h-[85vh] md:min-h-screen flex items-end md:items-center pt-24 md:pt-20 pb-16 md:pb-12 overflow-hidden bg-surface-container-low border-b border-gold/20">
+    <!-- Right-Side Image (Full screen on mobile, 50% width on desktop) -->
+    <div class="absolute inset-0 md:left-auto md:right-0 md:top-0 w-full md:w-1/2 h-full z-0 overflow-hidden">
+        <!-- Desktop High-Fashion Gradient Transition -->
+        <div class="hidden md:block absolute inset-y-0 left-0 w-48 bg-gradient-to-r from-surface-container-low via-surface-container-low/70 to-transparent z-10 pointer-events-none"></div>
+        <!-- Mobile Dark Gradient Overlay to ensure text readability -->
+        <div class="block md:hidden absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-black/10 z-10 pointer-events-none"></div>
+        <img src="/images/imh.jpeg" alt="Médecine Esthétique - Pr. Abdelfateh Slama Sousse" class="w-full h-full object-cover object-center transition-all duration-700 brightness-[1.02] contrast-[1.03]" />
+    </div>
+
+    <!-- Content Column -->
+    <div class="relative z-20 w-full px-4 sm:px-6 md:px-margin-desktop max-w-container-max mx-auto">
+        <div class="w-full md:w-5/12 lg:w-[42%] max-w-lg p-0 text-white md:text-primary">
+            <div class="flex items-center gap-3 mb-4 reveal-text">
+                <span class="w-10 h-[1px] bg-gold"></span>
+                <span class="font-label-caps text-gold text-[9.5px] md:text-[10px] tracking-[0.3em] md:tracking-[0.4em] uppercase font-bold animate-reveal">PR. ABDELFATEH SLAMA • SOUSSE</span>
+            </div>
+            <h1 class="font-display-lg text-4xl sm:text-5xl md:text-[85px] lg:text-[95px] leading-[0.92] md:leading-[0.88] tracking-tighter text-white md:text-primary mb-6 md:mb-8 italic">
+                Médecine<br/>
+                <span class="not-italic font-black">Esthétique</span>
+            </h1>
+            <div class="space-y-4 font-body-lg text-white/90 md:text-primary/85 text-sm md:text-base leading-relaxed">
+                <p class="font-bold text-white md:text-primary text-base md:text-lg">
+                    La médecine esthétique d'exception et soins mini-invasifs à Sousse.
+                </p>
+                <p class="font-light text-white/80 md:text-primary/80">
+                    Protocoles sur-mesure d'injections d'acide hyaluronique HD, inducteurs et fils tenseurs pour rajeunir, embellir et sublimer l'harmonie naturelle du visage.
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scroll Indicator -->
+    <div class="absolute bottom-10 left-6 md:left-margin-desktop flex items-center gap-4">
+        <div class="h-16 w-[1px] bg-gold"></div>
+        <span class="font-label-caps text-[10px] vertical-text text-gold font-bold" style="writing-mode: vertical-rl; transform: rotate(180deg);">SCROLL</span>
+    </div>
+</section>
+
+
+
+<!-- ============================================ -->
+<!-- 4. AESTHETIC TREATMENTS CATALOG GRID WITH INTEGRATED FILTER -->
+<!-- ============================================ -->
+<section class="py-16 px-6 md:px-margin-desktop bg-[#faf8f5] border-b border-gold/20">
+    <div class="max-w-container-max mx-auto">
+        
+        <!-- Dynamic Category Filter Buttons Bar -->
+        <div class="flex flex-wrap gap-2.5 justify-center mb-8 border-b border-gold/20 pb-6">
+            @if (categories != null)
+            {
+                foreach (var cat in categories)
+                {
+                    var catSlug = System.Text.RegularExpressions.Regex.Replace(cat.ToLower().Trim(), @"[^a-z0-9]+", "-");
+                    <button onclick="filterAesthetics('@catSlug')" id="btn-@catSlug" class="aesthetic-tab px-6 py-3.5 font-label-caps text-xs tracking-widest bg-white border border-gold/30 text-primary hover:border-gold hover:text-gold transition-all shadow-sm uppercase font-bold">
+                        @cat
+                    </button>
+                }
+            }
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8" id="aesthetics-grid">
+            @if (Model != null && Model.Any())
+            {
+                foreach (var item in Model)
+                {
+                    var catSlug = System.Text.RegularExpressions.Regex.Replace(item.Category.ToLower().Trim(), @"[^a-z0-9]+", "-");
+                    var img = string.IsNullOrEmpty(item.ImageUrl) ? "/images/dr_slama_consultation.png" : item.ImageUrl;
+
+                    <a asp-controller="Home" asp-action="ProcedureDetail" asp-route-id="@item.Slug" class="aesthetic-card bg-white border border-gold/20 flex flex-col justify-between overflow-hidden group transition-all duration-500 hover:border-gold hover:shadow-xl hover:shadow-gold/10 hover:-translate-y-1 cursor-pointer rounded-2xl" data-category="@catSlug">
+                        <div class="relative aspect-[4/3] overflow-hidden bg-neutral-100 border-b border-gold/20">
+                            <img src="@img" alt="@item.Title" class="w-full h-full object-cover object-center transition-transform duration-500" />
+                            <div class="absolute top-4 left-4 z-10">
+                                <span class="gold-gradient text-white font-label-caps text-[9px] px-3 py-1 font-bold tracking-widest uppercase shadow rounded-full">
+                                    @item.Category
+                                </span>
+                            </div>
+                        </div>
+                        <div class="p-6 flex items-center justify-between gap-4">
+                            <div>
+                                <h3 class="font-display-lg text-xl font-bold text-primary group-hover:text-gold transition-colors">@item.Title</h3>
+                                @if (!string.IsNullOrEmpty(item.Subtitle))
+                                {
+                                    <p class="font-body-md text-xs text-neutral-500 mt-1 line-clamp-1">@item.Subtitle</p>
+                                }
+                            </div>
+                            <span class="w-9 h-9 rounded-full border border-gold/30 flex items-center justify-center text-gold group-hover:bg-gold group-hover:text-white group-hover:border-gold transition-all flex-shrink-0">
+                                →
+                            </span>
+                        </div>
+                    </a>
+                }
+            }
+            else
+            {
+                <div class="col-span-3 text-center py-12 text-gray-500 text-sm">
+                    Aucun soin esthétique enregistré pour le moment.
+                </div>
+            }
+        </div>
+    </div>
+</section>
+
+<!-- ============================================ -->
+<!-- 4. PATIENT JOURNEY / LE PARCOURS D'EXCELLENCE -->
+<!-- ============================================ -->
+<section class="py-section-gap bg-ivory border-t-2 border-gold/20">
+    <div class="px-6 md:px-margin-desktop max-w-container-max mx-auto">
+        <div class="mb-20 text-center md:text-left">
+            <div class="flex items-center justify-center md:justify-start gap-3 mb-4">
+                <span class="w-10 h-[1px] bg-gold"></span>
+                <span class="font-label-caps text-gold text-[10px] tracking-[0.4em] uppercase font-bold">ACCOMPAGNEMENT PRIVILÉGIÉ</span>
+                <span class="w-10 h-[1px] bg-gold"></span>
+            </div>
+            <h2 class="font-display-lg text-5xl md:text-7xl">Le Parcours d'Excellence</h2>
+            <p class="font-body-lg text-primary/70 mt-4 max-w-2xl">Une prise en charge confidentielle, rigoureuse et entièrement personnalisée à chaque étape de votre soin à Sousse.</p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+            <!-- Step 1 -->
+            <div class="bg-white p-8 editorial-border flex flex-col justify-between min-h-[320px] transition-transform hover:-translate-y-2 duration-300">
+                <div>
+                    <span class="font-display-lg text-5xl font-black text-gold block mb-6">01</span>
+                    <h3 class="font-label-caps text-sm font-bold mb-4 tracking-wider text-primary">CONSULTATION INITIALE</h3>
+                    <p class="font-body-md text-xs text-primary/70 leading-relaxed">
+                        Écoute attentive de vos souhaits, examen morphologique précis.
+                    </p>
+                </div>
+                <div class="w-8 h-[2px] gold-gradient mt-8"></div>
+            </div>
+            <!-- Step 2 -->
+            <div class="bg-white p-8 editorial-border flex flex-col justify-between min-h-[320px] transition-transform hover:-translate-y-2 duration-300">
+                <div>
+                    <span class="font-display-lg text-5xl font-black text-gold block mb-6">02</span>
+                    <h3 class="font-label-caps text-sm font-bold mb-4 tracking-wider text-primary">PLAN SUR-MESURE</h3>
+                    <p class="font-body-md text-xs text-primary/70 leading-relaxed">
+                        Élaboration du protocole sur-mesure, informations médicales claires et remise du devis détaillé.
+                    </p>
+                </div>
+                <div class="w-8 h-[2px] gold-gradient mt-8"></div>
+            </div>
+            <!-- Step 3 -->
+            <div class="bg-white p-8 editorial-border flex flex-col justify-between min-h-[320px] transition-transform hover:-translate-y-2 duration-300">
+                <div>
+                    <span class="font-display-lg text-5xl font-black text-gold block mb-6">03</span>
+                    <h3 class="font-label-caps text-sm font-bold mb-4 tracking-wider text-primary">HAUTE PRÉCISION</h3>
+                    <p class="font-body-md text-xs text-primary/70 leading-relaxed">
+                        Intervention réalisée dans un bloc opératoire agréé d'excellence répondant aux normes internationales les plus exigeantes.
+                    </p>
+                </div>
+                <div class="w-8 h-[2px] gold-gradient mt-8"></div>
+            </div>
+            <!-- Step 4 -->
+            <div class="bg-white p-8 editorial-border flex flex-col justify-between min-h-[320px] transition-transform hover:-translate-y-2 duration-300">
+                <div>
+                    <span class="font-display-lg text-5xl font-black text-gold block mb-6">04</span>
+                    <h3 class="font-label-caps text-sm font-bold mb-4 tracking-wider text-primary">SUIVI PRIVILÉGIÉ</h3>
+                    <p class="font-body-md text-xs text-primary/70 leading-relaxed">
+                        Accompagnement post-opératoire rigoureux, consultations de suivi incluses.
+                    </p>
+                </div>
+                <div class="w-8 h-[2px] gold-gradient mt-8"></div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ============================================ -->
+<!-- 4. CALL TO ACTION (HARMONIZED CRYSTAL GLASS DESIGN) -->
+<!-- ============================================ -->
+<section class="relative py-32 md:py-44 px-6 md:px-margin-desktop text-white text-center overflow-hidden bg-black border-t border-gold/30">
+    <!-- Fully Visible Clinic Office Background Image -->
+    <div class="absolute inset-0 z-0">
+        <img src="/images/office.png" alt="Cabinet Dr Slama Sousse" class="w-full h-full object-cover object-center opacity-95 scale-100 transition-transform duration-[10s] hover:scale-105" />
+        <div class="absolute inset-0 bg-black/15"></div>
+    </div>
+
+    <!-- Crystal Transparent Floating Card -->
+    <div class="relative z-10 max-w-3xl mx-auto bg-black/25 backdrop-blur-[2px] p-8 md:p-12 border border-white/30 shadow-2xl rounded-2xl">
+        <span class="font-label-caps text-[10px] tracking-[0.4em] text-white block mb-6 uppercase border border-white/40 inline-block px-4 py-1.5 bg-black/30 backdrop-blur-sm font-bold drop-shadow">
+            CONSULTATION PRIVÉE • SOUSSE
+        </span>
+        <h2 class="font-display-lg text-4xl md:text-6xl font-bold text-white mb-6 leading-tight drop-shadow-[0_3px_12px_rgba(0,0,0,0.85)]">
+            Révélez l'Éclat Naturel de Votre Visage.
+        </h2>
+        <p class="font-body-lg text-white mb-10 text-base md:text-lg leading-relaxed max-w-xl mx-auto drop-shadow-[0_2px_8px_rgba(0,0,0,0.85)] font-medium">
+            Bénéficiez d'une première consultation confidentielle pour établir votre bilan esthétique tridimensionnel.
+        </p>
+
+        <div class="flex flex-col sm:flex-row gap-5 justify-center items-center">
+            <a asp-controller="Home" asp-action="Contact" class="bg-white text-primary font-label-caps text-[11px] tracking-widest px-10 py-5 hover:bg-neutral-200 transition-all duration-300 w-full sm:w-auto text-center shadow-2xl font-bold">
+                CONTACTEZ-NOUS
+            </a>
+            <a href="tel:+21673200000" class="border border-white/60 bg-black/30 backdrop-blur-sm text-white font-label-caps text-[11px] tracking-widest px-10 py-5 hover:bg-white hover:text-primary transition-all duration-300 w-full sm:w-auto text-center flex items-center justify-center gap-3 font-bold shadow-lg">
+                <span class="material-symbols-outlined text-sm">phone</span>
+                +216 73 200 000
+            </a>
+        </div>
+    </div>
+</section>
+
+@section Scripts {
+<script>
+    function filterAesthetics(category) {
+        // Update active tab buttons
+        document.querySelectorAll('.aesthetic-tab').forEach(btn => {
+            btn.classList.remove('gold-gradient', 'text-white', 'shadow-md');
+            btn.classList.add('bg-white', 'text-primary', 'border-gold/30', 'shadow-sm');
+        });
+        const activeBtn = document.getElementById('btn-' + category);
+        if (activeBtn) {
+            activeBtn.classList.remove('bg-white', 'text-primary', 'border-gold/30', 'shadow-sm');
+            activeBtn.classList.add('gold-gradient', 'text-white', 'shadow-md');
+        }
+
+        // Filter cards
+        const cards = document.querySelectorAll('.aesthetic-card');
+        cards.forEach(card => {
+            if (category === 'all' || card.dataset.category === category) {
+                card.style.display = 'flex';
+            } else {
+                card.style.display = 'none';
+            }
+        });
+    }
+</script>
+}

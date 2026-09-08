@@ -1,0 +1,549 @@
+<!DOCTYPE html>
+<html class="scroll-smooth" lang="fr">
+<head>
+    <meta charset="utf-8"/>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+    <title>@(ViewData["Title"] != null ? ViewData["Title"] + " - " : "")Dr. Abdelfateh Slama</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=Montserrat:wght@300;400;700&display=swap" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+    <script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "tertiary-container": "#1a1c1c",
+                        "on-surface": "#1b1c1c",
+                        "secondary-fixed-dim": "#e9c349",
+                        "on-primary-fixed-variant": "#474746",
+                        "on-error": "#ffffff",
+                        "secondary-fixed": "#ffe088",
+                        "secondary": "#735c00",
+                        "surface-container-low": "#ffffff",
+                        "tertiary-fixed": "#e2e2e2",
+                        "primary-container": "#1c1b1b",
+                        "surface": "#ffffff",
+                        "inverse-surface": "#1a1c1c",
+                        "primary": "#000000",
+                        "on-secondary-container": "#745c00",
+                        "surface-container-lowest": "#ffffff",
+                        "on-secondary-fixed": "#241a00",
+                        "surface-tint": "#000000",
+                        "surface-bright": "#ffffff",
+                        "outline": "#000000",
+                        "error-container": "#ffdad6",
+                        "on-tertiary-container": "#838484",
+                        "background": "#ffffff",
+                        "primary-fixed": "#e5e2e1",
+                        "secondary-container": "#fed65b",
+                        "on-primary": "#ffffff",
+                        "on-tertiary-fixed-variant": "#454747",
+                        "inverse-on-surface": "#f2f0f0",
+                        "surface-container-high": "#e9e8e7",
+                        "surface-container": "#efeded",
+                        "on-surface-variant": "#1a1c1c",
+                        "on-primary-container": "#1a1c1c",
+                        "tertiary": "#000000",
+                        "on-primary-fixed": "#1c1b1b",
+                        "surface-container-highest": "#e3e2e2",
+                        "primary-fixed-dim": "#c8c6c5",
+                        "on-tertiary": "#ffffff",
+                        "surface-dim": "#dbdad9",
+                        "surface-variant": "#e3e2e2",
+                        "error": "#ba1a1a",
+                        "outline-variant": "#e2e2e2",
+                        "on-error-container": "#93000a",
+                        "on-tertiary-fixed": "#1a1c1c",
+                        "on-background": "#1a1c1c",
+                        "on-secondary": "#ffffff",
+                        "inverse-primary": "#c8c6c5",
+                        "tertiary-fixed-dim": "#c6c6c7",
+                        "on-secondary-fixed-variant": "#574500",
+                        "gold": "#c2a878",
+                        "gold-light": "#d9c69d",
+                        "gold-dark": "#9e8657",
+                        "ivory": "#faf8f5",
+                        "charcoal": "#1a1a1a"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0px",
+                        "lg": "0px",
+                        "xl": "0px",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "gutter": "32px",
+                        "margin-mobile": "24px",
+                        "section-gap": "160px",
+                        "element-gap": "24px",
+                        "margin-desktop": "80px",
+                        "container-max": "1440px"
+                    },
+                    "fontFamily": {
+                        "quote": ["Playfair Display"],
+                        "label-caps": ["Montserrat"],
+                        "display-lg-mobile": ["Playfair Display"],
+                        "headline-md": ["Playfair Display"],
+                        "display-lg": ["Playfair Display"],
+                        "body-md": ["Montserrat"],
+                        "headline-sm": ["Playfair Display"],
+                        "body-lg": ["Montserrat"]
+                    },
+                    "fontSize": {
+                        "quote": ["32px", {"lineHeight": "44px", "fontWeight": "400"}],
+                        "label-caps": ["12px", {"lineHeight": "16px", "letterSpacing": "0.2em", "fontWeight": "700"}],
+                        "display-lg-mobile": ["48px", {"lineHeight": "52px", "letterSpacing": "-0.01em", "fontWeight": "900"}],
+                        "headline-md": ["42px", {"lineHeight": "48px", "fontWeight": "700"}],
+                        "display-lg": ["84px", {"lineHeight": "92px", "letterSpacing": "-0.02em", "fontWeight": "900"}],
+                        "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                        "headline-sm": ["24px", {"lineHeight": "32px", "fontWeight": "700"}],
+                        "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}]
+                    }
+                },
+            },
+        }
+    </script>
+    <style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 200, 'GRAD' 0, 'opsz' 24;
+        }
+        .editorial-border {
+            border: 1px solid #000;
+        }
+        .gold-border {
+            border: 1px solid #c2a878;
+        }
+        .gold-border-light {
+            border: 1px solid rgba(194,168,120,0.3);
+        }
+        .stark-shadow {
+            box-shadow: 20px 20px 0px 0px rgba(0,0,0,0.05);
+        }
+        .gold-glow {
+            box-shadow: 0 0 40px rgba(194,168,120,0.15), 0 0 80px rgba(194,168,120,0.05);
+        }
+        .gold-gradient {
+            background: linear-gradient(135deg, #c2a878 0%, #d9c69d 50%, #c2a878 100%);
+        }
+        .gold-gradient-text {
+            background: linear-gradient(135deg, #c2a878, #d9c69d);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        .gold-line {
+            background: linear-gradient(90deg, #c2a878, #d9c69d, transparent);
+        }
+        .reveal-text {
+            clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
+        }
+        @@keyframes reveal {
+            from { transform: translateY(100%); }
+            to { transform: translateY(0); }
+        }
+        .animate-reveal {
+            animation: reveal 1.2s cubic-bezier(0.19, 1, 0.22, 1) forwards;
+        }
+        @@keyframes goldPulse {
+            0%, 100% { opacity: 0.6; transform: scale(1); }
+            50% { opacity: 1; transform: scale(1.05); }
+        }
+        .animate-gold-pulse {
+            animation: goldPulse 3s ease-in-out infinite;
+        }
+
+        /* Modern Universal Scroll Reveal Animations */
+        .reveal-on-scroll {
+            opacity: 0;
+            transform: translateY(35px);
+            transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+            will-change: opacity, transform;
+        }
+        .reveal-on-scroll.is-visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        .reveal-delay-1 { transition-delay: 0.1s; }
+        .reveal-delay-2 { transition-delay: 0.2s; }
+        .reveal-delay-3 { transition-delay: 0.3s; }
+        .reveal-delay-4 { transition-delay: 0.4s; }
+
+        /* Floating Slow Ambient Movement */
+        @@keyframes floatSlow {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-10px) rotate(0.5deg); }
+        }
+        .animate-float-slow {
+            animation: floatSlow 6s ease-in-out infinite;
+        }
+
+        /* Gold Shimmer Effect for Luxury Elements */
+        @@keyframes goldShimmer {
+            0% { background-position: -200% 0; }
+            100% { background-position: 200% 0; }
+        }
+        .gold-shimmer {
+            background: linear-gradient(90deg, #c2a878 0%, #fef08a 50%, #c2a878 100%);
+            background-size: 200% 100%;
+            animation: goldShimmer 4s infinite linear;
+        }
+        /* Custom Luxury Golden Scrollbar */
+        ::-webkit-scrollbar {
+            width: 10px;
+            height: 10px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #faf8f5;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: linear-gradient(180deg, #c2a878 0%, #d9c69d 100%);
+            border-radius: 9999px;
+            border: 2px solid #faf8f5;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #9e8657;
+        }
+        * {
+            scrollbar-width: thin;
+            scrollbar-color: #c2a878 #faf8f5;
+        }
+
+        body {
+            background-color: #ffffff;
+            color: #1a1c1c;
+        }
+    </style>
+</head>
+<body class="font-body-md overflow-x-hidden overflow-y-auto">
+    <!-- Navigation -->
+    <header class="fixed top-0 left-0 w-full z-50 bg-white shadow-md border-b border-slate-200 transition-all duration-300" id="main-nav">
+        
+        <!-- Top Utility Bar: Phone, Email & Social Icons (Hidden on mobile for clean screen height) -->
+        <div class="bg-slate-900 text-white/80 py-2 px-6 md:px-margin-desktop text-[11px] font-label-caps border-b border-slate-800 hidden sm:block">
+            <div class="max-w-container-max mx-auto flex flex-wrap justify-between items-center gap-2">
+                <!-- Left Info: Phone & Email -->
+                <div class="flex items-center gap-6">
+                    <a href="tel:+21673200000" class="flex items-center gap-2 hover:text-gold transition-colors font-medium">
+                        <span class="material-symbols-outlined text-sm text-gold">call</span>
+                        <span>+216 73 200 000</span>
+                    </a>
+                    <span class="text-slate-700 hidden sm:inline">•</span>
+                    <a href="mailto:contact@drslama.com" class="flex items-center gap-2 hover:text-gold transition-colors font-medium">
+                        <span class="material-symbols-outlined text-sm text-gold">mail</span>
+                        <span>contact@drslama.com</span>
+                    </a>
+                </div>
+
+                <!-- Right Info: Social Media Icons -->
+                <div class="flex items-center gap-4">
+                    <span class="text-slate-400 text-[10px] hidden md:inline tracking-wider">SUIVEZ-NOUS:</span>
+                    <!-- Instagram -->
+                    <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" class="hover:text-gold transition-colors p-1" title="Instagram Dr. Slama">
+                        <svg class="w-3.5 h-3.5 fill-current" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
+                        </svg>
+                    </a>
+                    <!-- Facebook -->
+                    <a href="https://facebook.com" target="_blank" rel="noopener noreferrer" class="hover:text-gold transition-colors p-1" title="Facebook Dr. Slama">
+                        <svg class="w-3.5 h-3.5 fill-current" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M9 8H6v4h3v12h5V12h3.642L18 8h-4V6.333C14 5.374 14.5 5 15.714 5H18V0h-3.808C10.598 0 9 1.582 9 4.615V8z"/>
+                        </svg>
+                    </a>
+                    <!-- LinkedIn -->
+                    <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" class="hover:text-gold transition-colors p-1" title="LinkedIn Dr. Slama">
+                        <svg class="w-3.5 h-3.5 fill-current" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M4.98 3.5c0 1.381-1.11 2.5-2.48 2.5s-2.48-1.119-2.48-2.5c0-1.38 1.11-2.5 2.48-2.5s2.48 1.12 2.48 2.5zm.02 4.5h-5v16h5v-16zm7.982 0h-4.968v16h4.969v-8.399c0-4.67 6.029-5.052 6.029 0v8.399h4.988v-10.131c0-7.88-8.922-7.593-11.018-3.714v-2.155z"/>
+                        </svg>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Main Navbar (100% Full Width Opaque White) -->
+        <div class="w-full bg-white border-b border-slate-200/80">
+            <div class="flex justify-between items-center px-2.5 sm:px-4 md:px-margin-desktop h-16 sm:h-20 max-w-[1500px] mx-auto gap-2 sm:gap-4 overflow-hidden">
+            <div class="flex items-center gap-2 sm:gap-3 flex-shrink-0">
+                <button onclick="toggleMobileMenu()" aria-label="Toggle Navigation Menu" class="md:hidden text-gold p-1 hover:bg-gold/10 rounded-lg transition-colors flex items-center justify-center">
+                    <span class="material-symbols-outlined text-2xl sm:text-3xl" id="mobile-hamburger-icon">menu</span>
+                </button>
+                <a class="flex items-center gap-2 sm:gap-3.5 group py-1" asp-controller="Home" asp-action="Index">
+                    <!-- Luxury Metallic Gold Ring Logo Container -->
+                    <div class="relative p-0.5 rounded-full bg-gradient-to-tr from-[#c2a878] via-[#e9c349] to-[#9e8657] shadow-sm group-hover:shadow-[0_0_20px_rgba(194,168,120,0.35)] group-hover:scale-105 transition-all duration-300 flex-shrink-0">
+                        <div class="w-9 h-9 sm:w-11 sm:h-11 md:w-12 md:h-12 rounded-full bg-white p-0.5 flex items-center justify-center overflow-hidden border border-white">
+                            <img src="~/images/logo.png" alt="Pr. Abdelfateh Slama Logo" class="w-full h-full object-contain transition-transform duration-500 group-hover:scale-110" />
+                        </div>
+                    </div>
+
+                    <!-- Luxury Doctor & Specialties Typography -->
+                    <div class="flex flex-col justify-center">
+                        <div class="flex items-center gap-1 leading-none">
+                            <span class="font-display-lg text-xs sm:text-sm lg:text-[15px] tracking-tight sm:tracking-wide text-black font-bold group-hover:text-gold transition-colors duration-300 whitespace-nowrap">
+                                Pr. A. <span class="font-black text-black">SLAMA</span>
+                            </span>
+                        </div>
+                        
+                        <div class="hidden sm:flex flex-col gap-0.5 mt-1 border-l-2 border-gold/50 pl-2">
+                            <span class="font-label-caps text-[8px] lg:text-[8.5px] tracking-[0.18em] text-slate-800 font-extrabold uppercase leading-none whitespace-nowrap">
+                                Chirurgie Esthétique
+                            </span>
+                            <span class="font-label-caps text-[7.5px] lg:text-[8px] tracking-[0.16em] text-gold-dark font-bold uppercase leading-none whitespace-nowrap mt-0.5">
+                                Chirurgie de la Face
+                            </span>
+                        </div>
+                    </div>
+                </a>
+            </div>
+            <nav class="hidden md:flex flex-1 justify-evenly items-center gap-1.5 lg:gap-3 xl:gap-4 mx-2">
+                <a class="font-label-caps text-xs text-primary hover:text-gold transition-colors duration-300 relative whitespace-nowrap after:content-[''] after:absolute after:bottom-[-4px] after:left-0 after:w-0 after:h-[2px] after:bg-gold hover:after:w-full after:transition-all after:duration-300" asp-controller="Home" asp-action="Index">Accueil</a>
+                <a class="font-label-caps text-xs text-primary hover:text-gold transition-colors duration-300 relative whitespace-nowrap after:content-[''] after:absolute after:bottom-[-4px] after:left-0 after:w-0 after:h-[2px] after:bg-gold hover:after:w-full after:transition-all after:duration-300" asp-controller="Home" asp-action="About">CV et Formation</a>
+                <a class="font-label-caps text-xs text-primary hover:text-gold transition-colors duration-300 relative whitespace-nowrap after:content-[''] after:absolute after:bottom-[-4px] after:left-0 after:w-0 after:h-[2px] after:bg-gold hover:after:w-full after:transition-all after:duration-300" asp-controller="Home" asp-action="Chirurgies">Chirurgie Esthétique</a>
+                <a class="font-label-caps text-xs text-primary hover:text-gold transition-colors duration-300 relative whitespace-nowrap after:content-[''] after:absolute after:bottom-[-4px] after:left-0 after:w-0 after:h-[2px] after:bg-gold hover:after:w-full after:transition-all after:duration-300" asp-controller="Home" asp-action="Reparatrice">Chirurgie Réparatrice</a>
+                <a class="font-label-caps text-xs text-primary hover:text-gold transition-colors duration-300 relative whitespace-nowrap after:content-[''] after:absolute after:bottom-[-4px] after:left-0 after:w-0 after:h-[2px] after:bg-gold hover:after:w-full after:transition-all after:duration-300" asp-controller="Home" asp-action="Esthetique">Médecine Esthétique</a>
+                <a class="font-label-caps text-xs text-primary hover:text-gold transition-colors duration-300 relative whitespace-nowrap after:content-[''] after:absolute after:bottom-[-4px] after:left-0 after:w-0 after:h-[2px] after:bg-gold hover:after:w-full after:transition-all after:duration-300" asp-controller="Home" asp-action="Temoignages">Témoignages &amp; Actualités</a>
+            </nav>
+            <div class="flex items-center gap-2 sm:gap-3 flex-shrink-0">
+                <a asp-controller="Home" asp-action="Contact" class="gold-gradient text-white px-3 sm:px-6 py-2 sm:py-2.5 font-label-caps text-[9px] sm:text-[10px] hover:opacity-90 hover:scale-105 active:scale-95 transition-all duration-300 shadow-md rounded-full whitespace-nowrap">
+                    CONTACT
+                </a>
+                <!-- Standalone Tunisian Flag -->
+                <div class="flex items-center justify-center p-0.5 sm:p-1 rounded bg-slate-50 border border-slate-200/80 shadow-xs flex-shrink-0" title="Tunisie 🇹🇳">
+                    <svg class="w-5 h-3.5 sm:w-6 sm:h-4 rounded-[1.5px] shadow-sm object-cover" viewBox="0 0 1200 800" xmlns="http://www.w3.org/2000/svg">
+                        <rect width="1200" height="800" fill="#E70013"/>
+                        <circle cx="600" cy="400" r="200" fill="#FFF"/>
+                        <path d="M 640 260 A 140 140 0 1 0 640 540 A 110 110 0 1 1 640 260 Z" fill="#E70013"/>
+                        <polygon points="630,340 646,380 690,380 655,406 668,448 630,422 592,448 605,406 570,380 614,380" fill="#E70013"/>
+                    </svg>
+                </div>
+            </div>
+        </div>
+        </div>
+    </header>
+
+    <!-- Slide-Out Mobile Navigation Drawer -->
+    <div id="mobile-menu-drawer" class="fixed inset-0 z-50 bg-black/60 backdrop-blur-sm hidden transition-opacity duration-300">
+        <div class="absolute inset-0" onclick="toggleMobileMenu()"></div>
+        <div class="relative z-10 w-4/5 max-w-sm h-full bg-white shadow-2xl flex flex-col justify-between p-6 overflow-y-auto">
+            <div>
+                <!-- Mobile Drawer Header -->
+                <div class="flex justify-between items-center pb-6 border-b border-slate-200">
+                    <div class="flex items-center gap-3">
+                        <img src="~/images/logo.png" alt="Logo" class="w-10 h-10 rounded-full border border-gold/40 p-0.5 object-contain" />
+                        <div>
+                            <span class="font-display-lg text-sm font-bold text-black block leading-none">Pr. A. SLAMA</span>
+                            <span class="font-label-caps text-[8px] text-gold font-bold uppercase tracking-wider block mt-1">SOUSSE, TUNISIE</span>
+                        </div>
+                    </div>
+                    <button onclick="toggleMobileMenu()" class="text-slate-700 hover:text-gold p-2 rounded-full hover:bg-slate-100 transition-colors">
+                        <span class="material-symbols-outlined text-2xl">close</span>
+                    </button>
+                </div>
+
+                <!-- Mobile Menu Navigation Links -->
+                <nav class="py-6 space-y-3 font-label-caps text-xs">
+                    <a asp-controller="Home" asp-action="Index" class="flex items-center gap-3 p-3 rounded-xl hover:bg-gold/10 hover:text-gold transition-all text-primary font-bold">
+                        <span class="w-6 h-6 rounded-full bg-gold/10 flex items-center justify-center text-gold text-[10px]">1</span>
+                        <span>Accueil</span>
+                    </a>
+                    <a asp-controller="Home" asp-action="About" class="flex items-center gap-3 p-3 rounded-xl hover:bg-gold/10 hover:text-gold transition-all text-primary font-bold">
+                        <span class="w-6 h-6 rounded-full bg-gold/10 flex items-center justify-center text-gold text-[10px]">2</span>
+                        <span>CV &amp; Formation</span>
+                    </a>
+                    <a asp-controller="Home" asp-action="Chirurgies" class="flex items-center gap-3 p-3 rounded-xl hover:bg-gold/10 hover:text-gold transition-all text-primary font-bold">
+                        <span class="w-6 h-6 rounded-full bg-gold/10 flex items-center justify-center text-gold text-[10px]">3</span>
+                        <span>Chirurgie Esthétique</span>
+                    </a>
+                    <a asp-controller="Home" asp-action="Reparatrice" class="flex items-center gap-3 p-3 rounded-xl hover:bg-gold/10 hover:text-gold transition-all text-primary font-bold">
+                        <span class="w-6 h-6 rounded-full bg-gold/10 flex items-center justify-center text-gold text-[10px]">4</span>
+                        <span>Chirurgie Réparatrice</span>
+                    </a>
+                    <a asp-controller="Home" asp-action="Esthetique" class="flex items-center gap-3 p-3 rounded-xl hover:bg-gold/10 hover:text-gold transition-all text-primary font-bold">
+                        <span class="w-6 h-6 rounded-full bg-gold/10 flex items-center justify-center text-gold text-[10px]">5</span>
+                        <span>Médecine Esthétique</span>
+                    </a>
+                    <a asp-controller="Home" asp-action="Temoignages" class="flex items-center gap-3 p-3 rounded-xl hover:bg-gold/10 hover:text-gold transition-all text-primary font-bold">
+                        <span class="w-6 h-6 rounded-full bg-gold/10 flex items-center justify-center text-gold text-[10px]">6</span>
+                        <span>Témoignages &amp; Actualités</span>
+                    </a>
+                    <a asp-controller="Home" asp-action="Contact" class="flex items-center gap-3 p-3 rounded-xl gold-gradient text-white font-bold shadow-md">
+                        <span class="w-6 h-6 rounded-full bg-white/20 flex items-center justify-center text-white text-[10px]">7</span>
+                        <span>Contact &amp; RDV Sousse</span>
+                    </a>
+                </nav>
+            </div>
+
+            <!-- Mobile Drawer Footer Contacts -->
+            <div class="pt-4 border-t border-slate-200 space-y-3 text-xs">
+                <a href="tel:+21673200000" class="flex items-center gap-3 text-primary/80 font-body-md hover:text-gold transition-colors">
+                    <span class="material-symbols-outlined text-gold">phone</span>
+                    <span>+216 73 200 000</span>
+                </a>
+                <a href="https://wa.me/21673200000" target="_blank" class="flex items-center gap-3 text-emerald-700 font-body-md font-bold">
+                    <span class="material-symbols-outlined">chat</span>
+                    <span>WhatsApp Secrétariat</span>
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <main>
+        @RenderBody()
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-charcoal text-white py-24 border-t-2 border-gold/40">
+        <div class="px-6 md:px-margin-desktop max-w-container-max mx-auto grid grid-cols-1 md:grid-cols-4 gap-16">
+            <div class="md:col-span-1">
+                <a class="flex items-center gap-4 mb-6 group" asp-controller="Home" asp-action="Index">
+                    <div class="relative p-0.5 rounded-full bg-gradient-to-tr from-[#c2a878] via-[#e9c349] to-[#9e8657] shadow-md group-hover:shadow-[0_0_20px_rgba(194,168,120,0.4)] group-hover:scale-105 transition-all duration-300 flex-shrink-0">
+                        <div class="w-11 h-11 md:w-12 md:h-12 rounded-full bg-white p-0.5 flex items-center justify-center overflow-hidden border border-white">
+                            <img src="~/images/logo.png" alt="Pr. Abdelfateh Slama Logo" class="w-full h-full object-contain transition-transform duration-500 group-hover:scale-110" />
+                        </div>
+                    </div>
+                    <div class="flex flex-col justify-center">
+                        <span class="font-display-lg text-base md:text-lg tracking-wider text-white font-bold group-hover:text-gold transition-colors duration-300 leading-tight">
+                            Pr. Abdelfateh <span class="font-black text-white">SLAMA</span>
+                        </span>
+                        <span class="font-label-caps text-[8.5px] tracking-[0.2em] text-gold/90 font-bold uppercase mt-1">
+                            SOUSSE, TUNISIE
+                        </span>
+                    </div>
+                </a>
+                <div class="pl-2 border-l-2 border-gold/40 space-y-1">
+                    <p class="font-label-caps text-[9.5px] tracking-[0.16em] text-white/80 font-bold uppercase leading-tight">
+                        Chirurgie Esthétique
+                    </p>
+                    <p class="font-label-caps text-[9px] tracking-[0.14em] text-gold/80 font-semibold uppercase leading-tight">
+                        Chirurgie de la Face
+                    </p>
+                </div>
+                <div class="w-16 h-[2px] gold-gradient mt-6"></div>
+            </div>
+            <div>
+                <h5 class="font-label-caps text-xs mb-8 border-b border-gold/30 pb-2 text-gold">NAVIGATION</h5>
+                <nav class="flex flex-col gap-4 font-body-md text-sm">
+                    <a class="text-white/60 hover:text-gold transition-colors" asp-controller="Home" asp-action="Index">Accueil</a>
+                    <a class="text-white/60 hover:text-gold transition-colors" asp-controller="Home" asp-action="About">CV et Formation</a>
+                    <a class="text-white/60 hover:text-gold transition-colors" asp-controller="Home" asp-action="Chirurgies">Chirurgie Esthétique</a>
+                    <a class="text-white/60 hover:text-gold transition-colors" asp-controller="Home" asp-action="Reparatrice">Chirurgie Réparatrice</a>
+                    <a class="text-white/60 hover:text-gold transition-colors" asp-controller="Home" asp-action="Esthetique">Médecine Esthétique</a>
+                    <a class="text-white/60 hover:text-gold transition-colors" asp-controller="Home" asp-action="Temoignages">Témoignages &amp; Actualités</a>
+                    <a class="text-white/60 hover:text-gold transition-colors" asp-controller="Home" asp-action="Contact">Contact</a>
+                </nav>
+            </div>
+            <div>
+                <h5 class="font-label-caps text-xs mb-8 border-b border-gold/30 pb-2 text-gold">ADRESSE</h5>
+                <p class="font-body-md text-sm leading-loose text-white/60">
+                    Hôpital Sahloul,<br/>
+                    4000 Sousse, Tunisie<br/>
+                    <span class="text-gold-light font-bold">+216 73 200 000</span>
+                </p>
+            </div>
+            <div>
+                <h5 class="font-label-caps text-xs mb-8 border-b border-gold/30 pb-2 text-gold">SOCIAL</h5>
+                <div class="flex flex-col gap-4 font-body-md text-sm">
+                    <a class="text-white/60 hover:text-gold transition-colors" href="#">Instagram</a>
+                    <a class="text-white/60 hover:text-gold transition-colors" href="#">LinkedIn</a>
+                </div>
+            </div>
+        </div>
+        <div class="px-6 md:px-margin-desktop max-w-container-max mx-auto mt-24 pt-8 border-t border-white/10 text-center md:text-left flex flex-col md:flex-row justify-between items-center gap-4">
+            <p class="font-label-caps text-[9px] text-white/25">© 2024 DR. ABDELFATEH SLAMA. DROITS RÉSERVÉS.</p>
+            <div class="flex items-center gap-2">
+                <span class="w-2 h-2 rounded-full bg-gold animate-gold-pulse"></span>
+                <span class="font-label-caps text-[8px] text-gold/60 tracking-widest">EXCELLENCE MÉDICALE</span>
+            </div>
+        </div>
+    </footer>
+    <!-- Mobile Bottom Bar -->
+    <div class="md:hidden fixed bottom-0 w-full z-50 bg-white/95 backdrop-blur-xl border-t-2 border-gold/30 flex justify-around items-center h-20 px-4 pb-safe shadow-[0_-4px_30px_rgba(184,134,11,0.08)]">
+        <a class="flex flex-col items-center justify-center text-gold" asp-controller="Home" asp-action="Index">
+            <span class="material-symbols-outlined">home</span>
+            <span class="font-label-caps text-[8px] mt-1">HOME</span>
+        </a>
+        <a class="flex flex-col items-center justify-center text-primary/40 hover:text-gold transition-colors" asp-controller="Home" asp-action="Chirurgies">
+            <span class="material-symbols-outlined">medical_services</span>
+            <span class="font-label-caps text-[8px] mt-1">SERVICES</span>
+        </a>
+        <a class="flex flex-col items-center justify-center text-primary/40 hover:text-gold transition-colors" asp-controller="Home" asp-action="Contact">
+            <span class="material-symbols-outlined">calendar_month</span>
+            <span class="font-label-caps text-[8px] mt-1">RDV</span>
+        </a>
+    </div>
+
+    <!-- Floating Circular WhatsApp Button -->
+    <a href="https://wa.me/21673200000?text=Bonjour%20Dr.%20Slama,%20je%20souhaite%20prendre%20un%20rendez-vous." 
+       target="_blank" 
+       rel="noopener noreferrer" 
+       class="fixed bottom-24 md:bottom-8 right-6 z-50 w-14 h-14 bg-[#25D366] text-white rounded-full flex items-center justify-center shadow-2xl hover:bg-[#20ba5a] hover:scale-110 active:scale-95 transition-all duration-300 group border border-white/20 animate-bounce hover:animate-none"
+       title="Discuter sur WhatsApp"
+       id="whatsapp-floating-btn">
+        
+        <!-- WhatsApp SVG Icon -->
+        <svg class="w-7 h-7 fill-current text-white flex-shrink-0" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-1.149 4.197 4.292-1.127zm10.741-6.196c-.301-.15-1.782-.88-2.059-.98-.276-.1-.478-.15-.678.15-.2.3-.778.98-.954 1.18-.176.2-.351.226-.652.076-.301-.15-1.271-.468-2.42-1.493-.894-.798-1.498-1.783-1.674-2.083-.176-.3-.019-.462.131-.611.135-.134.301-.35.451-.525.15-.175.2-.3.301-.5.101-.2.05-.375-.025-.525-.075-.15-.678-1.636-.93-2.241-.244-.588-.493-.509-.678-.518-.175-.008-.375-.01-.576-.01s-.526.075-.802.375c-.276.3-1.053 1.03-1.053 2.514s1.078 2.914 1.229 3.114c.15.2 2.122 3.24 5.141 4.544.718.31 1.279.496 1.716.634.721.229 1.378.197 1.897.12.577-.087 1.782-.728 2.033-1.431.25-.702.25-1.303.175-1.43-.075-.128-.276-.203-.577-.353z"/>
+        </svg>
+    </a>
+
+    <script>
+        function toggleMobileMenu() {
+            const drawer = document.getElementById('mobile-menu-drawer');
+            const icon = document.getElementById('mobile-hamburger-icon');
+            if (drawer) {
+                if (drawer.classList.contains('hidden')) {
+                    drawer.classList.remove('hidden');
+                    if (icon) icon.textContent = 'close';
+                    document.body.classList.add('overflow-hidden');
+                } else {
+                    drawer.classList.add('hidden');
+                    if (icon) icon.textContent = 'menu';
+                    document.body.classList.remove('overflow-hidden');
+                }
+            }
+        }
+
+        // Header scroll behavior
+        window.addEventListener('scroll', () => {
+            const nav = document.getElementById('main-nav');
+            if (window.scrollY > 80) {
+                nav.classList.add('h-16', 'shadow-sm');
+                nav.classList.remove('h-20');
+            } else {
+                nav.classList.add('h-20');
+                nav.classList.remove('h-16', 'shadow-sm');
+            }
+        });
+
+        // Universal Scroll Reveal Observer for smooth entrance animations on all pages
+        document.addEventListener('DOMContentLoaded', () => {
+            const observerOptions = {
+                root: null,
+                rootMargin: '0px 0px -60px 0px',
+                threshold: 0.1
+            };
+
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('is-visible');
+                    }
+                });
+            }, observerOptions);
+
+            // Safely observe explicit reveal-on-scroll elements
+            const targets = document.querySelectorAll('.reveal-on-scroll');
+            targets.forEach((el, idx) => {
+                observer.observe(el);
+            });
+
+            // Safety Fallback: ensure all elements become visible after 600ms even if observer fails
+            setTimeout(() => {
+                document.querySelectorAll('.reveal-on-scroll').forEach(el => {
+                    el.classList.add('is-visible');
+                });
+            }, 600);
+        });
+    </script>
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>

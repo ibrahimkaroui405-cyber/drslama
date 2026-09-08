@@ -1,0 +1,101 @@
+@model DrAbdelfatehSalma.Models.Esthetique
+@{
+    Layout = "_AdminLayout";
+    ViewData["Title"] = "Éditer un Soin Esthétique";
+}
+
+<div class="max-w-4xl mx-auto space-y-8">
+    <div class="border-b border-gold/20 pb-6 flex items-center justify-between">
+        <div>
+            <h1 class="font-display-lg text-2xl font-bold text-white mb-1">Modifier le Soin : @Model.Title</h1>
+            <p class="text-xs text-gray-400">Mettre à jour les détails du traitement esthétique.</p>
+        </div>
+        <a asp-controller="Admin" asp-action="Esthetique" class="text-xs text-gray-400 hover:text-white flex items-center gap-1 font-bold">
+            ← Annuler et retourner
+        </a>
+    </div>
+
+    <form asp-controller="Admin" asp-action="EditEsthetique" method="post" enctype="multipart/form-data" class="space-y-6 bg-[#121419] p-8 border border-gold/20 shadow-xl">
+        <input type="hidden" asp-for="Id" />
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div>
+                <label class="block text-xs font-bold text-gold uppercase mb-2">TITRE DU SOIN *</label>
+                <input type="text" asp-for="Title" id="title-input" required class="w-full p-3.5 bg-[#0c0d10] border border-gold/20 text-white text-xs focus:outline-none focus:border-gold" oninput="onTitleInput(this.value)" />
+            </div>
+
+            <div>
+                <label class="block text-xs font-bold text-gold uppercase mb-2">IDENTIFIANT URL (SLUG) *</label>
+                <input type="text" asp-for="Slug" id="slug-input" required class="w-full p-3.5 bg-[#0c0d10] border border-gold/20 text-white text-xs focus:outline-none focus:border-gold" />
+            </div>
+        </div>
+
+        <input type="hidden" asp-for="Category" />
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div>
+                <label class="block text-xs font-bold text-gold uppercase mb-2">IMAGE PRINCIPALE</label>
+                @if (!string.IsNullOrEmpty(Model.ImageUrl))
+                {
+                    <img src="@Model.ImageUrl" alt="Aperçu" class="w-20 h-20 object-cover border border-gold/30 mb-2 rounded" />
+                }
+                <input type="file" name="imageFile" accept="image/*" class="w-full p-2 bg-[#0c0d10] border border-gold/20 text-white text-xs" />
+                <input type="text" asp-for="ImageUrl" class="w-full p-3.5 mt-2 bg-[#0c0d10] border border-gold/20 text-white text-xs" />
+            </div>
+
+            <div>
+                <label class="block text-xs font-bold text-gold uppercase mb-2">SOUS-TITRE / RÉSUMÉ COURT</label>
+                <input type="text" asp-for="Subtitle" class="w-full p-3.5 bg-[#0c0d10] border border-gold/20 text-white text-xs" />
+            </div>
+        </div>
+
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+            <div>
+                <label class="block text-[10px] font-bold text-gold uppercase mb-2">DURÉE</label>
+                <input type="text" asp-for="Duree" class="w-full p-3 bg-[#0c0d10] border border-gold/20 text-white text-xs" />
+            </div>
+            <div>
+                <label class="block text-[10px] font-bold text-gold uppercase mb-2">ANESTHÉSIE</label>
+                <input type="text" asp-for="Anesthesie" class="w-full p-3 bg-[#0c0d10] border border-gold/20 text-white text-xs" />
+            </div>
+            <div>
+                <label class="block text-[10px] font-bold text-gold uppercase mb-2">ÉVICTION</label>
+                <input type="text" asp-for="Eviction" class="w-full p-3 bg-[#0c0d10] border border-gold/20 text-white text-xs" />
+            </div>
+            <div>
+                <label class="block text-[10px] font-bold text-gold uppercase mb-2">LIEU / CADRE</label>
+                <input type="text" asp-for="Hospitalisation" class="w-full p-3 bg-[#0c0d10] border border-gold/20 text-white text-xs" />
+            </div>
+        </div>
+
+        <div>
+            <label class="block text-xs font-bold text-gold uppercase mb-2">PRÉSENTATION & APPROCHE MÉDICALE</label>
+            <textarea asp-for="Overview" rows="4" class="w-full p-3.5 bg-[#0c0d10] border border-gold/20 text-white text-xs"></textarea>
+        </div>
+
+        <div>
+            <label class="block text-xs font-bold text-gold uppercase mb-2">QUESTIONS FREQUENTES (Question ? Réponse ; Question ? Réponse)</label>
+            <textarea asp-for="Faqs" rows="3" class="w-full p-3.5 bg-[#0c0d10] border border-gold/20 text-white text-xs"></textarea>
+        </div>
+
+        <div class="pt-4 border-t border-gold/20 flex justify-end">
+            <button type="submit" class="gold-gradient text-white font-label-caps text-xs py-4 px-8 hover:opacity-90 font-bold tracking-widest shadow">
+                METTRE À JOUR LE SOIN ESTHÉTIQUE
+            </button>
+        </div>
+
+    </form>
+</div>
+
+<script>
+    function onTitleInput(val) {
+        const slugInput = document.getElementById('slug-input');
+        if (slugInput && (!slugInput.value || slugInput.dataset.auto === 'true')) {
+            slugInput.value = val.toLowerCase()
+                .normalize("NFD").replace(/[\u0300-\u036f]/g, "")
+                .replace(/[^a-z0-9]+/g, '-')
+                .replace(/^-+|-+$/g, '');
+            slugInput.dataset.auto = 'true';
+        }
+    }
+</script>

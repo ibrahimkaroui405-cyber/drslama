@@ -1,0 +1,91 @@
+@model IEnumerable<DrAbdelfatehSalma.Models.Actualite>
+@{
+    Layout = "_AdminLayout";
+    ViewData["Title"] = "Gestion des Actualités & Presse";
+}
+
+<div class="space-y-8">
+    <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 border-b border-gold/20 pb-6">
+        <div>
+            <h1 class="font-display-lg text-2xl font-bold text-white mb-1">Actualités &amp; Presse</h1>
+            <p class="text-xs text-gray-400">Gérer les publications, congrès et innovations affichés sur le site public.</p>
+        </div>
+        <a asp-controller="Admin" asp-action="CreateActualite" class="gold-gradient text-white font-label-caps text-xs py-3 px-5 hover:opacity-90 transition-all font-bold tracking-widest flex items-center gap-2 shadow">
+            <span class="material-symbols-outlined text-sm">add_circle</span>
+            <span>AJOUTER UNE ACTUALITÉ</span>
+        </a>
+    </div>
+
+    <div class="bg-[#121419] border border-gold/20 overflow-hidden">
+        <div class="overflow-x-auto">
+            <table class="w-full text-left text-xs text-gray-300">
+                <thead class="bg-[#0c0d10] text-gold font-label-caps text-[10px] uppercase border-b border-gold/20">
+                    <tr>
+                        <th class="p-4">Image</th>
+                        <th class="p-4">Titre</th>
+                        <th class="p-4">Date / Label</th>
+                        <th class="p-4">Vedette</th>
+                        <th class="p-4 text-right">Actions</th>
+                    </tr>
+                </thead>
+                <tbody class="divide-y divide-gray-800">
+                    @if (Model != null && Model.Any())
+                    {
+                        foreach (var item in Model)
+                        {
+                            <tr class="hover:bg-white/5 transition-colors">
+                                <td class="p-4">
+                                    @if (!string.IsNullOrEmpty(item.ImageUrl))
+                                    {
+                                        <img src="@item.ImageUrl" alt="@item.Title" class="w-16 h-12 object-cover rounded border border-gold/20" />
+                                    }
+                                    else
+                                    {
+                                        <div class="w-16 h-12 bg-gray-800 rounded border border-gold/20 flex items-center justify-center">
+                                            <span class="material-symbols-outlined text-gray-600 text-lg">image</span>
+                                        </div>
+                                    }
+                                </td>
+                                <td class="p-4 max-w-xs">
+                                    <p class="font-bold text-white truncate">@item.Title</p>
+                                    <p class="text-[10px] text-gray-500 truncate mt-0.5">@item.Excerpt</p>
+                                </td>
+                                <td class="p-4 text-gold font-bold">@item.DateLabel</td>
+                                <td class="p-4">
+                                    @if (item.IsFeatured)
+                                    {
+                                        <span class="px-2.5 py-1 rounded bg-gold/10 text-gold text-[10px] font-bold border border-gold/30">⭐ VEDETTE</span>
+                                    }
+                                    else
+                                    {
+                                        <span class="text-gray-600 text-[10px]">—</span>
+                                    }
+                                </td>
+                                <td class="p-4 text-right space-x-2">
+                                    <a asp-controller="Home" asp-action="ActualiteDetail" asp-route-id="@item.Id" target="_blank" class="px-3 py-1.5 bg-white/10 text-white hover:bg-white hover:text-black rounded text-[11px] font-bold transition-all inline-block">
+                                        Voir
+                                    </a>
+                                    <a asp-controller="Admin" asp-action="EditActualite" asp-route-id="@item.Id" class="px-3 py-1.5 bg-gold/20 text-gold hover:bg-gold hover:text-white rounded text-[11px] font-bold transition-all inline-block">
+                                        Éditer
+                                    </a>
+                                    <form asp-controller="Admin" asp-action="DeleteActualite" asp-route-id="@item.Id" method="post" class="inline" onsubmit="return confirm('Supprimer cette actualité ?');">
+                                        @Html.AntiForgeryToken()
+                                        <button type="submit" class="px-3 py-1.5 bg-red-500/20 text-red-400 hover:bg-red-500 hover:text-white rounded text-[11px] font-bold transition-all">
+                                            Supprimer
+                                        </button>
+                                    </form>
+                                </td>
+                            </tr>
+                        }
+                    }
+                    else
+                    {
+                        <tr>
+                            <td colspan="5" class="p-8 text-center text-gray-500 italic">Aucune actualité enregistrée. Cliquez sur « Ajouter une Actualité » pour commencer.</td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

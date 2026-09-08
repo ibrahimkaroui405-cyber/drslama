@@ -1,0 +1,70 @@
+@model IEnumerable<DrAbdelfatehSalma.Models.Resultat>
+@{
+    Layout = "_AdminLayout";
+    ViewData["Title"] = "Gestion des Résultats (Avant/Après)";
+}
+
+<div class="space-y-8">
+    <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 border-b border-gold/20 pb-6">
+        <div>
+            <h1 class="font-display-lg text-2xl font-bold text-white mb-1">Cas Résultats (Galerie Avant / Après)</h1>
+            <p class="text-xs text-gray-400">Ajouter, modifier ou supprimer des études de cas cliniques et photos Avant/Après.</p>
+        </div>
+        <a asp-controller="Admin" asp-action="CreateResultat" class="gold-gradient text-white font-label-caps text-xs py-3 px-5 hover:opacity-90 transition-all font-bold tracking-widest flex items-center gap-2 shadow">
+            <span class="material-symbols-outlined text-sm">add_photo_alternate</span>
+            <span>AJOUTER UN CAS CLINIQUE</span>
+        </a>
+    </div>
+
+    <div class="bg-[#121419] border border-gold/20 overflow-hidden">
+        <div class="overflow-x-auto">
+            <table class="w-full text-left text-xs text-gray-300">
+                <thead class="bg-[#0c0d10] text-gold font-label-caps text-[10px] uppercase border-b border-gold/20">
+                    <tr>
+                        <th class="p-4">Avant / Après</th>
+                        <th class="p-4">Titre du Cas</th>
+                        <th class="p-4">Catégorie</th>
+                        <th class="p-4">Patient</th>
+                        <th class="p-4">Technique</th>
+                        <th class="p-4 text-right">Actions</th>
+                    </tr>
+                </thead>
+                <tbody class="divide-y divide-gray-800">
+                    @if (Model != null && Model.Any())
+                    {
+                        foreach (var item in Model)
+                        {
+                            <tr class="hover:bg-white/5 transition-colors">
+                                <td class="p-4 flex items-center gap-2">
+                                    <img src="@item.BeforeImageUrl" alt="Avant" class="w-12 h-12 object-cover border border-gold/30 rounded" />
+                                    <span class="text-gold font-bold">→</span>
+                                    <img src="@item.AfterImageUrl" alt="Après" class="w-12 h-12 object-cover border border-gold/30 rounded" />
+                                </td>
+                                <td class="p-4 font-bold text-white">@item.Title</td>
+                                <td class="p-4 text-gold">@item.CategoryTitle</td>
+                                <td class="p-4">@item.PatientInfo</td>
+                                <td class="p-4">@item.Technique</td>
+                                <td class="p-4 text-right space-x-2">
+                                    <a asp-controller="Admin" asp-action="EditResultat" asp-route-id="@item.Id" class="px-3 py-1.5 bg-gold/20 text-gold hover:bg-gold hover:text-white rounded text-[11px] font-bold transition-all inline-block">
+                                        Éditer
+                                    </a>
+                                    <form asp-controller="Admin" asp-action="DeleteResultat" asp-route-id="@item.Id" method="post" class="inline" onsubmit="return confirm('Êtes-vous sûr de vouloir supprimer ce cas clinique ?');">
+                                        <button type="submit" class="px-3 py-1.5 bg-red-500/20 text-red-400 hover:bg-red-500 hover:text-white rounded text-[11px] font-bold transition-all">
+                                            Supprimer
+                                        </button>
+                                    </form>
+                                </td>
+                            </tr>
+                        }
+                    }
+                    else
+                    {
+                        <tr>
+                            <td colspan="6" class="p-8 text-center text-gray-500 italic">Aucun cas clinique Avant/Après enregistré.</td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

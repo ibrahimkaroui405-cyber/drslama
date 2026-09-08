@@ -1,0 +1,165 @@
+@model IEnumerable<DrAbdelfatehSalma.Models.DemandeContact>
+@{
+    Layout = "_AdminLayout";
+    ViewData["Title"] = "Tableau de bord Administration";
+}
+
+<div class="space-y-8">
+
+    <!-- Page Header -->
+    <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 border-b border-gold/20 pb-6">
+        <div>
+            <h1 class="font-display-lg text-2xl md:text-3xl font-bold text-white mb-1">Tableau de Bord</h1>
+            <p class="text-xs text-gray-400">Aperçu global de l'activité, des contenus et des demandes de rendez-vous.</p>
+        </div>
+        <div class="flex gap-3">
+            <a asp-controller="Admin" asp-action="CreateResultat" class="gold-gradient text-white font-label-caps text-xs py-3 px-5 hover:opacity-90 transition-all font-bold tracking-widest shadow flex items-center gap-2">
+                <span class="material-symbols-outlined text-sm">add_photo_alternate</span>
+                <span>NOUVEAU RÉSULTAT</span>
+            </a>
+        </div>
+    </div>
+
+    <!-- Summary Metrics Grid -->
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-6 gap-6">
+        
+        <div class="bg-[#121419] p-6 border border-gold/20 flex flex-col justify-between">
+            <div class="flex justify-between items-start mb-4">
+                <span class="text-xs font-label-caps text-gray-400 font-bold">CHIRURGIES</span>
+                <span class="material-symbols-outlined text-gold">medical_services</span>
+            </div>
+            <span class="font-display-lg text-4xl font-bold text-white mb-1">@ViewBag.TotalChirurgies</span>
+            <span class="text-[10px] text-gray-500">Procédures configurées</span>
+        </div>
+
+        <div class="bg-[#121419] p-6 border border-gold/20 flex flex-col justify-between">
+            <div class="flex justify-between items-start mb-4">
+                <span class="text-xs font-label-caps text-gray-400 font-bold">MÉDECINE ESTHÉTIQUE</span>
+                <span class="material-symbols-outlined text-gold">auto_awesome</span>
+            </div>
+            <span class="font-display-lg text-4xl font-bold text-white mb-1">@ViewBag.TotalEsthetique</span>
+            <span class="text-[10px] text-gray-500">Soins configurés</span>
+        </div>
+
+        <div class="bg-[#121419] p-6 border border-gold/20 flex flex-col justify-between">
+            <div class="flex justify-between items-start mb-4">
+                <span class="text-xs font-label-caps text-gray-400 font-bold">RÉSULTATS (AVANT/APRÈS)</span>
+                <span class="material-symbols-outlined text-gold">photo_library</span>
+            </div>
+            <span class="font-display-lg text-4xl font-bold text-white mb-1">@ViewBag.TotalResultats</span>
+            <span class="text-[10px] text-gray-500">Cas cliniques en galerie</span>
+        </div>
+
+        <div class="bg-[#121419] p-6 border border-gold/20 flex flex-col justify-between">
+            <div class="flex justify-between items-start mb-4">
+                <span class="text-xs font-label-caps text-gray-400 font-bold">TÉMOIGNAGES</span>
+                <span class="material-symbols-outlined text-gold">rate_review</span>
+            </div>
+            <span class="font-display-lg text-4xl font-bold text-white mb-1">@ViewBag.TotalTemoignages</span>
+            <span class="text-[10px] text-gray-500">Avis & récits patients</span>
+        </div>
+
+        <div class="bg-[#121419] p-6 border border-gold/20 flex flex-col justify-between">
+            <div class="flex justify-between items-start mb-4">
+                <span class="text-xs font-label-caps text-gray-400 font-bold">ACTUALITÉS</span>
+                <span class="material-symbols-outlined text-gold">newspaper</span>
+            </div>
+            <span class="font-display-lg text-4xl font-bold text-white mb-1">@ViewBag.TotalActualites</span>
+            <span class="text-[10px] text-gray-500">Publications & congrès</span>
+        </div>
+
+        <div class="bg-[#121419] p-6 border border-gold/20 flex flex-col justify-between">
+            <div class="flex justify-between items-start mb-4">
+                <span class="text-xs font-label-caps text-gold font-bold">RDV À TRAITER</span>
+                <span class="material-symbols-outlined text-amber-400">notification_important</span>
+            </div>
+            <span class="font-display-lg text-4xl font-bold text-gold mb-1">@ViewBag.PendingRendezVous</span>
+            <span class="text-[10px] text-gray-400">Demandes en attente</span>
+        </div>
+
+    </div>
+
+    <!-- Recent Appointment Requests Table -->
+    <div class="bg-[#121419] border border-gold/20 overflow-hidden">
+        <div class="p-6 border-b border-gold/20 flex justify-between items-center">
+            <div>
+                <h3 class="font-display-lg text-lg font-bold text-white mb-0.5">Dernières Demandes de Rendez-vous</h3>
+                <p class="text-xs text-gray-400">Formulaires transmis récemment par les patients.</p>
+            </div>
+            <a asp-controller="Admin" asp-action="RendezVous" class="text-xs text-gold hover:underline font-bold">Voir toutes les demandes →</a>
+        </div>
+
+        <div class="overflow-x-auto">
+            <table class="w-full text-left text-xs text-gray-300">
+                <thead class="bg-[#0c0d10] text-gold font-label-caps text-[10px] uppercase border-b border-gold/20">
+                    <tr>
+                        <th class="p-4">Patient</th>
+                        <th class="p-4">Téléphone</th>
+                        <th class="p-4">Email</th>
+                        <th class="p-4">Motif de Consultation</th>
+                        <th class="p-4">Message</th>
+                        <th class="p-4">Photo</th>
+                        <th class="p-4">Date</th>
+                        <th class="p-4">Statut</th>
+                        <th class="p-4 text-right">Action</th>
+                    </tr>
+                </thead>
+                <tbody class="divide-y divide-gray-800">
+                    @if (Model != null && Model.Any())
+                    {
+                        foreach (var item in Model)
+                        {
+                            var msg = !string.IsNullOrWhiteSpace(item.Message) ? item.Message : (!string.IsNullOrWhiteSpace(item.Objet) ? item.Objet : "-");
+                            <tr class="hover:bg-white/5 transition-colors">
+                                <td class="p-4 font-bold text-white">@item.FullName</td>
+                                <td class="p-4 font-bold text-gold">@item.Phone</td>
+                                <td class="p-4">@item.Email</td>
+                                <td class="p-4 text-gold">@item.ConsultationType</td>
+                                <td class="p-4 text-gray-200 max-w-[180px] truncate" title="@msg">@msg</td>
+                                <td class="p-4">
+                                    @if (!string.IsNullOrEmpty(item.PhotoPath))
+                                    {
+                                        <a href="@item.PhotoPath" target="_blank" class="inline-flex items-center gap-1 px-2 py-0.5 rounded bg-gold/10 text-gold border border-gold/30 hover:bg-gold hover:text-white transition-all text-[10px] font-bold">
+                                            <span>Voir photo</span>
+                                            <span class="material-symbols-outlined text-xs">open_in_new</span>
+                                        </a>
+                                    }
+                                    else
+                                    {
+                                        <span class="text-gray-500">-</span>
+                                    }
+                                </td>
+                                <td class="p-4 text-gray-400">@item.CreatedAt.ToString("dd/MM/yyyy HH:mm")</td>
+                                <td class="p-4">
+                                    @if (item.IsProcessed)
+                                    {
+                                        <span class="px-2.5 py-1 rounded bg-green-500/10 text-green-400 text-[10px] font-bold border border-green-500/30">TRAITÉ</span>
+                                    }
+                                    else
+                                    {
+                                        <span class="px-2.5 py-1 rounded bg-amber-500/10 text-amber-400 text-[10px] font-bold border border-amber-500/30">EN ATTENTE</span>
+                                    }
+                                </td>
+                                <td class="p-4 text-right">
+                                    <form asp-controller="Admin" asp-action="ToggleProcessRendezVous" method="post" class="inline">
+                                        <input type="hidden" name="id" value="@item.Id" />
+                                        <button type="submit" class="px-3 py-1 bg-white/10 hover:bg-white/20 text-white rounded text-[10px] font-bold transition-colors">
+                                            @(item.IsProcessed ? "Marquer non traité" : "Valider")
+                                        </button>
+                                    </form>
+                                </td>
+                            </tr>
+                        }
+                    }
+                    else
+                    {
+                        <tr>
+                            <td colspan="9" class="p-8 text-center text-gray-500 italic">Aucune demande de rendez-vous enregistrée.</td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+</div>

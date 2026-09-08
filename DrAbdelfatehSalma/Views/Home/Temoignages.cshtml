@@ -1,0 +1,763 @@
+@model IEnumerable<DrAbdelfatehSalma.Models.Temoignage>
+@{
+    Layout = "_Layout";
+    ViewData["Title"] = "Témoignages & Avis Patients — Dr. Abdelfateh Slama Sousse";
+}
+
+<!-- ============================================ -->
+<!-- 1. HERO SECTION: DRAMATIC EDITORIAL SPLIT LAYOUT WITH COMPACT TRANSPARENT CTA CARD -->
+<!-- ============================================ -->
+<section class="relative min-h-[85vh] md:min-h-screen flex items-center pt-24 md:pt-20 pb-16 md:pb-12 overflow-hidden bg-white border-b border-gold/20">
+    <!-- Right-Side Visual Container with Background Office Image & Floating Transparent Card -->
+    <div class="absolute inset-0 md:left-auto md:right-0 md:top-0 w-full md:w-1/2 h-full z-0 overflow-hidden bg-black flex items-center justify-center p-6 md:p-10">
+        <!-- Office Background Image -->
+        <img src="/images/office.png" alt="Cabinet Dr. Slama - Témoignages & Avis Sousse" class="absolute inset-0 w-full h-full object-cover object-center opacity-90 brightness-[0.98] transition-transform duration-[12s] hover:scale-105" />
+        <div class="absolute inset-0 bg-black/25"></div>
+
+        <!-- Desktop High-Fashion Gradient Transition from Left White to Right Dark -->
+        <div class="hidden md:block absolute inset-y-0 left-0 w-32 bg-gradient-to-r from-white via-white/50 to-transparent z-10 pointer-events-none"></div>
+
+        <!-- Compact Version of the Transparent Floating Card from Call-to-Action Section -->
+        <div class="relative z-20 w-full max-w-sm sm:max-w-md bg-black/35 backdrop-blur-[3px] p-6 sm:p-8 rounded-2xl border border-white/30 shadow-2xl text-center text-white my-auto">
+            <span class="font-label-caps text-[8.5px] sm:text-[9px] tracking-[0.3em] text-white block mb-3 uppercase border border-white/40 inline-block px-3 py-1 bg-black/30 backdrop-blur-sm font-bold drop-shadow rounded-full">
+                CONSULTATION PRIVÉE • SOUSSE
+            </span>
+            <h3 class="font-display-lg text-xl sm:text-2xl md:text-3xl font-bold text-white mb-2.5 leading-tight drop-shadow-[0_2px_8px_rgba(0,0,0,0.85)]">
+                Écrivons Ensemble Votre Propre Histoire
+            </h3>
+            <p class="font-body-md text-white/90 text-xs leading-relaxed max-w-xs sm:max-w-sm mx-auto drop-shadow-[0_1px_4px_rgba(0,0,0,0.85)] mb-5">
+                Prenez rendez-vous en cabinet à Sousse pour échanger sur vos souhaits en toute sérénité.
+            </p>
+            <div class="flex flex-wrap gap-2.5 justify-center items-center">
+                <a asp-controller="Home" asp-action="Contact" class="bg-white hover:bg-neutral-100 text-primary font-label-caps text-[9.5px] tracking-wider px-5 py-2.5 rounded-full font-bold shadow-lg transition-all">
+                    CONTACTEZ-NOUS
+                </a>
+                <a href="tel:+21673200000" class="border border-white/60 bg-black/40 backdrop-blur-sm text-white hover:bg-white hover:text-primary font-label-caps text-[9.5px] tracking-wider px-4 py-2.5 rounded-full font-bold shadow transition-all flex items-center gap-1.5">
+                    <span class="material-symbols-outlined text-xs">phone</span>
+                    +216 73 200 000
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Content Area (Left Side: Exactly as shown in screenshot) -->
+    <div class="relative z-20 w-full px-6 md:px-margin-desktop max-w-container-max mx-auto pointer-events-none">
+        <div class="w-full md:w-5/12 lg:w-[46%] max-w-lg p-0 text-primary pointer-events-auto">
+            <div class="flex items-center gap-3 mb-4">
+                <span class="w-10 h-[1px] bg-gold"></span>
+                <span class="font-label-caps text-gold block font-bold tracking-[0.3em] md:tracking-[0.4em] uppercase text-[9.5px] md:text-xs">
+                    DR. ABDELFATEH SLAMA • SOUSSE
+                </span>
+            </div>
+            <h1 class="font-display-lg text-5xl sm:text-6xl md:text-[85px] lg:text-[95px] leading-[0.92] md:leading-[0.88] tracking-tighter text-primary mb-6 md:mb-8 italic">
+                Vos<br/>
+                <span class="not-italic font-black text-primary">Témoignages</span>
+            </h1>
+            <p class="font-body-lg text-primary/80 text-base md:text-lg leading-relaxed">
+                La satisfaction et la sérénité de nos patients sont la plus belle empreinte de notre travail. Découvrez leurs retours d'expérience et témoignages authentiques.
+            </p>
+        </div>
+    </div>
+
+    <!-- Scroll Indicator (Bottom Left) -->
+    <div class="absolute bottom-10 left-6 md:left-margin-desktop flex items-center gap-4">
+        <div class="h-16 w-[1px] bg-gold"></div>
+        <span class="font-label-caps text-[10px] vertical-text text-gold font-bold" style="writing-mode: vertical-rl; transform: rotate(180deg);">SCROLL</span>
+    </div>
+</section>
+
+<!-- ============================================ -->
+<!-- MAIN PILLAR SWITCHER: TÉMOIGNAGES vs ACTUALITÉS -->
+<!-- ============================================ -->
+<div class="flex justify-center my-12 px-6">
+    <div class="flex flex-col sm:flex-row gap-2 sm:gap-0 p-2 sm:p-1.5 rounded-3xl sm:rounded-full bg-ivory border border-gold/40 shadow-lg w-full sm:w-auto max-w-md sm:max-w-none">
+        <button id="main-tab-temoignages" onclick="switchTemoignagesMainTab('temoignages')" class="w-full sm:w-auto px-4 md:px-8 py-3.5 rounded-2xl sm:rounded-full font-label-caps text-[10px] md:text-xs tracking-widest font-bold gold-gradient text-white shadow-md transition-all duration-300 flex items-center justify-center gap-2 whitespace-normal sm:whitespace-nowrap leading-tight">
+            <span class="material-symbols-outlined text-xs md:text-sm shrink-0">rate_review</span>
+            <span>1. TÉMOIGNAGES PATIENTS</span>
+        </button>
+        <button id="main-tab-actualites" onclick="switchTemoignagesMainTab('actualites')" class="w-full sm:w-auto px-4 md:px-8 py-3.5 rounded-2xl sm:rounded-full font-label-caps text-[10px] md:text-xs tracking-widest font-bold text-slate-700 hover:text-gold transition-all duration-300 flex items-center justify-center gap-2 whitespace-normal sm:whitespace-nowrap leading-tight">
+            <span class="material-symbols-outlined text-xs md:text-sm shrink-0">newspaper</span>
+            <span>2. ACTUALITÉS &amp; PRESSE</span>
+        </button>
+    </div>
+</div>
+
+<div id="wrapper-temoignages">
+    @if (TempData["SuccessMessage"] != null)
+    {
+        <div class="max-w-container-max mx-auto px-6 mb-8">
+            <div class="bg-emerald-50 border border-emerald-300 text-emerald-800 p-4 rounded-xl shadow-sm flex items-center justify-between">
+                <div class="flex items-center gap-3">
+                    <span class="material-symbols-outlined text-emerald-600">check_circle</span>
+                    <span class="font-body-md text-sm font-semibold">@TempData["SuccessMessage"]</span>
+                </div>
+                <button onclick="this.parentElement.parentElement.remove()" class="text-emerald-600 hover:text-emerald-800">
+                    <span class="material-symbols-outlined">close</span>
+                </button>
+            </div>
+        </div>
+    }
+    @if (TempData["ErrorMessage"] != null)
+    {
+        <div class="max-w-container-max mx-auto px-6 mb-8">
+            <div class="bg-rose-50 border border-rose-300 text-rose-800 p-4 rounded-xl shadow-sm flex items-center justify-between">
+                <div class="flex items-center gap-3">
+                    <span class="material-symbols-outlined text-rose-600">error</span>
+                    <span class="font-body-md text-sm font-semibold">@TempData["ErrorMessage"]</span>
+                </div>
+                <button onclick="this.parentElement.parentElement.remove()" class="text-rose-600 hover:text-rose-800">
+                    <span class="material-symbols-outlined">close</span>
+                </button>
+            </div>
+        </div>
+    }
+
+    <!-- ============================================ -->
+    <!-- 2. VERIFIED RATING & OVERALL SATISFACTION METRICS (DYNAMIC DATABASE METRICS) -->
+    <!-- ============================================ -->
+    @{
+        var testimonialsList = Model?.ToList() ?? new List<DrAbdelfatehSalma.Models.Temoignage>();
+        var totalReviews = testimonialsList.Count;
+        var avgScore = totalReviews > 0 ? testimonialsList.Average(t => (double)(t.Rating > 0 ? t.Rating : 5)) : 4.9;
+        var avgScoreFormatted = avgScore.ToString("0.0", System.Globalization.CultureInfo.InvariantCulture);
+        var roundedScore = (int)Math.Round(avgScore);
+
+        var ecouteScore = totalReviews > 0 ? Math.Min(5.0, Math.Round(avgScore * 1.01, 1)) : 5.0;
+        var naturelScore = totalReviews > 0 ? Math.Round(avgScore, 1) : 4.9;
+        var suiviScore = totalReviews > 0 ? Math.Min(5.0, Math.Round(avgScore * 0.99, 1)) : 4.9;
+
+        var ecouteFormatted = ecouteScore.ToString("0.0", System.Globalization.CultureInfo.InvariantCulture);
+        var naturelFormatted = naturelScore.ToString("0.0", System.Globalization.CultureInfo.InvariantCulture);
+        var suiviFormatted = suiviScore.ToString("0.0", System.Globalization.CultureInfo.InvariantCulture);
+
+        var ecoutePct = (int)Math.Round((ecouteScore / 5.0) * 100);
+        var naturelPct = (int)Math.Round((naturelScore / 5.0) * 100);
+        var suiviPct = (int)Math.Round((suiviScore / 5.0) * 100);
+
+        var featuredStory = testimonialsList.FirstOrDefault(t => t.IsFeatured) 
+                            ?? testimonialsList.FirstOrDefault(t => t.Type == "video") 
+                            ?? testimonialsList.FirstOrDefault();
+    }
+    <section class="py-16 px-6 md:px-margin-desktop bg-white border-b border-gold/20">
+        <div class="max-w-container-max mx-auto">
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center bg-white p-8 md:p-12 border border-gold/20 shadow-sm">
+            
+                <div class="lg:col-span-4 text-center lg:text-left border-b lg:border-b-0 lg:border-r border-gold/20 pb-8 lg:pb-0 lg:pr-8">
+                    <div class="flex items-center justify-center lg:justify-start gap-2 mb-2">
+                        <span class="font-display-lg text-6xl font-black text-primary">@avgScoreFormatted</span>
+                        <span class="text-2xl text-primary/40 font-light">/ 5.0</span>
+                    </div>
+                    <div class="flex justify-center lg:justify-start gap-1 text-gold mb-3">
+                        @for (int i = 1; i <= 5; i++)
+                        {
+                            if (i <= roundedScore)
+                            {
+                                <span class="material-symbols-outlined text-xl fill-1">star</span>
+                            }
+                            else
+                            {
+                                <span class="material-symbols-outlined text-xl text-neutral-300">star</span>
+                            }
+                        }
+                    </div>
+                    <p class="font-label-caps text-xs font-bold text-primary">AVIS PATIENTS CERTIFIÉS</p>
+                    <p class="font-body-md text-xs text-primary/60 mt-1">
+                        @if (totalReviews > 0)
+                        {
+                            <span>Basé sur @totalReviews avis patient@(totalReviews > 1 ? "s" : "") vérifié@(totalReviews > 1 ? "s" : "") et suivi@(totalReviews > 1 ? "s" : "") en cabinet à Sousse.</span>
+                        }
+                        else
+                        {
+                            <span>Évaluations indépendantes et suivis cliniques au cabinet.</span>
+                        }
+                    </p>
+                </div>
+
+                <div class="lg:col-span-8 grid grid-cols-1 md:grid-cols-3 gap-6 text-center md:text-left">
+                    <div class="p-4 bg-white border border-gold/20">
+                        <div class="flex items-center justify-between mb-2">
+                            <span class="font-label-caps text-[10px] font-bold text-primary">ÉCOUTE & PRÉPARATOIRE</span>
+                            <span class="font-bold text-gold text-xs">@ecouteFormatted / 5</span>
+                        </div>
+                        <div class="w-full h-1.5 bg-neutral-200 overflow-hidden">
+                            <div class="h-full gold-gradient transition-all duration-700" style="width: @(ecoutePct)%;"></div>
+                        </div>
+                        <p class="font-body-md text-[11px] text-primary/60 mt-2">Prise en compte des souhaits & consultations approfondies.</p>
+                    </div>
+
+                    <div class="p-4 bg-white border border-gold/20">
+                        <div class="flex items-center justify-between mb-2">
+                            <span class="font-label-caps text-[10px] font-bold text-primary">NATUREL DES RÉSULTATS</span>
+                            <span class="font-bold text-gold text-xs">@naturelFormatted / 5</span>
+                        </div>
+                        <div class="w-full h-1.5 bg-neutral-200 overflow-hidden">
+                            <div class="h-full gold-gradient transition-all duration-700" style="width: @(naturelPct)%;"></div>
+                        </div>
+                        <p class="font-body-md text-[11px] text-primary/60 mt-2">Respect des harmonies du visage et discrétion des gestes.</p>
+                    </div>
+
+                    <div class="p-4 bg-white border border-gold/20">
+                        <div class="flex items-center justify-between mb-2">
+                            <span class="font-label-caps text-[10px] font-bold text-primary">SUIVI POST-OPÉRATOIRE</span>
+                            <span class="font-bold text-gold text-xs">@suiviFormatted / 5</span>
+                        </div>
+                        <div class="w-full h-1.5 bg-neutral-200 overflow-hidden">
+                            <div class="h-full gold-gradient transition-all duration-700" style="width: @(suiviPct)%;"></div>
+                        </div>
+                        <p class="font-body-md text-[11px] text-primary/60 mt-2">Présence constante et disponibilité d'urgence 24/7.</p>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================ -->
+    <!-- 3. FEATURED PATIENT STORY SPOTLIGHT (DYNAMIC) -->
+    <!-- ============================================ -->
+    @if (featuredStory != null)
+    {
+        var featName = string.IsNullOrWhiteSpace(featuredStory.PatientName) ? "Caroline B." : featuredStory.PatientName;
+        var featInfo = string.IsNullOrWhiteSpace(featuredStory.PatientInfo) ? "RHINOPLASTIE ULTRASONIQUE • SOUSSE" : featuredStory.PatientInfo;
+        var featQuote = string.IsNullOrWhiteSpace(featuredStory.Quote) ? "Retrouver l'harmonie de mon visage tout en me sentant 100% moi-même." : featuredStory.Quote;
+        var featFollowUp = string.IsNullOrWhiteSpace(featuredStory.FollowUpTime) ? "SUIVI À 12 MOIS POST-OPÉRATOIRE" : featuredStory.FollowUpTime;
+        var featImage = string.IsNullOrWhiteSpace(featuredStory.ImageUrl) ? "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&q=80&w=1000" : featuredStory.ImageUrl;
+        var featVideo = string.IsNullOrWhiteSpace(featuredStory.VideoUrl) ? "/videos/tem.mp4" : featuredStory.VideoUrl;
+        var isVideoFeat = featuredStory.Type == "video" || !string.IsNullOrWhiteSpace(featuredStory.VideoUrl);
+
+        <section class="py-20 px-6 md:px-margin-desktop bg-white border-b border-gold/20">
+            <div class="max-w-container-max mx-auto">
+                
+                <div class="text-center max-w-3xl mx-auto mb-12">
+                    <span class="font-label-caps text-[10px] tracking-[0.3em] text-gold font-bold block mb-3 uppercase">RÉCIT EN VEDETTE</span>
+                    <h2 class="font-display-lg text-4xl md:text-5xl font-bold text-primary">L'Histoire de @featName</h2>
+                </div>
+
+                <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center bg-white border border-gold/20 shadow-xl p-8 md:p-12">
+                    
+                    <div class="lg:col-span-6 relative">
+                        <div class="relative aspect-[16/10] overflow-hidden gold-border-light group cursor-pointer" onclick="@(isVideoFeat ? $"openPageVideoModal('{featVideo}', '{featName} — {featInfo}')" : "")">
+                            <img src="@featImage" alt="Témoignage @featName" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" />
+                            @if (isVideoFeat)
+                            {
+                                <div class="absolute inset-0 bg-black/40 group-hover:bg-black/25 transition-colors flex items-center justify-center">
+                                    <div class="w-20 h-20 rounded-full gold-gradient text-white flex items-center justify-center shadow-2xl group-hover:scale-110 transition-transform">
+                                        <span class="material-symbols-outlined text-4xl">play_arrow</span>
+                                    </div>
+                                </div>
+                                <span class="absolute bottom-4 right-4 bg-black/90 text-white font-label-caps text-[10px] px-3 py-1.5 flex items-center gap-1 font-bold">
+                                    <span class="material-symbols-outlined text-sm text-gold">videocam</span> VIDÉO HD
+                                </span>
+                            }
+                        </div>
+                    </div>
+
+                    <div class="lg:col-span-6 space-y-6">
+                        <span class="font-label-caps text-[10px] gold-gradient text-white px-3 py-1 font-bold uppercase tracking-widest inline-block shadow">
+                            @featInfo.ToUpper()
+                        <h3 class="font-display-lg text-2xl md:text-4xl font-bold text-primary leading-tight">
+                            "@featQuote"
+                        </h3>
+                        <div class="border-t border-gold/20 pt-4 flex items-center justify-between">
+                            <div>
+                                <p class="font-label-caps text-xs font-bold text-primary">@featName.ToUpper()</p>
+                                <p class="font-label-caps text-[9px] text-gold font-bold">@featFollowUp.ToUpper()</p>
+                            </div>
+                            @if (isVideoFeat)
+                            {
+                                <button onclick="openPageVideoModal('@featVideo', '@featName — @featInfo')" class="gold-gradient text-white font-label-caps text-[10px] px-6 py-3 hover:opacity-90 transition-all font-bold tracking-widest flex items-center gap-2 shadow">
+                                    <span class="material-symbols-outlined text-sm">play_circle</span> REGARDER LE RÉCIT VIDÉO
+                                </button>
+                            }
+                            else
+                            {
+                                <div class="flex gap-1 text-gold">
+                                    @for (int i = 0; i < (featuredStory.Rating > 0 ? featuredStory.Rating : 5); i++)
+                                    {
+                                        <span class="material-symbols-outlined text-sm fill-1">star</span>
+                                    }
+                                </div>
+                            }
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+        </section>
+    }
+
+<!-- ============================================ -->
+<!-- 4. MAIN TESTIMONIALS CATALOG GRID (PRESERVED CARD DESIGN) -->
+<!-- ============================================ -->
+<section class="py-section-gap px-6 md:px-margin-desktop max-w-container-max mx-auto">
+    <div class="flex flex-col md:flex-row justify-between items-start md:items-end mb-16 gap-6">
+        <div>
+            <span class="font-label-caps text-gold font-bold block mb-4 uppercase">RETOURS D'EXPÉRIENCE PATIENTS</span>
+            <h2 class="font-display-lg text-4xl md:text-6xl font-bold text-primary">Vidéos & Avis Écrits</h2>
+        </div>
+        <div class="flex flex-wrap items-center gap-3">
+            <button onclick="filterPageTestimonials('all')" class="page-tab active px-5 py-2.5 font-label-caps text-xs gold-gradient text-white font-bold transition-all shadow-md">TOUT VOIR</button>
+            <button onclick="filterPageTestimonials('video')" class="page-tab px-5 py-2.5 font-label-caps text-xs bg-white border border-gold/30 text-primary hover:border-gold hover:text-gold transition-all">VIDÉOS 🎥</button>
+            <button onclick="filterPageTestimonials('text')" class="page-tab px-5 py-2.5 font-label-caps text-xs bg-white border border-gold/30 text-primary hover:border-gold hover:text-gold transition-all">AVIS ÉCRITS ✍️</button>
+            <button onclick="openShareModal()" class="px-5 py-2.5 font-label-caps text-xs bg-primary text-gold border border-gold hover:bg-gold hover:text-white transition-all font-bold shadow-sm flex items-center gap-1.5">
+                <span class="material-symbols-outlined text-sm">edit_square</span> LAISSER UN AVIS
+            </button>
+        </div>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+        @if (Model != null && Model.Any())
+        {
+            foreach (var item in Model)
+            {
+                if (item.Type == "video")
+                {
+                    <div class="page-testimonial-card group editorial-border overflow-hidden bg-white relative" data-type="video">
+                        <div class="relative aspect-[16/9] overflow-hidden cursor-pointer" onclick="openPageVideoModal('@(string.IsNullOrEmpty(item.VideoUrl) ? "/videos/tem.mp4" : item.VideoUrl)', '@item.PatientName — @item.PatientInfo')">
+                            <img src="@(string.IsNullOrEmpty(item.ImageUrl) ? "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&q=80&w=800" : item.ImageUrl)" alt="@item.PatientName" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"/>
+                            <div class="absolute inset-0 bg-black/40 group-hover:bg-black/20 transition-colors flex items-center justify-center">
+                                <div class="w-16 h-16 rounded-full bg-white text-black flex items-center justify-center shadow-xl group-hover:scale-110 transition-transform">
+                                    <span class="material-symbols-outlined text-3xl">play_arrow</span>
+                                </div>
+                            </div>
+                            <span class="absolute bottom-3 right-3 bg-black/80 text-white font-label-caps text-[9px] px-2 py-1 flex items-center gap-1">
+                                <span class="material-symbols-outlined text-xs">videocam</span> @(string.IsNullOrEmpty(item.FollowUpTime) ? "Suivi certifié" : item.FollowUpTime)
+                            </span>
+                            <span class="absolute top-3 left-3 bg-black text-white font-label-caps text-[9px] px-3 py-1 font-bold">TÉMOIGNAGE VIDÉO</span>
+                        </div>
+                        <div class="p-6">
+                            <p class="font-quote text-base italic text-primary leading-relaxed mb-4">"@item.Quote"</p>
+                            <div class="flex justify-between items-center border-t border-black/10 pt-4">
+                                <div>
+                                    <p class="font-label-caps text-xs font-bold">@item.PatientName.ToUpper()</p>
+                                    <p class="font-label-caps text-[9px] text-primary/40">@item.PatientInfo.ToUpper()</p>
+                                </div>
+                                <button onclick="openPageVideoModal('@(string.IsNullOrEmpty(item.VideoUrl) ? "/videos/tem.mp4" : item.VideoUrl)', '@item.PatientName — @item.PatientInfo')" class="font-label-caps text-[9px] font-bold underline hover:opacity-70 flex items-center gap-1">
+                                    REGARDER LA VIDÉO <span class="material-symbols-outlined text-xs">play_circle</span>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                }
+                else
+                {
+                    <div class="page-testimonial-card editorial-border p-8 flex flex-col justify-between bg-white" data-type="text">
+                        <div>
+                            <div class="flex justify-between items-center mb-6">
+                                <div class="flex gap-1 text-gold">
+                                    @for (int i = 0; i < (item.Rating > 0 ? item.Rating : 5); i++)
+                                    {
+                                        <span class="material-symbols-outlined text-sm fill-1">star</span>
+                                    }
+                                </div>
+                                <span class="font-label-caps text-[9px] bg-black/5 px-2 py-1">AVIS ÉCRIT</span>
+                            </div>
+                            <p class="font-quote text-lg italic leading-relaxed text-primary mb-8">
+                                "@item.Quote"
+                            </p>
+                        </div>
+                        <div class="border-t border-black/10 pt-6">
+                            <p class="font-label-caps text-xs font-bold">@item.PatientName.ToUpper()</p>
+                            <p class="font-label-caps text-[10px] text-primary/40">@item.PatientInfo.ToUpper()</p>
+                        </div>
+                    </div>
+                }
+            }
+        }
+        else
+        {
+            <div class="col-span-1 md:col-span-3 max-w-xl mx-auto text-center py-16 px-8 bg-ivory border border-gold/30 rounded-3xl space-y-4 shadow-sm">
+                <div class="w-16 h-16 rounded-2xl bg-white border border-gold/40 flex items-center justify-center mx-auto text-gold shadow-xs">
+                    <span class="material-symbols-outlined text-3xl">rate_review</span>
+                </div>
+                <h3 class="font-display-lg text-2xl font-bold text-primary">Aucun avis publié pour le moment</h3>
+                <p class="font-body-md text-xs sm:text-sm text-primary/70 max-w-md mx-auto leading-relaxed">
+                    Les retours d'expérience et témoignages de nos patients seront prochainement partagés ici. Vous êtes patient du Pr. Slama ? Partagez votre expérience en premier.
+                </p>
+                <div class="pt-2">
+                    <button onclick="openShareModal()" class="inline-flex items-center gap-2 gold-gradient text-white font-label-caps text-[10px] tracking-widest px-7 py-3.5 rounded-full font-bold shadow-lg hover:scale-105 transition-all">
+                        <span class="material-symbols-outlined text-xs">edit_square</span>
+                        LAISSER UN AVIS
+                    </button>
+                </div>
+            </div>
+        }
+    </div>
+</section>
+
+<!-- ============================================ -->
+<!-- 5. WHY PATIENTS TRUST DR. SLAMA (4 PILLARS) -->
+<!-- ============================================ -->
+<section class="py-24 px-6 md:px-margin-desktop bg-[#08090b] text-white">
+    <div class="max-w-container-max mx-auto">
+        <div class="text-center max-w-3xl mx-auto mb-16">
+            <span class="font-label-caps text-[10px] tracking-[0.3em] text-amber-300 block mb-3 uppercase">CHARTE DE CONFIANCE</span>
+            <h2 class="font-display-lg text-4xl md:text-5xl font-bold text-white mb-4">Pourquoi Nos Patients Nous Font Confiance ?</h2>
+            <p class="font-body-md text-white/70 text-sm md:text-base">Une approche médicale humaine, rigoureuse et axée sur l'excellence.</p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-6">
+            <div class="p-8 bg-white/5 border border-white/10 flex flex-col justify-between">
+                <div>
+                    <span class="material-symbols-outlined text-amber-300 text-3xl mb-4">psychology</span>
+                    <h4 class="font-headline-sm text-base font-bold text-white mb-2">Écoute & Sur-Mesure</h4>
+                    <p class="font-body-md text-xs text-white/70 leading-relaxed">
+                        Chaque patient bénéficie d'un temps d'échange prolongé pour exprimer ses attentes sans aucun sentiment de précipitation.
+                    </p>
+                </div>
+            </div>
+
+            <div class="p-8 bg-white/5 border border-white/10 flex flex-col justify-between">
+                <div>
+                    <span class="material-symbols-outlined text-amber-300 text-3xl mb-4">verified</span>
+                    <h4 class="font-headline-sm text-base font-bold text-white mb-2">Résultats 100% Naturels</h4>
+                    <p class="font-body-md text-xs text-white/70 leading-relaxed">
+                        Refus systématique de la surcorrection pour préserver les mimiques expressives et la structure originelle du visage.
+                    </p>
+                </div>
+            </div>
+
+            <div class="p-8 bg-white/5 border border-white/10 flex flex-col justify-between">
+                <div>
+                    <span class="material-symbols-outlined text-amber-300 text-3xl mb-4">medical_services</span>
+                    <h4 class="font-headline-sm text-base font-bold text-white mb-2">Suivi Post-Opératoire 24/7</h4>
+                    <p class="font-body-md text-xs text-white/70 leading-relaxed">
+                        Accès direct à l'équipe médicale après toute intervention pour répondre à la moindre interrogation au cours de la guérison.
+                    </p>
+                </div>
+            </div>
+
+            <div class="p-8 bg-white/5 border border-white/10 flex flex-col justify-between">
+                <div>
+                    <span class="material-symbols-outlined text-amber-300 text-3xl mb-4">lock</span>
+                    <h4 class="font-headline-sm text-base font-bold text-white mb-2">Confidentialité Absolue</h4>
+                    <p class="font-body-md text-xs text-white/70 leading-relaxed">
+                        Cadre discret et sécurisé en plein cœur de Sousse garantissant l'anonymat et la tranquillité de chaque patient.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+    <!-- ============================================ -->
+    <!-- 6. SUBMIT A TESTIMONIAL / SHARE EXPERIENCE BANNER -->
+    <!-- ============================================ -->
+    <section class="py-16 px-6 md:px-margin-desktop bg-white">
+        <div class="max-w-4xl mx-auto border border-black/15 bg-white p-8 md:p-12 shadow-sm text-center">
+            <span class="material-symbols-outlined text-4xl text-amber-700 mb-4">rate_review</span>
+            <h3 class="font-display-lg text-2xl md:text-3xl font-bold text-primary mb-3">Vous Êtes Patient du Dr. Slama ?</h3>
+            <p class="font-body-md text-xs md:text-sm text-primary/75 leading-relaxed max-w-2xl mx-auto mb-6">
+                Votre retour d'expérience est précieux pour guider les futurs patients. Partagez votre témoignage ou votre avis de manière confidentielle.
+            </p>
+            <button onclick="openShareModal()" class="bg-primary text-white font-label-caps text-[11px] tracking-widest px-8 py-4 hover:bg-neutral-800 transition-all font-bold">
+                PARTAGER MON EXPÉRIENCE
+            </button>
+        </div>
+    </section>
+</div>
+
+<!-- ============================================ -->
+<!-- BRANCH 2: ACTUALITÉS & PRESSE SECTION       -->
+<!-- ============================================ -->
+<div id="wrapper-actualites" class="hidden">
+    <section class="py-16 px-6 md:px-margin-desktop bg-white border-b border-gold/20">
+        <div class="max-w-container-max mx-auto">
+            
+            <div class="text-center max-w-3xl mx-auto mb-12">
+                <span class="font-label-caps text-[10px] tracking-[0.3em] text-gold font-bold block mb-2 uppercase">CHIRURGIE &amp; MÉDECINE ESTHÉTIQUE</span>
+                <h2 class="font-display-lg text-3xl md:text-5xl font-bold text-primary">Actualités</h2>
+                <p class="font-body-md text-primary/75 text-sm md:text-base mt-3 leading-relaxed">Découvrez les actualités et les nouveautés en chirurgie et médecine esthétique. A travers nos articles et nos expertises, nous vous aidons à mieux comprendre les traitements et les solutions adaptées à vos besoins.</p>
+            </div>
+
+            @{
+                var actualites = ViewBag.Actualites as List<DrAbdelfatehSalma.Models.Actualite> ?? new List<DrAbdelfatehSalma.Models.Actualite>();
+            }
+
+            @if (actualites.Any())
+            {
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    @foreach (var news in actualites)
+                    {
+                        <a asp-controller="Home" asp-action="ActualiteDetail" asp-route-id="@news.Id" class="bg-white border border-gold/25 rounded-2xl overflow-hidden shadow-sm hover:shadow-xl hover:border-gold transition-all duration-300 flex flex-col justify-between group block cursor-pointer h-full">
+                            <div class="relative w-full overflow-hidden bg-neutral-900 border-b border-gold/15">
+                                @if (!string.IsNullOrEmpty(news.ImageUrl))
+                                {
+                                    <img src="@news.ImageUrl" alt="@news.Title" class="w-full h-auto block" />
+                                }
+                                else
+                                {
+                                    <div class="w-full h-48 flex items-center justify-center bg-[#0c0d10]">
+                                        <span class="material-symbols-outlined text-gold text-4xl">newspaper</span>
+                                    </div>
+                                }
+                                <span class="absolute top-3 left-3 gold-gradient text-white font-label-caps text-[8.5px] px-3 py-1 rounded-full font-bold uppercase shadow">
+                                    @(news.IsFeatured ? "⭐ À LA UNE" : "ACTUALITÉ")
+                                </span>
+                            </div>
+                            <div class="p-6 flex flex-col justify-between flex-1 space-y-4">
+                                <div>
+                                    <div class="flex items-center gap-2 text-gold text-[10px] font-label-caps font-bold mb-1">
+                                        <span class="material-symbols-outlined text-xs">calendar_month</span>
+                                        <span>@news.DateLabel</span>
+                                    </div>
+                                    <h4 class="font-display-lg text-xl font-bold text-primary mb-2 group-hover:text-gold transition-colors line-clamp-2">
+                                        @news.Title
+                                    </h4>
+                                    <p class="font-body-md text-xs text-primary/75 leading-relaxed line-clamp-3">
+                                        @news.Excerpt
+                                    </p>
+                                </div>
+                                <div class="pt-3 border-t border-gold/15 flex items-center justify-between">
+                                    <div class="flex items-center gap-2 flex-wrap">
+                                        @if (!string.IsNullOrEmpty(news.Tags))
+                                        {
+                                            foreach (var tag in news.Tags.Split(',', StringSplitOptions.RemoveEmptyEntries).Take(2))
+                                            {
+                                                <span class="font-label-caps text-[9px] text-slate-500 font-bold uppercase bg-slate-100 px-2 py-0.5 rounded">@tag.Trim()</span>
+                                            }
+                                        }
+                                    </div>
+                                    <span class="font-label-caps text-[10px] font-bold text-gold flex items-center gap-1 group-hover:translate-x-1 transition-transform">
+                                        LIRE <span class="material-symbols-outlined text-xs">arrow_forward</span>
+                                    </span>
+                                </div>
+                            </div>
+                        </a>
+                    }
+                </div>
+            }
+            else
+            {
+                <div class="text-center py-16 text-gray-400 italic">
+                    Aucune actualité publiée pour le moment.
+                </div>
+            }
+
+        </div>
+    </section>
+</div>
+
+
+<!-- ============================================ -->
+<!-- 7. FLOATING DARK GLASS CALL TO ACTION (CTA) -->
+<!-- ============================================ -->
+<section class="relative py-32 md:py-44 px-6 md:px-margin-desktop text-white text-center overflow-hidden bg-black">
+    <!-- Fully Visible Clinic Office Background Image -->
+    <div class="absolute inset-0 z-0">
+        <img src="/images/office.png" alt="Cabinet Dr Slama Sousse" class="w-full h-full object-cover object-center opacity-95 scale-100 transition-transform duration-[10s] hover:scale-105" />
+        <div class="absolute inset-0 bg-black/15"></div>
+    </div>
+
+    <!-- Crystal Transparent Floating Card -->
+    <div class="relative z-10 max-w-3xl mx-auto bg-black/25 backdrop-blur-[2px] p-8 md:p-12 border border-white/30 shadow-2xl rounded-2xl">
+        <span class="font-label-caps text-[10px] tracking-[0.4em] text-white block mb-6 uppercase border border-white/40 inline-block px-4 py-1.5 bg-black/30 backdrop-blur-sm font-bold drop-shadow">
+            CONSULTATION PRIVÉE • SOUSSE
+        </span>
+        <h2 class="font-display-lg text-4xl md:text-6xl font-bold text-white mb-6 leading-tight drop-shadow-[0_3px_12px_rgba(0,0,0,0.85)]">
+            Écrivons Ensemble Votre Propre Histoire.
+        </h2>
+        <p class="font-body-lg text-white mb-10 text-base md:text-lg leading-relaxed max-w-xl mx-auto drop-shadow-[0_2px_8px_rgba(0,0,0,0.85)] font-medium">
+            Prenez rendez-vous en cabinet à Sousse pour échanger sur vos souhaits en toute sérénité.
+        </p>
+
+        <div class="flex flex-col sm:flex-row gap-5 justify-center items-center">
+            <a asp-controller="Home" asp-action="Contact" class="bg-white text-primary font-label-caps text-[11px] tracking-widest px-10 py-5 hover:bg-neutral-200 transition-all duration-300 w-full sm:w-auto text-center shadow-2xl font-bold">
+                CONTACTEZ-NOUS
+            </a>
+            <a href="tel:+21673200000" class="border border-white/60 bg-black/30 backdrop-blur-sm text-white font-label-caps text-[11px] tracking-widest px-10 py-5 hover:bg-white hover:text-primary transition-all duration-300 w-full sm:w-auto text-center flex items-center justify-center gap-3 font-bold shadow-lg">
+                <span class="material-symbols-outlined text-sm">phone</span>
+                +216 73 200 000
+            </a>
+        </div>
+    </div>
+</section>
+
+<!-- Video Modal Popup -->
+<div id="page-video-modal" class="fixed inset-0 z-50 bg-black/90 hidden items-center justify-center p-4 backdrop-blur-md">
+    <!-- Backdrop Click Close -->
+    <div class="absolute inset-0" onclick="closePageVideoModal()"></div>
+
+    <div class="relative z-10 w-full max-w-4xl bg-neutral-900 border border-white/20 p-4 shadow-2xl">
+        <div class="flex justify-between items-center mb-4 pb-2 border-b border-white/10">
+            <h4 id="page-video-title" class="font-label-caps text-sm text-white font-bold">Témoignage Vidéo</h4>
+            <button onclick="closePageVideoModal()" class="text-white hover:opacity-50 w-8 h-8 flex items-center justify-center rounded-full bg-white/10">
+                <span class="material-symbols-outlined text-xl">close</span>
+            </button>
+        </div>
+        <div id="page-video-container" class="aspect-video w-full bg-black relative">
+        </div>
+    </div>
+</div>
+
+<!-- Share Experience Modal -->
+<div id="share-modal" class="fixed inset-0 z-50 bg-black/85 backdrop-blur-md hidden items-center justify-center p-4">
+    <div class="relative w-full max-w-xl bg-white border border-gold/30 p-8 shadow-2xl rounded-2xl">
+        <div class="flex justify-between items-center mb-6 pb-4 border-b border-gold/20">
+            <div>
+                <span class="font-label-caps text-[10px] text-gold font-bold uppercase tracking-widest block mb-1">DR. ABDELFATEH SLAMA</span>
+                <h3 class="font-display-lg text-2xl font-bold text-primary">Partager Votre Témoignage</h3>
+            </div>
+            <button onclick="closeShareModal()" type="button" class="text-primary hover:text-gold transition-colors">
+                <span class="material-symbols-outlined text-2xl">close</span>
+            </button>
+        </div>
+        <form asp-controller="Home" asp-action="SubmitTemoignage" method="post" class="space-y-4">
+            @Html.AntiForgeryToken()
+            <div>
+                <label class="block font-label-caps text-[10px] font-bold text-primary mb-1">VOTRE NOM / INITIALES *</label>
+                <input type="text" name="PatientName" required placeholder="Ex: Sophie R." class="w-full p-3 border border-gold/30 font-body-md text-sm focus:outline-none focus:border-gold rounded" />
+            </div>
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <div>
+                    <label class="block font-label-caps text-[10px] font-bold text-primary mb-1">INTERVENTION RÉALISÉE</label>
+                    <input type="text" name="PatientInfo" placeholder="Ex: Rhinoplastie Ultrasonique — Sousse" class="w-full p-3 border border-gold/30 font-body-md text-sm focus:outline-none focus:border-gold rounded" />
+                </div>
+                <div>
+                    <label class="block font-label-caps text-[10px] font-bold text-primary mb-1">RECUL POST-OPÉRATOIRE</label>
+                    <input type="text" name="FollowUpTime" placeholder="Ex: 6 mois post-op" class="w-full p-3 border border-gold/30 font-body-md text-sm focus:outline-none focus:border-gold rounded" />
+                </div>
+            </div>
+            <div>
+                <label class="block font-label-caps text-[10px] font-bold text-primary mb-1">VOTRE ÉVALUATION (NOTE)</label>
+                <select name="Rating" class="w-full p-3 border border-gold/30 font-body-md text-sm focus:outline-none focus:border-gold rounded bg-white cursor-pointer">
+                    <option value="5" selected>⭐⭐⭐⭐⭐ (5/5 - Exceptionnel)</option>
+                    <option value="4">⭐⭐⭐⭐ (4/5 - Très satisfait)</option>
+                    <option value="3">⭐⭐⭐ (3/5 - Satisfait)</option>
+                </select>
+            </div>
+            <div>
+                <label class="block font-label-caps text-[10px] font-bold text-primary mb-1">VOTRE TÉMOIGNAGE *</label>
+                <textarea name="Quote" required rows="4" placeholder="Décrivez votre expérience, le déroulement de l'intervention et votre résultat avec le Dr. Slama..." class="w-full p-3 border border-gold/30 font-body-md text-sm focus:outline-none focus:border-gold rounded"></textarea>
+            </div>
+            <button type="submit" class="w-full gold-gradient text-white font-label-caps text-xs py-4 hover:opacity-90 transition-all font-bold tracking-widest shadow-lg rounded">
+                PUBLIER MON TÉMOIGNAGE
+            </button>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+<script>
+    function filterPageTestimonials(type) {
+        const cards = document.querySelectorAll('.page-testimonial-card');
+        const tabs = document.querySelectorAll('.page-tab');
+
+        tabs.forEach(tab => {
+            tab.classList.remove('gold-gradient', 'text-white', 'shadow-md');
+            tab.classList.add('bg-white', 'text-primary', 'border-gold/30');
+        });
+
+        if (event && event.currentTarget) {
+            event.currentTarget.classList.remove('bg-white', 'text-primary', 'border-gold/30');
+            event.currentTarget.classList.add('gold-gradient', 'text-white', 'shadow-md');
+        }
+
+        cards.forEach(card => {
+            if (type === 'all' || card.dataset.type === type) {
+                card.style.display = 'flex';
+            } else {
+                card.style.display = 'none';
+            }
+        });
+    }
+
+    function openPageVideoModal(videoSrc, title) {
+        const modal = document.getElementById('page-video-modal');
+        const modalTitle = document.getElementById('page-video-title');
+        const container = document.getElementById('page-video-container');
+
+        if (modalTitle) modalTitle.textContent = title;
+
+        let isYouTube = videoSrc.includes('youtube.com') || videoSrc.includes('youtu.be');
+
+        if (isYouTube) {
+            let embedUrl = videoSrc;
+            if (videoSrc.includes('watch?v=')) {
+                const parts = videoSrc.split('v=');
+                const vId = parts[1].split('&')[0];
+                embedUrl = 'https://www.youtube.com/embed/' + vId;
+            } else if (videoSrc.includes('youtu.be/')) {
+                const parts = videoSrc.split('youtu.be/');
+                const vId = parts[1].split('?')[0];
+                embedUrl = 'https://www.youtube.com/embed/' + vId;
+            }
+            embedUrl += (embedUrl.includes('?') ? '&' : '?') + 'autoplay=1&rel=0';
+
+            container.innerHTML = `<iframe src="${embedUrl}" title="${title || 'Vidéo'}" class="w-full h-full border-0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>`;
+        } else {
+            container.innerHTML = `<video id="page-video-player" controls autoplay class="w-full h-full object-contain">
+                <source src="${videoSrc}" type="video/mp4"/>
+                Votre navigateur ne supporte pas la lecture de vidéo.
+            </video>`;
+        }
+
+        modal.classList.remove('hidden');
+        modal.classList.add('flex');
+        document.body.classList.add('overflow-hidden');
+    }
+
+    function closePageVideoModal() {
+        const modal = document.getElementById('page-video-modal');
+        const container = document.getElementById('page-video-container');
+        if (container) container.innerHTML = '';
+        if (modal) {
+            modal.classList.remove('flex');
+            modal.classList.add('hidden');
+        }
+        document.body.classList.remove('overflow-hidden');
+    }
+
+    function openShareModal() {
+        const modal = document.getElementById('share-modal');
+        modal.classList.remove('hidden');
+        modal.classList.add('flex');
+    }
+
+    function closeShareModal() {
+        const modal = document.getElementById('share-modal');
+        modal.classList.remove('flex');
+        modal.classList.add('hidden');
+    }
+
+    function handleShareSubmit(e) {
+        e.preventDefault();
+        const msg = document.getElementById('share-success-msg');
+        msg.classList.remove('hidden');
+        setTimeout(() => {
+            closeShareModal();
+            msg.classList.add('hidden');
+        }, 2000);
+    }
+
+    function switchTemoignagesMainTab(tab) {
+        const btnTem = document.getElementById('main-tab-temoignages');
+        const btnAct = document.getElementById('main-tab-actualites');
+        const wrapTem = document.getElementById('wrapper-temoignages');
+        const wrapAct = document.getElementById('wrapper-actualites');
+
+        if (tab === 'temoignages') {
+            btnTem.className = 'px-6 md:px-8 py-3.5 rounded-full font-label-caps text-[11px] md:text-xs tracking-widest font-bold gold-gradient text-white shadow-md transition-all duration-300 flex items-center gap-2 whitespace-nowrap';
+            btnAct.className = 'px-6 md:px-8 py-3.5 rounded-full font-label-caps text-[11px] md:text-xs tracking-widest font-bold text-slate-700 hover:text-gold transition-all duration-300 flex items-center gap-2 whitespace-nowrap';
+            wrapTem.classList.remove('hidden');
+            wrapAct.classList.add('hidden');
+        } else {
+            btnAct.className = 'px-6 md:px-8 py-3.5 rounded-full font-label-caps text-[11px] md:text-xs tracking-widest font-bold gold-gradient text-white shadow-md transition-all duration-300 flex items-center gap-2 whitespace-nowrap';
+            btnTem.className = 'px-6 md:px-8 py-3.5 rounded-full font-label-caps text-[11px] md:text-xs tracking-widest font-bold text-slate-700 hover:text-gold transition-all duration-300 flex items-center gap-2 whitespace-nowrap';
+            wrapAct.classList.remove('hidden');
+            wrapTem.classList.add('hidden');
+        }
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+        const urlParams = new URLSearchParams(window.location.search);
+        const hash = window.location.hash;
+        if (urlParams.get('tab') === 'actualites' || hash === '#actualites') {
+            switchTemoignagesMainTab('actualites');
+        }
+    });
+
+
+</script>
+}

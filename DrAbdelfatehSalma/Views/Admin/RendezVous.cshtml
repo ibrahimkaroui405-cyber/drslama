@@ -1,0 +1,96 @@
+@model IEnumerable<DrAbdelfatehSalma.Models.DemandeContact>
+@{
+    Layout = "_AdminLayout";
+    ViewData["Title"] = "Demandes de Rendez-vous";
+}
+
+<div class="space-y-8">
+    <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 border-b border-gold/20 pb-6">
+        <div>
+            <h1 class="font-display-lg text-2xl font-bold text-white mb-1">Demandes de Rendez-vous & Consultations</h1>
+            <p class="text-xs text-gray-400">Consulter et traiter les demandes reçues via le formulaire de contact du site.</p>
+        </div>
+    </div>
+
+    <div class="bg-[#121419] border border-gold/20 overflow-hidden">
+        <div class="overflow-x-auto">
+            <table class="w-full text-left text-xs text-gray-300">
+                <thead class="bg-[#0c0d10] text-gold font-label-caps text-[10px] uppercase border-b border-gold/20">
+                    <tr>
+                        <th class="p-4">Date</th>
+                        <th class="p-4">Patient</th>
+                        <th class="p-4">Téléphone</th>
+                        <th class="p-4">Email</th>
+                        <th class="p-4">Motif de Consultation</th>
+                        <th class="p-4">Message</th>
+                        <th class="p-4">Photo</th>
+                        <th class="p-4">Statut</th>
+                        <th class="p-4 text-right">Actions</th>
+                    </tr>
+                </thead>
+                <tbody class="divide-y divide-gray-800">
+                    @if (Model != null && Model.Any())
+                    {
+                        foreach (var item in Model)
+                        {
+                            var msg = !string.IsNullOrWhiteSpace(item.Message) ? item.Message : (!string.IsNullOrWhiteSpace(item.Objet) ? item.Objet : "-");
+                            <tr class="hover:bg-white/5 transition-colors">
+                                <td class="p-4 text-gray-400">@item.CreatedAt.ToString("dd/MM/yyyy HH:mm")</td>
+                                <td class="p-4 font-bold text-white">@item.FullName</td>
+                                <td class="p-4 font-bold text-gold">
+                                    <a href="tel:@item.Phone" class="hover:underline">@item.Phone</a>
+                                </td>
+                                <td class="p-4">
+                                    <a href="mailto:@item.Email" class="hover:underline">@item.Email</a>
+                                </td>
+                                <td class="p-4 text-gold font-medium">@item.ConsultationType</td>
+                                <td class="p-4 text-gray-200 max-w-xs truncate" title="@msg">@msg</td>
+                                <td class="p-4">
+                                    @if (!string.IsNullOrEmpty(item.PhotoPath))
+                                    {
+                                        <a href="@item.PhotoPath" target="_blank" class="inline-flex items-center gap-1 px-2.5 py-1 rounded bg-gold/10 text-gold border border-gold/30 hover:bg-gold hover:text-white transition-all text-[11px] font-bold">
+                                            <span>Photo</span>
+                                            <span class="material-symbols-outlined text-xs">open_in_new</span>
+                                        </a>
+                                    }
+                                    else
+                                    {
+                                        <span class="text-gray-500">-</span>
+                                    }
+                                </td>
+                                <td class="p-4">
+                                    @if (item.IsProcessed)
+                                    {
+                                        <span class="px-2.5 py-1 rounded bg-green-500/10 text-green-400 text-[10px] font-bold border border-green-500/30">TRAITÉ</span>
+                                    }
+                                    else
+                                    {
+                                        <span class="px-2.5 py-1 rounded bg-amber-500/10 text-amber-400 text-[10px] font-bold border border-amber-500/30">EN ATTENTE</span>
+                                    }
+                                </td>
+                                <td class="p-4 text-right space-x-2">
+                                    <form asp-controller="Admin" asp-action="ToggleProcessRendezVous" asp-route-id="@item.Id" method="post" class="inline">
+                                        <button type="submit" class="px-3 py-1.5 bg-gold/20 text-gold hover:bg-gold hover:text-white rounded text-[11px] font-bold transition-all">
+                                            @(item.IsProcessed ? "Marquer non traité" : "Valider")
+                                        </button>
+                                    </form>
+                                    <form asp-controller="Admin" asp-action="DeleteRendezVous" asp-route-id="@item.Id" method="post" class="inline" onsubmit="return confirm('Supprimer cette demande ?');">
+                                        <button type="submit" class="px-3 py-1.5 bg-red-500/20 text-red-400 hover:bg-red-500 hover:text-white rounded text-[11px] font-bold transition-all">
+                                            Supprimer
+                                        </button>
+                                    </form>
+                                </td>
+                            </tr>
+                        }
+                    }
+                    else
+                    {
+                        <tr>
+                            <td colspan="9" class="p-8 text-center text-gray-500 italic">Aucune demande de rendez-vous enregistrée pour le moment.</td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,123 @@
+@model DrAbdelfatehSalma.Models.Resultat
+@{
+    Layout = "_AdminLayout";
+    ViewData["Title"] = "Nouveau Cas Clinique Avant/Après";
+}
+
+<div class="max-w-4xl mx-auto space-y-8">
+    <div class="border-b border-gold/20 pb-6 flex items-center justify-between">
+        <div>
+            <h1 class="font-display-lg text-2xl font-bold text-white mb-1">Ajouter un Cas Avant / Après</h1>
+            <p class="text-xs text-gray-400">Publier une nouvelle étude de cas comparatif dans la galerie résultats.</p>
+        </div>
+        <a asp-controller="Admin" asp-action="Resultats" class="text-xs text-gray-400 hover:text-white flex items-center gap-1 font-bold">
+            ← Annuler et retourner
+        </a>
+    </div>
+
+    <form asp-controller="Admin" asp-action="CreateResultat" method="post" enctype="multipart/form-data" class="space-y-6 bg-[#121419] p-8 border border-gold/20 shadow-xl">
+        
+        <div>
+            <label class="block text-xs font-bold text-gold uppercase mb-2">TITRE DU CAS *</label>
+            <input type="text" asp-for="Title" required placeholder="Ex: Rhinoplastie Primaire Ultrasonique" class="w-full p-3.5 bg-[#0c0d10] border border-gold/20 text-white text-xs focus:outline-none focus:border-gold" />
+        </div>
+
+        <div>
+            <label class="block text-xs font-bold text-gold uppercase mb-2">CATÉGORIE DU CAS CLINIQUE *</label>
+            <select asp-for="CategoryKey" required class="w-full p-3.5 bg-[#0c0d10] border border-gold/20 text-white text-xs focus:outline-none focus:border-gold cursor-pointer" onchange="document.getElementById('category-title-input').value = this.options[this.selectedIndex].text">
+                <option value="visage" selected="@(Model.CategoryKey == "visage" ? "selected" : null)">CHIRURGIE DU VISAGE</option>
+                <option value="poitrine" selected="@(Model.CategoryKey == "poitrine" ? "selected" : null)">CHIRURGIE DU SEIN (POITRINE)</option>
+                <option value="silhouette" selected="@(Model.CategoryKey == "silhouette" ? "selected" : null)">CHIRURGIE DE LA SILHOUETTE</option>
+            </select>
+            <input type="hidden" asp-for="CategoryTitle" id="category-title-input" value="@(string.IsNullOrEmpty(Model.CategoryTitle) ? "CHIRURGIE DU VISAGE" : Model.CategoryTitle)" />
+        </div>
+
+        <div>
+            <label class="block text-xs font-bold text-gold uppercase mb-2">INFOS PATIENT *</label>
+            <input type="text" asp-for="PatientInfo" placeholder="Ex: Femme, 29 ans (Sousse)" class="w-full p-3.5 bg-[#0c0d10] border border-gold/20 text-white text-xs focus:outline-none focus:border-gold" />
+        </div>
+
+        <!-- Before & After Images Upload -->
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 p-4 bg-[#0c0d10] border border-gold/20 rounded">
+            <div>
+                <label class="block text-xs font-bold text-gold uppercase mb-2">📷 PHOTO AVANT (Fichier ou URL)</label>
+                <input type="file" name="beforeFile" accept="image/*" class="w-full p-2 bg-[#121419] border border-gold/20 text-white text-xs" />
+                <input type="text" asp-for="BeforeImageUrl" placeholder="Ou URL (/images/rhino_before.png)" class="w-full p-3.5 mt-2 bg-[#121419] border border-gold/20 text-white text-xs" />
+            </div>
+
+            <div>
+                <label class="block text-xs font-bold text-gold uppercase mb-2">✨ PHOTO APRÈS (Fichier ou URL)</label>
+                <input type="file" name="afterFile" accept="image/*" class="w-full p-2 bg-[#121419] border border-gold/20 text-white text-xs" />
+                <input type="text" asp-for="AfterImageUrl" placeholder="Ou URL (/images/rhino_after.png)" class="w-full p-3.5 mt-2 bg-[#121419] border border-gold/20 text-white text-xs" />
+            </div>
+        </div>
+
+        <div>
+            <label class="block text-xs font-bold text-gold uppercase mb-2">DESCRIPTION CLINIQUE DU CAS</label>
+            <textarea asp-for="Description" rows="3" placeholder="Correction d'une déviation septale avec lissage du profil..." class="w-full p-3.5 bg-[#0c0d10] border border-gold/20 text-white text-xs"></textarea>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+            <div>
+                <label class="block text-[10px] font-bold text-gold uppercase mb-2">TECHNIQUE UTILISÉE</label>
+                <input type="text" asp-for="Technique" placeholder="Ex: Piezo-Rhinoplastie Ouverte" class="w-full p-3 bg-[#0c0d10] border border-gold/20 text-white text-xs" />
+            </div>
+            <div>
+                <label class="block text-[10px] font-bold text-gold uppercase mb-2">ANESTHÉSIE</label>
+                <input type="text" asp-for="Anesthesia" placeholder="Ex: Générale (Ambulatoire)" class="w-full p-3 bg-[#0c0d10] border border-gold/20 text-white text-xs" />
+            </div>
+            <div>
+                <label class="block text-[10px] font-bold text-gold uppercase mb-2">RÉCUPÉRATION / RÉSULTAT</label>
+                <input type="text" asp-for="RecoveryTime" placeholder="Ex: Résultat final à 8 mois" class="w-full p-3 bg-[#0c0d10] border border-gold/20 text-white text-xs" />
+            </div>
+        </div>
+
+        <div class="pt-4 border-t border-gold/20 flex items-center justify-between">
+            <label class="flex items-center gap-2 text-xs text-gold font-bold">
+                <input type="checkbox" asp-for="IsFeatured" class="rounded bg-[#0c0d10] border-gold/40 text-gold focus:ring-gold" />
+                Mettre en avant sur la page d'accueil
+            </label>
+
+            <button type="submit" class="gold-gradient text-white font-label-caps text-xs py-4 px-8 hover:opacity-90 font-bold tracking-widest shadow">
+                ENREGISTRER LE CAS CLINIQUE
+            </button>
+        </div>
+
+    </form>
+</div>
+
+<script>
+    function onCategorySelectChange(select) {
+        const titleInput = document.getElementById('category-title-input');
+        const keyInput = document.getElementById('category-key-input');
+        const selectedOption = select.options[select.selectedIndex];
+
+        if (select.value === '__NEW__') {
+            titleInput.value = '';
+            keyInput.value = '';
+            keyInput.dataset.auto = 'true';
+            titleInput.focus();
+        } else if (select.value) {
+            keyInput.value = select.value;
+            titleInput.value = selectedOption.getAttribute('data-title') || select.value;
+            keyInput.dataset.auto = 'false';
+        }
+    }
+
+    function onCategoryTitleInput(val) {
+        const keyInput = document.getElementById('category-key-input');
+        if (keyInput && (keyInput.dataset.auto === 'true' || !keyInput.value)) {
+            keyInput.value = val.toLowerCase()
+                .normalize("NFD").replace(/[\u0300-\u036f]/g, "")
+                .replace(/[^a-z0-9]+/g, '-')
+                .replace(/^-+|-+$/g, '');
+        }
+    }
+
+    function onCategoryKeyInput(val) {
+        const keyInput = document.getElementById('category-key-input');
+        if (keyInput) {
+            keyInput.dataset.auto = 'false';
+        }
+    }
+</script>

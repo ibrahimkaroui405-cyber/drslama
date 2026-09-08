@@ -1,0 +1,735 @@
+@model List<DrAbdelfatehSalma.Models.Chirurgie>
+@{
+    ViewData["Title"] = "Chirurgie Esthétique - Pr. Abdelfateh Slama Sousse";
+    var defaultCats = new List<string> { "VISAGE & COU", "POITRINE", "SILHOUETTE" };
+    var categories = Model != null ? Model
+        .Select(c => c.Category)
+        .Where(c => !string.IsNullOrEmpty(c))
+        .Distinct(StringComparer.OrdinalIgnoreCase)
+        .ToList() : new List<string>();
+
+    foreach (var dCat in defaultCats)
+    {
+        if (!categories.Any(c => c.Equals(dCat, StringComparison.OrdinalIgnoreCase)))
+        {
+            categories.Add(dCat);
+        }
+    }
+}
+
+<!-- ============================================ -->
+<!-- 1. HERO SECTION: DRAMATIC EDITORIAL SPLIT LAYOUT (100VH FULL SCREEN) -->
+<!-- ============================================ -->
+<section class="relative min-h-[85vh] md:min-h-screen flex items-end md:items-center pt-24 md:pt-20 pb-16 md:pb-12 overflow-hidden bg-surface-container-low border-b border-gold/20">
+    <!-- Right-Side Image (Full screen on mobile, 50% width on desktop) -->
+    <div class="absolute inset-0 md:left-auto md:right-0 md:top-0 w-full md:w-1/2 h-full z-0 overflow-hidden">
+        <!-- Desktop High-Fashion Gradient Transition -->
+        <div class="hidden md:block absolute inset-y-0 left-0 w-48 bg-gradient-to-r from-surface-container-low via-surface-container-low/70 to-transparent z-10 pointer-events-none"></div>
+        <!-- Mobile Dark Gradient Overlay to ensure text readability -->
+        <div class="block md:hidden absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-black/10 z-10 pointer-events-none"></div>
+        <img id="hero-panoramic-bg" src="/images/ch.png" alt="Chirurgie Esthétique - Pr. Abdelfateh Slama Sousse" class="w-full h-full object-cover object-center transition-all duration-700 brightness-[1.02] contrast-[1.03]" />
+    </div>
+
+    <!-- Content Column -->
+    <div class="relative z-20 w-full px-4 sm:px-6 md:px-margin-desktop max-w-container-max mx-auto">
+        <div class="w-full md:w-5/12 lg:w-[42%] max-w-lg p-0 text-white md:text-primary">
+            <div class="flex items-center gap-3 mb-4 reveal-text">
+                <span class="w-10 h-[1px] bg-gold"></span>
+                <span class="font-label-caps text-gold text-[9.5px] md:text-[10px] tracking-[0.3em] md:tracking-[0.4em] uppercase font-bold animate-reveal">PR. ABDELFATEH SLAMA • SOUSSE</span>
+            </div>
+            <h1 class="font-display-lg text-4xl sm:text-5xl md:text-[85px] lg:text-[95px] leading-[0.92] md:leading-[0.88] tracking-tighter text-white md:text-primary mb-6 md:mb-8 italic">
+                Chirurgie<br/>
+                <span class="not-italic font-black">Esthétique</span>
+            </h1>
+            <div class="space-y-4 font-body-lg text-white/90 md:text-primary/85 text-sm md:text-base leading-relaxed">
+                <p class="font-bold text-white md:text-primary text-base md:text-lg">
+                    L'art de la chirurgie esthétique sur-mesure à Sousse.
+                </p>
+                <p class="font-light text-white/80 md:text-primary/80">
+                    Allier rigueur médicale, précision artistique et sécurité opératoire pour sublimer votre beauté naturelle et rétablir l'harmonie de votre silhouette et de votre visage.
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scroll Indicator -->
+    <div class="absolute bottom-10 left-6 md:left-margin-desktop flex items-center gap-4">
+        <div class="h-16 w-[1px] bg-gold"></div>
+        <span class="font-label-caps text-[10px] vertical-text text-gold font-bold" style="writing-mode: vertical-rl; transform: rotate(180deg);">SCROLL</span>
+    </div>
+</section>
+
+<!-- ============================================ -->
+<!-- 2. SURGICAL CATALOG GRID & RESULTS BRANCH WITH INTEGRATED SWITCHER -->
+<!-- ============================================ -->
+<section class="py-20 px-6 md:px-margin-desktop bg-white border-b border-gold/20">
+    <div class="max-w-container-max mx-auto">
+        
+        <!-- Main Segmented Pillar Switcher: Les Opérations vs Les Résultats (Sous Code / Galerie) -->
+        <div class="flex justify-center mb-16 px-6">
+            <div class="flex flex-col sm:flex-row gap-2 sm:gap-0 p-2 sm:p-1.5 rounded-3xl sm:rounded-full bg-ivory border border-gold/40 shadow-lg w-full sm:w-auto max-w-md sm:max-w-none">
+                <button id="tab-btn-operations" onclick="switchMainTab('operations')" class="w-full sm:w-auto px-4 md:px-8 py-3.5 rounded-2xl sm:rounded-full font-label-caps text-[10px] md:text-xs tracking-widest font-bold gold-gradient text-white shadow-md transition-all duration-300 flex items-center justify-center gap-2 whitespace-normal sm:whitespace-nowrap leading-tight">
+                    <span class="material-symbols-outlined text-xs md:text-sm shrink-0">medical_services</span>
+                    <span>1. LES OPÉRATIONS (PROCÉDURES)</span>
+                </button>
+                <button id="tab-btn-results" onclick="switchMainTab('results')" class="w-full sm:w-auto px-4 md:px-8 py-3.5 rounded-2xl sm:rounded-full font-label-caps text-[10px] md:text-xs tracking-widest font-bold text-slate-700 hover:text-gold transition-all duration-300 flex items-center justify-center gap-2 whitespace-normal sm:whitespace-nowrap leading-tight">
+                    <span class="material-symbols-outlined text-xs md:text-sm shrink-0">photo_library</span>
+                    <span>2. LES RÉSULTATS (AVANT / APRÈS)</span>
+                </button>
+            </div>
+        </div>
+
+        <!-- ============================================ -->
+        <!-- BRANCH A: LES OPÉRATIONS SECTION -->
+        <!-- ============================================ -->
+        <div id="section-operations">
+            <!-- Visual Category Showcase Grid (Custom Doctor Category Images) -->
+            <div class="mb-16">
+                <div class="text-center max-w-3xl mx-auto mb-10">
+                    <span class="font-label-caps text-[10px] tracking-[0.3em] text-gold font-bold block mb-2 uppercase">NOS DOMAINES CHIRURGICAUX D'EXCELLENCE</span>
+                    <h2 class="font-display-lg text-3xl md:text-5xl font-bold text-primary">Spécialités du Pr. Abdelfateh Slama</h2>
+                    <p class="font-body-md text-primary/70 text-sm mt-2">Sélectionnez une catégorie ci-dessous pour filtrer les interventions correspondantes.</p>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                    <!-- Category Card 1: Visage & Cou -->
+                    <div onclick="filterSurgeries('visage-cou')" class="group relative bg-white border border-gold/30 rounded-3xl overflow-hidden shadow-lg hover:shadow-2xl hover:border-gold transition-all duration-500 cursor-pointer flex flex-col justify-between">
+                        <div class="relative aspect-[16/10] overflow-hidden bg-neutral-100 border-b border-gold/20">
+                            <img src="/images/ch1.webp" alt="Chirurgie du Visage & du Cou" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" />
+                            <div class="absolute inset-0 bg-gradient-to-t from-black/85 via-black/30 to-transparent"></div>
+                            <div class="absolute top-4 left-4">
+                                <span class="gold-gradient text-white font-label-caps text-[9px] px-3.5 py-1.5 rounded-full font-bold tracking-widest uppercase shadow">
+                                    SPÉCIALITÉ FACIALE
+                                </span>
+                            </div>
+                            <div class="absolute bottom-4 left-4 right-4 text-white">
+                                <h3 class="font-display-lg text-2xl font-bold mb-1">Chirurgie du Visage &amp; Cou</h3>
+                                <p class="font-body-md text-xs text-white/90 line-clamp-2 leading-relaxed mb-1">
+                                    Rajeunir, équilibrer et harmoniser la face (nez, lèvres, joues, paupières, menton).
+                                </p>
+                                <p class="text-[10px] text-gold font-medium tracking-wide">
+                                    Rhinoplastie, Lifting Cervico-Facial, Blépharoplastie, Génioplastie, Otoplastie.
+                                </p>
+                            </div>
+                        </div>
+                        <div class="p-5 flex items-center justify-between bg-ivory">
+                            <span class="font-label-caps text-[10px] text-primary font-bold tracking-wider uppercase">VOIR LES PROCEDURES</span>
+                            <span class="w-8 h-8 rounded-full gold-gradient text-white flex items-center justify-center font-bold text-sm shadow group-hover:scale-110 transition-transform">
+                                →
+                            </span>
+                        </div>
+                    </div>
+
+                    <!-- Category Card 2: Chirurgie du Sein -->
+                    <div onclick="filterSurgeries('poitrine')" class="group relative bg-white border border-gold/30 rounded-3xl overflow-hidden shadow-lg hover:shadow-2xl hover:border-gold transition-all duration-500 cursor-pointer flex flex-col justify-between">
+                        <div class="relative aspect-[16/10] overflow-hidden bg-neutral-100 border-b border-gold/20">
+                            <img src="/images/ch4.jpg" alt="Chirurgie du Sein & Poitrine" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" />
+                            <div class="absolute inset-0 bg-gradient-to-t from-black/85 via-black/30 to-transparent"></div>
+                            <div class="absolute top-4 left-4">
+                                <span class="gold-gradient text-white font-label-caps text-[9px] px-3.5 py-1.5 rounded-full font-bold tracking-widest uppercase shadow">
+                                    CHIRURGIE DU SEIN
+                                </span>
+                            </div>
+                            <div class="absolute bottom-4 left-4 right-4 text-white">
+                                <h3 class="font-display-lg text-2xl font-bold mb-1">Chirurgie du Sein (Poitrine)</h3>
+                                <p class="font-body-md text-xs text-white/90 line-clamp-2 leading-relaxed mb-1">
+                                    Redonner du volume, galber la poitrine et corriger les asymétries ou ptoses.
+                                </p>
+                                <p class="text-[10px] text-gold font-medium tracking-wide">
+                                    Augmentation Mammaire (Prothèses &amp; Lipofilling), Mastopexie, Réduction Mammaire.
+                                </p>
+                            </div>
+                        </div>
+                        <div class="p-5 flex items-center justify-between bg-ivory">
+                            <span class="font-label-caps text-[10px] text-primary font-bold tracking-wider uppercase">VOIR LES PROCEDURES</span>
+                            <span class="w-8 h-8 rounded-full gold-gradient text-white flex items-center justify-center font-bold text-sm shadow group-hover:scale-110 transition-transform">
+                                →
+                            </span>
+                        </div>
+                    </div>
+
+                    <!-- Category Card 3: Silhouette & Corps -->
+                    <div onclick="filterSurgeries('silhouette')" class="group relative bg-white border border-gold/30 rounded-3xl overflow-hidden shadow-lg hover:shadow-2xl hover:border-gold transition-all duration-500 cursor-pointer flex flex-col justify-between">
+                        <div class="relative aspect-[16/10] overflow-hidden bg-neutral-100 border-b border-gold/20">
+                            <img src="/images/silhouette_corps.jpg" alt="Silhouette & Corps" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" />
+                            <div class="absolute inset-0 bg-gradient-to-t from-black/85 via-black/30 to-transparent"></div>
+                            <div class="absolute top-4 left-4">
+                                <span class="gold-gradient text-white font-label-caps text-[9px] px-3.5 py-1.5 rounded-full font-bold tracking-widest uppercase shadow">
+                                    SCULPTURE CORPORELLE
+                                </span>
+                            </div>
+                            <div class="absolute bottom-4 left-4 right-4 text-white">
+                                <h3 class="font-display-lg text-2xl font-bold mb-1">Silhouette &amp; Corps</h3>
+                                <p class="font-body-md text-xs text-white/90 line-clamp-2 leading-relaxed mb-1">
+                                    Sculptes les contours, éliminer les surcharges graisseuses et retendre la peau.
+                                </p>
+                                <p class="text-[10px] text-gold font-medium tracking-wide">
+                                    Liposculpture Vaser HD, Abdominoplastie, Lifting Bras &amp; Cuisses, BBL.
+                                </p>
+                            </div>
+                        </div>
+                        <div class="p-5 flex items-center justify-between bg-ivory">
+                            <span class="font-label-caps text-[10px] text-primary font-bold tracking-wider uppercase">VOIR LES PROCEDURES</span>
+                            <span class="w-8 h-8 rounded-full gold-gradient text-white flex items-center justify-center font-bold text-sm shadow group-hover:scale-110 transition-transform">
+                                →
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Dynamic Category Filter Buttons Bar with Category Image Thumbnails -->
+            <div class="flex flex-wrap gap-3 justify-center mb-12 border-b border-gold/20 pb-8">
+                @if (categories != null)
+                {
+                    foreach (var cat in categories)
+                    {
+                        var catSlug = System.Text.RegularExpressions.Regex.Replace(cat.ToLower().Trim(), @"[^a-z0-9]+", "-");
+                        var iconImg = "/images/ch1.webp";
+                        if (cat.Contains("POITRINE", StringComparison.OrdinalIgnoreCase)) iconImg = "/images/ch4.jpg";
+                        else if (cat.Contains("SILHOUETTE", StringComparison.OrdinalIgnoreCase) || cat.Contains("CORPS", StringComparison.OrdinalIgnoreCase)) iconImg = "/images/silhouette_corps.jpg";
+
+                        <button onclick="filterSurgeries('@catSlug')" id="btn-@catSlug" class="surgery-tab px-6 py-3.5 font-label-caps text-xs tracking-widest bg-white border border-gold/30 text-primary hover:border-gold hover:text-gold transition-all shadow-sm uppercase font-bold flex items-center gap-2.5 rounded-full">
+                            <img src="@iconImg" alt="@cat" class="w-5 h-5 rounded-full object-cover border border-gold/40 flex-shrink-0" />
+                            <span>@cat</span>
+                        </button>
+                    }
+                }
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8" id="surgeries-grid">
+                @if (Model != null && Model.Any())
+                {
+                    foreach (var item in Model)
+                    {
+                        var catSlug = System.Text.RegularExpressions.Regex.Replace(item.Category.ToLower().Trim(), @"[^a-z0-9]+", "-");
+                        var img = item.ImageUrl;
+                        if (string.IsNullOrEmpty(img) || img == "/images/dr_slama_details.png")
+                        {
+                            if (item.Category.Contains("POITRINE", StringComparison.OrdinalIgnoreCase)) img = "/images/ch4.jpg";
+                            else if (item.Category.Contains("SILHOUETTE", StringComparison.OrdinalIgnoreCase) || item.Category.Contains("CORPS", StringComparison.OrdinalIgnoreCase)) img = "/images/silhouette_corps.jpg";
+                            else img = "/images/ch1.webp";
+                        }
+
+                        <a asp-controller="Home" asp-action="ProcedureDetail" asp-route-id="@item.Slug" class="surgery-card bg-white border border-gold/20 flex flex-col justify-between overflow-hidden group transition-all duration-500 hover:border-gold hover:shadow-xl hover:shadow-gold/10 hover:-translate-y-1 cursor-pointer rounded-2xl" data-category="@catSlug">
+                            <div class="relative aspect-[4/3] overflow-hidden bg-neutral-100 border-b border-gold/20">
+                                <img src="@img" alt="@item.Title" class="w-full h-full object-cover object-center transition-transform duration-500" />
+                                <div class="absolute top-4 left-4 z-10">
+                                    <span class="gold-gradient text-white font-label-caps text-[9px] px-3 py-1 font-bold tracking-widest uppercase shadow rounded-full">
+                                        @item.Category
+                                    </span>
+                                </div>
+                            </div>
+                            <div class="p-6 flex flex-col justify-between flex-1 space-y-4">
+                                <div>
+                                    <h3 class="font-display-lg text-xl font-bold text-primary group-hover:text-gold transition-colors mb-2">@item.Title</h3>
+                                    @if (!string.IsNullOrEmpty(item.Subtitle))
+                                    {
+                                        <p class="font-body-md text-xs text-neutral-600 line-clamp-2 leading-relaxed">@item.Subtitle</p>
+                                    }
+                                </div>
+
+                                <!-- Meta details badges -->
+                                <div class="grid grid-cols-2 gap-2 pt-2 border-t border-gold/15 text-[10px] text-primary/80 font-body-md">
+                                    @if (!string.IsNullOrEmpty(item.Anesthesie))
+                                    {
+                                        <div class="flex items-center gap-1.5 bg-ivory p-1.5 rounded border border-gold/20">
+                                            <span class="material-symbols-outlined text-gold text-xs">local_hospital</span>
+                                            <span class="truncate">@item.Anesthesie</span>
+                                        </div>
+                                    }
+                                    @if (!string.IsNullOrEmpty(item.Hospitalisation))
+                                    {
+                                        <div class="flex items-center gap-1.5 bg-ivory p-1.5 rounded border border-gold/20">
+                                            <span class="material-symbols-outlined text-gold text-xs">hotel</span>
+                                            <span class="truncate">@item.Hospitalisation</span>
+                                        </div>
+                                    }
+                                </div>
+
+                                <div class="flex items-center justify-between pt-2">
+                                    <span class="font-label-caps text-[10px] text-gold font-bold tracking-wider uppercase">DÉCOUVRIR LES DÉTAILS</span>
+                                    <span class="w-8 h-8 rounded-full border border-gold/30 flex items-center justify-center text-gold group-hover:bg-gold group-hover:text-white group-hover:border-gold transition-all">
+                                        →
+                                    </span>
+                                </div>
+                            </div>
+                        </a>
+                    }
+                }
+                else
+                {
+                    <div class="col-span-3 text-center py-12 text-gray-500 text-sm">
+                        Aucune procédure enregistrée pour le moment.
+                    </div>
+                }
+            </div>
+        </div>
+
+        <!-- ============================================ -->
+        <!-- BRANCH B: LES RÉSULTATS (AVANT / APRÈS) SECTION -->
+        <!-- ============================================ -->
+        <div id="section-results" class="hidden">
+            <div class="text-center max-w-3xl mx-auto mb-10">
+                <span class="font-label-caps text-[10px] tracking-[0.3em] text-gold font-bold block mb-2 uppercase">GALERIE DE RÉSULTATS AVANT / APRÈS (SOUS CODE)</span>
+                <h2 class="font-display-lg text-3xl md:text-5xl font-bold text-primary">Cas Réels de Chirurgie Esthétique</h2>
+                <p class="font-body-md text-primary/70 text-sm mt-2">Découvrez les transformations réelles réalisées par le Pr. Abdelfateh Slama à Sousse.</p>
+            </div>
+
+            <!-- PASSWORD PROTECTION ACCESS GATE -->
+            <div id="results-password-gate" class="max-w-2xl mx-auto my-8 p-8 md:p-12 bg-ivory border-2 border-gold/40 rounded-3xl shadow-2xl text-center space-y-6">
+                <div class="w-16 h-16 rounded-full bg-gold/15 border-2 border-gold/40 flex items-center justify-center text-gold mx-auto shadow-inner">
+                    <span class="material-symbols-outlined text-3xl">lock</span>
+                </div>
+                <div class="space-y-2">
+                    <span class="font-label-caps text-[10px] tracking-[0.3em] text-gold font-bold uppercase block">ACCÈS SÉCURISÉ &amp; CONFIDENTIEL</span>
+                    <h3 class="font-display-lg text-2xl md:text-3xl font-bold text-primary">Galerie Résultats Sous Code Médical</h3>
+                    <p class="font-body-md text-xs md:text-sm text-primary/75 max-w-lg mx-auto leading-relaxed">
+                        Conformément aux règles de déontologie médicale et pour le respect de la vie privée de nos patients, l'accès à la galerie Avant / Après nécessite la saisie du code secret d'accès.
+                    </p>
+                </div>
+
+                <form onsubmit="unlockResultsGallery(event)" class="max-w-md mx-auto space-y-4">
+                    <div class="relative">
+                        <input type="password" id="results-pass-input" placeholder="Entrez le code d'accès confidentiel..." class="w-full px-5 py-4 bg-white border border-gold/40 rounded-full font-body-md text-sm text-center tracking-widest text-primary focus:outline-none focus:border-gold focus:ring-2 focus:ring-gold/20 shadow-sm" required />
+                    </div>
+                    <div id="results-pass-error" class="hidden text-xs text-red-600 font-bold font-label-caps py-1">
+                        Code d'accès incorrect. Seuls les mots de passe autorisés déverrouillent la galerie.
+                    </div>
+                    <button type="submit" class="w-full gold-gradient text-white font-label-caps text-xs py-4 rounded-full font-bold tracking-widest hover:opacity-90 transition-all shadow-md flex items-center justify-center gap-2">
+                        <span class="material-symbols-outlined text-sm">key</span>
+                        DÉVERROUILLER LA GALERIE
+                    </button>
+                </form>
+
+                <div class="pt-4 border-t border-gold/20 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs">
+                    <span class="text-primary/70 font-body-md">Pas encore de code ?</span>
+                    <a href="https://wa.me/21673200000?text=Bonjour,%20je%20souhaite%20recevoir%20le%20code%20d'accès%20pour%20la%20galerie%20des%20résultats." target="_blank" class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-emerald-600 text-white font-label-caps text-[10px] font-bold tracking-wider hover:bg-emerald-700 transition-all shadow-sm">
+                        <span class="material-symbols-outlined text-sm">chat</span>
+                        OBTENIR LE CODE PAR WHATSAPP
+                    </a>
+                </div>
+            </div>
+
+            <!-- UNLOCKED GALLERY CONTAINER -->
+            <div id="results-gallery-content" class="hidden space-y-10">
+                <!-- Lock Status Badge -->
+                <div class="flex justify-between items-center bg-gold/10 border border-gold/30 px-6 py-3 rounded-2xl">
+                    <div class="flex items-center gap-2 text-gold font-label-caps text-xs font-bold">
+                        <span class="material-symbols-outlined text-sm">lock_open</span>
+                        <span>ACCÈS CONFIDENTIEL DÉVERROUILLÉ</span>
+                    </div>
+                    <button onclick="lockResultsGallery()" class="text-[10px] font-label-caps text-primary/60 hover:text-red-600 font-bold underline">
+                        VERROUILLER À NOUVEAU
+                    </button>
+                </div>
+
+                <!-- Results Sub-Category Filter (Visage, Poitrine, Silhouette) -->
+                <div class="flex flex-wrap gap-3 justify-center border-b border-gold/20 pb-8">
+                    <button onclick="filterResultsBranch('all')" id="res-btn-all" class="res-tab px-6 py-3 font-label-caps text-xs tracking-widest gold-gradient text-white font-bold transition-all shadow-md uppercase rounded-full">
+                        TOUS LES RÉSULTATS
+                    </button>
+                    <button onclick="filterResultsBranch('visage')" id="res-btn-visage" class="res-tab px-6 py-3 font-label-caps text-xs tracking-widest bg-white border border-gold/30 text-primary hover:border-gold hover:text-gold transition-all shadow-sm uppercase font-bold rounded-full">
+                        CHIRURGIE DU VISAGE
+                    </button>
+                    <button onclick="filterResultsBranch('poitrine')" id="res-btn-poitrine" class="res-tab px-6 py-3 font-label-caps text-xs tracking-widest bg-white border border-gold/30 text-primary hover:border-gold hover:text-gold transition-all shadow-sm uppercase font-bold rounded-full">
+                        CHIRURGIE DU SEIN (POITRINE)
+                    </button>
+                    <button onclick="filterResultsBranch('silhouette')" id="res-btn-silhouette" class="res-tab px-6 py-3 font-label-caps text-xs tracking-widest bg-white border border-gold/30 text-primary hover:border-gold hover:text-gold transition-all shadow-sm uppercase font-bold rounded-full">
+                        CHIRURGIE DE LA SILHOUETTE
+                    </button>
+                </div>
+
+            <!-- Results Grid with Interactive Before/After Sliders -->
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8" id="results-branch-grid">
+                <!-- Visage Case 1 -->
+                <div class="result-branch-card bg-white border border-gold/30 rounded-2xl overflow-hidden shadow-md group transition-all duration-300" data-cat="visage">
+                    <div class="relative aspect-[4/3] overflow-hidden bg-black/5 select-none ba-card-slider">
+                        <img src="/images/rhino_after.png" class="absolute inset-0 w-full h-full object-cover" alt="Après — Rhinoplastie" />
+                        <span class="absolute top-3 right-3 bg-primary text-white font-label-caps text-[8px] px-2 py-0.5 font-bold z-10 shadow">APRÈS</span>
+                        
+                        <img src="/images/rhino_before.png" class="ba-card-before absolute inset-0 w-full h-full object-cover z-10" style="clip-path: inset(0 50% 0 0);" alt="Avant — Rhinoplastie" />
+                        <span class="absolute top-3 left-3 bg-black/90 text-white font-label-caps text-[8px] px-2 py-0.5 font-bold z-20 shadow">AVANT</span>
+
+                        <div class="ba-card-handle absolute top-0 bottom-0 w-[2px] bg-white z-30 shadow-2xl flex items-center justify-center cursor-ew-resize" style="left: 50%;">
+                            <div class="w-6 h-6 rounded-full bg-white text-black flex items-center justify-center shadow-lg text-[10px] font-bold border border-black/20">
+                                ↔
+                            </div>
+                        </div>
+                        <span class="absolute bottom-3 left-1/2 -translate-x-1/2 bg-black/80 text-white font-label-caps text-[8px] px-2.5 py-1 z-20 shadow-md pointer-events-none">VISAGE</span>
+                    </div>
+                    <div class="p-5">
+                        <h4 class="font-display-lg text-lg font-bold mb-1 text-primary">Rhinoplastie Ultrasonique</h4>
+                        <p class="font-body-md text-xs text-primary/70 leading-relaxed mb-2">Correction de la bosse ostéo-cartilagineuse et harmonisation du profil sans hématome majeur par piezotome.</p>
+                    </div>
+                </div>
+
+                <!-- Visage Case 2 -->
+                <div class="result-branch-card bg-white border border-gold/30 rounded-2xl overflow-hidden shadow-md group transition-all duration-300" data-cat="visage">
+                    <div class="relative aspect-[4/3] overflow-hidden bg-black/5 select-none ba-card-slider">
+                        <img src="/images/facelift_after.png" class="absolute inset-0 w-full h-full object-cover" alt="Après — Deep Plane Facelift" />
+                        <span class="absolute top-3 right-3 bg-primary text-white font-label-caps text-[8px] px-2 py-0.5 font-bold z-10 shadow">APRÈS</span>
+                        
+                        <img src="/images/facelift_before.png" class="ba-card-before absolute inset-0 w-full h-full object-cover z-10" style="clip-path: inset(0 50% 0 0);" alt="Avant — Deep Plane Facelift" />
+                        <span class="absolute top-3 left-3 bg-black/90 text-white font-label-caps text-[8px] px-2 py-0.5 font-bold z-20 shadow">AVANT</span>
+
+                        <div class="ba-card-handle absolute top-0 bottom-0 w-[2px] bg-white z-30 shadow-2xl flex items-center justify-center cursor-ew-resize" style="left: 50%;">
+                            <div class="w-6 h-6 rounded-full bg-white text-black flex items-center justify-center shadow-lg text-[10px] font-bold border border-black/20">
+                                ↔
+                            </div>
+                        </div>
+                        <span class="absolute bottom-3 left-1/2 -translate-x-1/2 bg-black/80 text-white font-label-caps text-[8px] px-2.5 py-1 z-20 shadow-md pointer-events-none">VISAGE</span>
+                    </div>
+                    <div class="p-5">
+                        <h4 class="font-display-lg text-lg font-bold mb-1 text-primary">Lifting Cervico-Facial (Deep Plane)</h4>
+                        <p class="font-body-md text-xs text-primary/70 leading-relaxed mb-2">Redéfinition de l'ovale du visage et du cou avec repositionnement musculaire naturel.</p>
+                    </div>
+                </div>
+
+                <!-- Poitrine Case -->
+                <div class="result-branch-card bg-white border border-gold/30 rounded-2xl overflow-hidden shadow-md group transition-all duration-300" data-cat="poitrine">
+                    <div class="relative aspect-[4/3] overflow-hidden bg-black/5 select-none ba-card-slider">
+                        <img src="/images/injections_after.png" class="absolute inset-0 w-full h-full object-cover" alt="Après — Augmentation Mammaire" />
+                        <span class="absolute top-3 right-3 bg-primary text-white font-label-caps text-[8px] px-2 py-0.5 font-bold z-10 shadow">APRÈS</span>
+                        
+                        <img src="/images/injections_before.png" class="ba-card-before absolute inset-0 w-full h-full object-cover z-10" style="clip-path: inset(0 50% 0 0);" alt="Avant — Augmentation Mammaire" />
+                        <span class="absolute top-3 left-3 bg-black/90 text-white font-label-caps text-[8px] px-2 py-0.5 font-bold z-20 shadow">AVANT</span>
+
+                        <div class="ba-card-handle absolute top-0 bottom-0 w-[2px] bg-white z-30 shadow-2xl flex items-center justify-center cursor-ew-resize" style="left: 50%;">
+                            <div class="w-6 h-6 rounded-full bg-white text-black flex items-center justify-center shadow-lg text-[10px] font-bold border border-black/20">
+                                ↔
+                            </div>
+                        </div>
+                        <span class="absolute bottom-3 left-1/2 -translate-x-1/2 bg-black/80 text-white font-label-caps text-[8px] px-2.5 py-1 z-20 shadow-md pointer-events-none">POITRINE</span>
+                    </div>
+                    <div class="p-5">
+                        <h4 class="font-display-lg text-lg font-bold mb-1 text-primary">Augmentation Mammaire Sur-Mesure</h4>
+                        <p class="font-body-md text-xs text-primary/70 leading-relaxed mb-2">Restauration des galbes naturels et galbe harmonieux du décolleté.</p>
+                    </div>
+                </div>
+
+                <!-- Silhouette Case -->
+                <div class="result-branch-card bg-white border border-gold/30 rounded-2xl overflow-hidden shadow-md group transition-all duration-300" data-cat="silhouette">
+                    <div class="relative aspect-[4/3] overflow-hidden bg-black/5 select-none ba-card-slider">
+                        <img src="/images/rhino_after.png" class="absolute inset-0 w-full h-full object-cover" alt="Après — Liposculpture Vaser" />
+                        <span class="absolute top-3 right-3 bg-primary text-white font-label-caps text-[8px] px-2 py-0.5 font-bold z-10 shadow">APRÈS</span>
+                        
+                        <img src="/images/rhino_before.png" class="ba-card-before absolute inset-0 w-full h-full object-cover z-10" style="clip-path: inset(0 50% 0 0);" alt="Avant — Liposculpture Vaser" />
+                        <span class="absolute top-3 left-3 bg-black/90 text-white font-label-caps text-[8px] px-2 py-0.5 font-bold z-20 shadow">AVANT</span>
+
+                        <div class="ba-card-handle absolute top-0 bottom-0 w-[2px] bg-white z-30 shadow-2xl flex items-center justify-center cursor-ew-resize" style="left: 50%;">
+                            <div class="w-6 h-6 rounded-full bg-white text-black flex items-center justify-center shadow-lg text-[10px] font-bold border border-black/20">
+                                ↔
+                            </div>
+                        </div>
+                        <span class="absolute bottom-3 left-1/2 -translate-x-1/2 bg-black/80 text-white font-label-caps text-[8px] px-2.5 py-1 z-20 shadow-md pointer-events-none">SILHOUETTE</span>
+                    </div>
+                    <div class="p-5">
+                        <h4 class="font-display-lg text-lg font-bold mb-1 text-primary">Liposculpture Vaser HD</h4>
+                        <p class="font-body-md text-xs text-primary/70 leading-relaxed mb-2">Sculpture tridimensionnelle des contours abdominaux et taille affinée.</p>
+                    </div>
+                </div>
+
+                <!-- Visage Case 3 -->
+                <div class="result-branch-card bg-white border border-gold/30 rounded-2xl overflow-hidden shadow-md group transition-all duration-300" data-cat="visage">
+                    <div class="relative aspect-[4/3] overflow-hidden bg-black/5 select-none ba-card-slider">
+                        <img src="/images/bleph_after.png" class="absolute inset-0 w-full h-full object-cover" alt="Après — Blépharoplastie" />
+                        <span class="absolute top-3 right-3 bg-primary text-white font-label-caps text-[8px] px-2 py-0.5 font-bold z-10 shadow">APRÈS</span>
+                        
+                        <img src="/images/bleph_before.png" class="ba-card-before absolute inset-0 w-full h-full object-cover z-10" style="clip-path: inset(0 50% 0 0);" alt="Avant — Blépharoplastie" />
+                        <span class="absolute top-3 left-3 bg-black/90 text-white font-label-caps text-[8px] px-2 py-0.5 font-bold z-20 shadow">AVANT</span>
+
+                        <div class="ba-card-handle absolute top-0 bottom-0 w-[2px] bg-white z-30 shadow-2xl flex items-center justify-center cursor-ew-resize" style="left: 50%;">
+                            <div class="w-6 h-6 rounded-full bg-white text-black flex items-center justify-center shadow-lg text-[10px] font-bold border border-black/20">
+                                ↔
+                            </div>
+                        </div>
+                        <span class="absolute bottom-3 left-1/2 -translate-x-1/2 bg-black/80 text-white font-label-caps text-[8px] px-2.5 py-1 z-20 shadow-md pointer-events-none">VISAGE</span>
+                    </div>
+                    <div class="p-5">
+                        <h4 class="font-display-lg text-lg font-bold mb-1 text-primary">Blépharoplastie 4 Paupières</h4>
+                        <p class="font-body-md text-xs text-primary/70 leading-relaxed mb-2">Rajeunissement complet du regard par exérèse des poches graisseuses.</p>
+                    </div>
+                </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</section>
+
+<!-- ============================================ -->
+<!-- 3. SURGICAL PROTOCOL JOURNEY -->
+<!-- ============================================ -->
+<section class="py-24 px-6 md:px-margin-desktop bg-white border-y border-gold/20">
+    <div class="max-w-container-max mx-auto">
+        <div class="text-center max-w-3xl mx-auto mb-16">
+            <span class="font-label-caps text-[10px] tracking-[0.3em] text-gold font-bold block mb-3 uppercase">ACCOMPAGNEMENT SÉCURISÉ</span>
+            <h2 class="font-display-lg text-4xl md:text-6xl font-bold text-primary mb-4">Le Parcours Chirurgical d'Excellence</h2>
+            <p class="font-body-md text-primary/70 text-sm md:text-base">De la première consultation 3D au contrôle final à Sousse.</p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-6">
+            <!-- Step 1 -->
+            <div class="bg-white p-8 border border-gold/20 flex flex-col justify-between shadow-sm hover:border-gold transition-colors">
+                <div>
+                    <span class="font-display-lg text-4xl font-black text-gold/50 block mb-4">01</span>
+                    <h4 class="font-headline-sm text-base font-bold text-primary mb-2">Diagnostic & Simulation 3D</h4>
+                    <p class="font-body-md text-xs text-primary/70 leading-relaxed">
+                        Écoute attentive, examen morphologique et modélisation tridimensionnelle Crisalix en cabinet médical.
+                    </p>
+                </div>
+                <div class="w-12 h-[2px] gold-line mt-6"></div>
+            </div>
+
+            <!-- Step 2 -->
+            <div class="bg-white p-8 border border-gold/20 flex flex-col justify-between shadow-sm hover:border-gold transition-colors">
+                <div>
+                    <span class="font-display-lg text-4xl font-black text-gold/50 block mb-4">02</span>
+                    <h4 class="font-headline-sm text-base font-bold text-primary mb-2">Bilan Pré-Opératoire</h4>
+                    <p class="font-body-md text-xs text-primary/70 leading-relaxed">
+                        Consultation avec l'anesthésiste, bilans sanguins complets et validation du consentement éclairé.
+                    </p>
+                </div>
+                <div class="w-12 h-[2px] gold-line mt-6"></div>
+            </div>
+
+            <!-- Step 3 -->
+            <div class="bg-white p-8 border border-gold/20 flex flex-col justify-between shadow-sm hover:border-gold transition-colors">
+                <div>
+                    <span class="font-display-lg text-4xl font-black text-gold/50 block mb-4">03</span>
+                    <h4 class="font-headline-sm text-base font-bold text-primary mb-2">Intervention en Bloc Agréé</h4>
+                    <p class="font-body-md text-xs text-primary/70 leading-relaxed">
+                        Chirurgie réalisée dans une clinique privée d'excellence à Sousse sous surveillance médicale continue.
+                    </p>
+                </div>
+                <div class="w-12 h-[2px] gold-line mt-6"></div>
+            </div>
+
+            <!-- Step 4 -->
+            <div class="bg-white p-8 border border-gold/20 flex flex-col justify-between shadow-sm hover:border-gold transition-colors">
+                <div>
+                    <span class="font-display-lg text-4xl font-black text-gold/50 block mb-4">04</span>
+                    <h4 class="font-headline-sm text-base font-bold text-primary mb-2">Suivi Personnalisé 24/7</h4>
+                    <p class="font-body-md text-xs text-primary/70 leading-relaxed">
+                        Contrôles post-opératoires rigoureux par le Dr. Slama et ligne d'assistance directe dédiée.
+                    </p>
+                </div>
+                <div class="w-12 h-[2px] gold-line mt-6"></div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ============================================ -->
+<!-- 4. CALL TO ACTION (HARMONIZED CRYSTAL GLASS DESIGN) -->
+<!-- ============================================ -->
+<section class="relative py-32 md:py-44 px-6 md:px-margin-desktop text-white text-center overflow-hidden bg-black border-t border-gold/30">
+    <!-- Fully Visible Clinic Office Background Image -->
+    <div class="absolute inset-0 z-0">
+        <img src="/images/office.png" alt="Cabinet Dr Slama Sousse" class="w-full h-full object-cover object-center opacity-95 scale-100 transition-transform duration-[10s] hover:scale-105" />
+        <div class="absolute inset-0 bg-black/15"></div>
+    </div>
+
+    <!-- Crystal Transparent Floating Card -->
+    <div class="relative z-10 max-w-3xl mx-auto bg-black/25 backdrop-blur-[2px] p-8 md:p-12 border border-white/30 shadow-2xl rounded-2xl">
+        <span class="font-label-caps text-[10px] tracking-[0.4em] text-white block mb-6 uppercase border border-white/40 inline-block px-4 py-1.5 bg-black/30 backdrop-blur-sm font-bold drop-shadow">
+            CONSULTATION PRIVÉE • SOUSSE
+        </span>
+        <h2 class="font-display-lg text-4xl md:text-6xl font-bold text-white mb-6 leading-tight drop-shadow-[0_3px_12px_rgba(0,0,0,0.85)]">
+            Planifiez votre projet chirurgical.
+        </h2>
+        <p class="font-body-lg text-white mb-10 text-base md:text-lg leading-relaxed max-w-xl mx-auto drop-shadow-[0_2px_8px_rgba(0,0,0,0.85)] font-medium">
+            Bénéficiez d'une première consultation confidentielle et d'un diagnostic tridimensionnel en cabinet médical.
+        </p>
+
+        <div class="flex flex-col sm:flex-row gap-5 justify-center items-center">
+            <a asp-controller="Home" asp-action="Contact" class="bg-white text-primary font-label-caps text-[11px] tracking-widest px-10 py-5 hover:bg-neutral-200 transition-all duration-300 w-full sm:w-auto text-center shadow-2xl font-bold">
+                CONTACTEZ-NOUS
+            </a>
+            <a href="tel:+21673200000" class="border border-white/60 bg-black/30 backdrop-blur-sm text-white font-label-caps text-[11px] tracking-widest px-10 py-5 hover:bg-white hover:text-primary transition-all duration-300 w-full sm:w-auto text-center flex items-center justify-center gap-3 font-bold shadow-lg">
+                <span class="material-symbols-outlined text-sm">phone</span>
+                +216 73 200 000
+            </a>
+        </div>
+    </div>
+</section>
+
+@section Scripts {
+<script>
+    function filterSurgeries(category) {
+        // Update active tab buttons
+        document.querySelectorAll('.surgery-tab').forEach(btn => {
+            btn.classList.remove('gold-gradient', 'text-white', 'shadow-md');
+            btn.classList.add('bg-white', 'text-primary', 'border-gold/30', 'shadow-sm');
+        });
+        const activeBtn = document.getElementById('btn-' + category);
+        if (activeBtn) {
+            activeBtn.classList.remove('bg-white', 'text-primary', 'border-gold/30', 'shadow-sm');
+            activeBtn.classList.add('gold-gradient', 'text-white', 'shadow-md');
+        }
+
+        // Filter cards smoothly
+        const cards = document.querySelectorAll('.surgery-card');
+        cards.forEach(card => {
+            const cardCat = (card.dataset.category || '').toLowerCase();
+            const targetCat = (category || '').toLowerCase();
+            
+            let match = false;
+            if (targetCat === 'all') {
+                match = true;
+            } else if (targetCat === 'poitrine' || targetCat === 'sein' || targetCat === 'mammaire') {
+                match = cardCat.includes('poitrine') || cardCat.includes('sein') || cardCat.includes('mammaire');
+            } else if (targetCat === 'visage-cou' || targetCat === 'visage') {
+                match = cardCat.includes('visage') || cardCat.includes('cou');
+            } else if (targetCat === 'silhouette' || targetCat === 'corps') {
+                match = cardCat.includes('silhouette') || cardCat.includes('corps');
+            } else {
+                match = cardCat === targetCat || cardCat.includes(targetCat) || targetCat.includes(cardCat);
+            }
+
+            if (match) {
+                card.style.display = 'flex';
+            } else {
+                card.style.display = 'none';
+            }
+        });
+
+        // Smooth scroll focus down to grid when category card is clicked
+        const grid = document.getElementById('surgeries-grid');
+        if (grid && category !== 'all') {
+            grid.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        }
+    }
+
+    function switchMainTab(tab) {
+        const btnOps = document.getElementById('tab-btn-operations');
+        const btnRes = document.getElementById('tab-btn-results');
+        const secOps = document.getElementById('section-operations');
+        const secRes = document.getElementById('section-results');
+
+        if (tab === 'operations') {
+            btnOps.className = 'px-6 md:px-8 py-3.5 rounded-full font-label-caps text-[11px] md:text-xs tracking-widest font-bold gold-gradient text-white shadow-md transition-all duration-300 flex items-center gap-2 whitespace-nowrap';
+            btnRes.className = 'px-6 md:px-8 py-3.5 rounded-full font-label-caps text-[11px] md:text-xs tracking-widest font-bold text-slate-700 hover:text-gold transition-all duration-300 flex items-center gap-2 whitespace-nowrap';
+            secOps.classList.remove('hidden');
+            secRes.classList.add('hidden');
+        } else {
+            btnRes.className = 'px-6 md:px-8 py-3.5 rounded-full font-label-caps text-[11px] md:text-xs tracking-widest font-bold gold-gradient text-white shadow-md transition-all duration-300 flex items-center gap-2 whitespace-nowrap';
+            btnOps.className = 'px-6 md:px-8 py-3.5 rounded-full font-label-caps text-[11px] md:text-xs tracking-widest font-bold text-slate-700 hover:text-gold transition-all duration-300 flex items-center gap-2 whitespace-nowrap';
+            secRes.classList.remove('hidden');
+            secOps.classList.add('hidden');
+            initMiniCardSliders();
+        }
+    }
+
+    function filterResultsBranch(category) {
+        document.querySelectorAll('.res-tab').forEach(btn => {
+            btn.classList.remove('gold-gradient', 'text-white', 'shadow-md');
+            btn.classList.add('bg-white', 'text-primary', 'border-gold/30', 'shadow-sm');
+        });
+        const activeBtn = document.getElementById('res-btn-' + category);
+        if (activeBtn) {
+            activeBtn.classList.remove('bg-white', 'text-primary', 'border-gold/30', 'shadow-sm');
+            activeBtn.classList.add('gold-gradient', 'text-white', 'shadow-md');
+        }
+
+        document.querySelectorAll('.result-branch-card').forEach(card => {
+            const cat = card.dataset.cat;
+            if (category === 'all' || cat === category) {
+                card.style.display = 'block';
+            } else {
+                card.style.display = 'none';
+            }
+        });
+    }
+
+    function initMiniCardSliders() {
+        const sliders = document.querySelectorAll('.ba-card-slider');
+        sliders.forEach(slider => {
+            const beforeImg = slider.querySelector('.ba-card-before');
+            const handle = slider.querySelector('.ba-card-handle');
+            if (!beforeImg || !handle) return;
+
+            let isDragging = false;
+
+            function updatePosition(x) {
+                const rect = slider.getBoundingClientRect();
+                let offsetX = x - rect.left;
+                if (offsetX < 0) offsetX = 0;
+                if (offsetX > rect.width) offsetX = rect.width;
+                const percentage = (offsetX / rect.width) * 100;
+                
+                beforeImg.style.clipPath = `inset(0 ${100 - percentage}% 0 0)`;
+                handle.style.left = `${percentage}%`;
+            }
+
+            slider.addEventListener('mousedown', (e) => {
+                isDragging = true;
+                updatePosition(e.clientX);
+            });
+
+            window.addEventListener('mousemove', (e) => {
+                if (isDragging) updatePosition(e.clientX);
+            });
+
+            window.addEventListener('mouseup', () => { isDragging = false; });
+
+            slider.addEventListener('touchstart', (e) => {
+                isDragging = true;
+                if (e.touches.length > 0) updatePosition(e.touches[0].clientX);
+            });
+
+            window.addEventListener('touchmove', (e) => {
+                if (isDragging && e.touches.length > 0) updatePosition(e.touches[0].clientX);
+            });
+
+            window.addEventListener('touchend', () => { isDragging = false; });
+        });
+    }
+
+    function unlockResultsGallery(e) {
+        if (e) e.preventDefault();
+        const input = document.getElementById('results-pass-input');
+        const error = document.getElementById('results-pass-error');
+        const rawVal = (input ? input.value : '').trim();
+        const val = rawVal.toLowerCase();
+
+        // Strong authorized medical passwords
+        const validCodes = [
+            'slama-vip-2026!',
+            'afs-resultats-2026#',
+            'clinique-slama-2026',
+            'slama2026'
+        ];
+
+        if (validCodes.includes(val)) {
+            if (error) error.classList.add('hidden');
+            const gate = document.getElementById('results-password-gate');
+            const content = document.getElementById('results-gallery-content');
+            if (gate) gate.classList.add('hidden');
+            if (content) content.classList.remove('hidden');
+            setTimeout(() => { initMiniCardSliders(); }, 100);
+        } else {
+            if (error) {
+                error.textContent = "❌ Code d'accès confidentiel incorrect. Veuillez saisir un code valide ou contacter le secrétariat.";
+                error.classList.remove('hidden');
+            }
+        }
+    }
+
+    function lockResultsGallery() {
+        const gate = document.getElementById('results-password-gate');
+        const content = document.getElementById('results-gallery-content');
+        if (gate) gate.classList.remove('hidden');
+        if (content) content.classList.add('hidden');
+    }
+
+    // No session restore — password required on every page load
+    function checkResultsUnlockStatus() {}
+
+    document.addEventListener('DOMContentLoaded', () => {
+        checkResultsUnlockStatus();
+        initMiniCardSliders();
+    });
+</script>
+}

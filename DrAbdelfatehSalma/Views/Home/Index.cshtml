@@ -1,0 +1,1294 @@
+@{
+    Layout = "_Layout";
+    ViewData["Title"] = "Accueil";
+}
+
+<!-- BEGIN: HeroSection -->
+<section class="relative min-h-screen lg:h-screen flex items-center pt-20 md:pt-24 pb-12 overflow-hidden bg-ivory">
+    <!-- Right-aligned Continuous Hero Video -->
+    <div class="absolute right-0 top-0 w-full md:w-1/2 h-full z-0 overflow-hidden bg-black/5">
+        <!-- Soft High-Fashion Gradient Transition from Left White to Right Video -->
+        <div class="absolute inset-y-0 left-0 w-24 md:w-48 bg-gradient-to-r from-ivory via-ivory/70 to-transparent z-20 pointer-events-none"></div>
+
+        <!-- Video Background Container -->
+        <div class="relative w-full h-full">
+            <video id="hero-main-video" autoplay loop muted playsinline webkit-playsinline preload="auto" poster="/images/dr_slama_operating_suite.png" class="w-full h-full object-cover">
+                <source src="/videos/homeslidevideo.mp4" type="video/mp4"/>
+            </video>
+        </div>
+    </div>
+    
+    <div class="relative z-30 w-full px-6 md:px-margin-desktop max-w-container-max mx-auto flex items-center my-auto">
+        <div class="w-full md:w-7/12 lg:w-6/12 space-y-5 my-auto">
+
+            <!-- Big Signature Doctor Name -->
+            <h1 class="font-display-lg text-4xl sm:text-6xl md:text-[75px] lg:text-[85px] leading-[0.9] text-primary tracking-tight font-black">
+                Dr Abdelfateh<br/>
+                <span class="font-light italic text-gold tracking-normal">SLAMA</span>
+            </h1>
+
+            <!-- Medical Title & Sub-Specialties -->
+            <div class="space-y-1">
+                <h2 class="font-display-lg text-2xl sm:text-3xl text-gold font-normal">
+                    Professeur et Chef de Service
+                </h2>
+                <p class="font-label-caps text-xs sm:text-sm font-bold tracking-[0.12em] text-primary uppercase">
+                    CHIRURGIE ESTHÉTIQUE — CHIRURGIE DE LA FACE
+                </p>
+            </div>
+
+            <!-- Quote Box with Gold Left Border -->
+            <div class="border-l-2 border-gold pl-4 sm:pl-5 py-1 max-w-xl">
+                <p class="font-body-md text-xs sm:text-sm text-primary/80 italic leading-relaxed">
+                    "L'excellence chirurgicale au service de l'harmonie naturelle. Une expertise médicale universitaire et un accompagnement sur-mesure."
+                </p>
+                <span class="font-label-caps text-[9px] sm:text-[9.5px] font-bold text-gold tracking-widest uppercase block mt-2">
+                    ANCIEN INTERNE DES HÔPITAUX DE FRANCE • LILLE
+                </span>
+            </div>
+
+            <!-- Dual Action Pill Buttons -->
+            <div class="flex flex-col sm:flex-row gap-4 items-stretch sm:items-center pt-2">
+                <a asp-controller="Home" asp-action="Contact" class="bg-[#c2a878] hover:bg-[#a89060] text-white px-8 py-4 rounded-full font-label-caps text-[11px] tracking-widest font-bold shadow-md hover:shadow-lg transition-all text-center flex items-center justify-center gap-2">
+                    <span class="material-symbols-outlined text-base">calendar_month</span>
+                    PRENDRE RENDEZ-VOUS
+                </a>
+                <a asp-controller="Home" asp-action="Chirurgies" class="bg-white hover:bg-slate-50 border border-slate-300 text-primary px-8 py-4 rounded-full font-label-caps text-[11px] tracking-widest font-bold shadow-xs hover:shadow-sm transition-all text-center flex items-center justify-center gap-2">
+                    NOS INTERVENTIONS →
+                </a>
+            </div>
+
+            <!-- Bottom Meta Footprint -->
+            <div class="flex flex-wrap items-center gap-4 sm:gap-6 text-primary/70 font-body-md text-xs pt-3">
+                <span class="flex items-center gap-1.5">
+                    <span class="w-1.5 h-1.5 rounded-full bg-gold"></span>
+                    Cabinet Privé à Sousse, Tunisie
+                </span>
+                <span class="text-slate-400">•</span>
+                <a href="tel:+21673200000" class="hover:text-gold transition-colors flex items-center gap-1.5 font-medium">
+                    <span class="material-symbols-outlined text-xs text-gold">phone</span>
+                    +216 73 200 000
+                </a>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- Elegant Vertical Detail -->
+    <div class="absolute bottom-12 right-12 hidden md:flex flex-col items-center gap-8 z-20">
+        <span class="font-label-caps text-[9px] tracking-[0.5em] uppercase text-primary/60 rotate-180 drop-shadow-sm" style="writing-mode: vertical-rl;">SCROLL</span>
+        <div class="h-24 w-[1px] bg-primary/30 relative overflow-hidden">
+            <div class="absolute top-0 left-0 w-full h-full bg-primary animate-scroll-line"></div>
+        </div>
+    </div>
+</section>
+<!-- END: HeroSection -->
+
+<!-- BEGIN: LePraticien (Two Contrasting Sections Layout) -->
+<section class="relative z-30 py-16 md:py-24 bg-white border-b border-gold/20" id="about">
+    <div class="max-w-container-max mx-auto px-6 md:px-margin-desktop space-y-12 md:space-y-16">
+        
+        <!-- SECTION 1: MINIMALIST MAGAZINE SPLIT (Photo Left, Serif Quote Right) -->
+        <div class="bg-white rounded-3xl border border-gold/20 p-6 md:p-8 shadow-sm">
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-8 items-center">
+                
+                <!-- Left Side: Doctor Portrait Showcase (5 Cols, balanced medium size) -->
+                <div class="lg:col-span-5 max-w-[420px] mx-auto w-full relative group">
+                    <div class="aspect-[4/5] max-h-[460px] w-full rounded-2xl overflow-hidden border border-gold/35 shadow-md bg-slate-50 relative">
+                        <img alt="Pr. Abdelfateh Slama" class="w-full h-full object-cover object-top group-hover:scale-105 transition-transform duration-700" src="/images/drpic.jpg"/>
+                    </div>
+                    
+                    <!-- Floating Caption Badge -->
+                    <div class="absolute -bottom-3 left-4 bg-white border border-gold/30 px-3.5 py-1.5 rounded-lg shadow-md flex items-center gap-2">
+                        <span class="w-2 h-2 rounded-full bg-gold"></span>
+                        <span class="font-label-caps text-[9px] text-primary font-bold tracking-wider uppercase">PR. ABDELFATEH SLAMA</span>
+                    </div>
+                </div>
+
+                <!-- Right Side: Large Serif Quote & Narrative (7 Cols) -->
+                <div class="lg:col-span-7 space-y-4">
+                    <div class="inline-flex items-center gap-2 text-gold font-label-caps text-[11px] font-bold tracking-[0.2em] uppercase">
+                        <span class="w-2 h-2 rounded-full bg-gold"></span>
+                        LA VISION ESTHÉTIQUE &amp; PHILOSOPHIE
+                    </div>
+
+                    <!-- Main Statement Quote -->
+                    <h2 class="font-display-lg text-lg sm:text-xl md:text-2xl font-bold text-primary italic leading-snug border-l-3 border-gold pl-4">
+                        "Le visage et le corps sont considérés comme une œuvre d’art globale. L’objectif de la chirurgie esthétique est de retrouver la meilleure version de soi même avec un équilibre et une confiance chaque matin devant le miroir."
+                    </h2>
+
+                    <!-- Medical Expertise Text -->
+                    <p class="font-body-md text-primary/80 text-sm leading-relaxed">
+                        Le Pr SLAMA vous propose une expertise médicale en chirurgie réparatrice et esthétique allant du diagnostic précis des anomalies jusqu’à la chirurgie avec ses indications, ses techniques et ses résultats.
+                    </p>
+
+                    <!-- Highlight Quote Box: First Consultation Commitment -->
+                    <div class="p-4 rounded-xl bg-ivory border border-gold/30 shadow-xs space-y-1">
+                        <span class="font-label-caps text-gold text-[9px] font-bold tracking-wider uppercase block">
+                            ✦ L'OBJECTIF DE LA 1ÈRE CONSULTATION
+                        </span>
+                        <p class="font-body-md text-xs sm:text-sm text-primary/90 italic leading-relaxed">
+                            "Lors de la 1ère consultation, notre objectif principal est de définir votre demande et comprendre votre attente, afin de choisir une solution personnalisée qui donne le meilleur résultat."
+                        </p>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- SECTION 2: MODERN ASYMMETRIC BENTO GRID -->
+        <div class="space-y-4 relative">
+            
+            <!-- TOP BENTO ROW: Main Bio (7 Cols) + Portrait Spotlight (5 Cols) -->
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-4 items-stretch">
+                
+                <!-- Bento Tile A: Main Doctor Biography & Credentials (7 Cols) -->
+                <div class="lg:col-span-7 bg-ivory rounded-3xl p-6 md:p-8 border border-gold/30 shadow-sm flex flex-col justify-between space-y-4">
+                    <div>
+                        <div class="flex items-center gap-2 mb-2">
+                            <span class="w-2 h-2 rounded-full bg-gold"></span>
+                            <span class="font-label-caps text-gold text-[11px] font-bold tracking-[0.2em] uppercase">LE CHIRURGIEN SPÉCIALISTE</span>
+                        </div>
+                        
+                        <h3 class="font-display-lg text-2xl sm:text-3xl font-bold text-primary mb-1">
+                            Pr. Abdelfateh Slama
+                        </h3>
+                        <p class="font-headline-sm text-[11px] text-gold font-bold tracking-widest uppercase mb-4">
+                            Chirurgien Esthétique à Sousse • Tunisie
+                        </p>
+
+                        <div class="space-y-2 text-primary/80 font-body-md text-xs sm:text-sm leading-relaxed">
+                            <p class="font-medium text-primary">
+                                Le Pr SLAMA est un chirurgien esthétique à Sousse - Tunisie. Il est spécialiste dans la chirurgie de la face et qualifié en chirurgie réparatrice et esthétique par le Collège Français en 2005.
+                            </p>
+                            <p>
+                                Grâce à ses diplômes tunisiens et français et des années de formation au sein des plus grands centres hospitaliers et universitaires en Tunisie et en France, le Pr SLAMA a forgé une grande expérience, depuis les années 2000, et une expertise solide dans les domaines de la chirurgie esthétique, réparatrice et du visage.
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="pt-2 flex flex-wrap items-center gap-2">
+                        <span class="px-3 py-1 rounded-full bg-white border border-gold/30 text-gold font-label-caps text-[9px] font-bold tracking-wider uppercase shadow-xs">
+                            🎓 COLLÈGE FRANÇAIS 2005
+                        </span>
+                        <span class="px-3 py-1 rounded-full bg-white border border-gold/30 text-primary/80 font-label-caps text-[9px] font-bold tracking-wider uppercase shadow-xs">
+                            📍 SOUSSE • TUNISIE
+                        </span>
+                    </div>
+                </div>
+
+                <!-- Bento Tile B: Surgeon at Work Spotlight (5 Cols) -->
+                <div class="lg:col-span-5 bg-white rounded-3xl p-2.5 border border-gold/30 shadow-sm relative min-h-[300px] group overflow-hidden">
+                    <div class="w-full h-full rounded-2xl overflow-hidden relative">
+                        <img alt="Pr. Slama au bloc opératoire" class="w-full h-full object-cover object-top group-hover:scale-105 transition-transform duration-700" src="/images/dr_operating_real.png"/>
+                        
+                        <div class="absolute bottom-3 left-3 right-3 bg-white/95 backdrop-blur-md p-2.5 rounded-xl border border-gold/30 shadow-md text-center">
+                            <span class="font-label-caps text-[8px] text-gold font-bold uppercase tracking-wider block">EXCELLENCE &amp; PRÉCISION AU BLOC</span>
+                            <span class="font-body-md text-[11px] text-primary font-bold">Chirurgie Plastique &amp; Esthétique</span>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- BOTTOM BENTO ROW: 3 Highlight Tiles (4 Cols / 4 Cols / 4 Cols) -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                
+                <!-- Tile 1: Qualifications & Stats -->
+                <div class="bg-white rounded-3xl p-5 border border-gold/25 shadow-xs hover:border-gold transition-all space-y-2">
+                    <div class="w-8 h-8 rounded-xl bg-ivory border border-gold/30 flex items-center justify-center">
+                        <span class="material-symbols-outlined text-gold text-lg">workspace_premium</span>
+                    </div>
+                    <h4 class="font-label-caps text-[10px] font-bold text-primary uppercase tracking-wider">EXPÉRIENCE &amp; QUALIFICATION</h4>
+                    <p class="font-body-md text-[11px] text-primary/70 leading-relaxed">
+                        Qualifié par le <strong>Collège Français (2005)</strong> et formé dans les CHU de Tunisie et de France depuis 2000.
+                    </p>
+                </div>
+
+                <!-- Tile 2: Active Memberships (STCE & ISAPS) -->
+                <div class="bg-white rounded-3xl p-5 border border-gold/25 shadow-xs hover:border-gold transition-all space-y-2">
+                    <div class="w-8 h-8 rounded-xl bg-ivory border border-gold/30 flex items-center justify-center">
+                        <span class="material-symbols-outlined text-gold text-lg">groups</span>
+                    </div>
+                    <h4 class="font-label-caps text-[10px] font-bold text-primary uppercase tracking-wider">MEMBRE ACTIF</h4>
+                    <div class="space-y-1 text-[11px]">
+                        <div class="flex items-center gap-1.5 text-primary/80">
+                            <span class="w-1.5 h-1.5 rounded-full bg-gold"></span>
+                            <span><strong>STCE</strong> (Société Tunisienne de Chirurgie Esthétique)</span>
+                        </div>
+                        <div class="flex items-center gap-1.5 text-primary/80">
+                            <span class="w-1.5 h-1.5 rounded-full bg-gold"></span>
+                            <span><strong>ISAPS</strong> (International Society of Aesthetic Surgery)</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Tile 3: Direct Actions Bar -->
+                <div class="bg-ivory rounded-3xl p-5 border border-gold/30 shadow-xs flex flex-col justify-between space-y-3">
+                    <div>
+                        <div class="w-8 h-8 rounded-xl bg-white border border-gold/30 flex items-center justify-center mb-2">
+                            <span class="material-symbols-outlined text-gold text-lg">calendar_month</span>
+                        </div>
+                        <h4 class="font-label-caps text-[10px] font-bold text-primary uppercase tracking-wider mb-0.5">CONSULTATION &amp; CONTACT</h4>
+                        <p class="font-body-md text-[11px] text-primary/70">Prenez rendez-vous directement avec le Pr. Slama.</p>
+                    </div>
+                    <div class="flex items-center gap-2">
+                        <a asp-controller="Home" asp-action="About" class="flex-1 gold-gradient text-white py-2 px-3 rounded-full font-label-caps text-[10px] font-bold tracking-wider shadow hover:opacity-90 transition-all text-center block">
+                            PARCOURS →
+                        </a>
+                        <a asp-controller="Home" asp-action="Contact" class="flex-1 bg-white border border-gold/40 text-primary py-2 px-3 rounded-full font-label-caps text-[10px] font-bold tracking-wider transition-all text-center block hover:border-gold">
+                            RDV
+                        </a>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+</section>
+<!-- END: LePraticien -->
+
+<!-- BEGIN: ServicesBentoGrid (Clean 4-Card Grid Light Ivory Theme) -->
+<section class="bg-ivory text-primary py-28 border-y border-gold/20 relative overflow-hidden">
+    
+    <div class="px-6 md:px-margin-desktop max-w-container-max mx-auto relative z-10">
+        
+        <!-- Header & Intro Section: Refined Medical Layout -->
+        <div class="flex flex-col md:flex-row justify-between items-start md:items-center mb-16 gap-8 pb-10 border-b border-gold/15">
+            <div class="max-w-2xl">
+                <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-gold/10 border border-gold/25 mb-4">
+                    <span class="w-2 h-2 rounded-full bg-gold animate-pulse"></span>
+                    <span class="font-label-caps text-gold tracking-[0.3em] text-[10px] uppercase font-bold">EXCELLENCE &amp; HAUTE CHIRURGIE</span>
+                </div>
+                <h2 class="font-display-lg text-4xl md:text-6xl text-primary font-bold leading-tight">
+                    L'Art de la Transformation
+                </h2>
+                <p class="font-body-md text-primary/75 text-sm md:text-base leading-relaxed mt-3">
+                    Des protocoles chirurgicaux et esthétiques d'exception alliant précision médicale et préservation absolue de votre identité naturelle.
+                </p>
+            </div>
+
+            <div class="flex flex-wrap gap-2.5 items-center">
+                <span class="font-label-caps text-[10px] bg-white text-gold px-4 py-2 border border-gold/30 rounded-full font-bold shadow-sm">
+                    📍 SOUSSE, TUNISIE
+                </span>
+                <span class="font-label-caps text-[10px] gold-gradient text-white px-4 py-2 rounded-full font-bold shadow">
+                    ⚡ ULTRASONS PIEZO HD
+                </span>
+                <span class="font-label-caps text-[10px] bg-white text-gold px-4 py-2 border border-gold/30 rounded-full font-bold shadow-sm">
+                    ✨ 100% SUR-MESURE
+                </span>
+            </div>
+        </div>
+
+        <!-- Modern Medical Specialty Bento Grid -->
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
+            
+            <!-- CARD 01: Chirurgie du Visage (Spotlight Hero Card - 7 Cols) -->
+            <div class="lg:col-span-7 group relative bg-white border border-teal-500/20 rounded-2xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-500 flex flex-col md:flex-row">
+                <div class="md:w-1/2 relative aspect-[4/3] md:aspect-auto overflow-hidden bg-slate-100">
+                    <img alt="Chirurgie du Visage" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" src="/images/ch1.webp"/>
+                    <div class="absolute top-4 left-4 z-10">
+                        <span class="gold-gradient text-white font-label-caps text-[9px] px-3 py-1.5 rounded-full font-bold uppercase tracking-widest shadow">
+                            PIEZO ULTRASONS HD
+                        </span>
+                    </div>
+                </div>
+                <div class="md:w-1/2 p-8 flex flex-col justify-between">
+                    <div>
+                        <div class="flex items-center gap-2 mb-2">
+                            <span class="w-2 h-2 rounded-full bg-gold"></span>
+                            <span class="font-label-caps text-gold text-[10px] uppercase font-bold tracking-widest">VISAGE &amp; COU</span>
+                        </div>
+                        <h3 class="font-display-lg text-2xl md:text-3xl font-bold text-primary mb-3">
+                            Chirurgie Esthétique du Visage
+                        </h3>
+                        <p class="font-body-md text-xs text-slate-700 leading-relaxed mb-2 font-medium">
+                            La chirurgie esthétique de la face et du cou permet de :
+                        </p>
+                        <ul class="font-body-md text-xs text-slate-600 space-y-1 mb-3 pl-4 list-disc marker:text-gold leading-relaxed">
+                            <li>Rajeunir le visage,</li>
+                            <li>Equilibrer et harmoniser la face, notamment le nez, les lèvres, les joues et les paupières,</li>
+                        </ul>
+                        <p class="font-body-md text-xs text-slate-600 leading-relaxed mb-6">
+                            Les interventions les plus pratiquées sont : la rhinoplastie, le lifting cervico-facial, la blépharoplastie, la génioplastie, l’otoplastie et la liposuccion du double menton.
+                        </p>
+                    </div>
+                    <div class="pt-4 border-t border-slate-100 flex items-center justify-between">
+                        <span class="font-label-caps text-[10px] text-slate-400 font-semibold">SOUSSE • CLINIQUE</span>
+                        <a asp-controller="Home" asp-action="Chirurgies" class="gold-gradient text-white px-5 py-2.5 rounded-full font-label-caps text-[10px] font-bold tracking-widest flex items-center gap-1.5 shadow hover:opacity-90 transition-all">
+                            DÉTAILS <span class="material-symbols-outlined text-xs">arrow_forward</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- CARD 02: Médecine Esthétique (Featured Card - 5 Cols) -->
+            <div class="lg:col-span-5 group relative bg-white border border-teal-500/20 rounded-2xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-500 flex flex-col justify-between">
+                <div class="relative aspect-[16/9] overflow-hidden bg-slate-100">
+                    <img alt="Médecine Esthétique" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" src="/images/ch2.jpg"/>
+                    <div class="absolute top-4 left-4 z-10">
+                        <span class="gold-gradient text-white font-label-caps text-[9px] px-3 py-1.5 rounded-full font-bold uppercase tracking-widest shadow">
+                            INJECTIONS &amp; SOINS
+                        </span>
+                    </div>
+                </div>
+                <div class="p-6 flex flex-col justify-between flex-1">
+                    <div>
+                        <div class="flex items-center gap-2 mb-2">
+                            <span class="w-2 h-2 rounded-full bg-gold"></span>
+                            <span class="font-label-caps text-gold text-[10px] uppercase font-bold tracking-widest">MÉDECINE ESTHÉTIQUE</span>
+                        </div>
+                        <h3 class="font-display-lg text-2xl font-bold text-primary mb-2">
+                            Médecine Esthétique
+                        </h3>
+                        <p class="font-body-md text-xs text-slate-600 leading-relaxed mb-4">
+                            Sublimation des volumes du visage et traitement lissant par injections d'acide hyaluronique HD et Profhilo.
+                        </p>
+                    </div>
+                    <div class="pt-4 border-t border-slate-100 flex items-center justify-between">
+                        <span class="font-label-caps text-[10px] text-slate-400 font-semibold">SANS ÉVICTION</span>
+                        <a asp-controller="Home" asp-action="Esthetique" class="gold-gradient text-white px-5 py-2.5 rounded-full font-label-caps text-[10px] font-bold tracking-widest flex items-center gap-1.5 shadow hover:opacity-90 transition-all">
+                            DÉTAILS <span class="material-symbols-outlined text-xs">arrow_forward</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- CARD 03: Silhouette & Corps (6 Cols) -->
+            <div class="lg:col-span-6 group relative bg-white border border-teal-500/20 rounded-2xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-500 flex flex-col md:flex-row">
+                <div class="md:w-1/2 relative aspect-[4/3] md:aspect-auto overflow-hidden bg-slate-100">
+                    <img alt="Silhouette &amp; Corps" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" src="/images/silhouette_corps.jpg"/>
+                    <div class="absolute top-4 left-4 z-10">
+                        <span class="gold-gradient text-white font-label-caps text-[9px] px-3 py-1.5 rounded-full font-bold uppercase tracking-widest shadow">
+                            ULTRASONS VASER
+                        </span>
+                    </div>
+                </div>
+                <div class="md:w-1/2 p-6 flex flex-col justify-between">
+                    <div>
+                        <div class="flex items-center gap-2 mb-2">
+                            <span class="w-2 h-2 rounded-full bg-gold"></span>
+                            <span class="font-label-caps text-gold text-[10px] uppercase font-bold tracking-widest">CORPS &amp; SILHOUETTE</span>
+                        </div>
+                        <h3 class="font-display-lg text-2xl font-bold text-primary mb-2">
+                            Silhouette &amp; Corps
+                        </h3>
+                        <p class="font-body-md text-xs text-slate-700 leading-relaxed mb-2">
+                            La liposuccion ou lipoaspiration ou liposculpture intéresse l’excès de graisse jugé disgracieux surtout au niveau du ventre, hanches, cuisses, genoux, bras, dos.
+                        </p>
+                        <p class="font-body-md text-xs text-slate-600 leading-relaxed mb-2">
+                            Le résultat est immédiat et on peut s’habiller en toute liberté et avec une nouvelle assurance.
+                        </p>
+                        <p class="font-body-md text-xs text-slate-600 leading-relaxed mb-4">
+                            La liposuccion, selon les cas, est réalisée sous anesthésie générale ou locale, nécessite 24h d'hospitalisation et 5 à 7 jours de convalescence.
+                        </p>
+                    </div>
+                    <div class="pt-4 border-t border-slate-100 flex items-center justify-between">
+                        <span class="font-label-caps text-[10px] text-slate-400 font-semibold">HD SCULPT</span>
+                        <a asp-controller="Home" asp-action="Chirurgies" class="gold-gradient text-white px-5 py-2.5 rounded-full font-label-caps text-[10px] font-bold tracking-widest flex items-center gap-1.5 shadow hover:opacity-90 transition-all">
+                            DÉTAILS <span class="material-symbols-outlined text-xs">arrow_forward</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- CARD 04: Chirurgie Mammaire (6 Cols) -->
+            <div class="lg:col-span-6 group relative bg-white border border-teal-500/20 rounded-2xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-500 flex flex-col md:flex-row">
+                <div class="md:w-1/2 relative aspect-[4/3] md:aspect-auto overflow-hidden bg-slate-100">
+                    <img alt="Chirurgie Mammaire" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" src="/images/ch4.jpg"/>
+                    <div class="absolute top-4 left-4 z-10">
+                        <span class="gold-gradient text-white font-label-caps text-[9px] px-3 py-1.5 rounded-full font-bold uppercase tracking-widest shadow">
+                            PROTHÈSES HD
+                        </span>
+                    </div>
+                </div>
+                <div class="md:w-1/2 p-6 flex flex-col justify-between">
+                    <div>
+                        <div class="flex items-center gap-2 mb-2">
+                            <span class="w-2 h-2 rounded-full bg-gold"></span>
+                            <span class="font-label-caps text-gold text-[10px] uppercase font-bold tracking-widest">POITRINE</span>
+                        </div>
+                        <h3 class="font-display-lg text-2xl font-bold text-primary mb-2">
+                            Chirurgie esthétique des seins
+                        </h3>
+                        <p class="font-body-md text-xs text-slate-700 leading-relaxed mb-2">
+                            La chirurgie esthétique des seins ou mammoplastie touche au plus près la féminité et l’estime de soi.
+                        </p>
+                        <p class="font-body-md text-xs text-slate-600 leading-relaxed mb-4">
+                            Cette chirurgie regroupe des interventions visant à augmenter, réduire, lifter ou reconstruire le volume des seins pour avoir une belle poitrine.
+                        </p>
+                    </div>
+                    <div class="pt-4 border-t border-slate-100 flex items-center justify-between">
+                        <span class="font-label-caps text-[10px] text-slate-400 font-semibold">SUR-MESURE</span>
+                        <a asp-controller="Home" asp-action="Chirurgies" class="gold-gradient text-white px-5 py-2.5 rounded-full font-label-caps text-[10px] font-bold tracking-widest flex items-center gap-1.5 shadow hover:opacity-90 transition-all">
+                            DÉTAILS <span class="material-symbols-outlined text-xs">arrow_forward</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+</section>
+<!-- END: ServicesBentoGrid -->
+
+<!-- SECTION: ACTUALITÉS & PUBLICATIONS MÉDICALES -->
+<section class="py-24 px-6 md:px-margin-desktop bg-ivory border-y border-gold/20 overflow-hidden relative" id="actualites">
+    <div class="max-w-container-max mx-auto relative z-10">
+        
+        <!-- Minimalist Section Header -->
+        <div class="flex flex-col md:flex-row justify-between items-start md:items-end mb-12 border-b border-gold/20 pb-8 gap-4">
+            <div>
+                <span class="font-label-caps text-gold tracking-[0.3em] text-[10px] uppercase font-bold block mb-2">PUBLICATIONS &amp; CONGRÈS</span>
+                <h2 class="font-display-lg text-4xl md:text-6xl font-extrabold text-primary">
+                    Actualités du <span class="italic font-light text-gold">Pr. Slama</span>
+                </h2>
+            </div>
+            <div class="flex flex-col sm:flex-row sm:items-center gap-4">
+                <p class="font-body-md text-primary/70 text-sm max-w-md leading-relaxed">
+                    Découvrez les actualités et les nouveautés en chirurgie et médecine esthétique.
+                </p>
+                <a asp-controller="Home" asp-action="Temoignages" asp-route-tab="actualites" class="inline-flex items-center gap-2 font-label-caps text-xs text-primary hover:text-gold font-bold tracking-widest border-b border-gold pb-1 transition-all whitespace-nowrap">
+                    <span>VOIR TOUT</span>
+                    <span class="material-symbols-outlined text-sm">arrow_forward</span>
+                </a>
+            </div>
+        </div>
+
+        @{
+            var homeActualites = ViewBag.Actualites as List<DrAbdelfatehSalma.Models.Actualite> ?? new List<DrAbdelfatehSalma.Models.Actualite>();
+        }
+
+        @if (homeActualites.Any())
+        {
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                @foreach (var news in homeActualites.Take(3))
+                {
+                    <a asp-controller="Home" asp-action="ActualiteDetail" asp-route-id="@news.Id" class="bg-white border border-gold/25 rounded-2xl overflow-hidden shadow-sm hover:shadow-xl hover:border-gold transition-all duration-300 flex flex-col justify-between group block cursor-pointer h-full">
+                        <div class="relative w-full overflow-hidden bg-neutral-900 border-b border-gold/15">
+                            @if (!string.IsNullOrEmpty(news.ImageUrl))
+                            {
+                                <img src="@news.ImageUrl" alt="@news.Title" class="w-full h-auto block" />
+                            }
+                            else
+                            {
+                                <div class="w-full h-48 flex items-center justify-center bg-[#0c0d10]">
+                                    <span class="material-symbols-outlined text-gold text-4xl">newspaper</span>
+                                </div>
+                            }
+                            <span class="absolute top-3 left-3 gold-gradient text-white font-label-caps text-[8.5px] px-3 py-1 rounded-full font-bold uppercase shadow">
+                                @(news.IsFeatured ? "⭐ À LA UNE" : "ACTUALITÉ")
+                            </span>
+                        </div>
+                        <div class="p-6 flex flex-col justify-between flex-1 space-y-4">
+                            <div>
+                                <div class="flex items-center gap-2 text-gold text-[10px] font-label-caps font-bold mb-1">
+                                    <span class="material-symbols-outlined text-xs">calendar_month</span>
+                                    <span>@news.DateLabel</span>
+                                </div>
+                                <h4 class="font-display-lg text-xl font-bold text-primary mb-2 group-hover:text-gold transition-colors line-clamp-2">
+                                    @news.Title
+                                </h4>
+                                <p class="font-body-md text-xs text-primary/75 leading-relaxed line-clamp-3">
+                                    @news.Excerpt
+                                </p>
+                            </div>
+                            <div class="pt-3 border-t border-gold/15 flex items-center justify-between">
+                                <div class="flex items-center gap-2 flex-wrap">
+                                    @if (!string.IsNullOrEmpty(news.Tags))
+                                    {
+                                        foreach (var tag in news.Tags.Split(',', StringSplitOptions.RemoveEmptyEntries).Take(2))
+                                        {
+                                            <span class="font-label-caps text-[9px] text-slate-500 font-bold uppercase bg-slate-100 px-2 py-0.5 rounded">@tag.Trim()</span>
+                                        }
+                                    }
+                                </div>
+                                <span class="font-label-caps text-[10px] font-bold text-gold flex items-center gap-1 group-hover:translate-x-1 transition-transform">
+                                    LIRE <span class="material-symbols-outlined text-xs">arrow_forward</span>
+                                </span>
+                            </div>
+                        </div>
+                    </a>
+                }
+            </div>
+        }
+        else
+        {
+            <div class="text-center py-12 text-gray-400 italic">
+                Aucune actualité publiée pour le moment.
+            </div>
+        }
+
+    </div>
+</section>
+
+<!-- SECTION 2: The Patient Journey (Le Parcours d'Excellence) -->
+<section class="py-section-gap bg-ivory border-t-2 border-gold/20">
+<div class="px-6 md:px-margin-desktop max-w-container-max mx-auto">
+<div class="mb-20 text-center md:text-left">
+<div class="flex items-center justify-center md:justify-start gap-3 mb-4">
+    <span class="w-10 h-[1px] bg-gold"></span>
+    <span class="font-label-caps text-gold text-[10px] tracking-[0.4em] uppercase font-bold">ACCOMPAGNEMENT PRIVILÉGIÉ</span>
+    <span class="w-10 h-[1px] bg-gold"></span>
+</div>
+<h2 class="font-display-lg text-5xl md:text-7xl">Le Parcours d'Excellence</h2>
+<p class="font-body-lg text-primary/70 mt-4 max-w-2xl">Une prise en charge confidentielle, rigoureuse et entièrement personnalisée à chaque étape de votre soin à Sousse.</p>
+</div>
+
+<div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+            <!-- Step 1 -->
+            <div class="bg-white p-8 editorial-border flex flex-col justify-between min-h-[320px] transition-transform hover:-translate-y-2 duration-300">
+                <div>
+                    <span class="font-display-lg text-5xl font-black text-gold block mb-6">01</span>
+                    <h3 class="font-label-caps text-sm font-bold mb-4 tracking-wider text-primary">CONSULTATION INITIALE</h3>
+                    <p class="font-body-md text-xs text-primary/70 leading-relaxed">
+                        Écoute attentive de vos souhaits, examen morphologique précis.
+                    </p>
+                </div>
+                <div class="w-8 h-[2px] gold-gradient mt-8"></div>
+            </div>
+            <!-- Step 2 -->
+            <div class="bg-white p-8 editorial-border flex flex-col justify-between min-h-[320px] transition-transform hover:-translate-y-2 duration-300">
+                <div>
+                    <span class="font-display-lg text-5xl font-black text-gold block mb-6">02</span>
+                    <h3 class="font-label-caps text-sm font-bold mb-4 tracking-wider text-primary">PLAN SUR-MESURE</h3>
+                    <p class="font-body-md text-xs text-primary/70 leading-relaxed">
+                        Élaboration du protocole sur-mesure, informations médicales claires et remise du devis détaillé.
+                    </p>
+                </div>
+                <div class="w-8 h-[2px] gold-gradient mt-8"></div>
+            </div>
+            <!-- Step 3 -->
+            <div class="bg-white p-8 editorial-border flex flex-col justify-between min-h-[320px] transition-transform hover:-translate-y-2 duration-300">
+                <div>
+                    <span class="font-display-lg text-5xl font-black text-gold block mb-6">03</span>
+                    <h3 class="font-label-caps text-sm font-bold mb-4 tracking-wider text-primary">HAUTE PRÉCISION</h3>
+                    <p class="font-body-md text-xs text-primary/70 leading-relaxed">
+                        Intervention réalisée dans un bloc opératoire agréé d'excellence répondant aux normes internationales les plus exigeantes.
+                    </p>
+                </div>
+                <div class="w-8 h-[2px] gold-gradient mt-8"></div>
+            </div>
+            <!-- Step 4 -->
+            <div class="bg-white p-8 editorial-border flex flex-col justify-between min-h-[320px] transition-transform hover:-translate-y-2 duration-300">
+                <div>
+                    <span class="font-display-lg text-5xl font-black text-gold block mb-6">04</span>
+                    <h3 class="font-label-caps text-sm font-bold mb-4 tracking-wider text-primary">SUIVI PRIVILÉGIÉ</h3>
+                    <p class="font-body-md text-xs text-primary/70 leading-relaxed">
+                        Accompagnement post-opératoire rigoureux, consultations de suivi incluses.
+                    </p>
+                </div>
+                <div class="w-8 h-[2px] gold-gradient mt-8"></div>
+            </div>
+</div>
+</div>
+</section>
+
+<!-- SECTION 3: Client Testimonials & Experience -->
+<section class="bg-charcoal text-white py-section-gap">
+    <div class="px-6 md:px-margin-desktop max-w-container-max mx-auto">
+        <div class="flex flex-col md:flex-row justify-between items-start md:items-end mb-16 gap-6">
+            <div>
+                <span class="font-label-caps text-gold/70 block mb-4">L'EXPÉRIENCE PATIENT</span>
+                <h2 class="font-display-lg text-5xl md:text-8xl italic">Témoignages</h2>
+            </div>
+            @{
+                var homeTemoignages = ViewBag.Temoignages as List<DrAbdelfatehSalma.Models.Temoignage> ?? new List<DrAbdelfatehSalma.Models.Temoignage>();
+            }
+            @if (homeTemoignages.Any())
+            {
+                <div class="flex flex-wrap gap-4">
+                    <button onclick="filterTestimonials('all')" class="testimonial-tab active px-5 py-2 font-label-caps text-xs border border-white bg-white text-black transition-all">TOUT VOIR</button>
+                    <button onclick="filterTestimonials('video')" class="testimonial-tab px-5 py-2 font-label-caps text-xs border border-white bg-transparent text-white hover:bg-white hover:text-black transition-all">VIDÉOS 🎥</button>
+                    <button onclick="filterTestimonials('text')" class="testimonial-tab px-5 py-2 font-label-caps text-xs border border-white bg-transparent text-white hover:bg-white hover:text-black transition-all">AVIS ÉCRITS ✍️</button>
+                </div>
+            }
+        </div>
+
+        @if (homeTemoignages.Any())
+        {
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                @foreach (var item in homeTemoignages)
+                {
+                    if (item.Type == "video")
+                    {
+                        var videoUrl = string.IsNullOrEmpty(item.VideoUrl) ? "/videos/tem.mp4" : item.VideoUrl;
+                        var imgUrl = string.IsNullOrEmpty(item.ImageUrl) ? "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&q=80&w=800" : item.ImageUrl;
+                        <div class="testimonial-card group border border-white/20 overflow-hidden bg-white/5 backdrop-blur-sm relative" data-type="video">
+                            <div class="relative aspect-[16/9] overflow-hidden cursor-pointer" onclick="openVideoModal('@videoUrl', 'Témoignage Vidéo — @item.PatientName')">
+                                <img src="@imgUrl" alt="@item.PatientName" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105 opacity-80"/>
+                                <div class="absolute inset-0 bg-black/40 group-hover:bg-black/20 transition-colors flex items-center justify-center">
+                                    <div class="w-16 h-16 rounded-full bg-white/90 text-black flex items-center justify-center shadow-lg group-hover:scale-110 transition-transform">
+                                        <span class="material-symbols-outlined text-3xl">play_arrow</span>
+                                    </div>
+                                </div>
+                                <span class="absolute bottom-3 right-3 bg-black/80 text-white font-label-caps text-[9px] px-2 py-1 flex items-center gap-1">
+                                    <span class="material-symbols-outlined text-xs">videocam</span> @(string.IsNullOrEmpty(item.FollowUpTime) ? "Suivi certifié" : item.FollowUpTime)
+                                </span>
+                                <span class="absolute top-3 left-3 bg-white text-black font-label-caps text-[9px] px-3 py-1 font-bold">TÉMOIGNAGE VIDÉO</span>
+                            </div>
+                            <div class="p-6 border-t border-white/10">
+                                <p class="font-quote text-base italic text-white/90 mb-4">"@item.Quote"</p>
+                                <div class="flex justify-between items-center">
+                                    <div>
+                                        <p class="font-label-caps text-xs font-bold">@item.PatientName?.ToUpper()</p>
+                                        <p class="font-label-caps text-[9px] text-white/40">@item.PatientInfo?.ToUpper()</p>
+                                    </div>
+                                    <button onclick="openVideoModal('@videoUrl', 'Témoignage Vidéo — @item.PatientName')" class="font-label-caps text-[9px] border-b border-white hover:opacity-50 flex items-center gap-1">
+                                        REGARDER <span class="material-symbols-outlined text-xs">play_circle</span>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    }
+                    else
+                    {
+                        <div class="testimonial-card border border-white/20 p-8 flex flex-col justify-between bg-white/5 backdrop-blur-sm" data-type="text">
+                            <div>
+                                <div class="flex justify-between items-center mb-6">
+                                    <div class="flex gap-1 text-gold">
+                                        @for (int i = 0; i < (item.Rating > 0 ? item.Rating : 5); i++)
+                                        {
+                                            <span class="material-symbols-outlined text-sm fill-1">star</span>
+                                        }
+                                    </div>
+                                    <span class="font-label-caps text-[9px] bg-white/10 px-2 py-1 text-white/70">AVIS ÉCRIT</span>
+                                </div>
+                                <p class="font-quote text-lg italic leading-relaxed text-white/90 mb-8">
+                                    "@item.Quote"
+                                </p>
+                            </div>
+                            <div class="border-t border-white/10 pt-6">
+                                <p class="font-label-caps text-xs font-bold">@item.PatientName?.ToUpper()</p>
+                                <p class="font-label-caps text-[10px] text-white/40">@item.PatientInfo?.ToUpper()</p>
+                            </div>
+                        </div>
+                    }
+                }
+            </div>
+        }
+        else
+        {
+            <div class="max-w-xl mx-auto text-center py-16 px-8 bg-white/5 border border-white/15 rounded-3xl space-y-4 backdrop-blur-sm">
+                <div class="w-16 h-16 rounded-2xl bg-white/10 border border-gold/40 flex items-center justify-center mx-auto text-gold shadow-md">
+                    <span class="material-symbols-outlined text-3xl">rate_review</span>
+                </div>
+                <h3 class="font-display-lg text-2xl font-bold text-white">Aucun avis publié pour le moment</h3>
+                <p class="font-body-md text-xs sm:text-sm text-white/75 leading-relaxed">
+                    Les retours d'expérience et témoignages de nos patients seront prochainement partagés ici en toute confidentialité.
+                </p>
+                <div class="pt-2">
+                    <a asp-controller="Home" asp-action="Temoignages" class="inline-flex items-center gap-2 gold-gradient text-white font-label-caps text-[10px] tracking-widest px-7 py-3.5 rounded-full font-bold shadow-lg hover:scale-105 transition-all">
+                        <span class="material-symbols-outlined text-xs">edit_square</span>
+                        LAISSER UN AVIS
+                    </a>
+                </div>
+            </div>
+        }
+    </div>
+</section>
+
+<!-- Interactive Video Player Modal -->
+<div id="video-modal" class="fixed inset-0 z-50 bg-black/90 hidden items-center justify-center p-4 backdrop-blur-md">
+    <!-- Backdrop Click Close -->
+    <div class="absolute inset-0" onclick="closeVideoModal()"></div>
+
+    <div class="relative z-10 w-full max-w-4xl bg-neutral-900 border border-white/20 p-4 shadow-2xl">
+        <div class="flex justify-between items-center mb-4 pb-2 border-b border-white/10">
+            <h4 id="video-modal-title" class="font-label-caps text-sm text-white font-bold">Témoignage Vidéo</h4>
+            <button onclick="closeVideoModal()" class="text-white hover:opacity-50 w-8 h-8 flex items-center justify-center rounded-full bg-white/10">
+                <span class="material-symbols-outlined text-xl">close</span>
+            </button>
+        </div>
+        <div id="index-video-container" class="aspect-video w-full bg-black relative">
+        </div>
+    </div>
+</div>
+
+
+
+
+<!-- ============================================ -->
+<!-- FINAL CTA: HARMONIZED CRYSTAL GLASS DESIGN -->
+<!-- ============================================ -->
+<section class="relative py-32 md:py-44 px-6 md:px-margin-desktop text-white text-center overflow-hidden bg-black">
+    <!-- Fully Visible Clinic Office Background Image -->
+    <div class="absolute inset-0 z-0">
+        <img src="/images/office.png" alt="Cabinet Dr Slama Sousse" class="w-full h-full object-cover object-center opacity-95 scale-100 transition-transform duration-[10s] hover:scale-105" />
+        <div class="absolute inset-0 bg-black/15"></div>
+    </div>
+
+    <!-- Crystal Transparent Floating Card -->
+    <div class="relative z-10 max-w-3xl mx-auto bg-black/25 backdrop-blur-[2px] p-8 md:p-12 border border-white/30 shadow-2xl rounded-2xl">
+        <span class="font-label-caps text-[10px] tracking-[0.4em] text-white block mb-6 uppercase border border-white/40 inline-block px-4 py-1.5 bg-black/30 backdrop-blur-sm font-bold drop-shadow">
+            CONSULTATION PRIVÉE • SOUSSE
+        </span>
+        <h2 class="font-display-lg text-4xl md:text-6xl font-bold text-white mb-6 leading-tight drop-shadow-[0_3px_12px_rgba(0,0,0,0.85)]">
+            Révélez votre <span class="italic font-normal text-gold">Identité.</span>
+        </h2>
+        <p class="font-body-lg text-white mb-10 text-base md:text-lg leading-relaxed max-w-xl mx-auto drop-shadow-[0_2px_8px_rgba(0,0,0,0.85)] font-medium">
+            Une prise en charge confidentielle, rigoureuse et entièrement sur-mesure au cœur de Sousse.
+        </p>
+
+        <div class="flex flex-col sm:flex-row gap-5 justify-center items-center">
+            <a asp-controller="Home" asp-action="Contact" class="bg-white text-primary font-label-caps text-[11px] tracking-widest px-10 py-5 hover:bg-neutral-200 transition-all duration-300 w-full sm:w-auto text-center shadow-2xl font-bold">
+                CONTACTEZ-NOUS
+            </a>
+            <a href="tel:+21673200000" class="border border-white/60 bg-black/30 backdrop-blur-sm text-white font-label-caps text-[11px] tracking-widest px-10 py-5 hover:bg-white hover:text-primary transition-all duration-300 w-full sm:w-auto text-center flex items-center justify-center gap-3 font-bold shadow-lg">
+                <span class="material-symbols-outlined text-sm">phone</span>
+                +216 73 200 000
+            </a>
+        </div>
+    </div>
+</section>
+
+
+@section Scripts {
+<style>
+    /* Results gallery blur state */
+    .results-blurable {
+        filter: blur(12px) brightness(0.7);
+        transition: filter 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    .results-unlocked .results-blurable {
+        filter: none;
+    }
+    /* Lock overlay */
+    .results-lock-overlay {
+        background: rgba(0,0,0,0.35);
+        backdrop-filter: blur(2px);
+        transition: opacity 0.4s ease;
+    }
+    .results-unlocked .results-lock-overlay {
+        opacity: 0;
+        pointer-events: none;
+    }
+</style>
+<script>
+    // ==========================================
+    // RESULTS GALLERY PASSWORD PROTECTION
+    // ==========================================
+    // Same authorized codes as Chirurgies & Esthetique results gallery
+    const RESULTS_VALID_CODES = [
+        'slama-vip-2026!',
+        'afs-resultats-2026#',
+        'clinique-slama-2026',
+        'slama2026'
+    ];
+    let _resultsUnlocked = false; // resets on every page reload
+
+    function isResultsUnlocked() {
+        return _resultsUnlocked;
+    }
+
+    function applyResultsBlurState() {
+        const track = document.getElementById('gallery-carousel-track');
+        if (!track) return;
+        if (_resultsUnlocked) {
+            track.classList.add('results-unlocked');
+        } else {
+            track.classList.remove('results-unlocked');
+        }
+    }
+
+    function openResultsPasswordModal() {
+        if (isResultsUnlocked()) return;
+        const modal = document.getElementById('results-password-modal');
+        if (!modal) return;
+        modal.classList.remove('hidden');
+        modal.classList.add('flex');
+        document.body.classList.add('overflow-hidden');
+        const input = document.getElementById('results-password-input');
+        if (input) { input.value = ''; setTimeout(() => input.focus(), 80); }
+        const err = document.getElementById('results-password-error');
+        if (err) err.classList.add('hidden');
+    }
+
+    function closeResultsPasswordModal() {
+        const modal = document.getElementById('results-password-modal');
+        if (!modal) return;
+        modal.classList.add('hidden');
+        modal.classList.remove('flex');
+        document.body.classList.remove('overflow-hidden');
+    }
+
+    function submitResultsPassword() {
+        const input = document.getElementById('results-password-input');
+        const err = document.getElementById('results-password-error');
+        if (!input) return;
+        if (RESULTS_VALID_CODES.includes(input.value.trim().toLowerCase())) {
+            _resultsUnlocked = true;
+            applyResultsBlurState();
+            closeResultsPasswordModal();
+        } else {
+            if (err) err.classList.remove('hidden');
+            input.value = '';
+            input.focus();
+            input.classList.add('border-red-400');
+            setTimeout(() => input.classList.remove('border-red-400'), 800);
+        }
+    }
+
+    function toggleResultsPwdVisibility() {
+        const input = document.getElementById('results-password-input');
+        const icon = document.getElementById('results-eye-icon');
+        if (!input) return;
+        if (input.type === 'password') {
+            input.type = 'text';
+            if (icon) icon.textContent = 'visibility_off';
+        } else {
+            input.type = 'password';
+            if (icon) icon.textContent = 'visibility';
+        }
+    }
+
+    // ==========================================
+    // --- Galerie de Résultats Side Navigation Arrows & Drag Carousel Slider ---
+    let isMouseDown = false;
+    let startX = 0;
+    let scrollLeftStart = 0;
+
+    function initGalleryCarousel() {
+        const track = document.getElementById('gallery-carousel-track');
+        if (!track) return;
+
+        // Mouse Dragging (Desktop)
+        track.addEventListener('mousedown', (e) => {
+            isMouseDown = true;
+            startX = e.pageX - track.offsetLeft;
+            scrollLeftStart = track.scrollLeft;
+        });
+
+        track.addEventListener('mouseleave', () => {
+            isMouseDown = false;
+        });
+
+        track.addEventListener('mouseup', () => {
+            isMouseDown = false;
+        });
+
+        track.addEventListener('mousemove', (e) => {
+            if (!isMouseDown) return;
+            e.preventDefault();
+            const x = e.pageX - track.offsetLeft;
+            const walk = (x - startX) * 1.5;
+            track.scrollLeft = scrollLeftStart - walk;
+        });
+    }
+
+    function manualScrollGallery(direction) {
+        const track = document.getElementById('gallery-carousel-track');
+        if (!track) return;
+
+        const scrollAmount = 340;
+        if (direction === 'left') {
+            track.scrollBy({ left: -scrollAmount, behavior: 'smooth' });
+        } else {
+            track.scrollBy({ left: scrollAmount, behavior: 'smooth' });
+        }
+    }
+
+    // Toggle Card Photo between Avant & Après cleanly
+    function toggleCardPhoto(id) {
+        const img = document.getElementById(`card-img-${id}`);
+        const btnText = document.getElementById(`card-btn-text-${id}`);
+        if (!img || !btnText) return;
+
+        const afterSrc = img.dataset.after;
+        const beforeSrc = img.dataset.before;
+
+        if (btnText.textContent.includes('AVANT')) {
+            img.src = beforeSrc;
+            btnText.textContent = 'VOIR APRÈS';
+        } else {
+            img.src = afterSrc;
+            btnText.textContent = 'VOIR AVANT';
+        }
+    }
+
+    // Category Filtering for Results Gallery
+    function filterResults(category) {
+        const cards = document.querySelectorAll('#gallery-carousel-track .result-card');
+        const tabs = document.querySelectorAll('.gallery-tab');
+        
+        tabs.forEach(tab => {
+            tab.classList.remove('bg-primary', 'text-white');
+            tab.classList.add('bg-white', 'text-primary');
+        });
+        
+        event.currentTarget.classList.remove('bg-white', 'text-primary');
+        event.currentTarget.classList.add('bg-primary', 'text-white');
+
+        cards.forEach(card => {
+            if (category === 'all' || card.dataset.category === category) {
+                card.style.display = 'block';
+            } else {
+                card.style.display = 'none';
+            }
+        });
+        
+        const track = document.getElementById('gallery-carousel-track');
+        if (track) track.scrollTo({ left: 0, behavior: 'smooth' });
+    }
+
+    // Filter Testimonials (All / Video / Text)
+    function filterTestimonials(type) {
+        const cards = document.querySelectorAll('.testimonial-card');
+        const tabs = document.querySelectorAll('.testimonial-tab');
+
+        tabs.forEach(tab => {
+            tab.classList.remove('bg-white', 'text-black');
+            tab.classList.add('bg-transparent', 'text-white');
+        });
+
+        event.currentTarget.classList.remove('bg-transparent', 'text-white');
+        event.currentTarget.classList.add('bg-white', 'text-black');
+
+        cards.forEach(card => {
+            if (type === 'all' || card.dataset.type === type) {
+                card.style.display = 'flex';
+            } else {
+                card.style.display = 'none';
+            }
+        });
+    }
+
+    // Video Modal Player Control
+    function openVideoModal(videoSrc, title) {
+        const modal = document.getElementById('video-modal');
+        const videoPlayer = document.getElementById('modal-video-player');
+        const modalTitle = document.getElementById('video-modal-title');
+
+        modalTitle.textContent = title;
+        videoPlayer.src = videoSrc;
+        videoPlayer.load();
+        modal.classList.remove('hidden');
+        modal.classList.add('flex');
+        
+        const playPromise = videoPlayer.play();
+        if (playPromise !== undefined) {
+            playPromise.catch(err => {
+                console.log("Video play interaction needed:", err);
+            });
+        }
+    }
+
+    function closeVideoModal() {
+        const modal = document.getElementById('video-modal');
+        const videoPlayer = document.getElementById('modal-video-player');
+        
+        videoPlayer.pause();
+        videoPlayer.removeAttribute('src');
+        modal.classList.remove('flex');
+        modal.classList.add('hidden');
+    }
+
+
+
+
+
+    function initMiniCardSliders() {
+        document.querySelectorAll('.ba-card-slider').forEach(slider => {
+            const beforeImg = slider.querySelector('.ba-card-before');
+            const handle = slider.querySelector('.ba-card-handle');
+            let isDragging = false;
+
+            if (!slider || !beforeImg || !handle) return;
+
+            function setPos(clientX) {
+                const rect = slider.getBoundingClientRect();
+                let x = clientX - rect.left;
+                if (x < 0) x = 0;
+                if (x > rect.width) x = rect.width;
+                const pct = (x / rect.width) * 100;
+                beforeImg.style.clipPath = `inset(0 ${100 - pct}% 0 0)`;
+                handle.style.left = pct + '%';
+            }
+
+            // Drag ONLY when clicking down
+            slider.addEventListener('mousedown', (e) => {
+                isDragging = true;
+                setPos(e.clientX);
+            });
+
+            window.addEventListener('mousemove', (e) => {
+                if (!isDragging) return;
+                setPos(e.clientX);
+            });
+
+            window.addEventListener('mouseup', () => {
+                isDragging = false;
+            });
+
+            // Touch drag support for mobile
+            slider.addEventListener('touchstart', (e) => {
+                isDragging = true;
+                if (e.touches && e.touches[0]) {
+                    setPos(e.touches[0].clientX);
+                }
+            });
+
+            window.addEventListener('touchmove', (e) => {
+                if (!isDragging) return;
+                if (e.touches && e.touches[0]) {
+                    setPos(e.touches[0].clientX);
+                }
+            });
+
+            window.addEventListener('touchend', () => {
+                isDragging = false;
+            });
+        });
+    }
+
+    // Galerie de Résultats - Lightbox Modal Data & Controller
+    const galleryResultsData = [
+        {
+            id: 0,
+            category: "CHIRURGIE DU VISAGE",
+            title: "Rhinoplastie Ultrasonique",
+            desc: "Correction de la bosse ostéo-cartilagineuse et harmonisation du profil sans hématome majeur. Sculpture osseuse de haute précision par ultrasons Piezo.",
+            beforeImg: "/images/rhino_before.png",
+            afterImg: "/images/rhino_after.png",
+            tag1: "Précision Ultrasonique Piezo",
+            tag2: "5 à 7 jours"
+        },
+        {
+            id: 1,
+            category: "CHIRURGIE DU VISAGE",
+            title: "Deep Plane Facelift",
+            desc: "Redéfinition de l'ovale du visage et du cou avec repositionnement musculaire naturel du SMAS profond sans tension cutanée.",
+            beforeImg: "/images/facelift_before.png",
+            afterImg: "/images/facelift_after.png",
+            tag1: "Rajeunissement SMAS profonds",
+            tag2: "10 à 12 jours"
+        },
+        {
+            id: 2,
+            category: "MÉDECINE ESTHÉTIQUE",
+            title: "Profiloplastie Médicale",
+            desc: "Harmonisation du profil et remodelage par acide hyaluronique haute densité sans intervention chirurgicale ni éviction sociale.",
+            beforeImg: "/images/injections_before.png",
+            afterImg: "/images/injections_after.png",
+            tag1: "Injections Acide Hyaluronique",
+            tag2: "Sans éviction sociale"
+        },
+        {
+            id: 3,
+            category: "SILHOUETTE & CORPS",
+            title: "Liposculpture HD Vaser",
+            desc: "Redessin précis des contours de la silhouette, sculpture musculaire haute définition et rétraction cutanée par ultrasons Vaser.",
+            beforeImg: "/images/rhino_before.png",
+            afterImg: "/images/rhino_after.png",
+            tag1: "Technologie Ultrasons Vaser",
+            tag2: "7 à 10 jours"
+        },
+        {
+            id: 4,
+            category: "CHIRURGIE DU VISAGE",
+            title: "Blépharoplastie Sur-Mesure",
+            desc: "Rajeunissement du regard par résection de l'excès cutané des paupières et lissage des poches sans modifier l'expression du regard.",
+            beforeImg: "/images/bleph_before.png",
+            afterImg: "/images/bleph_after.png",
+            tag1: "Chirurgie des Paupières",
+            tag2: "5 à 7 jours"
+        }
+    ];
+
+    let currentResultModalIndex = 0;
+
+    function openResultModal(index) {
+        // Password guard
+        if (!isResultsUnlocked()) {
+            openResultsPasswordModal();
+            return;
+        }
+        currentResultModalIndex = index;
+        const data = galleryResultsData[index];
+        if (!data) return;
+
+        document.getElementById('modal-category').innerText = data.category;
+        document.getElementById('modal-title').innerText = data.title;
+        document.getElementById('modal-desc').innerText = data.desc;
+        document.getElementById('modal-tag1').innerText = data.tag1;
+        document.getElementById('modal-tag2').innerText = data.tag2;
+
+        const beforeImg = document.getElementById('modal-before-img');
+        const afterImg = document.getElementById('modal-after-img');
+        const handle = document.getElementById('modal-ba-handle');
+
+        if (beforeImg && afterImg && handle) {
+            beforeImg.src = data.beforeImg;
+            afterImg.src = data.afterImg;
+            beforeImg.style.clipPath = 'inset(0 50% 0 0)';
+            handle.style.left = '50%';
+        }
+
+        const modal = document.getElementById('result-modal');
+        if (modal) {
+            modal.classList.remove('hidden');
+            document.body.classList.add('overflow-hidden');
+        }
+    }
+
+    function closeResultModal() {
+        const modal = document.getElementById('result-modal');
+        if (modal) {
+            modal.classList.add('hidden');
+            document.body.classList.remove('overflow-hidden');
+        }
+    }
+
+    function navigateModalResult(direction) {
+        let newIndex = currentResultModalIndex + direction;
+        if (newIndex < 0) newIndex = galleryResultsData.length - 1;
+        if (newIndex >= galleryResultsData.length) newIndex = 0;
+        openResultModal(newIndex);
+    }
+
+    function initModalSlider() {
+        const slider = document.getElementById('modal-ba-slider');
+        const beforeImg = document.getElementById('modal-before-img');
+        const handle = document.getElementById('modal-ba-handle');
+        let isDragging = false;
+
+        if (!slider || !beforeImg || !handle) return;
+
+        function setModalPos(clientX) {
+            const rect = slider.getBoundingClientRect();
+            let x = clientX - rect.left;
+            if (x < 0) x = 0;
+            if (x > rect.width) x = rect.width;
+            const pct = (x / rect.width) * 100;
+            beforeImg.style.clipPath = `inset(0 ${100 - pct}% 0 0)`;
+            handle.style.left = pct + '%';
+        }
+
+        slider.addEventListener('mousedown', (e) => {
+            isDragging = true;
+            setModalPos(e.clientX);
+        });
+
+        window.addEventListener('mousemove', (e) => {
+            if (!isDragging) return;
+            setModalPos(e.clientX);
+        });
+
+        window.addEventListener('mouseup', () => {
+            isDragging = false;
+        });
+
+        slider.addEventListener('touchstart', (e) => {
+            isDragging = true;
+            if (e.touches && e.touches[0]) setModalPos(e.touches[0].clientX);
+        });
+
+        window.addEventListener('touchmove', (e) => {
+            if (!isDragging) return;
+            if (e.touches && e.touches[0]) setModalPos(e.touches[0].clientX);
+        });
+
+        window.addEventListener('touchend', () => {
+            isDragging = false;
+        });
+    }
+
+    window.addEventListener('keydown', (e) => {
+        const modal = document.getElementById('result-modal');
+        if (modal && !modal.classList.contains('hidden')) {
+            if (e.key === 'Escape') {
+                closeResultModal();
+            } else if (e.key === 'ArrowLeft') {
+                navigateModalResult(-1);
+            } else if (e.key === 'ArrowRight') {
+                navigateModalResult(1);
+            }
+        }
+
+        const vModal = document.getElementById('video-modal');
+        if (vModal && !vModal.classList.contains('hidden')) {
+            if (e.key === 'Escape') {
+                closeVideoModal();
+            }
+        }
+    });
+
+    // Video Testimonial Modal Controller
+    function openVideoModal(videoSrc, title) {
+        const modal = document.getElementById('video-modal');
+        const modalTitle = document.getElementById('video-modal-title');
+        const container = document.getElementById('index-video-container');
+
+        if (modalTitle && title) {
+            modalTitle.innerText = title;
+        }
+
+        if (container && videoSrc) {
+            let isYouTube = videoSrc.includes('youtube.com') || videoSrc.includes('youtu.be');
+
+            if (isYouTube) {
+                let embedUrl = videoSrc;
+                if (videoSrc.includes('watch?v=')) {
+                    const parts = videoSrc.split('v=');
+                    const vId = parts[1].split('&')[0];
+                    embedUrl = 'https://www.youtube.com/embed/' + vId;
+                } else if (videoSrc.includes('youtu.be/')) {
+                    const parts = videoSrc.split('youtu.be/');
+                    const vId = parts[1].split('?')[0];
+                    embedUrl = 'https://www.youtube.com/embed/' + vId;
+                }
+                embedUrl += (embedUrl.includes('?') ? '&' : '?') + 'autoplay=1&rel=0';
+
+                container.innerHTML = `<iframe src="${embedUrl}" title="${title || 'Vidéo'}" class="w-full h-full border-0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>`;
+            } else {
+                container.innerHTML = `<video id="modal-video-player" controls autoplay class="w-full h-full object-contain">
+                    <source src="${videoSrc}" type="video/mp4"/>
+                    Votre navigateur ne supporte pas la lecture de vidéo.
+                </video>`;
+            }
+
+            if (modal) {
+                modal.classList.remove('hidden');
+                modal.classList.add('flex');
+                document.body.classList.add('overflow-hidden');
+            }
+        }
+    }
+
+    function closeVideoModal() {
+        const modal = document.getElementById('video-modal');
+        const container = document.getElementById('index-video-container');
+
+        if (container) {
+            container.innerHTML = '';
+        }
+
+        if (modal) {
+            modal.classList.add('hidden');
+            modal.classList.remove('flex');
+            document.body.classList.remove('overflow-hidden');
+        }
+    }
+
+    function initHeroSlider() {
+        const mainVid = document.getElementById('hero-main-video');
+        if (mainVid) {
+            mainVid.muted = true;
+            mainVid.defaultMuted = true;
+            mainVid.play().catch(e => console.log("Hero video autoplay info:", e));
+        }
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+        initHeroSlider();
+        initGalleryCarousel();
+        initMiniCardSliders();
+        initModalSlider();
+        applyResultsBlurState(); // Restore blur/unlock from sessionStorage
+    });
+</script>
+}

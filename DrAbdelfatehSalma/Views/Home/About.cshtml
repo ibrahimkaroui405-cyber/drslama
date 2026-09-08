@@ -1,0 +1,654 @@
+@{
+    ViewData["Title"] = "CV et Formation - Pr. Abdelfateh Slama - Chirurgie Plastique & Esthétique Sousse";
+}
+
+<style>
+    .reveal {
+        opacity: 0;
+        transform: translateY(24px);
+        transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .reveal.active {
+        opacity: 1;
+        transform: translateY(0);
+    }
+    .stagger-1 { transition-delay: 0.1s; }
+    .stagger-2 { transition-delay: 0.2s; }
+    .stagger-3 { transition-delay: 0.3s; }
+    .stagger-4 { transition-delay: 0.4s; }
+
+    .gold-gradient-text {
+        background: linear-gradient(135deg, #c2a878 0%, #d9c69d 50%, #c2a878 100%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+    }
+
+    .luxury-card {
+        background: #ffffff;
+        border: 1px solid rgba(194, 168, 120, 0.25);
+        border-radius: 1.25rem;
+        transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .luxury-card:hover {
+        border-color: rgba(194, 168, 120, 0.6);
+        transform: translateY(-3px);
+        box-shadow: 0 20px 40px -15px rgba(194, 168, 120, 0.15);
+    }
+</style>
+
+<!-- ============================================ -->
+<!-- HERO SECTION: EDITORIAL LUXURY & METRICS (HEADER KEPT) -->
+<!-- ============================================ --><section class="pt-28 md:pt-32 pb-14 md:pb-16 px-6 md:px-margin-desktop max-w-container-max mx-auto border-b border-gold/20">
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-14 items-center">
+        
+        <!-- Text Column -->
+        <div class="lg:col-span-6 reveal order-2 lg:order-1 active" id="hero-reveal">
+            <div class="flex items-center gap-3 mb-4">
+                <span class="w-10 h-[1px] bg-gold"></span>
+                <span class="font-label-caps text-gold text-[10px] tracking-[0.3em] uppercase font-bold">PR. ABDELFATEH SLAMA • SOUSSE</span>
+            </div>
+            
+            <h1 class="font-display-lg text-4xl md:text-5xl lg:text-6xl leading-[1.08] mb-3 text-primary font-black">
+                Curriculum Vitae <br/>
+                <span class="italic font-light text-gold font-serif">du Professeur Slama</span>
+            </h1>
+
+            <p class="font-label-caps text-xs text-primary/80 font-bold tracking-widest uppercase mb-5">
+                Chirurgie Esthétique • Chirurgie de la Face
+            </p>
+            
+            <div class="font-body-md text-primary/80 leading-relaxed mb-8 max-w-xl text-sm md:text-base space-y-4">
+                <p>
+                    Le Pr SLAMA est doublement qualifié : en chirurgie esthétique de la face et en chirurgie esthétique morphologique. En effet, le Pr SLAMA a fait ses études et sa formation en Tunisie et en France. Il est diplômé en chirurgie de la face et qualifié par le Collège Français en chirurgie plastique et esthétique.
+                </p>
+                <p>
+                    Grâce à ses diplômes tunisiens et français et des années de formation au sein des plus grands centres hospitaliers et universitaires en Tunisie et en France, le Pr SLAMA a forgé une grande expérience, depuis les années 2000, et une expertise solide dans les domaines de la chirurgie esthétique, réparatrice et du visage.
+                </p>
+
+            </div>
+            
+            <div class="flex flex-col sm:flex-row gap-4">
+                <a asp-controller="Home" asp-action="Contact" class="gold-gradient text-white font-label-caps text-[11px] tracking-widest px-8 py-4 hover:opacity-95 transition-all duration-300 text-center shadow-xl font-bold rounded-full">
+                    PRENDRE RENDEZ-VOUS À SOUSSE
+                </a>
+                <a href="#diplomes" class="border border-gold/40 text-primary font-label-caps text-[11px] tracking-widest px-8 py-4 hover:border-gold hover:text-gold hover:bg-gold/5 transition-all duration-300 text-center font-bold rounded-full">
+                    CONSULTER LE CV DÉTAILLÉ
+                </a>
+            </div>
+        </div>
+        
+        <!-- Images Column: Slightly Larger & Centered -->
+        <div class="lg:col-span-6 reveal stagger-1 order-1 lg:order-2 active flex items-center justify-center">
+            <div class="grid grid-cols-2 gap-4 w-full max-w-lg mx-auto items-center">
+                <!-- Portrait Image -->
+                <div class="relative w-full aspect-[3/4] overflow-hidden bg-surface-container-low rounded-2xl border border-gold/30 shadow-2xl group">
+                    <img src="/images/drpic.jpg" class="w-full h-full object-cover object-top transition-transform duration-[2.5s] group-hover:scale-105" alt="Pr. Abdelfateh Slama" />
+                    <div class="absolute bottom-3.5 left-3.5 right-3.5 bg-white/95 backdrop-blur-md p-3 rounded-xl border border-gold/30 shadow-lg">
+                        <p class="font-label-caps text-[9px] tracking-[0.2em] text-gold font-bold mb-0.5">SOUSSE • TUNISIE</p>
+                        <p class="font-headline-sm text-xs md:text-sm font-bold text-primary">Pr. Abdelfateh Slama</p>
+                    </div>
+                </div>
+                <!-- Surgeon at Work Image -->
+                <div class="relative w-full aspect-[3/4] overflow-hidden bg-surface-container-low rounded-2xl border border-gold/30 shadow-2xl group">
+                    <img src="/images/dr_operating_real.png" class="w-full h-full object-cover object-top transition-transform duration-[2.5s] group-hover:scale-105" alt="Pr. Slama au bloc opératoire" />
+                    <div class="absolute bottom-3.5 left-3.5 right-3.5 bg-white/95 backdrop-blur-md p-3 rounded-xl border border-gold/30 shadow-lg">
+                        <p class="font-label-caps text-[9px] tracking-[0.2em] text-gold font-bold mb-0.5">EXCELLENCE CHIRURGICALE</p>
+                        <p class="font-headline-sm text-xs md:text-sm font-bold text-primary">Bloc Opératoire</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</section>       </div>
+
+    </div>
+</section>
+
+<!-- ============================================ -->
+<!-- SECTION 1: DIPLÔMES ET COMPÉTENCES -->
+<!-- ============================================ -->
+<section id="diplomes" class="py-24 px-6 md:px-margin-desktop max-w-container-max mx-auto border-b border-gold/20">
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16">
+        
+        <!-- Left Title -->
+        <div class="lg:col-span-4 reveal">
+            <div class="flex items-center gap-3 mb-4">
+                <span class="w-10 h-[1px] bg-gold"></span>
+                <span class="font-label-caps text-gold text-[10px] tracking-[0.3em] uppercase font-bold">ACCRÉDITATIONS & TITRES</span>
+            </div>
+            <h2 class="font-display-lg text-3xl md:text-5xl font-bold text-primary mb-6">
+                Diplômes & <br/>
+                <span class="italic font-light text-gold font-serif">Compétences</span>
+            </h2>
+            <p class="font-body-md text-primary/75 text-sm md:text-base leading-relaxed mb-6">
+                Une formation académique de haut niveau acquise en France et en Tunisie.
+            </p>
+            <div class="p-6 bg-[#faf8f5] border border-gold/30 rounded-2xl space-y-3">
+                <div class="flex items-center gap-3 text-gold">
+                    <span class="material-symbols-outlined text-2xl">verified</span>
+                    <strong class="text-xs font-label-caps tracking-widest text-primary font-bold">QUALIFICATIONS OFFICIELLES</strong>
+                </div>
+                <p class="text-xs text-primary/70 font-body-md leading-relaxed">
+                    Double compétence reconnue en Chirurgie Plastique & Esthétique et en Chirurgie de la Face.
+                </p>
+            </div>
+        </div>
+
+        <!-- Right Timeline Grid -->
+        <div class="lg:col-span-8 space-y-5">
+            
+            <!-- Item 2005 -->
+            <div class="luxury-card p-6 md:p-8 reveal stagger-1 flex flex-col md:flex-row md:items-center justify-between gap-6">
+                <div class="flex gap-5 items-start">
+                    <span class="font-display-lg text-xl md:text-2xl font-black text-gold border-b-2 border-gold/40 pb-1">2005</span>
+                    <div>
+                        <h3 class="font-display-lg text-lg md:text-xl font-bold text-primary">Collège Français</h3>
+                        <p class="font-body-md text-sm text-primary/75 mt-1">Diplôme de compétence en Chirurgie Plastique et Esthétique</p>
+                    </div>
+                </div>
+                <span class="inline-block px-4 py-2 border border-gold/30 text-gold text-[10px] font-label-caps tracking-widest font-bold self-start md:self-center bg-gold/5 rounded-full">
+                    France
+                </span>
+            </div>
+
+            <!-- Item 2002 - Lille II -->
+            <div class="luxury-card p-6 md:p-8 reveal stagger-2 flex flex-col md:flex-row md:items-center justify-between gap-6">
+                <div class="flex gap-5 items-start">
+                    <span class="font-display-lg text-xl md:text-2xl font-black text-gold border-b-2 border-gold/40 pb-1">2002</span>
+                    <div>
+                        <h3 class="font-display-lg text-lg md:text-xl font-bold text-primary">Université de Lille II - France</h3>
+                        <p class="font-body-md text-sm text-primary/75 mt-1">Diplôme de Formation Spécialisée en Chirurgie Plastique et Esthétique</p>
+                    </div>
+                </div>
+                <span class="inline-block px-4 py-2 border border-gold/30 text-gold text-[10px] font-label-caps tracking-widest font-bold self-start md:self-center bg-gold/5 rounded-full">
+                    Spécialisation
+                </span>
+            </div>
+
+            <!-- Item 2002 - Microchirurgie -->
+            <div class="luxury-card p-6 md:p-8 reveal stagger-3 flex flex-col md:flex-row md:items-center justify-between gap-6">
+                <div class="flex gap-5 items-start">
+                    <span class="font-display-lg text-xl md:text-2xl font-black text-gold border-b-2 border-gold/40 pb-1">2002</span>
+                    <div>
+                        <h3 class="font-display-lg text-lg md:text-xl font-bold text-primary">Université de Lille II - France</h3>
+                        <p class="font-body-md text-sm text-primary/75 mt-1">Diplôme de Chirurgie Microscopique</p>
+                    </div>
+                </div>
+                <span class="inline-block px-4 py-2 border border-gold/30 text-gold text-[10px] font-label-caps tracking-widest font-bold self-start md:self-center bg-gold/5 rounded-full">
+                    Microchirurgie
+                </span>
+            </div>
+
+            <!-- Item 2000 - Maxillo-Faciale -->
+            <div class="luxury-card p-6 md:p-8 reveal stagger-4 flex flex-col md:flex-row md:items-center justify-between gap-6">
+                <div class="flex gap-5 items-start">
+                    <span class="font-display-lg text-xl md:text-2xl font-black text-gold border-b-2 border-gold/40 pb-1">2000</span>
+                    <div>
+                        <h3 class="font-display-lg text-lg md:text-xl font-bold text-primary">Diplôme de Spécialiste</h3>
+                        <p class="font-body-md text-sm text-primary/75 mt-1">Spécialiste en Chirurgie Maxillo-Faciale et Esthétique</p>
+                    </div>
+                </div>
+                <span class="inline-block px-4 py-2 border border-gold/30 text-gold text-[10px] font-label-caps tracking-widest font-bold self-start md:self-center bg-gold/5 rounded-full">
+                    Chirurgie de la Face
+                </span>
+            </div>
+
+            <!-- Item 1999 - Sousse -->
+            <div class="luxury-card p-6 md:p-8 reveal stagger-4 flex flex-col md:flex-row md:items-center justify-between gap-6">
+                <div class="flex gap-5 items-start">
+                    <span class="font-display-lg text-xl md:text-2xl font-black text-gold border-b-2 border-gold/40 pb-1">1999</span>
+                    <div>
+                        <h3 class="font-display-lg text-lg md:text-xl font-bold text-primary">Faculté de Médecine de Sousse</h3>
+                        <p class="font-body-md text-sm text-primary/75 mt-1">Diplôme de Docteur en Médecine</p>
+                    </div>
+                </div>
+                <span class="inline-block px-4 py-2 border border-gold/30 text-gold text-[10px] font-label-caps tracking-widest font-bold self-start md:self-center bg-gold/5 rounded-full">
+                    Doctorat
+                </span>
+            </div>
+
+            <!-- Societies Affiliations -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4 pt-4">
+                <div class="p-6 bg-[#faf8f5] border border-gold/30 rounded-2xl flex items-center gap-4">
+                    <div class="w-12 h-12 rounded-full bg-gold/10 border border-gold/30 flex items-center justify-center text-gold font-bold flex-shrink-0">
+                        STCE
+                    </div>
+                    <div>
+                        <span class="text-[10px] font-label-caps text-gold font-bold block uppercase">2009 - AUJOURD'HUI</span>
+                        <strong class="text-xs font-bold text-primary block">Membre de la Société Tunisienne de Chirurgie Esthétique</strong>
+                    </div>
+                </div>
+
+                <div class="p-6 bg-[#faf8f5] border border-gold/30 rounded-2xl flex items-center gap-4">
+                    <div class="w-12 h-12 rounded-full bg-gold/10 border border-gold/30 flex items-center justify-center text-gold font-bold flex-shrink-0">
+                        ISAPS
+                    </div>
+                    <div>
+                        <span class="text-[10px] font-label-caps text-gold font-bold block uppercase">2014 - AUJOURD'HUI</span>
+                        <strong class="text-xs font-bold text-primary block">Membre de la Société Internationale de Chirurgie Plastique et Esthétique</strong>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+<!-- ============================================ -->
+<!-- SECTION 2: EXPÉRIENCES PROFESSIONNELLES -->
+<!-- ============================================ -->
+<section class="py-24 px-6 md:px-margin-desktop bg-[#faf8f5] border-b border-gold/20">
+    <div class="max-w-container-max mx-auto">
+        <div class="text-center max-w-3xl mx-auto mb-16 reveal">
+            <span class="font-label-caps text-[10px] tracking-[0.3em] text-gold font-bold block mb-3 uppercase">PARCOURS HOSPITALIER & UNIVERSITAIRE</span>
+            <h2 class="font-display-lg text-4xl md:text-5xl font-bold text-primary mb-4">Expériences Professionnelles</h2>
+            <p class="font-body-md text-primary/70 text-sm md:text-base">Une carrière dédiée à la pratique chirurgicale, l'enseignement et l'innovation médicale.</p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            
+            <!-- Card 1: France Interne -->
+            <div class="bg-white p-8 border border-gold/30 rounded-3xl shadow-sm hover:shadow-xl transition-all duration-300 flex flex-col justify-between">
+                <div class="space-y-4">
+                    <span class="font-label-caps text-[11px] text-gold font-bold tracking-widest block uppercase">2000, 2001, 2002</span>
+                    <h3 class="font-display-lg text-lg font-bold text-primary leading-snug">Interne en Chirurgie plastique et Esthétique à la cité hospitalière - Lille - France</h3>
+                </div>
+                <div class="pt-6 border-t border-gold/15 mt-6 flex items-center justify-between text-xs text-gold font-semibold">
+                    <span>Lille, France</span>
+                    <span class="material-symbols-outlined text-sm">local_hospital</span>
+                </div>
+            </div>
+
+            <!-- Card 2: Hôpital Roger Salingro -->
+            <div class="bg-white p-8 border border-gold/30 rounded-3xl shadow-sm hover:shadow-xl transition-all duration-300 flex flex-col justify-between">
+                <div class="space-y-4">
+                    <span class="font-label-caps text-[11px] text-gold font-bold tracking-widest block uppercase">2003</span>
+                    <h3 class="font-display-lg text-lg font-bold text-primary leading-snug">Chirurgien Attaché à l’Hôpital Roger Salingro - Lille - France</h3>
+                </div>
+                <div class="pt-6 border-t border-gold/15 mt-6 flex items-center justify-between text-xs text-gold font-semibold">
+                    <span>Lille, France</span>
+                    <span class="material-symbols-outlined text-sm">verified</span>
+                </div>
+            </div>
+
+            <!-- Card 3: Professeur Agrégé Sahloul -->
+            <div class="bg-white p-8 border border-gold/30 rounded-3xl shadow-sm hover:shadow-xl transition-all duration-300 flex flex-col justify-between">
+                <div class="space-y-4">
+                    <span class="font-label-caps text-[11px] text-gold font-bold tracking-widest block uppercase">2009 - 2017</span>
+                    <h3 class="font-display-lg text-lg font-bold text-primary leading-snug">Professeur Agrégé en médecine et Praticien à l’hôpital Sahloul de Sousse - Tunisie</h3>
+                </div>
+                <div class="pt-6 border-t border-gold/15 mt-6 flex items-center justify-between text-xs text-gold font-semibold">
+                    <span>Hôpital Sahloul Sousse</span>
+                    <span class="material-symbols-outlined text-sm">school</span>
+                </div>
+            </div>
+
+            <!-- Card 4: Cliniques Privées -->
+            <div class="bg-white p-8 border border-gold/30 rounded-3xl shadow-sm hover:shadow-xl transition-all duration-300 flex flex-col justify-between md:col-span-2 lg:col-span-1">
+                <div class="space-y-4">
+                    <span class="font-label-caps text-[11px] text-gold font-bold tracking-widest block uppercase">2017 - Aujourd’hui</span>
+                    <h3 class="font-display-lg text-lg font-bold text-primary leading-snug">Professeur en médecine et Praticien dans les cliniques Privées de Sousse</h3>
+                </div>
+                <div class="pt-6 border-t border-gold/15 mt-6 flex items-center justify-between text-xs text-gold font-semibold">
+                    <span>Cliniques Privées de Sousse</span>
+                    <span class="material-symbols-outlined text-sm">apartment</span>
+                </div>
+            </div>
+
+            <!-- Card 5: Enseignement & Recherche (Wide 2-col) -->
+            <div class="bg-[#faf8f5] p-8 border border-gold/40 rounded-3xl shadow-md md:col-span-2 lg:col-span-2 flex flex-col justify-between">
+                <div class="space-y-4">
+                    <div class="flex items-center gap-3">
+                        <span class="font-label-caps text-[11px] text-gold font-bold tracking-widest block uppercase">2004 - Aujourd’hui</span>
+                    </div>
+                    
+                    <ul class="space-y-3 pt-2">
+                        <li class="flex items-start gap-2.5 text-sm text-primary/85 font-body-md">
+                            <span class="w-2 h-2 rounded-full bg-gold mt-1.5 flex-shrink-0"></span>
+                            <span>Enseignant à la Faculté de médecine et l’école supérieure de santé de Sousse</span>
+                        </li>
+                        <li class="flex items-start gap-2.5 text-sm text-primary/85 font-body-md">
+                            <span class="w-2 h-2 rounded-full bg-gold mt-1.5 flex-shrink-0"></span>
+                            <span>Membre et Président de jury des examens de spécialité et des concours en médecine</span>
+                        </li>
+                        <li class="flex items-start gap-2.5 text-sm text-primary/85 font-body-md">
+                            <span class="w-2 h-2 rounded-full bg-gold mt-1.5 flex-shrink-0"></span>
+                            <span>Conférenciers et organisateur de Workshops et de Congrès en médecine</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+<!-- ============================================ -->
+<!-- SECTION 3: ACTIVITÉS PROFESSIONNELLES -->
+<!-- ============================================ -->
+<section class="py-24 px-6 md:px-margin-desktop max-w-container-max mx-auto border-b border-gold/20">
+    <div class="text-center max-w-3xl mx-auto mb-16 reveal">
+        <span class="font-label-caps text-[10px] tracking-[0.3em] text-gold font-bold block mb-3 uppercase">DOMAINES D'EXPERTISE CHIRURGICALE & MÉDICALE</span>
+        <h2 class="font-display-lg text-4xl md:text-5xl font-bold text-primary mb-4">Activités Professionnelles</h2>
+        <p class="font-body-md text-primary/70 text-sm md:text-base">Prise en charge globale esthétique, réparatrice et régénérative.</p>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 lg:grid-rows-2 gap-8">
+        
+        <!-- Activity 1: Chirurgie Esthétique du Visage -->
+        <div class="relative rounded-3xl overflow-hidden shadow-lg border border-gold/30 group transition-all duration-500 hover:shadow-2xl hover:border-gold hover:-translate-y-1 lg:col-span-2 lg:row-span-2 h-[340px] md:h-[380px] lg:h-[792px] cursor-pointer bg-neutral-900">
+            <!-- Background Image: Crystal Clear by Default -->
+            <div class="absolute inset-0 z-0 overflow-hidden">
+                <img src="/images/ch.png" alt="Chirurgie Esthétique du Visage" class="w-full h-full object-cover object-center group-hover:scale-110 transition-transform duration-700 brightness-[1.02] contrast-[1.03]" />
+                <div class="absolute inset-0 bg-gradient-to-t from-black/95 via-black/85 to-black/60 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"></div>
+            </div>
+
+            <!-- DEFAULT STATE LAYER (Hides completely on hover) -->
+            <div class="absolute inset-0 z-10 p-6 flex flex-col justify-between group-hover:opacity-0 group-hover:pointer-events-none transition-all duration-300">
+                <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-black/60 backdrop-blur-md border border-gold/40 text-gold text-[10px] font-label-caps font-bold tracking-widest uppercase shadow w-fit">
+                    <span class="material-symbols-outlined text-sm">face</span>
+                    <span>SPÉCIALITÉ FACIALE</span>
+                </div>
+
+                <div class="bg-black/75 backdrop-blur-md p-4 rounded-2xl border border-gold/40 shadow-xl flex items-center justify-between">
+                    <div>
+                        <h3 class="font-display-lg text-xl font-bold text-white mb-0.5">Chirurgie du Visage</h3>
+                        <span class="text-[10px] text-gold font-body-md font-semibold">Survolez pour les détails →</span>
+                    </div>
+                    <div class="w-8 h-8 rounded-full gold-gradient text-white flex items-center justify-center font-bold text-sm shadow flex-shrink-0">
+                        →
+                    </div>
+                </div>
+            </div>
+
+            <!-- HOVER STATE LAYER (Shows smoothly on hover) -->
+            <div class="absolute inset-0 z-20 p-6 flex flex-col justify-between opacity-0 pointer-events-none group-hover:opacity-100 group-hover:pointer-events-auto transition-all duration-500 text-white">
+                <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-gold/20 backdrop-blur-md border border-gold/40 text-gold text-[10px] font-label-caps font-bold tracking-widest uppercase shadow w-fit">
+                    <span class="material-symbols-outlined text-sm">verified</span>
+                    <span>PR. ABDELFATEH SLAMA</span>
+                </div>
+
+                <div class="space-y-3 pt-2">
+                    <h3 class="font-display-lg text-2xl font-bold text-white">
+                        Chirurgie Esthétique du Visage
+                    </h3>
+
+                    <p class="font-body-md text-xs text-white/90 leading-relaxed">
+                        Harmonie et rajeunissement des traits faciaux avec cicatrices très discrètes.
+                    </p>
+
+                    <ul class="space-y-1.5 pt-2 border-t border-white/20">
+                        <li class="flex items-center gap-2 text-xs text-white font-medium">
+                            <span class="w-2 h-2 rounded-full bg-gold flex-shrink-0"></span> Rhinoplastie
+                        </li>
+                        <li class="flex items-center gap-2 text-xs text-white font-medium">
+                            <span class="w-2 h-2 rounded-full bg-gold flex-shrink-0"></span> Lifting Cervico-Facial
+                        </li>
+                        <li class="flex items-center gap-2 text-xs text-white font-medium">
+                            <span class="w-2 h-2 rounded-full bg-gold flex-shrink-0"></span> Blépharoplastie (Paupières)
+                        </li>
+                        <li class="flex items-center gap-2 text-xs text-white font-medium">
+                            <span class="w-2 h-2 rounded-full bg-gold flex-shrink-0"></span> Otoplastie (Oreilles)
+                        </li>
+                    </ul>
+
+                    <div class="pt-2">
+                        <a asp-controller="Home" asp-action="Chirurgies" class="inline-flex items-center gap-2 text-xs font-label-caps gold-gradient text-white px-5 py-2.5 rounded-full font-bold tracking-wider shadow hover:opacity-90 transition-all">
+                            DÉCOUVRIR LE VISAGE →
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Activity 2: Chirurgie de la Silhouette -->
+        <div class="relative rounded-3xl overflow-hidden shadow-lg border border-gold/30 group transition-all duration-500 hover:shadow-2xl hover:border-gold hover:-translate-y-1 lg:col-span-2 h-[340px] md:h-[380px] cursor-pointer bg-neutral-900">
+            <!-- Background Image: Crystal Clear by Default -->
+            <div class="absolute inset-0 z-0 overflow-hidden">
+                <img src="/images/ch5.png" alt="Chirurgie de la Silhouette" class="w-full h-full object-cover object-center group-hover:scale-110 transition-transform duration-700 brightness-[1.02] contrast-[1.03]" />
+                <div class="absolute inset-0 bg-gradient-to-t from-black/95 via-black/85 to-black/60 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"></div>
+            </div>
+
+            <!-- DEFAULT STATE LAYER (Hides completely on hover) -->
+            <div class="absolute inset-0 z-10 p-6 flex flex-col justify-between group-hover:opacity-0 group-hover:pointer-events-none transition-all duration-300">
+                <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-black/60 backdrop-blur-md border border-gold/40 text-gold text-[10px] font-label-caps font-bold tracking-widest uppercase shadow w-fit">
+                    <span class="material-symbols-outlined text-sm">accessibility_new</span>
+                    <span>SILHOUETTE & CORPS</span>
+                </div>
+
+                <div class="bg-black/75 backdrop-blur-md p-4 rounded-2xl border border-gold/40 shadow-xl flex items-center justify-between">
+                    <div>
+                        <h3 class="font-display-lg text-xl font-bold text-white mb-0.5">Chirurgie Silhouette</h3>
+                        <span class="text-[10px] text-gold font-body-md font-semibold">Survolez pour les détails →</span>
+                    </div>
+                    <div class="w-8 h-8 rounded-full gold-gradient text-white flex items-center justify-center font-bold text-sm shadow flex-shrink-0">
+                        →
+                    </div>
+                </div>
+            </div>
+
+            <!-- HOVER STATE LAYER (Shows smoothly on hover) -->
+            <div class="absolute inset-0 z-20 p-6 flex flex-col justify-between opacity-0 pointer-events-none group-hover:opacity-100 group-hover:pointer-events-auto transition-all duration-500 text-white">
+                <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-gold/20 backdrop-blur-md border border-gold/40 text-gold text-[10px] font-label-caps font-bold tracking-widest uppercase shadow w-fit">
+                    <span class="material-symbols-outlined text-sm">verified</span>
+                    <span>PR. ABDELFATEH SLAMA</span>
+                </div>
+
+                <div class="space-y-3 pt-2">
+                    <h3 class="font-display-lg text-2xl font-bold text-white">
+                        Chirurgie de la Silhouette
+                    </h3>
+
+                    <p class="font-body-md text-xs text-white/90 leading-relaxed">
+                        Remodelage harmonieux des contours et rétablissement des proportions.
+                    </p>
+
+                    <ul class="space-y-1.5 pt-2 border-t border-white/20">
+                        <li class="flex items-center gap-2 text-xs text-white font-medium">
+                            <span class="w-2 h-2 rounded-full bg-gold flex-shrink-0"></span> Liposuccion Vaser HD
+                        </li>
+                        <li class="flex items-center gap-2 text-xs text-white font-medium">
+                            <span class="w-2 h-2 rounded-full bg-gold flex-shrink-0"></span> Abdominoplastie &amp; Body Sculpt
+                        </li>
+                        <li class="flex items-center gap-2 text-xs text-white font-medium">
+                            <span class="w-2 h-2 rounded-full bg-gold flex-shrink-0"></span> Lifting Bras &amp; Cuisses
+                        </li>
+                        <li class="flex items-center gap-2 text-xs text-white font-medium">
+                            <span class="w-2 h-2 rounded-full bg-gold flex-shrink-0"></span> Lipofilling / BBL Fessier
+                        </li>
+                    </ul>
+
+                    <div class="pt-2">
+                        <a asp-controller="Home" asp-action="Chirurgies" class="inline-flex items-center gap-2 text-xs font-label-caps gold-gradient text-white px-5 py-2.5 rounded-full font-bold tracking-wider shadow hover:opacity-90 transition-all">
+                            DÉCOUVRIR LA SILHOUETTE →
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Activity 3: Chirurgie Réparatrice -->
+        <div class="relative rounded-3xl overflow-hidden shadow-lg border border-gold/30 group transition-all duration-500 hover:shadow-2xl hover:border-gold hover:-translate-y-1 lg:col-span-1 h-[340px] md:h-[380px] cursor-pointer bg-neutral-900">
+            <!-- Background Image: Crystal Clear by Default -->
+            <div class="absolute inset-0 z-0 overflow-hidden">
+                <img src="/images/docr1.png" alt="Chirurgie Réparatrice" class="w-full h-full object-cover object-top group-hover:scale-110 transition-transform duration-700 brightness-[1.02] contrast-[1.03]" />
+                <div class="absolute inset-0 bg-gradient-to-t from-black/95 via-black/85 to-black/60 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"></div>
+            </div>
+
+            <!-- DEFAULT STATE LAYER (Hides completely on hover) -->
+            <div class="absolute inset-0 z-10 p-6 flex flex-col justify-between group-hover:opacity-0 group-hover:pointer-events-none transition-all duration-300">
+                <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-black/60 backdrop-blur-md border border-gold/40 text-gold text-[10px] font-label-caps font-bold tracking-widest uppercase shadow w-fit">
+                    <span class="material-symbols-outlined text-sm">healing</span>
+                    <span>RÉPARATRICE & RECONSTRUCTION</span>
+                </div>
+
+                <div class="bg-black/75 backdrop-blur-md p-4 rounded-2xl border border-gold/40 shadow-xl flex items-center justify-between">
+                    <div>
+                        <h3 class="font-display-lg text-xl font-bold text-white mb-0.5">Chirurgie Réparatrice</h3>
+                        <span class="text-[10px] text-gold font-body-md font-semibold">Survolez pour les détails →</span>
+                    </div>
+                    <div class="w-8 h-8 rounded-full gold-gradient text-white flex items-center justify-center font-bold text-sm shadow flex-shrink-0">
+                        →
+                    </div>
+                </div>
+            </div>
+
+            <!-- HOVER STATE LAYER (Shows smoothly on hover) -->
+            <div class="absolute inset-0 z-20 p-6 flex flex-col justify-between opacity-0 pointer-events-none group-hover:opacity-100 group-hover:pointer-events-auto transition-all duration-500 text-white">
+                <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-gold/20 backdrop-blur-md border border-gold/40 text-gold text-[10px] font-label-caps font-bold tracking-widest uppercase shadow w-fit">
+                    <span class="material-symbols-outlined text-sm">verified</span>
+                    <span>PR. ABDELFATEH SLAMA</span>
+                </div>
+
+                <div class="space-y-3 pt-2">
+                    <h3 class="font-display-lg text-2xl font-bold text-white">
+                        Chirurgie Réparatrice
+                    </h3>
+
+                    <p class="font-body-md text-xs text-white/90 leading-relaxed">
+                        Reconstruction plastique et rétablissement des fonctions et de l'esthétique.
+                    </p>
+
+                    <ul class="space-y-1.5 pt-2 border-t border-white/20">
+                        <li class="flex items-center gap-2 text-xs text-white font-medium">
+                            <span class="w-2 h-2 rounded-full bg-gold flex-shrink-0"></span> Reprise de Cicatrices Complexes
+                        </li>
+                        <li class="flex items-center gap-2 text-xs text-white font-medium">
+                            <span class="w-2 h-2 rounded-full bg-gold flex-shrink-0"></span> Malformations Congénitales
+                        </li>
+                        <li class="flex items-center gap-2 text-xs text-white font-medium">
+                            <span class="w-2 h-2 rounded-full bg-gold flex-shrink-0"></span> Tumeurs du Visage &amp; du Cou
+                        </li>
+                    </ul>
+
+                    <div class="pt-2">
+                        <a asp-controller="Home" asp-action="Reparatrice" class="inline-flex items-center gap-2 text-xs font-label-caps gold-gradient text-white px-5 py-2.5 rounded-full font-bold tracking-wider shadow hover:opacity-90 transition-all">
+                            CHIRURGIE RÉPARATRICE →
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Activity 4: Médecine Esthétique -->
+        <div class="relative rounded-3xl overflow-hidden shadow-lg border border-gold/30 group transition-all duration-500 hover:shadow-2xl hover:border-gold hover:-translate-y-1 lg:col-span-1 h-[340px] md:h-[380px] cursor-pointer bg-neutral-900">
+            <!-- Background Image: Crystal Clear by Default -->
+            <div class="absolute inset-0 z-0 overflow-hidden">
+                <img src="/images/imh.jpeg" alt="Médecine Esthétique" class="w-full h-full object-cover object-center group-hover:scale-110 transition-transform duration-700 brightness-[1.02] contrast-[1.03]" />
+                <div class="absolute inset-0 bg-gradient-to-t from-black/95 via-black/85 to-black/60 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"></div>
+            </div>
+
+            <!-- DEFAULT STATE LAYER (Hides completely on hover) -->
+            <div class="absolute inset-0 z-10 p-6 flex flex-col justify-between group-hover:opacity-0 group-hover:pointer-events-none transition-all duration-300">
+                <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-black/60 backdrop-blur-md border border-gold/40 text-gold text-[10px] font-label-caps font-bold tracking-widest uppercase shadow w-fit">
+                    <span class="material-symbols-outlined text-sm">vaccines</span>
+                    <span>MINI-INVASIF & INJECTIONS</span>
+                </div>
+
+                <div class="bg-black/75 backdrop-blur-md p-4 rounded-2xl border border-gold/40 shadow-xl flex items-center justify-between">
+                    <div>
+                        <h3 class="font-display-lg text-xl font-bold text-white mb-0.5">Médecine Esthétique</h3>
+                        <span class="text-[10px] text-gold font-body-md font-semibold">Survolez pour les détails →</span>
+                    </div>
+                    <div class="w-8 h-8 rounded-full gold-gradient text-white flex items-center justify-center font-bold text-sm shadow flex-shrink-0">
+                        →
+                    </div>
+                </div>
+            </div>
+
+            <!-- HOVER STATE LAYER (Shows smoothly on hover) -->
+            <div class="absolute inset-0 z-20 p-6 flex flex-col justify-between opacity-0 pointer-events-none group-hover:opacity-100 group-hover:pointer-events-auto transition-all duration-500 text-white">
+                <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-gold/20 backdrop-blur-md border border-gold/40 text-gold text-[10px] font-label-caps font-bold tracking-widest uppercase shadow w-fit">
+                    <span class="material-symbols-outlined text-sm">verified</span>
+                    <span>PR. ABDELFATEH SLAMA</span>
+                </div>
+
+                <div class="space-y-3 pt-2">
+                    <h3 class="font-display-lg text-2xl font-bold text-white">
+                        Médecine Esthétique
+                    </h3>
+
+                    <p class="font-body-md text-xs text-white/90 leading-relaxed">
+                        Traitements mini-invasifs sous anesthésie locale réalisés en cabinet.
+                    </p>
+
+                    <ul class="space-y-1.5 pt-2 border-t border-white/20">
+                        <li class="flex items-center gap-2 text-xs text-white font-medium">
+                            <span class="w-2 h-2 rounded-full bg-gold flex-shrink-0"></span> Injections de Botox
+                        </li>
+                        <li class="flex items-center gap-2 text-xs text-white font-medium">
+                            <span class="w-2 h-2 rounded-full bg-gold flex-shrink-0"></span> Comblement Acide Hyaluronique
+                        </li>
+                        <li class="flex items-center gap-2 text-xs text-white font-medium">
+                            <span class="w-2 h-2 rounded-full bg-gold flex-shrink-0"></span> Lipofilling Visage (Nano/MicroFat)
+                        </li>
+                    </ul>
+
+                    <div class="pt-2">
+                        <a asp-controller="Home" asp-action="Esthetique" class="inline-flex items-center gap-2 text-xs font-label-caps gold-gradient text-white px-5 py-2.5 rounded-full font-bold tracking-wider shadow hover:opacity-90 transition-all">
+                            MÉDECINE ESTHÉTIQUE →
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</section>
+
+<!-- ============================================ -->
+<!-- CALL TO ACTION (HARMONIZED CRYSTAL GLASS DESIGN) -->
+<!-- ============================================ -->
+<section class="relative py-32 md:py-44 px-6 md:px-margin-desktop text-white text-center overflow-hidden bg-black border-t border-gold/30">
+    <div class="absolute inset-0 z-0">
+        <img src="/images/office.png" alt="Cabinet Dr Slama Sousse" class="w-full h-full object-cover object-center opacity-95 scale-100 transition-transform duration-[10s] hover:scale-105" />
+        <div class="absolute inset-0 bg-black/15"></div>
+    </div>
+
+    <div class="relative z-10 max-w-3xl mx-auto bg-black/25 backdrop-blur-[2px] p-8 md:p-12 border border-white/30 shadow-2xl rounded-2xl">
+        <span class="font-label-caps text-[10px] tracking-[0.4em] text-white block mb-6 uppercase border border-white/40 inline-block px-4 py-1.5 bg-black/30 backdrop-blur-sm font-bold drop-shadow">
+            CONSULTATION PRIVÉE • SOUSSE
+        </span>
+        <h2 class="font-display-lg text-4xl md:text-6xl font-bold text-white mb-6 leading-tight drop-shadow-[0_3px_12px_rgba(0,0,0,0.85)]">
+            Échangez Directement avec le Pr. Slama.
+        </h2>
+        <p class="font-body-lg text-white mb-10 text-base md:text-lg leading-relaxed max-w-xl mx-auto drop-shadow-[0_2px_8px_rgba(0,0,0,0.85)] font-medium">
+            Bénéficiez d'une évaluation médicale personnalisée et attentive pour définir votre projet esthétique ou réparateur.
+        </p>
+
+        <div class="flex flex-col sm:flex-row gap-5 justify-center items-center">
+            <a asp-controller="Home" asp-action="Contact" class="bg-white text-primary font-label-caps text-[11px] tracking-widest px-10 py-5 hover:bg-neutral-200 transition-all duration-300 w-full sm:w-auto text-center shadow-2xl font-bold">
+                CONTACTEZ-NOUS
+            </a>
+            <a href="tel:+21673200000" class="border border-white/60 bg-black/30 backdrop-blur-sm text-white font-label-caps text-[11px] tracking-widest px-10 py-5 hover:bg-white hover:text-primary transition-all duration-300 w-full sm:w-auto text-center flex items-center justify-center gap-3 font-bold shadow-lg">
+                <span class="material-symbols-outlined text-sm">phone</span>
+                +216 73 200 000
+            </a>
+        </div>
+    </div>
+</section>
+
+@section Scripts {
+<script>
+    const observerOptions = {
+        threshold: 0.1,
+        rootMargin: '0px 0px -40px 0px'
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('active');
+            }
+        });
+    }, observerOptions);
+
+    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+    window.addEventListener('DOMContentLoaded', () => {
+        document.getElementById('hero-reveal')?.classList.add('active');
+    });
+</script>
+}

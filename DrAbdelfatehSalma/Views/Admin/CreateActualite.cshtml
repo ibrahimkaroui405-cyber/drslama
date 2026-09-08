@@ -1,0 +1,70 @@
+@model DrAbdelfatehSalma.Models.Actualite
+@{
+    Layout = "_AdminLayout";
+    ViewData["Title"] = "Ajouter une Actualité";
+}
+
+<div class="max-w-4xl mx-auto space-y-8">
+    <div class="border-b border-gold/20 pb-6 flex items-center justify-between">
+        <div>
+            <h1 class="font-display-lg text-2xl font-bold text-white mb-1">Ajouter une Actualité</h1>
+            <p class="text-xs text-gray-400">Créer une nouvelle publication, congrès ou innovation visible sur le site public.</p>
+        </div>
+        <a asp-controller="Admin" asp-action="Actualites" class="text-xs text-gray-400 hover:text-white flex items-center gap-1 font-bold">
+            ← Annuler et retourner
+        </a>
+    </div>
+
+    <form asp-controller="Admin" asp-action="CreateActualite" method="post" enctype="multipart/form-data" class="space-y-6 bg-[#121419] p-8 border border-gold/20 shadow-xl">
+        @Html.AntiForgeryToken()
+
+        <!-- Title -->
+        <div>
+            <label class="block text-xs font-bold text-gold uppercase mb-2">TITRE DE L'ACTUALITÉ *</label>
+            <input type="text" asp-for="Title" required placeholder="Ex: Présentation des Innovations en Piezo-Rhinoplastie HD" class="w-full p-3.5 bg-[#0c0d10] border border-gold/20 text-white text-xs focus:outline-none focus:border-gold" />
+        </div>
+
+        <!-- Excerpt -->
+        <div>
+            <label class="block text-xs font-bold text-gold uppercase mb-2">RÉSUMÉ COURT (affiché sur la carte)</label>
+            <textarea asp-for="Excerpt" rows="2" placeholder="Courte description affichée sur la carte de l'actualité..." class="w-full p-3.5 bg-[#0c0d10] border border-gold/20 text-white text-xs focus:outline-none focus:border-gold"></textarea>
+        </div>
+
+        <!-- Content -->
+        <div>
+            <label class="block text-xs font-bold text-gold uppercase mb-2">CONTENU COMPLET (optionnel)</label>
+            <textarea asp-for="Content" rows="5" placeholder="Contenu détaillé de l'actualité..." class="w-full p-3.5 bg-[#0c0d10] border border-gold/20 text-white text-xs focus:outline-none focus:border-gold"></textarea>
+        </div>
+
+        <!-- DateLabel -->
+        <div>
+            <label class="block text-xs font-bold text-gold uppercase mb-2">LABEL DE DATE (affiché sur la carte)</label>
+            <input type="text" asp-for="DateLabel" placeholder="Ex: AOÛT 2026 • SOUSSE / PARIS" class="w-full p-3.5 bg-[#0c0d10] border border-gold/20 text-white text-xs focus:outline-none focus:border-gold" />
+        </div>
+
+        <!-- Tags -->
+        <div>
+            <label class="block text-xs font-bold text-gold uppercase mb-2">TAGS (séparés par des virgules)</label>
+            <input type="text" asp-for="Tags" placeholder="Ex: #ISAPS2026,#RhinoplastiePiezo,#Sousse" class="w-full p-3.5 bg-[#0c0d10] border border-gold/20 text-white text-xs focus:outline-none focus:border-gold" />
+        </div>
+
+        <!-- Image -->
+        <div class="p-4 bg-[#0c0d10] border border-gold/20 rounded">
+            <label class="block text-xs font-bold text-gold uppercase mb-2">🖼️ IMAGE (Fichier uploadé ou URL)</label>
+            <input type="file" name="imageFile" accept="image/*" class="w-full p-2 bg-[#121419] border border-gold/20 text-white text-xs" />
+            <input type="text" asp-for="ImageUrl" placeholder="Ou URL image (ex: /images/mon-image.png)" class="w-full p-3.5 mt-2 bg-[#121419] border border-gold/20 text-white text-xs focus:outline-none focus:border-gold" />
+        </div>
+
+        <!-- Featured toggle -->
+        <div class="pt-4 border-t border-gold/20 flex items-center justify-between">
+            <label class="flex items-center gap-3 cursor-pointer">
+                <input type="checkbox" asp-for="IsFeatured" class="w-4 h-4 rounded bg-[#0c0d10] border-gold/40 text-gold focus:ring-gold" />
+                <span class="text-xs text-gold font-bold">⭐ Afficher en VEDETTE (grande bannière en haut de la section Actualités)</span>
+            </label>
+
+            <button type="submit" class="gold-gradient text-white font-label-caps text-xs py-4 px-8 hover:opacity-90 font-bold tracking-widest shadow">
+                PUBLIER L'ACTUALITÉ
+            </button>
+        </div>
+    </form>
+</div>

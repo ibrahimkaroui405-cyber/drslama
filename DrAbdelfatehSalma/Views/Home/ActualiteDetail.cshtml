@@ -1,0 +1,234 @@
+@model DrAbdelfatehSalma.Models.Actualite
+
+@{
+    ViewData["Title"] = $"{Model.Title} - Dr. Abdelfateh Slama";
+    var otherActualites = ViewBag.OtherActualites as List<DrAbdelfatehSalma.Models.Actualite> ?? new List<DrAbdelfatehSalma.Models.Actualite>();
+    var tags = !string.IsNullOrEmpty(Model.Tags) ? Model.Tags.Split(',', StringSplitOptions.RemoveEmptyEntries) : Array.Empty<string>();
+}
+
+<!-- Breadcrumb Navigation -->
+<div class="bg-ivory border-b border-gold/20 py-4 px-6 md:px-margin-desktop">
+    <div class="max-w-container-max mx-auto flex items-center justify-between text-xs font-label-caps tracking-widest text-primary/60">
+        <div class="flex items-center gap-2 flex-wrap">
+            <a asp-controller="Home" asp-action="Index" class="hover:text-gold transition-colors font-bold">ACCUEIL</a>
+            <span class="text-gold">/</span>
+            <a asp-controller="Home" asp-action="Temoignages" asp-route-tab="actualites" class="hover:text-gold transition-colors font-bold">TÉMOIGNAGES &amp; ACTUALITÉS</a>
+            <span class="text-gold">/</span>
+            <span class="text-primary font-bold truncate max-w-xs md:max-w-md">@Model.Title.ToUpper()</span>
+        </div>
+        <a asp-controller="Home" asp-action="Temoignages" asp-route-tab="actualites" class="hidden sm:inline-flex items-center gap-1 text-gold hover:text-primary font-bold transition-colors">
+            <span class="material-symbols-outlined text-sm">arrow_back</span>
+            <span>RETOUR AUX ACTUALITÉS</span>
+        </a>
+    </div>
+</div>
+
+<!-- ============================================ -->
+<!-- 1. ARTICLE HEADER SECTION                    -->
+<!-- ============================================ -->
+<section class="py-16 md:py-20 px-6 md:px-margin-desktop bg-white border-b border-gold/20">
+    <div class="max-w-4xl mx-auto text-center space-y-6">
+        
+        <!-- Category & Date Badge -->
+        <div class="flex flex-wrap items-center justify-center gap-3">
+            <span class="gold-gradient text-white font-label-caps text-[9px] px-3.5 py-1.5 rounded-full font-bold uppercase shadow">
+                ACTUALITÉ MÉDICALE
+            </span>
+            @if (!string.IsNullOrEmpty(Model.DateLabel))
+            {
+                <span class="flex items-center gap-1.5 text-gold text-xs font-label-caps font-bold">
+                    <span class="material-symbols-outlined text-sm">calendar_month</span>
+                    <span>@Model.DateLabel</span>
+                </span>
+            }
+        </div>
+
+        <!-- Main Title -->
+        <h1 class="font-display-lg text-3xl md:text-5xl lg:text-6xl font-black text-primary leading-tight">
+            @Model.Title
+        </h1>
+
+        <!-- Subtitle / Excerpt -->
+        @if (!string.IsNullOrEmpty(Model.Excerpt))
+        {
+            <p class="font-body-lg text-base md:text-xl text-primary/75 leading-relaxed max-w-3xl mx-auto font-light italic">
+                « @Model.Excerpt »
+            </p>
+        }
+
+        <!-- Tags -->
+        @if (tags.Length > 0)
+        {
+            <div class="pt-2 flex flex-wrap items-center justify-center gap-2">
+                @foreach (var tag in tags)
+                {
+                    <span class="px-3 py-1 rounded-full bg-ivory border border-gold/30 text-gold font-label-caps text-[9.5px] font-bold uppercase">
+                        @tag.Trim()
+                    </span>
+                }
+            </div>
+        }
+
+        <!-- Doctor / Author Badge -->
+        <div class="pt-6 flex items-center justify-center gap-4 text-left border-t border-gold/20 max-w-md mx-auto">
+            <img src="/images/drpic.jpg" alt="Pr. Abdelfateh Slama" class="w-14 h-14 md:w-16 md:h-16 rounded-full object-cover border-2 border-gold shadow-md shrink-0" />
+            <div>
+                <h4 class="font-label-caps text-sm md:text-base font-bold text-primary tracking-wide">PR. ABDELFATEH SLAMA</h4>
+                <p class="font-label-caps text-[10px] md:text-xs text-gold font-bold">CHIRURGIE PLASTIQUE, RECONSTRUCTRICE &amp; ESTHÉTIQUE</p>
+                <p class="font-body-md text-xs text-primary/70 mt-0.5">Cabinet Médical à Sousse, Tunisie</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ============================================ -->
+<!-- 2. ARTICLE CONTENT & IMAGE SHOWCASE          -->
+<!-- ============================================ -->
+<section class="py-16 px-6 md:px-margin-desktop bg-ivory border-b border-gold/20">
+    <div class="max-w-4xl mx-auto space-y-12">
+        
+        <!-- Featured Image -->
+        @if (!string.IsNullOrEmpty(Model.ImageUrl))
+        {
+            <div class="editorial-border bg-white p-3 md:p-4 shadow-xl rounded-2xl text-center max-w-xl mx-auto">
+                <div class="overflow-hidden rounded-xl bg-neutral-50 flex items-center justify-center p-1">
+                    <img src="@Model.ImageUrl" alt="@Model.Title" class="max-h-[380px] md:max-h-[430px] w-auto max-w-full object-contain block mx-auto rounded-lg shadow-sm" />
+                </div>
+                <div class="pt-3 px-2 flex items-center justify-between text-[11px] font-label-caps text-primary/60">
+                    <span>Pr. Abdelfateh Slama • Sousse, Tunisie</span>
+                    <span class="text-gold font-bold">Innovation &amp; Rigueur</span>
+                </div>
+            </div>
+        }
+
+        <!-- Full Text Body Content -->
+        <div class="bg-white p-8 md:p-14 border border-gold/20 shadow-sm space-y-8">
+            <div class="prose prose-lg max-w-none text-primary/90 font-body-md leading-relaxed space-y-6 text-sm md:text-base">
+                @{
+                    var rawContent = !string.IsNullOrEmpty(Model.Content) ? Model.Content : Model.Excerpt;
+                    var paragraphs = rawContent.Split(new[] { "\r\n\r\n", "\n\n" }, StringSplitOptions.RemoveEmptyEntries);
+                }
+                @foreach (var paragraph in paragraphs)
+                {
+                    var trimmed = paragraph.Trim();
+                    if (trimmed.StartsWith("Quels traitements") || trimmed.StartsWith("Pourquoi traiter") || trimmed.StartsWith("Qu'est-ce qu'une") || trimmed.StartsWith("À qui s’adresse") || trimmed.StartsWith("Comment se déroule") || trimmed.StartsWith("En résumé") || trimmed.StartsWith("Harmoniser le visage") || trimmed.StartsWith("Remodelage du nez"))
+                    {
+                        <h3 class="font-display-lg text-2xl md:text-3xl font-bold text-primary pt-4 pb-1 border-b border-gold/20">
+                            @trimmed
+                        </h3>
+                    }
+                    else if (trimmed.StartsWith("Les procédés") || trimmed.StartsWith("Les procèdes") || trimmed.StartsWith("Principales indications"))
+                    {
+                        <h4 class="font-headline-sm text-lg font-bold text-gold pt-2 uppercase tracking-wider">
+                            @trimmed
+                        </h4>
+                    }
+                    else
+                    {
+                        <div class="whitespace-pre-line text-primary/85 leading-relaxed">
+                            @trimmed
+                        </div>
+                    }
+                }
+            </div>
+
+            <!-- Author Signoff -->
+            <div class="border-t border-gold/20 pt-8 flex items-center gap-4">
+                <img src="/images/drpic.jpg" alt="Pr. Abdelfateh Slama" class="w-16 h-16 rounded-full object-cover border-2 border-gold shadow-md shrink-0" />
+                <div>
+                    <h4 class="font-label-caps text-sm font-bold text-primary tracking-wide">PR. ABDELFATEH SLAMA</h4>
+                    <p class="font-label-caps text-[10px] md:text-xs text-gold font-bold">CHIRURGIE PLASTIQUE, RECONSTRUCTRICE &amp; ESTHÉTIQUE</p>
+                    <p class="font-body-md text-xs text-primary/70 mt-0.5">Cabinet Médical à Sousse, Tunisie</p>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</section>
+
+<!-- ============================================ -->
+<!-- 3. RELATED ACTUALITÉS / ARTICLES             -->
+<!-- ============================================ -->
+@if (otherActualites.Any())
+{
+    <section class="py-16 md:py-20 px-6 md:px-margin-desktop bg-white border-b border-gold/20">
+        <div class="max-w-container-max mx-auto">
+            <div class="flex flex-col md:flex-row justify-between items-start md:items-end mb-12 gap-4">
+                <div>
+                    <span class="font-label-caps text-gold font-bold block mb-2 uppercase">À LIRE ÉGALEMENT</span>
+                    <h2 class="font-display-lg text-3xl md:text-4xl font-bold text-primary">Autres Actualités &amp; Publications</h2>
+                </div>
+                <a asp-controller="Home" asp-action="Temoignages" asp-route-tab="actualites" class="inline-flex items-center gap-2 font-label-caps text-xs text-primary hover:text-gold font-bold tracking-widest border-b border-gold pb-1 transition-all">
+                    <span>TOUTES LES ACTUALITÉS</span>
+                    <span class="material-symbols-outlined text-sm">arrow_forward</span>
+                </a>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                @foreach (var item in otherActualites)
+                {
+                    <a asp-controller="Home" asp-action="ActualiteDetail" asp-route-id="@item.Id" class="group block bg-white border border-gold/25 rounded-2xl overflow-hidden shadow-sm hover:shadow-xl hover:border-gold transition-all duration-300 flex flex-col justify-between">
+                        <div>
+                            <div class="relative w-full overflow-hidden bg-neutral-900 border-b border-gold/15">
+                                @if (!string.IsNullOrEmpty(item.ImageUrl))
+                                {
+                                    <img src="@item.ImageUrl" alt="@item.Title" class="w-full h-auto block" />
+                                }
+                                <span class="absolute top-3 left-3 gold-gradient text-white font-label-caps text-[8.5px] px-3 py-1 rounded-full font-bold uppercase shadow">
+                                    ACTUALITÉ
+                                </span>
+                            </div>
+                            <div class="p-6">
+                                <div class="flex items-center gap-2 text-gold text-[10px] font-label-caps font-bold mb-2">
+                                    <span class="material-symbols-outlined text-xs">newspaper</span>
+                                    <span>@item.DateLabel</span>
+                                </div>
+                                <h4 class="font-display-lg text-lg font-bold text-primary mb-2 group-hover:text-gold transition-colors leading-tight">
+                                    @item.Title
+                                </h4>
+                                <p class="font-body-md text-xs text-primary/75 leading-relaxed line-clamp-3">
+                                    @item.Excerpt
+                                </p>
+                            </div>
+                        </div>
+                        <div class="px-6 pb-6 pt-0 border-t border-black/5 flex justify-end items-center mt-auto">
+                            <span class="text-xs font-label-caps font-bold text-gold flex items-center gap-1 group-hover:translate-x-1 transition-transform">
+                                LIRE L'ARTICLE <span class="material-symbols-outlined text-sm">arrow_forward</span>
+                            </span>
+                        </div>
+                    </a>
+                }
+            </div>
+        </div>
+    </section>
+}
+
+<!-- ============================================ -->
+<!-- 4. BOTTOM LUXURY CALL TO ACTION              -->
+<!-- ============================================ -->
+<section class="relative py-28 px-6 md:px-margin-desktop text-white text-center overflow-hidden bg-black">
+    <div class="absolute inset-0 z-0">
+        <img src="/images/office.png" alt="Cabinet Dr Slama Sousse" class="w-full h-full object-cover opacity-95 scale-100 transition-transform duration-[10s] hover:scale-105" />
+        <div class="absolute inset-0 bg-black/15"></div>
+    </div>
+
+    <div class="relative z-10 max-w-3xl mx-auto bg-black/25 backdrop-blur-[2px] p-8 md:p-12 border border-white/30 shadow-2xl rounded-2xl">
+        <span class="font-label-caps text-[10px] tracking-[0.4em] text-white block mb-4 uppercase border border-white/40 inline-block px-4 py-1.5 bg-black/30 backdrop-blur-sm font-bold drop-shadow">
+            CABINET DU PR. ABDELFATEH SLAMA • SOUSSE
+        </span>
+        <h2 class="font-display-lg text-3xl md:text-5xl font-bold text-white mb-6 leading-tight drop-shadow-[0_3px_12px_rgba(0,0,0,0.85)]">
+            Une Question ou Une Consultation ?
+        </h2>
+        <p class="font-body-lg text-white mb-8 text-sm md:text-base leading-relaxed max-w-xl mx-auto drop-shadow-[0_2px_8px_rgba(0,0,0,0.85)] font-medium">
+            Prenez rendez-vous en cabinet à Sousse pour échanger directement avec le Pr. Slama sur votre projet.
+        </p>
+        <div class="flex flex-col sm:flex-row gap-4 justify-center items-center">
+            <a asp-controller="Home" asp-action="Contact" class="bg-white text-primary font-label-caps text-[11px] tracking-widest px-8 py-4 hover:bg-neutral-200 transition-all w-full sm:w-auto text-center font-bold shadow-xl">
+                CONTACTEZ-NOUS
+            </a>
+            <a asp-controller="Home" asp-action="Temoignages" asp-route-tab="actualites" class="border border-white/50 bg-black/30 backdrop-blur-sm text-white font-label-caps text-[11px] tracking-widest px-8 py-4 hover:bg-white hover:text-primary transition-all w-full sm:w-auto text-center font-bold shadow-lg">
+                RETOUR AUX ACTUALITÉS
+            </a>
+        </div>
+    </div>
+</section>

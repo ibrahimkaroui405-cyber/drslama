@@ -1,0 +1,142 @@
+@model DrAbdelfatehSalma.Models.Chirurgie
+@{
+    Layout = "_AdminLayout";
+    ViewData["Title"] = "Ajouter une Chirurgie";
+}
+
+<div class="max-w-4xl mx-auto space-y-8">
+    <div class="border-b border-gold/20 pb-6 flex items-center justify-between">
+        <div>
+            <h1 class="font-display-lg text-2xl font-bold text-white mb-1">Ajouter une Chirurgie</h1>
+            <p class="text-xs text-gray-400">Renseignez les détails de la nouvelle fiche opératoire.</p>
+        </div>
+        <a asp-controller="Admin" asp-action="Chirurgies" class="text-xs text-gray-400 hover:text-white flex items-center gap-1 font-bold">
+            ← Annuler et retourner
+        </a>
+    </div>
+
+    <form asp-controller="Admin" asp-action="CreateChirurgie" method="post" enctype="multipart/form-data" class="space-y-6 bg-[#121419] p-8 border border-gold/20 shadow-xl">
+        
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div>
+                <label class="block text-xs font-bold text-gold uppercase mb-2">TITRE DE LA CHIRURGIE *</label>
+                <input type="text" asp-for="Title" id="title-input" required placeholder="Ex: Rhinoplastie Ultrasonique" class="w-full p-3.5 bg-[#0c0d10] border border-gold/20 text-white text-xs focus:outline-none focus:border-gold" oninput="onTitleInput(this.value)" />
+            </div>
+
+            <div>
+                <label class="block text-xs font-bold text-gold uppercase mb-2">IDENTIFIANT URL (SLUG) *</label>
+                <input type="text" asp-for="Slug" id="slug-input" required placeholder="Ex: rhinoplastie" class="w-full p-3.5 bg-[#0c0d10] border border-gold/20 text-white text-xs focus:outline-none focus:border-gold" />
+            </div>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div>
+                <label class="block text-xs font-bold text-gold uppercase mb-2">CATÉGORIE *</label>
+                <div class="space-y-2">
+                    <select id="category-select" class="w-full p-3 bg-[#0c0d10] border border-gold/20 text-white text-xs focus:outline-none focus:border-gold cursor-pointer" onchange="onCategorySelectChange(this)">
+                        <option value="">-- Choisir une catégorie existante ou ajouter --</option>
+                        @if (ViewBag.ExistingCategories != null)
+                        {
+                            foreach (var cat in (List<string>)ViewBag.ExistingCategories)
+                            {
+                                <option value="@cat" selected="@(Model.Category == cat ? "selected" : null)">@cat</option>
+                            }
+                        }
+                        <option value="__NEW__">+ Ajouter une nouvelle catégorie...</option>
+                    </select>
+                    <input type="text" asp-for="Category" id="category-input" required placeholder="Ex: VISAGE & COU, POITRINE ou SILHOUETTE" class="w-full p-3.5 bg-[#0c0d10] border border-gold/20 text-white text-xs focus:outline-none focus:border-gold" oninput="onCategoryInput(this.value)" />
+                </div>
+            </div>
+
+            <div>
+                <label class="block text-xs font-bold text-gold uppercase mb-2">IMAGE PRINCIPALE (Fichier ou URL)</label>
+                <input type="file" name="imageFile" accept="image/*" class="w-full p-2 bg-[#0c0d10] border border-gold/20 text-white text-xs" />
+                <input type="text" asp-for="ImageUrl" placeholder="Ou URL image (/images/...)" class="w-full p-3.5 mt-2 bg-[#0c0d10] border border-gold/20 text-white text-xs" />
+            </div>
+        </div>
+
+        <div>
+            <label class="block text-xs font-bold text-gold uppercase mb-2">SOUS-TITRE / RÉSUMÉ COURT</label>
+            <input type="text" asp-for="Subtitle" placeholder="Remodelage structuré de la pyramide nasale..." class="w-full p-3.5 bg-[#0c0d10] border border-gold/20 text-white text-xs" />
+        </div>
+
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+            <div>
+                <label class="block text-[10px] font-bold text-gold uppercase mb-2">DURÉE</label>
+                <input type="text" asp-for="Duree" placeholder="Ex: 2h00 – 2h30" class="w-full p-3 bg-[#0c0d10] border border-gold/20 text-white text-xs" />
+            </div>
+            <div>
+                <label class="block text-[10px] font-bold text-gold uppercase mb-2">ANESTHÉSIE</label>
+                <input type="text" asp-for="Anesthesie" placeholder="Ex: Générale" class="w-full p-3 bg-[#0c0d10] border border-gold/20 text-white text-xs" />
+            </div>
+            <div>
+                <label class="block text-[10px] font-bold text-gold uppercase mb-2">ÉVICTION</label>
+                <input type="text" asp-for="Eviction" placeholder="Ex: 7 à 10 jours" class="w-full p-3 bg-[#0c0d10] border border-gold/20 text-white text-xs" />
+            </div>
+            <div>
+                <label class="block text-[10px] font-bold text-gold uppercase mb-2">HOSPITALISATION</label>
+                <input type="text" asp-for="Hospitalisation" placeholder="Ex: Ambulatoire" class="w-full p-3 bg-[#0c0d10] border border-gold/20 text-white text-xs" />
+            </div>
+        </div>
+
+        <div>
+            <label class="block text-xs font-bold text-gold uppercase mb-2">PRÉSENTATION & APPROCHE MÉDICALE</label>
+            <textarea asp-for="Overview" rows="4" placeholder="Description détaillée..." class="w-full p-3.5 bg-[#0c0d10] border border-gold/20 text-white text-xs"></textarea>
+        </div>
+
+        <div>
+            <label class="block text-xs font-bold text-gold uppercase mb-2">QUESTIONS FREQUENTES (Format: Question ? Réponse ; Question ? Réponse)</label>
+            <textarea asp-for="Faqs" rows="3" placeholder="Est-ce douloureux ? Non.;Quand voir le résultat ? Dès J+7." class="w-full p-3.5 bg-[#0c0d10] border border-gold/20 text-white text-xs"></textarea>
+        </div>
+
+        <div class="pt-4 border-t border-gold/20 flex justify-end">
+            <button type="submit" class="gold-gradient text-white font-label-caps text-xs py-4 px-8 hover:opacity-90 font-bold tracking-widest shadow">
+                ENREGISTRER LA CHIRURGIE
+            </button>
+        </div>
+
+    </form>
+</div>
+
+<script>
+    function onCategorySelectChange(select) {
+        const input = document.getElementById('category-input');
+        if (select.value === '__NEW__') {
+            input.value = '';
+            input.focus();
+        } else if (select.value) {
+            input.value = select.value;
+        }
+    }
+
+    function onCategoryInput(value) {
+        const select = document.getElementById('category-select');
+        const trimmed = value.trim();
+        if (!trimmed) return;
+
+        let found = false;
+        for (let i = 0; i < select.options.length; i++) {
+            if (select.options[i].value.toLowerCase() === trimmed.toLowerCase()) {
+                select.selectedIndex = i;
+                found = true;
+                break;
+            }
+        }
+
+        if (!found) {
+            const newOption = new Option(trimmed, trimmed, true, true);
+            select.insertBefore(newOption, select.options[select.options.length - 1]);
+        }
+    }
+
+    function onTitleInput(val) {
+        const slugInput = document.getElementById('slug-input');
+        if (slugInput && (!slugInput.value || slugInput.dataset.auto === 'true')) {
+            slugInput.value = val.toLowerCase()
+                .normalize("NFD").replace(/[\u0300-\u036f]/g, "")
+                .replace(/[^a-z0-9]+/g, '-')
+                .replace(/^-+|-+$/g, '');
+            slugInput.dataset.auto = 'true';
+        }
+    }
+</script>

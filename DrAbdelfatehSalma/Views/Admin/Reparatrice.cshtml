@@ -1,0 +1,93 @@
+@model IEnumerable<DrAbdelfatehSalma.Models.Reparatrice>
+@{
+    Layout = "_AdminLayout";
+    ViewData["Title"] = "Gestion Chirurgie Réparatrice";
+}
+
+<div class="space-y-8">
+    <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 border-b border-gold/20 pb-6">
+        <div>
+            <h1 class="font-display-lg text-2xl font-bold text-white mb-1">Chirurgie Réparatrice (Domaines d'Intervention)</h1>
+            <p class="text-xs text-gray-400">Gérer dynamiquement les cartes de domaines réparateurs affichées sur la page publique (Malformations, Traumatismes, Tumeurs...).</p>
+        </div>
+        <a asp-controller="Admin" asp-action="CreateReparatrice" class="gold-gradient text-white font-label-caps text-xs py-3 px-5 hover:opacity-90 transition-all font-bold tracking-widest flex items-center gap-2 shadow">
+            <span class="material-symbols-outlined text-sm">add_circle</span>
+            <span>AJOUTER UN DOMAINE RÉPARATEUR</span>
+        </a>
+    </div>
+
+    <div class="bg-[#121419] border border-gold/20 overflow-hidden">
+        <div class="overflow-x-auto">
+            <table class="w-full text-left text-xs text-gray-300">
+                <thead class="bg-[#0c0d10] text-gold font-label-caps text-[10px] uppercase border-b border-gold/20">
+                    <tr>
+                        <th class="p-4">Pilier</th>
+                        <th class="p-4">Titre &amp; Slogan</th>
+                        <th class="p-4">Description</th>
+                        <th class="p-4">Badges / Mots-clés</th>
+                        <th class="p-4 text-right">Actions</th>
+                    </tr>
+                </thead>
+                <tbody class="divide-y divide-gray-800">
+                    @if (Model != null && Model.Any())
+                    {
+                        int idx = 1;
+                        foreach (var item in Model)
+                        {
+                            <tr class="hover:bg-white/5 transition-colors">
+                                <td class="p-4">
+                                    <span class="px-2.5 py-1 rounded bg-gold/10 text-gold text-[10px] font-bold border border-gold/30 uppercase tracking-widest">
+                                        PILIER 0@(idx)
+                                    </span>
+                                </td>
+                                <td class="p-4 max-w-xs">
+                                    <span class="font-bold text-white block text-sm">@item.Title</span>
+                                    @if (!string.IsNullOrEmpty(item.Subtitle))
+                                    {
+                                        <span class="text-[11px] text-gold italic block mt-0.5">« @item.Subtitle »</span>
+                                    }
+                                </td>
+                                <td class="p-4 max-w-sm text-gray-300 leading-relaxed text-[11px]">
+                                    @item.Overview
+                                </td>
+                                <td class="p-4">
+                                    @if (!string.IsNullOrEmpty(item.Indications))
+                                    {
+                                        <div class="flex flex-wrap gap-1">
+                                            @foreach (var tag in item.Indications.Split(new[] { ';', ',' }, StringSplitOptions.RemoveEmptyEntries))
+                                            {
+                                                <span class="bg-[#0c0d10] text-gray-300 border border-gold/20 text-[9px] px-2 py-0.5 rounded font-medium">@tag.Trim()</span>
+                                            }
+                                        </div>
+                                    }
+                                    else
+                                    {
+                                        <span class="text-gray-600 text-[10px]">—</span>
+                                    }
+                                </td>
+                                <td class="p-4 text-right space-x-2 whitespace-nowrap">
+                                    <a asp-controller="Admin" asp-action="EditReparatrice" asp-route-id="@item.Id" class="px-3 py-1.5 bg-gold/20 text-gold hover:bg-gold hover:text-white rounded text-[11px] font-bold transition-all inline-block">
+                                        Éditer
+                                    </a>
+                                    <form asp-controller="Admin" asp-action="DeleteReparatrice" asp-route-id="@item.Id" method="post" class="inline" onsubmit="return confirm('Êtes-vous sûr de vouloir supprimer cette carte du site public ?');">
+                                        @Html.AntiForgeryToken()
+                                        <button type="submit" class="px-3 py-1.5 bg-red-500/20 text-red-400 hover:bg-red-500 hover:text-white rounded text-[11px] font-bold transition-all">
+                                            Supprimer
+                                        </button>
+                                    </form>
+                                </td>
+                            </tr>
+                            idx++;
+                        }
+                    }
+                    else
+                    {
+                        <tr>
+                            <td colspan="5" class="p-8 text-center text-gray-500 italic">Aucune intervention réparatrice enregistrée. Cliquez sur « Ajouter un domaine réparateur » pour commencer.</td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

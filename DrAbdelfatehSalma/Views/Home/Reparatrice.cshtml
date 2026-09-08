@@ -1,0 +1,257 @@
+@model List<DrAbdelfatehSalma.Models.Reparatrice>
+@{
+    ViewData["Title"] = "Chirurgie Réparatrice & Reconstructrice - Pr. Abdelfateh Slama Sousse";
+
+    var categories = Model != null ? Model
+        .Select(c => c.Category)
+        .Where(c => !string.IsNullOrEmpty(c))
+        .Distinct(StringComparer.OrdinalIgnoreCase)
+        .ToList() : new List<string>();
+}
+
+<!-- ============================================ -->
+<!-- 1. HERO SECTION: DRAMATIC EDITORIAL SPLIT LAYOUT (100VH FULL SCREEN) -->
+<!-- ============================================ -->
+<section class="relative min-h-[85vh] md:min-h-screen flex items-end md:items-center pt-24 md:pt-20 pb-16 md:pb-12 overflow-hidden bg-surface-container-low border-b border-gold/20">
+    <!-- Right-Side Image (Full screen on mobile, 50% width on desktop) -->
+    <div class="absolute inset-0 md:left-auto md:right-0 md:top-0 w-full md:w-1/2 h-full z-0 overflow-hidden">
+        <!-- Desktop High-Fashion Gradient Transition -->
+        <div class="hidden md:block absolute inset-y-0 left-0 w-48 bg-gradient-to-r from-surface-container-low via-surface-container-low/70 to-transparent z-10 pointer-events-none"></div>
+        <!-- Mobile Dark Gradient Overlay to ensure text readability -->
+        <div class="block md:hidden absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-black/10 z-10 pointer-events-none"></div>
+        <img src="/images/docr1.png" alt="Chirurgie Réparatrice - Pr. Abdelfateh Slama Sousse" class="w-full h-full object-cover object-top transition-all duration-700 brightness-[1.02] contrast-[1.03]" />
+    </div>
+
+    <!-- Content Column -->
+    <div class="relative z-20 w-full px-4 sm:px-6 md:px-margin-desktop max-w-container-max mx-auto">
+        <div class="w-full md:w-5/12 lg:w-[42%] max-w-lg p-0 text-white md:text-primary">
+            <div class="flex items-center gap-3 mb-4 reveal-text">
+                <span class="w-10 h-[1px] bg-gold"></span>
+                <span class="font-label-caps text-gold text-[9.5px] md:text-[10px] tracking-[0.3em] md:tracking-[0.4em] uppercase font-bold animate-reveal">PR. ABDELFATEH SLAMA • SOUSSE</span>
+            </div>
+            <h1 class="font-display-lg text-4xl sm:text-5xl md:text-[85px] lg:text-[95px] leading-[0.92] md:leading-[0.88] tracking-tighter text-white md:text-primary mb-6 md:mb-8 italic">
+                Chirurgie<br/>
+                <span class="not-italic font-black">Réparatrice</span>
+            </h1>
+            <div class="space-y-4 font-body-lg text-white/90 md:text-primary/85 text-sm md:text-base leading-relaxed">
+                <p class="font-bold text-white md:text-primary text-base md:text-lg">
+                    Chirurgie réparatrice et reconstructrice du visage et du cou à Sousse.
+                </p>
+                <p class="font-light text-white/80 md:text-primary/80">
+                    Prise en charge spécialisée des malformations, séquelles de traumatismes et chirurgie tumorale du visage avec rétablissement fonctionnel et esthétique.
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scroll Indicator -->
+    <div class="absolute bottom-10 left-6 md:left-margin-desktop flex items-center gap-4">
+        <div class="h-16 w-[1px] bg-gold"></div>
+        <span class="font-label-caps text-[10px] vertical-text text-gold font-bold" style="writing-mode: vertical-rl; transform: rotate(180deg);">SCROLL</span>
+    </div>
+</section>
+
+<!-- ============================================ -->
+<!-- 2. DOCTOR'S LEAD PRESENTATION & QUOTE CARD -->
+<!-- ============================================ -->
+<section class="py-20 px-6 md:px-margin-desktop bg-white border-b border-gold/20">
+    <div class="max-w-container-max mx-auto space-y-16">
+        
+        <!-- Quote Executive Banner -->
+        <div class="relative bg-[#faf8f5] p-8 md:p-14 border border-gold/30 shadow-xl rounded-3xl overflow-hidden max-w-5xl mx-auto">
+            <div class="absolute -right-10 -bottom-10 w-48 h-48 rounded-full bg-gold/5 pointer-events-none"></div>
+            <div class="relative z-10 space-y-4">
+                <span class="font-label-caps text-[10px] tracking-[0.4em] text-gold font-bold uppercase block">CADRE ET CADENCE MÉDICALE</span>
+                <p class="font-display-lg text-2xl md:text-3xl lg:text-4xl text-primary font-bold leading-snug">
+                    « La chirurgie réparatrice du visage et du cou permet de réparer et reconstruire des pertes de tissus d’origine congénitale ou acquise. »
+                </p>
+                <div class="pt-4 flex items-center gap-4 border-t border-gold/20">
+                    <img src="/images/drpic.jpg" alt="Pr. Abdelfateh Slama" class="w-14 h-14 rounded-full object-cover object-top border-2 border-gold shadow-md" />
+                    <div>
+                        <strong class="block text-sm font-bold text-primary font-display-lg">Pr. Abdelfateh Slama</strong>
+                        <span class="text-xs text-primary/70 font-body-md">Chirurgie Plastique, Reconstructrice & Esthétique • Sousse</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ============================================ -->
+        <!-- HIGH TECHNICALITY BAR: LAMBEAUX & GREFFES -->
+        <!-- ============================================ -->
+        <div class="bg-primary text-white p-10 md:p-16 rounded-3xl border border-gold/40 shadow-2xl relative overflow-hidden">
+            <div class="absolute right-0 top-0 w-1/3 h-full bg-gradient-to-l from-gold/10 to-transparent pointer-events-none"></div>
+            
+            <div class="relative z-10 max-w-6xl mx-auto text-center space-y-8">
+                <span class="font-label-caps text-[10px] tracking-[0.4em] text-gold font-bold uppercase block border border-gold/40 inline-block px-4 py-1.5 bg-gold/10 rounded-full">
+                    SAVOIR-FAIRE RECONSTRUCTEUR
+                </span>
+                
+                <h3 class="font-display-lg text-2xl md:text-4xl font-bold text-white leading-snug max-w-4xl mx-auto">
+                    « Cette chirurgie utilise des techniques de chirurgie réparatrice (des lambeaux et des greffes) et permet de rétablir à la fois la fonction défaillante et l’esthétique des régions réparées. »
+                </h3>
+
+                <!-- 4 Clinical Case Images (rep1.png, rep2.png, rep3.png, rep4.png) inside Black Banner -->
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 pt-6">
+                    <!-- Image 1 -->
+                    <div class="bg-white/10 backdrop-blur-md p-3 rounded-2xl border border-gold/30 overflow-hidden shadow-xl hover:border-gold hover:scale-105 transition-all">
+                        <div class="overflow-hidden rounded-xl border border-gold/20">
+                            <img src="/images/rep1.png" alt="Chirurgie Réparatrice - Cas 1" class="w-full h-auto object-cover" />
+                        </div>
+                    </div>
+
+                    <!-- Image 2 -->
+                    <div class="bg-white/10 backdrop-blur-md p-3 rounded-2xl border border-gold/30 overflow-hidden shadow-xl hover:border-gold hover:scale-105 transition-all">
+                        <div class="overflow-hidden rounded-xl border border-gold/20">
+                            <img src="/images/rep2.png" alt="Chirurgie Réparatrice - Cas 2" class="w-full h-auto object-cover" />
+                        </div>
+                    </div>
+
+                    <!-- Image 3 -->
+                    <div class="bg-white/10 backdrop-blur-md p-3 rounded-2xl border border-gold/30 overflow-hidden shadow-xl hover:border-gold hover:scale-105 transition-all">
+                        <div class="overflow-hidden rounded-xl border border-gold/20">
+                            <img src="/images/rep3.png" alt="Chirurgie Réparatrice - Cas 3" class="w-full h-auto object-cover" />
+                        </div>
+                    </div>
+
+                    <!-- Image 4 -->
+                    <div class="bg-white/10 backdrop-blur-md p-3 rounded-2xl border border-gold/30 overflow-hidden shadow-xl hover:border-gold hover:scale-105 transition-all">
+                        <div class="overflow-hidden rounded-xl border border-gold/20">
+                            <img src="/images/rep4.png" alt="Chirurgie Réparatrice - Cas 4" class="w-full h-auto object-cover" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ============================================ -->
+        <!-- 3. THE 3 DOMAINS OF RECONSTRUCTIVE SURGERY -->
+        <!-- ============================================ -->
+        <div id="expertises" class="space-y-12">
+            <div class="text-center max-w-2xl mx-auto space-y-3">
+                <span class="font-label-caps text-[10px] tracking-[0.3em] text-gold font-bold uppercase">TROIS DOMAINES MAJEURS D'INTERVENTION</span>
+                <h2 class="font-display-lg text-3xl md:text-5xl font-bold text-primary">Il peut s'agir de :</h2>
+                <p class="font-body-md text-xs md:text-sm text-primary/70">
+                    Chaque situation fait l'objet d'un examen clinique rigoureux pour adapter la technique réparatrice la plus efficace.
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                
+                <!-- Pillar 1: Malformations -->
+                <div class="bg-white rounded-3xl p-8 border border-gold/30 shadow-md hover:shadow-2xl hover:border-gold transition-all duration-500 flex flex-col justify-between group">
+                    <div class="space-y-6">
+                        <div class="w-16 h-16 rounded-2xl bg-[#faf8f5] border border-gold/30 flex items-center justify-center text-gold group-hover:scale-110 group-hover:bg-gold group-hover:text-white transition-all duration-500">
+                            <span class="material-symbols-outlined text-3xl">child_care</span>
+                        </div>
+                        <div class="space-y-2">
+                            <span class="font-label-caps text-[10px] text-gold tracking-widest font-bold block">PILIER 01</span>
+                            <h3 class="font-display-lg text-2xl font-bold text-primary group-hover:text-gold transition-colors">Malformations</h3>
+                            <p class="font-body-md text-sm text-gold font-semibold italic">
+                                Surtout des lèvres, du nez et des oreilles.
+                            </p>
+                        </div>
+                        <p class="font-body-md text-xs text-primary/75 leading-relaxed">
+                            Correction spécialisée des malformations congénitales de la face. Prise en charge des fentes labio-palatines, dysmorphies nasales et otoplasties réparatrices avec rétablissement de la fonction et de la symétrie.
+                        </p>
+                    </div>
+
+                    <div class="pt-6 border-t border-gold/15 mt-6 flex flex-wrap gap-1.5">
+                        <span class="bg-[#faf8f5] text-primary/80 border border-gold/20 text-[10px] px-2.5 py-1 rounded font-body-md font-semibold">Lèvres & Nez</span>
+                        <span class="bg-[#faf8f5] text-primary/80 border border-gold/20 text-[10px] px-2.5 py-1 rounded font-body-md font-semibold">Oreilles</span>
+                        <span class="bg-[#faf8f5] text-primary/80 border border-gold/20 text-[10px] px-2.5 py-1 rounded font-body-md font-semibold">Symétrie</span>
+                    </div>
+                </div>
+
+                <!-- Pillar 2: Séquelles de Traumatismes -->
+                <div class="bg-white rounded-3xl p-8 border border-gold/30 shadow-md hover:shadow-2xl hover:border-gold transition-all duration-500 flex flex-col justify-between group">
+                    <div class="space-y-6">
+                        <div class="w-16 h-16 rounded-2xl bg-[#faf8f5] border border-gold/30 flex items-center justify-center text-gold group-hover:scale-110 group-hover:bg-gold group-hover:text-white transition-all duration-500">
+                            <span class="material-symbols-outlined text-3xl">healing</span>
+                        </div>
+                        <div class="space-y-2">
+                            <span class="font-label-caps text-[10px] text-gold tracking-widest font-bold block">PILIER 02</span>
+                            <h3 class="font-display-lg text-2xl font-bold text-primary group-hover:text-gold transition-colors">Séquelles de Traumatismes</h3>
+                            <p class="font-body-md text-sm text-gold font-semibold italic">
+                                Cicatrices et fractures.
+                            </p>
+                        </div>
+                        <p class="font-body-md text-xs text-primary/75 leading-relaxed">
+                            Traitement réparateur des cicatrices complexes (hypertrophiques, chéloïdes, rétractions cutanées post-brûlures ou post-opératoires) et correction des séquelles de fractures du massif facial et du cou.
+                        </p>
+                    </div>
+
+                    <div class="pt-6 border-t border-gold/15 mt-6 flex flex-wrap gap-1.5">
+                        <span class="bg-[#faf8f5] text-primary/80 border border-gold/20 text-[10px] px-2.5 py-1 rounded font-body-md font-semibold">Reprise de Cicatrice</span>
+                        <span class="bg-[#faf8f5] text-primary/80 border border-gold/20 text-[10px] px-2.5 py-1 rounded font-body-md font-semibold">Fractures</span>
+                        <span class="bg-[#faf8f5] text-primary/80 border border-gold/20 text-[10px] px-2.5 py-1 rounded font-body-md font-semibold">Plasties Z</span>
+                    </div>
+                </div>
+
+                <!-- Pillar 3: Tumeurs du Visage et du Cou -->
+                <div class="bg-white rounded-3xl p-8 border border-gold/30 shadow-md hover:shadow-2xl hover:border-gold transition-all duration-500 flex flex-col justify-between group">
+                    <div class="space-y-6">
+                        <div class="w-16 h-16 rounded-2xl bg-[#faf8f5] border border-gold/30 flex items-center justify-center text-gold group-hover:scale-110 group-hover:bg-gold group-hover:text-white transition-all duration-500">
+                            <span class="material-symbols-outlined text-3xl">health_and_safety</span>
+                        </div>
+                        <div class="space-y-2">
+                            <span class="font-label-caps text-[10px] text-gold tracking-widest font-bold block">PILIER 03</span>
+                            <h3 class="font-display-lg text-2xl font-bold text-primary group-hover:text-gold transition-colors">Tumeurs du Visage & Cou</h3>
+                            <p class="font-body-md text-sm text-gold font-semibold italic">
+                                Exérèse et reconstruction.
+                            </p>
+                        </div>
+                        <p class="font-body-md text-xs text-primary/75 leading-relaxed">
+                            Prise en charge chirurgicale des tumeurs cutanées ou sous-cutanées de la face et du cou, avec reconstruction visant à préserver à la fois la fonction et l'esthétique de la région.
+                        </p>
+                    </div>
+
+                    <div class="pt-6 border-t border-gold/15 mt-6 flex flex-wrap gap-1.5">
+                        <span class="bg-[#faf8f5] text-primary/80 border border-gold/20 text-[10px] px-2.5 py-1 rounded font-body-md font-semibold">Exérèse Cutanée</span>
+                        <span class="bg-[#faf8f5] text-primary/80 border border-gold/20 text-[10px] px-2.5 py-1 rounded font-body-md font-semibold">Lambeaux</span>
+                        <span class="bg-[#faf8f5] text-primary/80 border border-gold/20 text-[10px] px-2.5 py-1 rounded font-body-md font-semibold">Greffes</span>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+</section>
+
+<!-- ============================================ -->
+<!-- 5. CALL TO ACTION (HARMONIZED CRYSTAL GLASS DESIGN) -->
+<!-- ============================================ -->
+<section class="relative py-32 md:py-44 px-6 md:px-margin-desktop text-white text-center overflow-hidden bg-black border-t border-gold/30">
+    <!-- Fully Visible Clinic Office Background Image -->
+    <div class="absolute inset-0 z-0">
+        <img src="/images/office.png" alt="Cabinet Dr Slama Sousse" class="w-full h-full object-cover object-center opacity-95 scale-100 transition-transform duration-[10s] hover:scale-105" />
+        <div class="absolute inset-0 bg-black/15"></div>
+    </div>
+
+    <!-- Crystal Transparent Floating Card -->
+    <div class="relative z-10 max-w-3xl mx-auto bg-black/25 backdrop-blur-[2px] p-8 md:p-12 border border-white/30 shadow-2xl rounded-2xl">
+        <span class="font-label-caps text-[10px] tracking-[0.4em] text-white block mb-6 uppercase border border-white/40 inline-block px-4 py-1.5 bg-black/30 backdrop-blur-sm font-bold drop-shadow">
+            CONSULTATION PRIVÉE • SOUSSE
+        </span>
+        <h2 class="font-display-lg text-4xl md:text-6xl font-bold text-white mb-6 leading-tight drop-shadow-[0_3px_12px_rgba(0,0,0,0.85)]">
+            Concrétisez votre projet en toute confiance.
+        </h2>
+        <p class="font-body-lg text-white mb-10 text-base md:text-lg leading-relaxed max-w-xl mx-auto drop-shadow-[0_2px_8px_rgba(0,0,0,0.85)] font-medium">
+            Notre équipe se tient à votre entière disposition pour répondre à vos questions et fixer votre première consultation privée à Sousse.
+        </p>
+
+        <div class="flex flex-col sm:flex-row gap-5 justify-center items-center">
+            <a asp-controller="Home" asp-action="Contact" class="bg-white text-primary font-label-caps text-[11px] tracking-widest px-10 py-5 hover:bg-neutral-200 transition-all duration-300 w-full sm:w-auto text-center shadow-2xl font-bold">
+                CONTACTEZ-NOUS
+            </a>
+            <a href="tel:+21673200000" class="border border-white/60 bg-black/30 backdrop-blur-sm text-white font-label-caps text-[11px] tracking-widest px-10 py-5 hover:bg-white hover:text-primary transition-all duration-300 w-full sm:w-auto text-center flex items-center justify-center gap-3 font-bold shadow-lg">
+                <span class="material-symbols-outlined text-sm">phone</span>
+                +216 73 200 000
+            </a>
+        </div>
+    </div>
+</section>
+
+
+
+

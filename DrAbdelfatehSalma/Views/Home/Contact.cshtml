@@ -1,0 +1,593 @@
+@{
+    ViewData["Title"] = "Contact & Consultation — Pr. Abdelfateh Slama Sousse";
+}
+
+<!-- ============================================ -->
+<!-- 1. HERO SECTION: DRAMATIC EDITORIAL SPLIT LAYOUT WITH COMPACT TRANSPARENT CTA CARD -->
+<!-- ============================================ -->
+<section class="relative min-h-[85vh] md:min-h-screen flex items-center pt-24 md:pt-20 pb-16 md:pb-12 overflow-hidden bg-white border-b border-gold/20">
+    <!-- Right-Side Visual Container with Background Office Image & Floating Transparent Card -->
+    <div class="absolute inset-0 md:left-auto md:right-0 md:top-0 w-full md:w-1/2 h-full z-0 overflow-hidden bg-black flex items-center justify-center p-6 md:p-10">
+        <!-- Office Background Image -->
+        <img src="/images/office.png" alt="Cabinet Pr Slama Sousse Contact & Prise de Rendez-vous" class="absolute inset-0 w-full h-full object-cover object-center opacity-90 brightness-[0.98] transition-transform duration-[12s] hover:scale-105" />
+        <div class="absolute inset-0 bg-black/25"></div>
+
+        <!-- Desktop High-Fashion Gradient Transition from Left White to Right Dark -->
+        <div class="hidden md:block absolute inset-y-0 left-0 w-32 bg-gradient-to-r from-white via-white/50 to-transparent z-10 pointer-events-none"></div>
+
+        <!-- Compact Version of the Transparent Floating Card from Call-to-Action Section -->
+        <div class="relative z-20 w-full max-w-sm sm:max-w-md bg-black/35 backdrop-blur-[3px] p-6 sm:p-8 rounded-2xl border border-white/30 shadow-2xl text-center text-white my-auto">
+            <span class="font-label-caps text-[8.5px] sm:text-[9px] tracking-[0.3em] text-white block mb-3 uppercase border border-white/40 inline-block px-3 py-1 bg-black/30 backdrop-blur-sm font-bold drop-shadow rounded-full">
+                CONSULTATION PRIVÉE • SOUSSE
+            </span>
+            <h3 class="font-display-lg text-xl sm:text-2xl md:text-3xl font-bold text-white mb-2.5 leading-tight drop-shadow-[0_2px_8px_rgba(0,0,0,0.85)]">
+                Planifiez votre <span class="italic font-normal text-gold">Soin.</span>
+            </h3>
+            <p class="font-body-md text-white/90 text-xs leading-relaxed max-w-xs sm:max-w-sm mx-auto drop-shadow-[0_1px_4px_rgba(0,0,0,0.85)] mb-5">
+                Une prise en charge confidentielle, rigoureuse et entièrement sur-mesure au cœur de Sousse.
+            </p>
+            <div class="flex flex-wrap gap-2.5 justify-center items-center">
+                <a href="#contact-form" class="bg-white hover:bg-neutral-100 text-primary font-label-caps text-[9.5px] tracking-wider px-5 py-2.5 rounded-full font-bold shadow-lg transition-all">
+                    CONTACTEZ-NOUS
+                </a>
+                <a href="tel:+21673200000" class="border border-white/60 bg-black/40 backdrop-blur-sm text-white hover:bg-white hover:text-primary font-label-caps text-[9.5px] tracking-wider px-4 py-2.5 rounded-full font-bold shadow transition-all flex items-center gap-1.5">
+                    <span class="material-symbols-outlined text-xs">phone</span>
+                    +216 73 200 000
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Content Area (Left Side: Pure White Editorial) -->
+    <div class="relative z-20 w-full px-6 md:px-margin-desktop max-w-container-max mx-auto pointer-events-none">
+        <div class="w-full md:w-5/12 lg:w-[46%] max-w-lg p-0 text-primary pointer-events-auto">
+            <div class="flex items-center gap-3 mb-4">
+                <span class="w-10 h-[1px] bg-gold"></span>
+                <span class="font-label-caps text-gold block font-bold tracking-widest uppercase text-xs">
+                    PR. ABDELFATEH SLAMA • SOUSSE
+                </span>
+            </div>
+            <h1 class="font-display-lg text-6xl md:text-[85px] lg:text-[95px] leading-[0.88] tracking-tighter text-primary mb-8 italic">
+                Prendre<br/>
+                <span class="not-italic font-black text-primary">Contact</span>
+            </h1>
+            <div class="space-y-4 font-body-lg text-primary/85 text-base md:text-lg leading-relaxed">
+                <p>
+                    Le Pr SLAMA vous propose une expertise médicale en chirurgie réparatrice et esthétique allant du diagnostic précis des anomalies jusqu’à la chirurgie avec ses indications, ses techniques et ses résultats.
+                </p>
+                <p class="text-sm md:text-base text-primary/75 italic border-l-2 border-gold pl-3.5">
+                    Lors de la 1ère consultation, notre objectif principal est de définir votre demande et comprendre votre attente, afin de choisir une solution personnalisée qui donne le meilleur résultat.
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scroll Indicator (Bottom Left) -->
+    <div class="absolute bottom-10 left-6 md:left-margin-desktop flex items-center gap-4">
+        <div class="h-16 w-[1px] bg-gold"></div>
+        <span class="font-label-caps text-[10px] vertical-text text-gold font-bold" style="writing-mode: vertical-rl; transform: rotate(180deg);">SCROLL</span>
+    </div>
+</section>
+
+<!-- ============================================ -->
+<!-- 2. DIRECT CONTACT INFO & QUICK ACCESS CARDS -->
+<!-- ============================================ -->
+<section class="py-16 px-6 md:px-margin-desktop bg-white border-b border-gold/20">
+    <div class="max-w-container-max mx-auto">
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8">
+            
+            <!-- Address Card -->
+            <div class="p-8 bg-white border border-gold/20 flex flex-col justify-between group hover:border-gold transition-all shadow-xs hover:shadow-md">
+                <div>
+                    <span class="material-symbols-outlined text-gold text-3xl mb-4">location_on</span>
+                    <h4 class="font-label-caps text-xs font-bold text-primary mb-2">LOCALISATION</h4>
+                    <p class="font-body-md text-sm text-primary/80 leading-relaxed">
+                        Hôpital Sahloul,<br/>
+                        4000 Sousse, Tunisie
+                    </p>
+                </div>
+                <div class="mt-6 pt-4 border-t border-gold/20">
+                    <a href="https://maps.google.com/?q=Hopital+Sahloul+Sousse+Tunisie" target="_blank" class="font-label-caps text-[10px] font-bold text-gold hover:underline flex items-center gap-1">
+                        OUVRIR DANS MAPS →
+                    </a>
+                </div>
+            </div>
+
+            <!-- Phone Card -->
+            <div class="p-8 bg-white border border-gold/20 flex flex-col justify-between group hover:border-gold transition-all shadow-xs hover:shadow-md">
+                <div>
+                    <span class="material-symbols-outlined text-gold text-3xl mb-4">phone_in_talk</span>
+                    <h4 class="font-label-caps text-xs font-bold text-primary mb-2">TÉLÉPHONE DIRECT</h4>
+                    <p class="font-body-md text-sm text-primary/80 leading-relaxed">
+                        +216 73 200 000<br/>
+                        <span class="text-xs text-primary/50">Secrétariat médical privé</span>
+                    </p>
+                </div>
+                <div class="mt-6 pt-4 border-t border-gold/20">
+                    <a href="tel:+21673200000" class="font-label-caps text-[10px] font-bold text-gold hover:underline flex items-center gap-1">
+                        APPELER LE CABINET →
+                    </a>
+                </div>
+            </div>
+
+            <!-- Hours Card -->
+            <div class="p-8 bg-white border border-gold/20 flex flex-col justify-between group hover:border-gold transition-all shadow-xs hover:shadow-md">
+                <div>
+                    <span class="material-symbols-outlined text-gold text-3xl mb-4">schedule</span>
+                    <h4 class="font-label-caps text-xs font-bold text-primary mb-2">HORAIRES D'OUVERTURE</h4>
+                    <p class="font-body-md text-sm text-primary/80 leading-relaxed">
+                        Lun – Ven : 08h30 – 19h00<br/>
+                        Samedi : Sur rendez-vous
+                    </p>
+                </div>
+                <div class="mt-6 pt-4 border-t border-gold/20">
+                    <span class="font-label-caps text-[10px] text-green-700 font-bold flex items-center gap-1">
+                        <span class="w-2 h-2 rounded-full bg-green-600 animate-pulse"></span> CONSULTATIONS PRIVÉES
+                    </span>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+<!-- ============================================ -->
+<!-- 3. INTERACTIVE APPOINTMENT FORM & LOCATION SPLIT -->
+<!-- ============================================ -->
+<section class="py-24 px-6 md:px-margin-desktop bg-white">
+    <div class="max-w-container-max mx-auto">
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-start">
+            
+            <!-- Left Column: Interactive Form -->
+            <div class="lg:col-span-7 bg-white p-8 md:p-12 border border-gold/20 shadow-xl">
+                <span class="font-label-caps text-[10px] tracking-[0.3em] text-gold block mb-3 uppercase font-bold">CONTACT & CONSULTATION</span>
+                <h2 class="font-display-lg text-3xl md:text-5xl font-bold text-primary mb-6">Formulaire de Contact</h2>
+                
+                <div class="mb-8 space-y-4 text-primary/80 font-body-md text-sm leading-relaxed">
+                    <p>
+                        Lors de la 1<sup>ère</sup> consultation, notre objectif principal est de définir votre demande et comprendre votre attente, afin de choisir une solution personnalisée qui donne le meilleur résultat.
+                    </p>
+                    
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 py-2">
+                        <div class="p-4 bg-surface-container-low border border-gold/30 flex items-center gap-3">
+                            <span class="material-symbols-outlined text-gold text-xl">check_circle</span>
+                            <span class="font-display-lg font-bold text-primary text-sm">Vous avez un besoin Esthétique ?</span>
+                        </div>
+                        <div class="p-4 bg-surface-container-low border border-gold/30 flex items-center gap-3">
+                            <span class="material-symbols-outlined text-gold text-xl">check_circle</span>
+                            <span class="font-display-lg font-bold text-primary text-sm">Vous voulez un conseil ou une expertise ?</span>
+                        </div>
+                    </div>
+                    
+                    <p class="text-primary/70 font-medium">
+                        Nous vous proposons de nous contacter, de remplir le formulaire suivant.
+                    </p>
+                </div>
+
+                @if (TempData["SuccessMessage"] != null)
+                {
+                    <div class="mb-6 p-4 bg-green-50 border border-green-300 text-green-900 text-xs font-bold leading-relaxed">
+                        ✓ @TempData["SuccessMessage"]
+                    </div>
+                }
+                @if (TempData["ErrorMessage"] != null)
+                {
+                    <div class="mb-6 p-4 bg-red-50 border border-red-300 text-red-900 text-xs font-bold leading-relaxed">
+                        ⚠ @TempData["ErrorMessage"]
+                    </div>
+                }
+
+                <form asp-controller="Home" asp-action="Contact" method="post" enctype="multipart/form-data" class="space-y-6" id="contact-form">
+                    @Html.AntiForgeryToken()
+                    
+                    <!-- Row 1: Nom & Prénom -->
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div>
+                            <label class="block font-label-caps text-xs font-bold text-primary mb-2">Nom *</label>
+                            <input type="text" name="Nom" required placeholder="Votre nom" class="w-full p-4 border border-gold/30 font-body-md text-sm focus:outline-none focus:border-gold transition-all bg-white shadow-2xs" />
+                        </div>
+                        <div>
+                            <label class="block font-label-caps text-xs font-bold text-primary mb-2">Prénom *</label>
+                            <input type="text" name="Prenom" required placeholder="Votre prénom" class="w-full p-4 border border-gold/30 font-body-md text-sm focus:outline-none focus:border-gold transition-all bg-white shadow-2xs" />
+                        </div>
+                    </div>
+
+                    <!-- Row 2: Indicatif Téléphone & Téléphone -->
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div>
+                            <label class="block font-label-caps text-xs font-bold text-primary mb-2">Sélectionnez l'indicatif Téléphone ... *</label>
+                            <select name="Indicatif" required class="w-full p-4 border border-gold/30 font-body-md text-sm focus:outline-none focus:border-gold transition-all bg-white text-primary shadow-2xs">
+                                <option value="" disabled selected>Sélectionnez l'indicatif Téléphone ... *</option>
+                                <option value="+216" selected>Tunisie (+216)</option>
+                                <option value="+33">France (+33)</option>
+                                <option value="+32">Belgique (+32)</option>
+                                <option value="+41">Suisse (+41)</option>
+                                <option value="+1">Canada / USA (+1)</option>
+                                <option value="+213">Algérie (+213)</option>
+                                <option value="+212">Maroc (+212)</option>
+                                <option value="+44">Royaume-Uni (+44)</option>
+                                <option value="+49">Allemagne (+49)</option>
+                                <option value="+39">Italie (+39)</option>
+                                <option value="+34">Espagne (+34)</option>
+                                <option value="+971">Émirats Arabes Unis (+971)</option>
+                                <option value="+966">Arabie Saoudite (+966)</option>
+                                <option value="+974">Qatar (+974)</option>
+                                <option value="+218">Libye (+218)</option>
+                                <option value="+225">Côte d'Ivoire (+225)</option>
+                                <option value="+221">Sénégal (+221)</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label class="block font-label-caps text-xs font-bold text-primary mb-2">Téléphone *</label>
+                            <input type="tel" name="Phone" required placeholder="Ex: 73 200 000" class="w-full p-4 border border-gold/30 font-body-md text-sm focus:outline-none focus:border-gold transition-all bg-white shadow-2xs" />
+                        </div>
+                    </div>
+
+                    <!-- Row 3: E-mail -->
+                    <div>
+                        <label class="block font-label-caps text-xs font-bold text-primary mb-2">E-mail *</label>
+                        <input type="email" name="Email" required placeholder="votre.email@exemple.com" class="w-full p-4 border border-gold/30 font-body-md text-sm focus:outline-none focus:border-gold transition-all bg-white shadow-2xs" />
+                    </div>
+
+                    <!-- Row 4: Motif de consultation -->
+                    <div>
+                        <label class="block font-label-caps text-xs font-bold text-primary mb-2">Motif de consultation *</label>
+                        @{
+                            var chirurgies = ViewBag.Chirurgies as List<DrAbdelfatehSalma.Models.Chirurgie> ?? new List<DrAbdelfatehSalma.Models.Chirurgie>();
+                            var reparatrices = ViewBag.Reparatrices as List<DrAbdelfatehSalma.Models.Reparatrice> ?? new List<DrAbdelfatehSalma.Models.Reparatrice>();
+                            var esthetiques = ViewBag.Esthetiques as List<DrAbdelfatehSalma.Models.Esthetique> ?? new List<DrAbdelfatehSalma.Models.Esthetique>();
+                            var selectedSlug = (ViewBag.SelectedProcedure as string ?? "").ToLowerInvariant().Trim();
+
+                            var visageList = chirurgies.Where(c => c.Category != null && (c.Category.ToUpper().Contains("VISAGE") || c.Category.ToUpper().Contains("COU"))).ToList();
+                            var poitrineList = chirurgies.Where(c => c.Category != null && (c.Category.ToUpper().Contains("POITRINE") || c.Category.ToUpper().Contains("SEIN"))).ToList();
+                            var silhouetteList = chirurgies.Where(c => c.Category != null && (c.Category.ToUpper().Contains("SILHOUETTE") || c.Category.ToUpper().Contains("CORPS"))).ToList();
+                            var otherChirurgiesList = chirurgies.Except(visageList).Except(poitrineList).Except(silhouetteList).ToList();
+
+                            bool HasMatchingSlug(string? slug, string? title)
+                            {
+                                if (string.IsNullOrEmpty(selectedSlug)) return false;
+                                if (!string.IsNullOrEmpty(slug) && (selectedSlug == slug.ToLowerInvariant() || selectedSlug.Contains(slug.ToLowerInvariant()) || slug.ToLowerInvariant().Contains(selectedSlug))) return true;
+                                if (!string.IsNullOrEmpty(title) && selectedSlug.Contains(title.ToLowerInvariant())) return true;
+                                return false;
+                            }
+                        }
+                        <select name="ConsultationType" required class="w-full p-4 border border-gold/30 font-body-md text-sm focus:outline-none focus:border-gold transition-all bg-white text-primary shadow-2xs">
+                            @if (string.IsNullOrEmpty(selectedSlug))
+                            {
+                                <option value="" disabled selected>Sélectionnez un motif de consultation *</option>
+                            }
+                            else
+                            {
+                                <option value="" disabled>Sélectionnez un motif de consultation *</option>
+                            }
+
+                            @if (visageList.Any())
+                            {
+                                <optgroup label="CHIRURGIE DU VISAGE & DU COU">
+                                    @foreach (var item in visageList)
+                                    {
+                                        var val = "Chirurgie Visage & Cou — " + item.Title;
+                                        var isSelected = HasMatchingSlug(item.Slug, item.Title);
+                                        if (isSelected)
+                                        {
+                                             <option value="@val" selected="selected">@item.Title</option>
+                                        }
+                                        else
+                                        {
+                                            <option value="@val">@item.Title</option>
+                                        }
+                                    }
+                                </optgroup>
+                            }
+                            else
+                            {
+                                <optgroup label="CHIRURGIE DU VISAGE & DU COU">
+                                    <option value="Chirurgie Visage & Cou — Rhinoplastie (Esthétique & Fonctionnelle)">Rhinoplastie (Esthétique & Fonctionnelle)</option>
+                                    <option value="Chirurgie Visage & Cou — Lifting Cervico-Facial">Lifting Cervico-Facial</option>
+                                    <option value="Chirurgie Visage & Cou — Blépharoplastie (Lifting des Paupières)">Blépharoplastie (Lifting des Paupières)</option>
+                                    <option value="Chirurgie Visage & Cou — Génioplastie (Chirurgie du Menton)">Génioplastie (Chirurgie du Menton)</option>
+                                    <option value="Chirurgie Visage & Cou — Otoplastie (Oreilles Décollées)">Otoplastie (Oreilles Décollées)</option>
+                                </optgroup>
+                            }
+
+                            @if (poitrineList.Any())
+                            {
+                                <optgroup label="CHIRURGIE DE LA POITRINE (SEINS)">
+                                    @foreach (var item in poitrineList)
+                                    {
+                                        var val = "Chirurgie Poitrine — " + item.Title;
+                                        var isSelected = HasMatchingSlug(item.Slug, item.Title);
+                                        if (isSelected)
+                                        {
+                                            <option value="@val" selected="selected">@item.Title</option>
+                                        }
+                                        else
+                                        {
+                                            <option value="@val">@item.Title</option>
+                                        }
+                                    }
+                                </optgroup>
+                            }
+                            else
+                            {
+                                <optgroup label="CHIRURGIE DE LA POITRINE (SEINS)">
+                                    <option value="Chirurgie Poitrine — Augmentation Mammaire (Prothèses / Lipofilling)">Augmentation Mammaire (Prothèses / Lipofilling)</option>
+                                    <option value="Chirurgie Poitrine — Lifting des Seins (Mastopexie)">Lifting des Seins (Mastopexie)</option>
+                                    <option value="Chirurgie Poitrine — Réduction Mammaire">Réduction Mammaire</option>
+                                    <option value="Chirurgie Poitrine — Gynécomastie (Torse Homme)">Gynécomastie (Torse Homme)</option>
+                                </optgroup>
+                            }
+
+                            @if (silhouetteList.Any())
+                            {
+                                <optgroup label="CHIRURGIE DE LA SILHOUETTE & CORPS">
+                                    @foreach (var item in silhouetteList)
+                                    {
+                                        var val = "Chirurgie Silhouette — " + item.Title;
+                                        var isSelected = HasMatchingSlug(item.Slug, item.Title);
+                                        if (isSelected)
+                                        {
+                                            <option value="@val" selected="selected">@item.Title</option>
+                                        }
+                                        else
+                                        {
+                                            <option value="@val">@item.Title</option>
+                                        }
+                                    }
+                                </optgroup>
+                            }
+                            else
+                            {
+                                <optgroup label="CHIRURGIE DE LA SILHOUETTE & CORPS">
+                                    <option value="Chirurgie Silhouette — Liposuccion & Liposculpture">Liposuccion & Liposculpture</option>
+                                    <option value="Chirurgie Silhouette — Abdominoplastie (Lifting du Ventre)">Abdominoplastie (Lifting du Ventre)</option>
+                                    <option value="Chirurgie Silhouette — Lifting des Bras et des Cuisses">Lifting des Bras et des Cuisses</option>
+                                    <option value="Chirurgie Silhouette — Augmentation des Fesses (BBL & Prothèses)">Augmentation des Fesses (BBL & Prothèses)</option>
+                                </optgroup>
+                            }
+
+                            @if (otherChirurgiesList.Any())
+                            {
+                                <optgroup label="AUTRES CHIRURGIES">
+                                    @foreach (var item in otherChirurgiesList)
+                                    {
+                                        var val = "Chirurgie — " + item.Title;
+                                        var isSelected = HasMatchingSlug(item.Slug, item.Title);
+                                        if (isSelected)
+                                        {
+                                            <option value="@val" selected="selected">@item.Title</option>
+                                        }
+                                        else
+                                        {
+                                            <option value="@val">@item.Title</option>
+                                        }
+                                    }
+                                </optgroup>
+                            }
+
+                            @if (reparatrices.Any())
+                            {
+                                <optgroup label="CHIRURGIE RÉPARATRICE & RECONSTRUCTRICE">
+                                    @foreach (var item in reparatrices)
+                                    {
+                                        var val = "Chirurgie Réparatrice — " + item.Title;
+                                        var isSelected = HasMatchingSlug(item.Slug, item.Title);
+                                        if (isSelected)
+                                        {
+                                            <option value="@val" selected="selected">@item.Title</option>
+                                        }
+                                        else
+                                        {
+                                            <option value="@val">@item.Title</option>
+                                        }
+                                    }
+                                </optgroup>
+                            }
+                            else
+                            {
+                                <optgroup label="CHIRURGIE RÉPARATRICE & RECONSTRUCTRICE">
+                                    <option value="Chirurgie Réparatrice — Malformations : surtout des lèvres, du nez et des oreilles">Malformations : surtout des lèvres, du nez et des oreilles</option>
+                                    <option value="Chirurgie Réparatrice — Séquelles de traumatismes : cicatrices et fractures">Séquelles de traumatismes : cicatrices et fractures</option>
+                                    <option value="Chirurgie Réparatrice — Tumeurs du visage et du cou">Tumeurs du visage et du cou</option>
+                                </optgroup>
+                            }
+
+                            @if (esthetiques.Any())
+                            {
+                                <optgroup label="MÉDECINE ESTHÉTIQUE & SOINS DU VISAGE">
+                                    @foreach (var item in esthetiques)
+                                    {
+                                        var val = "Médecine Esthétique — " + item.Title;
+                                        var isSelected = HasMatchingSlug(item.Slug, item.Title);
+                                        if (isSelected)
+                                        {
+                                            <option value="@val" selected="selected">@item.Title</option>
+                                        }
+                                        else
+                                        {
+                                            <option value="@val">@item.Title</option>
+                                        }
+                                    }
+                                </optgroup>
+                            }
+                            else
+                            {
+                                <optgroup label="MÉDECINE ESTHÉTIQUE & SOINS DU VISAGE">
+                                    <option value="Médecine Esthétique — Injection de Botox, Comblement & PRP">Injection de Botox, Comblement & PRP</option>
+                                    <option value="Médecine Esthétique — Lipofilling du Visage (MiliFat, MicroFat, NanoFat)">Lipofilling du Visage (MiliFat, MicroFat, NanoFat)</option>
+                                    <option value="Médecine Esthétique — Fils Tenseurs (Lifting Sans Cicatrice)">Fils Tenseurs (Lifting Sans Cicatrice)</option>
+                                </optgroup>
+                            }
+
+                            <optgroup label="CONSULTATIONS SPÉCIFIQUES & À DISTANCE">
+                                @if (selectedSlug == "bilan" || selectedSlug == "3d")
+                                {
+                                    <option value="Consultation — Première Consultation & Bilan Morphologique" selected="selected">Première Consultation / Bilan Morphologique</option>
+                                }
+                                else
+                                {
+                                    <option value="Consultation — Première Consultation & Bilan Morphologique">Première Consultation / Bilan Morphologique</option>
+                                }
+
+                                @if (selectedSlug == "teleconsultation")
+                                {
+                                    <option value="Consultation — Téléconsultation Vidéo à Distance" selected="selected">Téléconsultation Vidéo à Distance</option>
+                                }
+                                else
+                                {
+                                    <option value="Consultation — Téléconsultation Vidéo à Distance">Téléconsultation Vidéo à Distance</option>
+                                }
+
+                                @if (selectedSlug == "devis")
+                                {
+                                    <option value="Consultation — Devis Personnalisé & Estimation" selected="selected">Devis Personnalisé & Estimation</option>
+                                }
+                                else
+                                {
+                                    <option value="Consultation — Devis Personnalisé & Estimation">Devis Personnalisé & Estimation</option>
+                                }
+
+                                @if (selectedSlug == "autre")
+                                {
+                                    <option value="Consultation — Autre Demande / Suivi Post-Opératoire" selected="selected">Autre Demande / Suivi Post-Opératoire</option>
+                                }
+                                else
+                                {
+                                    <option value="Consultation — Autre Demande / Suivi Post-Opératoire">Autre Demande / Suivi Post-Opératoire</option>
+                                }
+                            </optgroup>
+                        </select>
+                    </div>
+
+                    <!-- Row 5: Votre message -->
+                    <div>
+                        <label class="block font-label-caps text-xs font-bold text-primary mb-2">Votre message *</label>
+                        <textarea name="Message" required rows="4" placeholder="Votre message..." class="w-full p-4 border border-gold/30 font-body-md text-sm focus:outline-none focus:border-gold transition-all bg-white shadow-2xs resize-y"></textarea>
+                    </div>
+
+                    <!-- Row 6: Consent Checkbox -->
+                    <div class="flex items-start gap-3 pt-2">
+                        <input type="checkbox" id="consent-check" name="ConsentAccepted" value="true" required checked class="mt-1 w-4 h-4 accent-[#c59b27] border border-gold/40 rounded cursor-pointer" />
+                        <label for="consent-check" class="font-body-md text-xs sm:text-sm text-primary/80 cursor-pointer select-none leading-snug">
+                            J'accepte que le site utilise ces informations pour répondre à ma demande *
+                        </label>
+                    </div>
+
+                    <!-- Row 7: File Attachment (Ajouter des photos) -->
+                    <div class="pt-2">
+                        <div class="flex flex-col sm:flex-row sm:items-center gap-3">
+                            <span class="font-label-caps text-xs font-bold text-primary">Ajouter des photos :</span>
+                            <label class="inline-flex items-center gap-2 px-5 py-2.5 bg-white border border-gold/40 hover:border-gold hover:bg-gold/5 text-primary text-xs font-label-caps font-bold tracking-wider rounded-lg cursor-pointer transition-all shadow-2xs">
+                                <span class="material-symbols-outlined text-sm text-gold">add_photo_alternate</span>
+                                <span>CHOISISSEZ UN FICHIER</span>
+                                <input type="file" name="photoFile" accept="image/*" class="hidden" onchange="document.getElementById('file-chosen-name').textContent = this.files[0] ? this.files[0].name : 'Aucun fichier sélectionné';" />
+                            </label>
+                            <span id="file-chosen-name" class="font-body-md text-xs text-primary/60 italic"></span>
+                        </div>
+                    </div>
+
+                    <!-- Submit Button: ENVOYER -->
+                    <div class="pt-4 flex justify-end">
+                        <button type="submit" class="gold-gradient hover:opacity-90 text-white font-label-caps text-xs tracking-widest px-12 py-4 rounded-xl font-bold shadow-xl transition-all flex items-center justify-center gap-2">
+                            <span>ENVOYER</span>
+                            <span class="material-symbols-outlined text-sm">send</span>
+                        </button>
+                    </div>
+                    
+                    <p class="font-body-md text-[11px] text-primary/50 text-center pt-2">
+                        Vos informations restent strictement confidentielles selon le secret médical.
+                    </p>
+                </form>
+            </div>
+
+            <!-- Right Column: Clinic Location, Map & Access -->
+            <div class="lg:col-span-5 space-y-8">
+                
+                <!-- Map Container -->
+                <div class="bg-white border border-gold/20 shadow-xl p-4">
+                    <div class="aspect-[4/3] w-full relative overflow-hidden border border-gold/20">
+                        <iframe 
+                            src="https://maps.google.com/maps?q=CHU+Sahloul+Sousse+Tunisie&t=&z=15&ie=UTF8&iwloc=&output=embed" 
+                            width="100%" 
+                            height="100%" 
+                            style="border:0;" 
+                            allowfullscreen="" 
+                            loading="lazy"
+                            class="w-full h-full transition-all duration-500">
+                        </iframe>
+                    </div>
+                    <div class="p-4 border-t border-gold/20 mt-2">
+                        <h4 class="font-label-caps text-xs font-bold text-primary mb-1">LOCALISATION &amp; ACCÈS</h4>
+                        <p class="font-body-md text-xs text-primary/70">Hôpital Sahloul • Sousse, Tunisie</p>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+</section>
+
+
+
+<!-- ============================================ -->
+<!-- ============================================ -->
+<!-- 5. FLOATING DARK GLASS CALL TO ACTION (CTA) -->
+<!-- ============================================ -->
+<section class="relative py-32 md:py-44 px-6 md:px-margin-desktop text-white text-center overflow-hidden bg-black">
+    <!-- Fully Visible Clinic Office Background Image -->
+    <div class="absolute inset-0 z-0">
+        <img src="/images/office.png" alt="Cabinet Dr Slama Sousse" class="w-full h-full object-cover object-center opacity-95 scale-100 transition-transform duration-[10s] hover:scale-105" />
+        <div class="absolute inset-0 bg-black/15"></div>
+    </div>
+
+    <!-- Crystal Transparent Floating Card -->
+    <div class="relative z-10 max-w-3xl mx-auto bg-black/25 backdrop-blur-[2px] p-8 md:p-12 border border-white/30 shadow-2xl rounded-2xl">
+        <span class="font-label-caps text-[10px] tracking-[0.4em] text-white block mb-6 uppercase border border-white/40 inline-block px-4 py-1.5 bg-black/30 backdrop-blur-sm font-bold drop-shadow">
+            CONSULTATION PRIVÉE • SOUSSE
+        </span>
+        <h2 class="font-display-lg text-4xl md:text-6xl font-bold text-white mb-6 leading-tight drop-shadow-[0_3px_12px_rgba(0,0,0,0.85)]">
+            Planifiez votre <span class="italic font-normal text-gold">Soin.</span>
+        </h2>
+        <p class="font-body-lg text-white mb-10 text-base md:text-lg leading-relaxed max-w-xl mx-auto drop-shadow-[0_2px_8px_rgba(0,0,0,0.85)] font-medium">
+            Une prise en charge confidentielle, rigoureuse et entièrement sur-mesure au cœur de Sousse.
+        </p>
+
+        <div class="flex flex-col sm:flex-row gap-5 justify-center items-center">
+            <a href="tel:+21673200000" class="bg-white text-primary font-label-caps text-[11px] tracking-widest px-10 py-5 hover:bg-neutral-200 transition-all duration-300 w-full sm:w-auto text-center shadow-2xl font-bold flex items-center justify-center gap-3">
+                <span class="material-symbols-outlined text-sm">phone</span>
+                APPELER LE CABINET
+            </a>
+            <a href="#contact-form" class="border border-white/60 bg-black/30 backdrop-blur-sm text-white font-label-caps text-[11px] tracking-widest px-10 py-5 hover:bg-white hover:text-primary transition-all duration-300 w-full sm:w-auto text-center flex items-center justify-center gap-3 font-bold shadow-lg">
+                <span class="material-symbols-outlined text-sm">mail</span>
+                CONTACTEZ-NOUS
+            </a>
+        </div>
+    </div>
+</section>
+
+@section Scripts {
+<script>
+    function handleContactSubmit(e) {
+        e.preventDefault();
+        const msg = document.getElementById('booking-success-msg');
+        if (msg) {
+            msg.classList.remove('hidden');
+            msg.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        }
+    }
+
+    function toggleFaq(faqId) {
+        const content = document.getElementById('content-' + faqId);
+        const icon = document.getElementById('icon-' + faqId);
+
+        if (content.classList.contains('hidden')) {
+            content.classList.remove('hidden');
+            if (icon) icon.textContent = 'remove';
+        } else {
+            content.classList.add('hidden');
+            if (icon) icon.textContent = 'add';
+        }
+    }
+</script>
+}

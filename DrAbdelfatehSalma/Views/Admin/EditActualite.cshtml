@@ -1,0 +1,78 @@
+@model DrAbdelfatehSalma.Models.Actualite
+@{
+    Layout = "_AdminLayout";
+    ViewData["Title"] = "Modifier l'Actualité";
+}
+
+<div class="max-w-4xl mx-auto space-y-8">
+    <div class="border-b border-gold/20 pb-6 flex items-center justify-between">
+        <div>
+            <h1 class="font-display-lg text-2xl font-bold text-white mb-1">Modifier l'Actualité</h1>
+            <p class="text-xs text-gray-400">Mettre à jour les informations de cette publication.</p>
+        </div>
+        <a asp-controller="Admin" asp-action="Actualites" class="text-xs text-gray-400 hover:text-white flex items-center gap-1 font-bold">
+            ← Retour à la liste
+        </a>
+    </div>
+
+    <form asp-controller="Admin" asp-action="EditActualite" method="post" enctype="multipart/form-data" class="space-y-6 bg-[#121419] p-8 border border-gold/20 shadow-xl">
+        @Html.AntiForgeryToken()
+        <input type="hidden" asp-for="Id" />
+
+        <!-- Title -->
+        <div>
+            <label class="block text-xs font-bold text-gold uppercase mb-2">TITRE DE L'ACTUALITÉ *</label>
+            <input type="text" asp-for="Title" required class="w-full p-3.5 bg-[#0c0d10] border border-gold/20 text-white text-xs focus:outline-none focus:border-gold" />
+        </div>
+
+        <!-- Excerpt -->
+        <div>
+            <label class="block text-xs font-bold text-gold uppercase mb-2">RÉSUMÉ COURT (affiché sur la carte)</label>
+            <textarea asp-for="Excerpt" rows="2" class="w-full p-3.5 bg-[#0c0d10] border border-gold/20 text-white text-xs focus:outline-none focus:border-gold"></textarea>
+        </div>
+
+        <!-- Content -->
+        <div>
+            <label class="block text-xs font-bold text-gold uppercase mb-2">CONTENU COMPLET (optionnel)</label>
+            <textarea asp-for="Content" rows="5" class="w-full p-3.5 bg-[#0c0d10] border border-gold/20 text-white text-xs focus:outline-none focus:border-gold"></textarea>
+        </div>
+
+        <!-- DateLabel -->
+        <div>
+            <label class="block text-xs font-bold text-gold uppercase mb-2">LABEL DE DATE</label>
+            <input type="text" asp-for="DateLabel" class="w-full p-3.5 bg-[#0c0d10] border border-gold/20 text-white text-xs focus:outline-none focus:border-gold" />
+        </div>
+
+        <!-- Tags -->
+        <div>
+            <label class="block text-xs font-bold text-gold uppercase mb-2">TAGS (séparés par des virgules)</label>
+            <input type="text" asp-for="Tags" class="w-full p-3.5 bg-[#0c0d10] border border-gold/20 text-white text-xs focus:outline-none focus:border-gold" />
+        </div>
+
+        <!-- Image -->
+        <div class="p-4 bg-[#0c0d10] border border-gold/20 rounded space-y-3">
+            <label class="block text-xs font-bold text-gold uppercase">🖼️ IMAGE (Fichier ou URL)</label>
+            @if (!string.IsNullOrEmpty(Model.ImageUrl))
+            {
+                <div class="flex items-center gap-4">
+                    <img src="@Model.ImageUrl" alt="Image actuelle" class="w-24 h-16 object-cover rounded border border-gold/20" />
+                    <span class="text-[10px] text-gray-400">Image actuelle — remplacer ci-dessous si nécessaire</span>
+                </div>
+            }
+            <input type="file" name="imageFile" accept="image/*" class="w-full p-2 bg-[#121419] border border-gold/20 text-white text-xs" />
+            <input type="text" asp-for="ImageUrl" placeholder="Ou URL image (ex: /images/mon-image.png)" class="w-full p-3.5 bg-[#121419] border border-gold/20 text-white text-xs focus:outline-none focus:border-gold" />
+        </div>
+
+        <!-- Featured toggle -->
+        <div class="pt-4 border-t border-gold/20 flex items-center justify-between">
+            <label class="flex items-center gap-3 cursor-pointer">
+                <input type="checkbox" asp-for="IsFeatured" class="w-4 h-4 rounded bg-[#0c0d10] border-gold/40 text-gold focus:ring-gold" />
+                <span class="text-xs text-gold font-bold">⭐ Afficher en VEDETTE (grande bannière en haut de la section Actualités)</span>
+            </label>
+
+            <button type="submit" class="gold-gradient text-white font-label-caps text-xs py-4 px-8 hover:opacity-90 font-bold tracking-widest shadow">
+                ENREGISTRER LES MODIFICATIONS
+            </button>
+        </div>
+    </form>
+</div>
