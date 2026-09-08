@@ -118,13 +118,13 @@
     @{
         var testimonialsList = Model?.ToList() ?? new List<DrAbdelfatehSalma.Models.Temoignage>();
         var totalReviews = testimonialsList.Count;
-        var avgScore = totalReviews > 0 ? testimonialsList.Average(t => (double)(t.Rating > 0 ? t.Rating : 5)) : 4.9;
+        var avgScore = totalReviews > 0 ? testimonialsList.Average(t => (double)(t.Rating > 0 ? t.Rating : 5)) : 5.0;
         var avgScoreFormatted = avgScore.ToString("0.0", System.Globalization.CultureInfo.InvariantCulture);
         var roundedScore = (int)Math.Round(avgScore);
 
-        var ecouteScore = totalReviews > 0 ? Math.Min(5.0, Math.Round(avgScore * 1.01, 1)) : 5.0;
-        var naturelScore = totalReviews > 0 ? Math.Round(avgScore, 1) : 4.9;
-        var suiviScore = totalReviews > 0 ? Math.Min(5.0, Math.Round(avgScore * 0.99, 1)) : 4.9;
+        var ecouteScore = totalReviews > 0 ? Math.Min(5.0, Math.Round(avgScore * 1.0, 1)) : 5.0;
+        var naturelScore = totalReviews > 0 ? Math.Min(5.0, Math.Round(avgScore * 1.0, 1)) : 5.0;
+        var suiviScore = totalReviews > 0 ? Math.Min(5.0, Math.Round(avgScore * 1.0, 1)) : 5.0;
 
         var ecouteFormatted = ecouteScore.ToString("0.0", System.Globalization.CultureInfo.InvariantCulture);
         var naturelFormatted = naturelScore.ToString("0.0", System.Globalization.CultureInfo.InvariantCulture);
