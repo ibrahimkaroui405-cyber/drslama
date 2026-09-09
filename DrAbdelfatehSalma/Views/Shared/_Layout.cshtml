@@ -65,9 +65,9 @@
                         "inverse-primary": "#c8c6c5",
                         "tertiary-fixed-dim": "#c6c6c7",
                         "on-secondary-fixed-variant": "#574500",
-                        "gold": "#8c6d3b",
-                        "gold-light": "#b89860",
-                        "gold-dark": "#634c24",
+                        "gold": "#946e20",
+                        "gold-light": "#c9a75d",
+                        "gold-dark": "#7e5b16",
                         "ivory": "#faf8f5",
                         "charcoal": "#1a1a1a"
                     },
@@ -117,31 +117,31 @@
             font-variation-settings: 'FILL' 1, 'wght' 400, 'GRAD' 0, 'opsz' 24;
         }
         .editorial-border {
-            border: 1px solid #000;
+            border: 1px solid #000000;
         }
         .gold-border {
-            border: 1px solid #8c6d3b;
+            border: 1px solid #946e20;
         }
         .gold-border-light {
-            border: 1px solid rgba(140,109,59,0.3);
+            border: 1px solid rgba(148,110,32,0.3);
         }
         .stark-shadow {
             box-shadow: 20px 20px 0px 0px rgba(0,0,0,0.05);
         }
         .gold-glow {
-            box-shadow: 0 0 40px rgba(140,109,59,0.15), 0 0 80px rgba(140,109,59,0.05);
+            box-shadow: 0 0 40px rgba(148,110,32,0.18), 0 0 80px rgba(148,110,32,0.08);
         }
         .gold-gradient {
-            background: linear-gradient(135deg, #8c6d3b 0%, #b89860 50%, #8c6d3b 100%);
+            background: linear-gradient(135deg, #946e20 0%, #c9a75d 50%, #7e5b16 100%);
         }
         .gold-gradient-text {
-            background: linear-gradient(135deg, #8c6d3b, #b89860);
+            background: linear-gradient(135deg, #946e20, #7e5b16);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
         }
         .gold-line {
-            background: linear-gradient(90deg, #8c6d3b, #b89860, transparent);
+            background: linear-gradient(90deg, #946e20, #c9a75d, transparent);
         }
         .reveal-text {
             clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
@@ -192,7 +192,7 @@
             100% { background-position: 200% 0; }
         }
         .gold-shimmer {
-            background: linear-gradient(90deg, #8c6d3b 0%, #e0c897 50%, #8c6d3b 100%);
+            background: linear-gradient(90deg, #946e20 0%, #d8b974 50%, #946e20 100%);
             background-size: 200% 100%;
             animation: goldShimmer 4s infinite linear;
         }
@@ -205,16 +205,16 @@
             background: #faf8f5;
         }
         ::-webkit-scrollbar-thumb {
-            background: linear-gradient(180deg, #8c6d3b 0%, #b89860 100%);
+            background: linear-gradient(180deg, #946e20 0%, #c9a75d 100%);
             border-radius: 9999px;
             border: 2px solid #faf8f5;
         }
         ::-webkit-scrollbar-thumb:hover {
-            background: #634c24;
+            background: #7e5b16;
         }
         * {
             scrollbar-width: thin;
-            scrollbar-color: #8c6d3b #faf8f5;
+            scrollbar-color: #946e20 #faf8f5;
         }
 
         body {
@@ -230,17 +230,41 @@
             font-weight: 400;
             line-height: 1.65;
         }
-        .text-primary\/60, .text-primary\/70, .text-primary\/75, .text-primary\/80, .text-primary\/85 {
-            color: #1e293b !important;
-        }
-        .text-primary\/40, .text-primary\/50 {
-            color: #334155 !important;
-        }
-        .text-slate-400, .text-slate-500, .text-neutral-400, .text-neutral-500 {
-            color: #334155 !important;
-        }
+
+        /* Imperial Gold High-Contrast Typography */
         .text-gold {
-            color: #704712 !important;
+            color: #946e20;
+        }
+        .text-gold-dark {
+            color: #7e5b16;
+        }
+        a.text-gold:hover, .hover\:text-gold:hover {
+            color: #6b4d10;
+        }
+
+        /* Luminous Gold on Dark Backgrounds */
+        .bg-slate-900 .text-gold,
+        .bg-black .text-gold,
+        .bg-neutral-900 .text-gold,
+        .bg-slate-950 .text-gold,
+        .bg-charcoal .text-gold,
+        .bg-\[\#0c0d10\] .text-gold,
+        .bg-\[\#121419\] .text-gold,
+        [class*="bg-black"] .text-gold,
+        [class*="bg-slate-900"] .text-gold,
+        header .bg-slate-900 .text-gold,
+        footer .text-gold,
+        .dark .text-gold {
+            color: #e5ca89;
+        }
+
+        /* Luxury Badge Container */
+        .badge-gold-luxury {
+            background-color: #fbf8f3;
+            border: 1px solid rgba(148, 110, 32, 0.4);
+            color: #0f172a !important;
+            font-weight: 700;
+            letter-spacing: 0.15em;
         }
     </style>
 </head>
@@ -249,17 +273,17 @@
     <header class="fixed top-0 left-0 w-full z-50 bg-white shadow-md border-b border-slate-200 transition-all duration-300" id="main-nav">
         
         <!-- Top Utility Bar: Phone, Email & Social Icons (Hidden on mobile for clean screen height) -->
-        <div class="bg-slate-900 text-white/80 py-2 px-6 md:px-margin-desktop text-[11px] font-label-caps border-b border-slate-800 hidden sm:block">
+        <div class="bg-slate-900 text-slate-100 py-2 px-6 md:px-margin-desktop text-[11px] font-label-caps border-b border-slate-800 hidden sm:block">
             <div class="max-w-container-max mx-auto flex flex-wrap justify-between items-center gap-2">
                 <!-- Left Info: Phone & Email -->
                 <div class="flex items-center gap-6">
-                    <a href="tel:+21673200000" class="flex items-center gap-2 hover:text-gold transition-colors font-medium">
-                        <span class="material-symbols-outlined text-sm text-gold">call</span>
-                        <span>+216 73 200 000</span>
+                    <a href="tel:+21673200000" class="flex items-center gap-2 text-slate-100 hover:text-amber-300 transition-colors font-semibold">
+                        <span class="material-symbols-outlined text-sm text-amber-300">call</span>
+                        <span class="tracking-wider">+216 73 200 000</span>
                     </a>
-                    <span class="text-slate-700 hidden sm:inline">•</span>
-                    <a href="mailto:contact@drslama.com" class="flex items-center gap-2 hover:text-gold transition-colors font-medium">
-                        <span class="material-symbols-outlined text-sm text-gold">mail</span>
+                    <span class="text-slate-600 hidden sm:inline">•</span>
+                    <a href="mailto:contact@drslama.com" class="flex items-center gap-2 text-slate-100 hover:text-amber-300 transition-colors font-semibold">
+                        <span class="material-symbols-outlined text-sm text-amber-300">mail</span>
                         <span>contact@drslama.com</span>
                     </a>
                 </div>
@@ -464,8 +488,7 @@
                 <h5 class="font-label-caps text-xs mb-8 border-b border-gold/30 pb-2 text-gold">ADRESSE</h5>
                 <p class="font-body-md text-sm leading-loose text-white/60">
                     Hôpital Sahloul,<br/>
-                    4000 Sousse, Tunisie<br/>
-                    <span class="text-gold-light font-bold">+216 73 200 000</span>
+                    4000 Sousse, Tunisie
                 </p>
             </div>
             <div>
