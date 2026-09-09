@@ -5,15 +5,15 @@
 
 <!-- BEGIN: HeroSection -->
 <section class="relative min-h-screen lg:h-screen flex items-center pt-20 md:pt-24 pb-12 overflow-hidden bg-ivory">
-    <!-- Right-aligned Continuous Hero Video (Full-bleed on mobile, 50% width on desktop) -->
-    <div class="absolute inset-0 md:left-auto md:right-0 md:top-0 w-full md:w-1/2 h-full z-0 overflow-hidden">
+    <!-- Right-aligned Continuous Hero Video (Full-bleed on mobile, 58% width on desktop) -->
+    <div class="absolute inset-0 md:left-auto md:right-0 md:top-0 w-full md:w-[58%] lg:w-[55%] h-full z-0 overflow-hidden">
         <!-- Mobile Only: Soft gradient overlay so text remains readable over full-bleed video -->
         <div class="block md:hidden absolute inset-0 bg-gradient-to-r from-ivory/90 via-ivory/65 to-ivory/30 z-10 pointer-events-none"></div>
-        <!-- Desktop: Subtle edge blend (video is 100% pure and clear with no white overlay) -->
-        <div class="hidden md:block absolute inset-y-0 left-0 w-20 bg-gradient-to-r from-ivory to-transparent z-10 pointer-events-none"></div>
+        <!-- Desktop: Wide silky smooth feathered transition into ivory background -->
+        <div class="hidden md:block absolute inset-y-0 left-0 w-64 lg:w-96 bg-gradient-to-r from-ivory via-ivory/80 via-ivory/25 to-transparent z-10 pointer-events-none"></div>
 
-        <!-- Video Background Container -->
-        <div class="relative w-full h-full">
+        <!-- Video Background Container with progressive alpha feathering on desktop -->
+        <div class="relative w-full h-full md:[mask-image:linear-gradient(to_right,transparent_0%,rgba(0,0,0,0.4)_15%,black_40%,black_100%)] md:[-webkit-mask-image:linear-gradient(to_right,transparent_0%,rgba(0,0,0,0.4)_15%,black_40%,black_100%)]">
             <video id="hero-main-video" autoplay loop muted playsinline webkit-playsinline preload="auto" poster="/images/dr_slama_operating_suite.png" class="w-full h-full object-cover">
                 <source src="/videos/homeslidevideo.mp4" type="video/mp4"/>
             </video>
