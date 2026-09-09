@@ -7,12 +7,14 @@
 <section class="relative min-h-screen lg:h-screen flex items-center pt-20 md:pt-24 pb-12 overflow-hidden bg-ivory">
     <!-- Right-aligned Continuous Hero Video (Full-bleed on mobile, 50% width on desktop) -->
     <div class="absolute inset-0 md:left-auto md:right-0 md:top-0 w-full md:w-1/2 h-full z-0 overflow-hidden">
-        <!-- Seamless Full-Bleed Gradient (No boxes: allows full-screen video visibility while keeping text 100% clear) -->
-        <div class="absolute inset-0 bg-gradient-to-r from-ivory/90 via-ivory/65 to-ivory/30 md:from-ivory md:via-ivory/70 md:to-transparent z-10 pointer-events-none"></div>
+        <!-- Mobile Only: Soft gradient overlay so text remains readable over full-bleed video -->
+        <div class="block md:hidden absolute inset-0 bg-gradient-to-r from-ivory/90 via-ivory/65 to-ivory/30 z-10 pointer-events-none"></div>
+        <!-- Desktop: Subtle edge blend (video is 100% pure and clear with no white overlay) -->
+        <div class="hidden md:block absolute inset-y-0 left-0 w-20 bg-gradient-to-r from-ivory to-transparent z-10 pointer-events-none"></div>
 
         <!-- Video Background Container -->
         <div class="relative w-full h-full">
-            <video id="hero-main-video" autoplay loop muted playsinline webkit-playsinline preload="auto" poster="/images/dr_slama_operating_suite.png" class="w-full h-full object-cover opacity-90 md:opacity-100 transition-opacity duration-500">
+            <video id="hero-main-video" autoplay loop muted playsinline webkit-playsinline preload="auto" poster="/images/dr_slama_operating_suite.png" class="w-full h-full object-cover">
                 <source src="/videos/homeslidevideo.mp4" type="video/mp4"/>
             </video>
         </div>
