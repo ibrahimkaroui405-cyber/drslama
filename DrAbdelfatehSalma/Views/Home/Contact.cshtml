@@ -586,18 +586,5 @@
             msg.scrollIntoView({ behavior: 'smooth', block: 'center' });
         }
     }
-
-    function toggleFaq(faqId) {
-        const content = document.getElementById('content-' + faqId);
-        const icon = document.getElementById('icon-' + faqId);
-
-        if (content.classList.contains('hidden')) {
-            content.classList.remove('hidden');
-            if (icon) icon.textContent = 'remove';
-        } else {
-            content.classList.add('hidden');
-            if (icon) icon.textContent = 'add';
-        }
-    }
 </script>
 }
