@@ -683,7 +683,8 @@ public static class DbInitializer
         {
             if (act.Title.Contains("rajeunissement", StringComparison.OrdinalIgnoreCase))
             {
-                act.Title = "L’approche globale du rajeunissement du visage :";
+                act.Title = "L’approche globale du rajeunissement du visage : Harmoniser le visage sans le transformer";
+                act.Excerpt = "Avec le temps, le visage vieillit par l’apparition des rides et la diminution des volumes. En effet, les tissus s’affaissent, la qualité de la peau évolue et certains muscles deviennent plus actifs. Ces phénomènes modifient progressivement l’équilibre du visage. Notre philosophie est d’analyser l’ensemble de ces changements et proposer un plan de traitement personnalisé qui permet de préserver l’harmonie du visage tout en respectant son identité.";
             }
             if (act.Title.Contains("RHINOPLASTIE", StringComparison.OrdinalIgnoreCase))
             {
@@ -704,8 +705,8 @@ public static class DbInitializer
             context.Actualites.AddRange(
                 new Actualite
                 {
-                    Title = "L’approche globale du rajeunissement du visage :",
-                    Excerpt = "Harmoniser le visage sans le transformer : Avec le temps, le visage vieillit par l’apparition des rides et la diminution des volumes. En effet, les tissus s’affaissent, la qualité de la peau évolue et certains muscles deviennent plus actifs. Ces phénomènes modifient progressivement l’équilibre du visage. Notre philosophie est d’analyser l’ensemble de ces changements et proposer un plan de traitement personnalisé qui permet de préserver l’harmonie du visage tout en respectant son identité.",
+                    Title = "L’approche globale du rajeunissement du visage : Harmoniser le visage sans le transformer",
+                    Excerpt = "Avec le temps, le visage vieillit par l’apparition des rides et la diminution des volumes. En effet, les tissus s’affaissent, la qualité de la peau évolue et certains muscles deviennent plus actifs. Ces phénomènes modifient progressivement l’équilibre du visage. Notre philosophie est d’analyser l’ensemble de ces changements et proposer un plan de traitement personnalisé qui permet de préserver l’harmonie du visage tout en respectant son identité.",
                     Content = @"Harmoniser le visage sans le transformer :
 Avec le temps, le visage vieillit par l’apparition des rides et la diminution des volumes. En effet, les tissus s’affaissent, la qualité de la peau évolue et certains muscles deviennent plus actifs. Ces phénomènes modifient progressivement l’équilibre du visage.
 Notre philosophie est d’analyser l’ensemble de ces changements et proposer un plan de traitement personnalisé qui permet de préserver l’harmonie du visage tout en respectant son identité. 

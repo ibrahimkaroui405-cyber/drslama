@@ -469,30 +469,41 @@
                     @foreach (var news in actualites)
                     {
                         <a asp-controller="Home" asp-action="ActualiteDetail" asp-route-id="@news.Id" class="bg-white border border-gold/25 rounded-2xl overflow-hidden shadow-sm hover:shadow-xl hover:border-gold transition-all duration-300 flex flex-col justify-between group block cursor-pointer h-full">
-                            <div class="relative w-full overflow-hidden bg-neutral-900 border-b border-gold/15">
+                            <div class="relative w-full h-56 sm:h-64 overflow-hidden bg-slate-950 flex items-center justify-center border-b border-gold/15">
                                 @if (!string.IsNullOrEmpty(news.ImageUrl))
                                 {
-                                    <img src="@news.ImageUrl" alt="@news.Title" class="w-full h-auto block" />
+                                    <img src="@news.ImageUrl" alt="@news.Title" class="w-full h-full object-contain p-2 group-hover:scale-105 transition-transform duration-500" />
                                 }
                                 else
                                 {
-                                    <div class="w-full h-48 flex items-center justify-center bg-[#0c0d10]">
+                                    <div class="w-full h-full flex items-center justify-center bg-[#0c0d10]">
                                         <span class="material-symbols-outlined text-gold text-4xl">newspaper</span>
                                     </div>
                                 }
-                                <span class="absolute top-3 left-3 gold-gradient text-white font-label-caps text-[8.5px] px-3 py-1 rounded-full font-bold uppercase shadow">
+                                <span class="absolute top-3 left-3 gold-gradient text-white font-label-caps text-[8.5px] px-3 py-1 rounded-full font-bold uppercase shadow z-10">
                                     @(news.IsFeatured ? "⭐ À LA UNE" : "ACTUALITÉ")
                                 </span>
                             </div>
                             <div class="p-6 flex flex-col justify-between flex-1 space-y-4">
                                 <div>
-                                    <div class="flex items-center gap-2 text-gold text-[10px] font-label-caps font-bold mb-1">
+                                    <div class="flex items-center gap-2 text-gold text-[10px] font-label-caps font-bold mb-1.5">
                                         <span class="material-symbols-outlined text-xs">calendar_month</span>
                                         <span>@news.DateLabel</span>
                                     </div>
-                                    <h4 class="font-display-lg text-xl font-bold text-primary mb-2 group-hover:text-gold transition-colors line-clamp-2">
-                                        @news.Title
-                                    </h4>
+                                    @if (news.Title.Contains(":"))
+                                    {
+                                        var parts = news.Title.Split(':', 2);
+                                        <h4 class="font-display-lg text-[16px] sm:text-[17px] font-bold text-primary group-hover:text-gold transition-colors leading-snug mb-2">
+                                            <span class="block text-primary">@parts[0].Trim()</span>
+                                            <span class="block text-xs sm:text-[13px] font-semibold text-gold mt-1 font-body-md tracking-normal">@parts[1].Trim()</span>
+                                        </h4>
+                                    }
+                                    else
+                                    {
+                                        <h4 class="font-display-lg text-[16px] sm:text-[17px] font-bold text-primary mb-2 group-hover:text-gold transition-colors leading-snug">
+                                            @news.Title
+                                        </h4>
+                                    }
                                     <p class="font-body-md text-xs text-primary/75 leading-relaxed line-clamp-3">
                                         @news.Excerpt
                                     </p>
