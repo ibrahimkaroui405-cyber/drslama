@@ -127,19 +127,8 @@ public static class DbInitializer
             catch { }
         }
 
-        // Automatic Migration / Cleanup of existing category names & video testimonial URLs
+        // Schema & ordering safe checks
         var existingChirurgies = context.Chirurgies.ToList();
-        foreach (var c in existingChirurgies)
-        {
-            if (c.Category == "CHIRURGIE DU VISAGE & DU COU") c.Category = "VISAGE & COU";
-            if (c.Category == "CHIRURGIE DE LA POITRINE") c.Category = "POITRINE";
-            if (c.Category == "RECONSTRUCTRICE")
-            {
-                context.Chirurgies.Remove(c);
-            }
-        }
-
-        // Ensure any chirurgies with Order == 0 receive sequential orders (1, 2, 3...)
         if (existingChirurgies.Any(c => c.Order == 0))
         {
             int autoSeq = 1;
@@ -151,75 +140,6 @@ public static class DbInitializer
                 }
                 autoSeq = Math.Max(autoSeq + 1, c.Order + 1);
             }
-            context.SaveChanges();
-        }
-        // Ensure strictly ONLY the 3 cards exist in the database (no 4th card, no auto-generated extras)
-        if (!context.Reparatrices.Any())
-        {
-            context.Reparatrices.AddRange(
-                new Reparatrice
-                {
-                    Slug = "malformations",
-                    Title = "Malformations",
-                    Category = "MALFORMATIONS",
-                    Subtitle = "Surtout des lèvres, du nez et des oreilles.",
-                    Overview = "Correction spécialisée des malformations congénitales de la face. Prise en charge des fentes labio-palatines, dysmorphies nasales et otoplasties réparatrices avec rétablissement de la fonction et de la symétrie.",
-                    Indications = "Lèvres & Nez;Oreilles;Symétrie",
-                    ImageUrl = "/images/rep1.png"
-                },
-                new Reparatrice
-                {
-                    Slug = "sequelles-de-traumatismes",
-                    Title = "Séquelles de Traumatismes",
-                    Category = "SÉQUELLES DE TRAUMATISMES",
-                    Subtitle = "Cicatrices et fractures.",
-                    Overview = "Traitement réparateur des cicatrices complexes (hypertrophiques, chéloïdes, rétractions cutanées post-brûlures ou post-opératoires) et correction des séquelles de fractures du massif facial et du cou.",
-                    Indications = "Reprise de Cicatrice;Fractures;Plasties Z",
-                    ImageUrl = "/images/rep2.png"
-                },
-                new Reparatrice
-                {
-                    Slug = "tumeurs-du-visage-et-du-cou",
-                    Title = "Tumeurs du Visage & Cou",
-                    Category = "TUMEURS",
-                    Subtitle = "Exérèse et reconstruction.",
-                    Overview = "Prise en charge chirurgicale des tumeurs cutanées ou sous-cutanées de la face et du cou, avec reconstruction visant à préserver à la fois la fonction et l'esthétique de la région.",
-                    Indications = "Exérèse Cutanée;Lambeaux;Greffes",
-                    ImageUrl = "/images/rep3.png"
-                }
-            );
-        }
-        else
-        {
-            // Remove any 4th / extra items from earlier runs
-            var allRep = context.Reparatrices.ToList();
-            if (allRep.Count > 3)
-            {
-                var canonical = new[] { "malformations", "sequelles-de-traumatismes", "tumeurs-du-visage-et-du-cou" };
-                var extras = allRep.Where(r => !canonical.Any(c => r.Slug.Equals(c, StringComparison.OrdinalIgnoreCase) || r.Title.Contains(c, StringComparison.OrdinalIgnoreCase))).ToList();
-                if (extras.Any())
-                {
-                    context.Reparatrices.RemoveRange(extras);
-                }
-            }
-
-            var tumeurItem = allRep.FirstOrDefault(r => r.Slug.Contains("tumeur"));
-            if (tumeurItem != null)
-            {
-                tumeurItem.Subtitle = "Exérèse et reconstruction.";
-                tumeurItem.Overview = "Prise en charge chirurgicale des tumeurs cutanées ou sous-cutanées de la face et du cou, avec reconstruction visant à préserver à la fois la fonction et l'esthétique de la région.";
-            }
-        }
-        var existingEsthetiques = context.Esthetiques.ToList();
-        foreach (var e in existingEsthetiques)
-        {
-            if (e.Category == "MÉDECINE ESTHÉTIQUE") e.Category = "INJECTIONS";
-        }
-        var dummyNames = new HashSet<string>(StringComparer.OrdinalIgnoreCase) { "Caroline B.", "Sophie R.", "Marc B.", "Élodie P.", "Nadia M." };
-        var dummyTemoignages = context.Temoignages.Where(t => dummyNames.Contains(t.PatientName)).ToList();
-        if (dummyTemoignages.Any())
-        {
-            context.Temoignages.RemoveRange(dummyTemoignages);
             context.SaveChanges();
         }
 
@@ -707,24 +627,7 @@ public static class DbInitializer
             );
         }
 
-        // 6. Reset & Seed ONLY the 2 Client Actualites
-        var currentActualites = context.Actualites.ToList();
-        foreach (var act in currentActualites)
-        {
-            if (act.Title.Contains("rajeunissement", StringComparison.OrdinalIgnoreCase))
-            {
-                act.Title = "L’approche globale du rajeunissement du visage : Harmoniser le visage sans le transformer";
-                act.Excerpt = "Avec le temps, le visage vieillit par l’apparition des rides et la diminution des volumes. En effet, les tissus s’affaissent, la qualité de la peau évolue et certains muscles deviennent plus actifs. Ces phénomènes modifient progressivement l’équilibre du visage. Notre philosophie est d’analyser l’ensemble de ces changements et proposer un plan de traitement personnalisé qui permet de préserver l’harmonie du visage tout en respectant son identité.";
-                act.ImageUrl = "/uploads/ec1bf786-4296-4987-b71b-25fcd8cf3eea_WhatsApp Image 2026-09-04 at 21.17.17.jpeg";
-            }
-            if (act.Title.Contains("RHINOPLASTIE", StringComparison.OrdinalIgnoreCase))
-            {
-                act.Title = "RHINOPLASTIE ULTRASONIQUE : Remodelage du nez en douceur";
-                act.ImageUrl = "/uploads/723e4115-d86d-474b-82c7-cf171cdf92af_b8bd7587-fb53-4c32-974b-5f456da68811.jpg";
-            }
-        }
-        context.SaveChanges();
-
+        // 6. Seed Actualités (Only if table is completely empty)
         if (!context.Actualites.Any())
         {
             context.Actualites.AddRange(

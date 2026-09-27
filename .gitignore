@@ -11,9 +11,18 @@
 .vscode/
 .idea/
 
-## SQLite temporary files
+## SQLite Database files
+*.db
 *.db-shm
 *.db-wal
+*.sqlite
+*.sqlite3
+
+## User Uploads (keep directory via .gitkeep, ignore uploaded media)
+**/wwwroot/uploads/*
+!**/wwwroot/uploads/.gitkeep
+
+site_html_export/
 
 ## OS files
 .DS_Store
