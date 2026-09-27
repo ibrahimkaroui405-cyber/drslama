@@ -90,7 +90,39 @@ public static class DbInitializer
                     AddColIfNotExists("PhotoPath", "TEXT NULL");
                     AddColIfNotExists("ConsentAccepted", "INTEGER NOT NULL DEFAULT 1");
                 }
+
+                // Ensure Order column exists in Chirurgies table
+                using (var cmd = conn.CreateCommand())
+                {
+                    cmd.CommandText = "PRAGMA table_info(\"Chirurgies\");";
+                    var columns = new HashSet<string>(StringComparer.OrdinalIgnoreCase);
+                    using (var reader = cmd.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            var colName = reader["name"]?.ToString();
+                            if (!string.IsNullOrEmpty(colName)) columns.Add(colName);
+                        }
+                    }
+
+                    if (!columns.Contains("Order"))
+                    {
+                        using var alterCmd = conn.CreateCommand();
+                        alterCmd.CommandText = "ALTER TABLE \"Chirurgies\" ADD COLUMN \"Order\" INTEGER NOT NULL DEFAULT 0;";
+                        alterCmd.ExecuteNonQuery();
+                    }
+                }
+
                 if (wasClosed) conn.Close();
+            }
+            catch { }
+        }
+        else
+        {
+            // PostgreSQL migration for Order column
+            try
+            {
+                context.Database.ExecuteSqlRaw(@"ALTER TABLE IF EXISTS ""Chirurgies"" ADD COLUMN IF NOT EXISTS ""Order"" integer NOT NULL DEFAULT 0;");
             }
             catch { }
         }
@@ -105,6 +137,21 @@ public static class DbInitializer
             {
                 context.Chirurgies.Remove(c);
             }
+        }
+
+        // Ensure any chirurgies with Order == 0 receive sequential orders (1, 2, 3...)
+        if (existingChirurgies.Any(c => c.Order == 0))
+        {
+            int autoSeq = 1;
+            foreach (var c in existingChirurgies.OrderBy(x => x.Order > 0 ? x.Order : 9999).ThenBy(x => x.Id))
+            {
+                if (c.Order == 0)
+                {
+                    c.Order = autoSeq;
+                }
+                autoSeq = Math.Max(autoSeq + 1, c.Order + 1);
+            }
+            context.SaveChanges();
         }
         // Ensure strictly ONLY the 3 cards exist in the database (no 4th card, no auto-generated extras)
         if (!context.Reparatrices.Any())
@@ -383,14 +430,11 @@ public static class DbInitializer
             }
         };
 
-        foreach (var item in defaultChirurgies)
+        if (!context.Chirurgies.Any())
         {
-            if (!context.Chirurgies.Any(c => c.Slug == item.Slug))
-            {
-                context.Chirurgies.Add(item);
-            }
+            context.Chirurgies.AddRange(defaultChirurgies);
+            context.SaveChanges();
         }
-        context.SaveChanges();
 
         // 2. Seed / Upsert Reparatrices
         var defaultReparatrices = new List<Reparatrice>
@@ -442,14 +486,11 @@ public static class DbInitializer
             }
         };
 
-        foreach (var item in defaultReparatrices)
+        if (!context.Reparatrices.Any())
         {
-            if (!context.Reparatrices.Any(r => r.Slug == item.Slug))
-            {
-                context.Reparatrices.Add(item);
-            }
+            context.Reparatrices.AddRange(defaultReparatrices);
+            context.SaveChanges();
         }
-        context.SaveChanges();
 
         // 2. Seed / Upsert Esthetique
         var defaultEsthetiques = new List<Esthetique>
@@ -504,21 +545,10 @@ public static class DbInitializer
             }
         };
 
-        foreach (var item in defaultEsthetiques)
+        if (!context.Esthetiques.Any())
         {
-            if (!context.Esthetiques.Any(e => e.Slug == item.Slug))
-            {
-                context.Esthetiques.Add(item);
-            }
-            else
-            {
-                var existing = context.Esthetiques.First(e => e.Slug == item.Slug);
-                // Preserve custom ImageUrl set via Admin panel
-                if (string.IsNullOrEmpty(existing.ImageUrl))
-                {
-                    existing.ImageUrl = item.ImageUrl;
-                }
-            }
+            context.Esthetiques.AddRange(defaultEsthetiques);
+            context.SaveChanges();
         }
 
         // Also clean up old default categories in existing rows if needed
@@ -695,15 +725,8 @@ public static class DbInitializer
         }
         context.SaveChanges();
 
-        var hasExactTwo = currentActualites.Count == 2 
-            && currentActualites.Any(a => a.Title.Contains("rajeunissement"))
-            && currentActualites.Any(a => a.Title.Contains("RHINOPLASTIE"));
-
-        if (!hasExactTwo)
+        if (!context.Actualites.Any())
         {
-            context.Actualites.RemoveRange(currentActualites);
-            context.SaveChanges();
-
             context.Actualites.AddRange(
                 new Actualite
                 {

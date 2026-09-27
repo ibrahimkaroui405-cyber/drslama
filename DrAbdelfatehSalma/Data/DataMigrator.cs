@@ -27,9 +27,18 @@ public static class DataMigrator
 
         // 1. Chirurgies
         var sqliteChirurgies = sqliteContext.Chirurgies.AsNoTracking().ToList();
+        var existingPgChirurgies = pgContext.Chirurgies.ToList();
+        var sqliteChirSlugs = sqliteChirurgies.Select(s => s.Slug).ToHashSet(StringComparer.OrdinalIgnoreCase);
+        var toDeleteChir = existingPgChirurgies.Where(p => !sqliteChirSlugs.Contains(p.Slug)).ToList();
+        if (toDeleteChir.Any())
+        {
+            pgContext.Chirurgies.RemoveRange(toDeleteChir);
+        }
+
         foreach (var item in sqliteChirurgies)
         {
-            if (!pgContext.Chirurgies.Any(x => x.Id == item.Id || x.Slug == item.Slug))
+            var pgItem = existingPgChirurgies.FirstOrDefault(x => x.Slug == item.Slug);
+            if (pgItem == null)
             {
                 pgContext.Chirurgies.Add(new Chirurgie
                 {
@@ -45,17 +54,43 @@ public static class DataMigrator
                     Overview = item.Overview,
                     Indications = item.Indications,
                     Steps = item.Steps,
-                    Faqs = item.Faqs
+                    Faqs = item.Faqs,
+                    Order = item.Order
                 });
+            }
+            else
+            {
+                pgItem.Title = item.Title;
+                pgItem.Category = item.Category;
+                pgItem.Subtitle = item.Subtitle;
+                pgItem.ImageUrl = item.ImageUrl;
+                pgItem.Duree = item.Duree;
+                pgItem.Anesthesie = item.Anesthesie;
+                pgItem.Eviction = item.Eviction;
+                pgItem.Hospitalisation = item.Hospitalisation;
+                pgItem.Overview = item.Overview;
+                pgItem.Indications = item.Indications;
+                pgItem.Steps = item.Steps;
+                pgItem.Faqs = item.Faqs;
+                pgItem.Order = item.Order;
             }
         }
         pgContext.SaveChanges();
 
         // 2. Reparatrices
         var sqliteReparatrices = sqliteContext.Reparatrices.AsNoTracking().ToList();
+        var existingPgRep = pgContext.Reparatrices.ToList();
+        var sqliteRepSlugs = sqliteReparatrices.Select(s => s.Slug).ToHashSet(StringComparer.OrdinalIgnoreCase);
+        var toDeleteRep = existingPgRep.Where(p => !sqliteRepSlugs.Contains(p.Slug)).ToList();
+        if (toDeleteRep.Any())
+        {
+            pgContext.Reparatrices.RemoveRange(toDeleteRep);
+        }
+
         foreach (var item in sqliteReparatrices)
         {
-            if (!pgContext.Reparatrices.Any(x => x.Id == item.Id || x.Slug == item.Slug))
+            var pgItem = existingPgRep.FirstOrDefault(x => x.Slug == item.Slug);
+            if (pgItem == null)
             {
                 pgContext.Reparatrices.Add(new Reparatrice
                 {
@@ -74,14 +109,38 @@ public static class DataMigrator
                     Faqs = item.Faqs
                 });
             }
+            else
+            {
+                pgItem.Title = item.Title;
+                pgItem.Category = item.Category;
+                pgItem.Subtitle = item.Subtitle;
+                pgItem.ImageUrl = item.ImageUrl;
+                pgItem.Duree = item.Duree;
+                pgItem.Anesthesie = item.Anesthesie;
+                pgItem.Eviction = item.Eviction;
+                pgItem.Hospitalisation = item.Hospitalisation;
+                pgItem.Overview = item.Overview;
+                pgItem.Indications = item.Indications;
+                pgItem.Steps = item.Steps;
+                pgItem.Faqs = item.Faqs;
+            }
         }
         pgContext.SaveChanges();
 
         // 3. Esthetiques
         var sqliteEsthetiques = sqliteContext.Esthetiques.AsNoTracking().ToList();
+        var existingPgEst = pgContext.Esthetiques.ToList();
+        var sqliteEstSlugs = sqliteEsthetiques.Select(s => s.Slug).ToHashSet(StringComparer.OrdinalIgnoreCase);
+        var toDeleteEst = existingPgEst.Where(p => !sqliteEstSlugs.Contains(p.Slug)).ToList();
+        if (toDeleteEst.Any())
+        {
+            pgContext.Esthetiques.RemoveRange(toDeleteEst);
+        }
+
         foreach (var item in sqliteEsthetiques)
         {
-            if (!pgContext.Esthetiques.Any(x => x.Id == item.Id || x.Slug == item.Slug))
+            var pgItem = existingPgEst.FirstOrDefault(x => x.Slug == item.Slug);
+            if (pgItem == null)
             {
                 pgContext.Esthetiques.Add(new Esthetique
                 {
@@ -100,14 +159,31 @@ public static class DataMigrator
                     Faqs = item.Faqs
                 });
             }
+            else
+            {
+                pgItem.Title = item.Title;
+                pgItem.Category = item.Category;
+                pgItem.Subtitle = item.Subtitle;
+                pgItem.ImageUrl = item.ImageUrl;
+                pgItem.Duree = item.Duree;
+                pgItem.Anesthesie = item.Anesthesie;
+                pgItem.Eviction = item.Eviction;
+                pgItem.Hospitalisation = item.Hospitalisation;
+                pgItem.Overview = item.Overview;
+                pgItem.Indications = item.Indications;
+                pgItem.Steps = item.Steps;
+                pgItem.Faqs = item.Faqs;
+            }
         }
         pgContext.SaveChanges();
 
         // 4. Resultats
         var sqliteResultats = sqliteContext.Resultats.AsNoTracking().ToList();
+        var existingPgRes = pgContext.Resultats.ToList();
         foreach (var item in sqliteResultats)
         {
-            if (!pgContext.Resultats.Any(x => x.Id == item.Id || x.Title == item.Title))
+            var pgItem = existingPgRes.FirstOrDefault(x => x.Title == item.Title || x.Id == item.Id);
+            if (pgItem == null)
             {
                 pgContext.Resultats.Add(new Resultat
                 {
@@ -123,6 +199,20 @@ public static class DataMigrator
                     RecoveryTime = item.RecoveryTime,
                     IsFeatured = item.IsFeatured
                 });
+            }
+            else
+            {
+                pgItem.CategoryKey = item.CategoryKey;
+                pgItem.CategoryTitle = item.CategoryTitle;
+                pgItem.Title = item.Title;
+                pgItem.Description = item.Description;
+                pgItem.BeforeImageUrl = item.BeforeImageUrl;
+                pgItem.AfterImageUrl = item.AfterImageUrl;
+                pgItem.PatientInfo = item.PatientInfo;
+                pgItem.Technique = item.Technique;
+                pgItem.Anesthesia = item.Anesthesia;
+                pgItem.RecoveryTime = item.RecoveryTime;
+                pgItem.IsFeatured = item.IsFeatured;
             }
         }
         pgContext.SaveChanges();
@@ -151,14 +241,23 @@ public static class DataMigrator
 
         // 6. Actualites
         var sqliteActualites = sqliteContext.Actualites.AsNoTracking().ToList();
+        var existingPgAct = pgContext.Actualites.ToList();
+        var sqliteActTitles = sqliteActualites.Select(s => s.Title).ToHashSet(StringComparer.OrdinalIgnoreCase);
+        var toDeleteAct = existingPgAct.Where(p => !sqliteActTitles.Contains(p.Title)).ToList();
+        if (toDeleteAct.Any())
+        {
+            pgContext.Actualites.RemoveRange(toDeleteAct);
+        }
+
         foreach (var item in sqliteActualites)
         {
-            if (!pgContext.Actualites.Any(x => x.Id == item.Id || x.Title == item.Title))
-            {
-                var dt = item.CreatedAt.Kind == DateTimeKind.Unspecified 
-                    ? DateTime.SpecifyKind(item.CreatedAt, DateTimeKind.Utc) 
-                    : item.CreatedAt.ToUniversalTime();
+            var dt = item.CreatedAt.Kind == DateTimeKind.Unspecified 
+                ? DateTime.SpecifyKind(item.CreatedAt, DateTimeKind.Utc) 
+                : item.CreatedAt.ToUniversalTime();
 
+            var pgItem = existingPgAct.FirstOrDefault(x => x.Title == item.Title);
+            if (pgItem == null)
+            {
                 pgContext.Actualites.Add(new Actualite
                 {
                     Title = item.Title,
@@ -170,6 +269,17 @@ public static class DataMigrator
                     IsFeatured = item.IsFeatured,
                     CreatedAt = dt
                 });
+            }
+            else
+            {
+                pgItem.Title = item.Title;
+                pgItem.Excerpt = item.Excerpt;
+                pgItem.Content = item.Content;
+                pgItem.ImageUrl = item.ImageUrl;
+                pgItem.Tags = item.Tags;
+                pgItem.DateLabel = item.DateLabel;
+                pgItem.IsFeatured = item.IsFeatured;
+                pgItem.CreatedAt = dt;
             }
         }
         pgContext.SaveChanges();

@@ -21,6 +21,7 @@
             <table class="w-full text-left text-xs text-gray-300">
                 <thead class="bg-[#0c0d10] text-gold font-label-caps text-[10px] uppercase border-b border-gold/20">
                     <tr>
+                        <th class="p-4 w-16 text-center">Ordre</th>
                         <th class="p-4">Image</th>
                         <th class="p-4">Titre</th>
                         <th class="p-4">Catégorie</th>
@@ -35,6 +36,9 @@
                         foreach (var item in Model)
                         {
                             <tr class="hover:bg-white/5 transition-colors">
+                                <td class="p-4 text-center">
+                                    <span class="px-2.5 py-1 rounded bg-gold/15 text-gold font-mono font-bold text-xs">@item.Order</span>
+                                </td>
                                 <td class="p-4">
                                     <img src="@item.ImageUrl" alt="@item.Title" class="w-12 h-12 object-cover border border-gold/30 rounded" />
                                 </td>
@@ -58,7 +62,7 @@
                     else
                     {
                         <tr>
-                            <td colspan="6" class="p-8 text-center text-gray-500 italic">Aucune chirurgie enregistrée.</td>
+                            <td colspan="7" class="p-8 text-center text-gray-500 italic">Aucune chirurgie enregistrée.</td>
                         </tr>
                     }
                 </tbody>

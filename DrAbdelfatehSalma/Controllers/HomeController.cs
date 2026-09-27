@@ -23,7 +23,7 @@ public class HomeController : Controller
     {
         ViewBag.Resultats = await _context.Resultats.ToListAsync();
         ViewBag.Temoignages = await _context.Temoignages.ToListAsync();
-        ViewBag.Chirurgies = await _context.Chirurgies.ToListAsync();
+        ViewBag.Chirurgies = await _context.Chirurgies.OrderBy(c => c.Order).ToListAsync();
         ViewBag.Esthetiques = await _context.Esthetiques.ToListAsync();
         ViewBag.Actualites = await _context.Actualites.OrderByDescending(a => a.IsFeatured).ThenByDescending(a => a.CreatedAt).ToListAsync();
         return View();
@@ -38,7 +38,7 @@ public class HomeController : Controller
     public async Task<IActionResult> Chirurgies()
     {
         ViewBag.Resultats = await _context.Resultats.ToListAsync();
-        var list = await _context.Chirurgies.ToListAsync();
+        var list = await _context.Chirurgies.OrderBy(c => c.Order).ToListAsync();
         return View(list);
     }
 

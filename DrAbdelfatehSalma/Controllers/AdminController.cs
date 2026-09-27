@@ -109,7 +109,7 @@ public class AdminController : Controller
     public async Task<IActionResult> Chirurgies()
     {
         ViewData["ActiveNav"] = "Chirurgies";
-        var list = await _context.Chirurgies.ToListAsync();
+        var list = await _context.Chirurgies.OrderBy(c => c.Order).ToListAsync();
         return View(list);
     }
 
@@ -231,6 +231,7 @@ public class AdminController : Controller
         existing.Indications = model.Indications;
         existing.Steps = model.Steps;
         existing.Faqs = model.Faqs;
+        existing.Order = model.Order;
 
         await _context.SaveChangesAsync();
         TempData["SuccessMessage"] = "Chirurgie mise à jour avec succès !";

@@ -39,4 +39,7 @@ public class Chirurgie
     public string Steps { get; set; } = string.Empty;
 
     public string Faqs { get; set; } = string.Empty;
+    
+    // New property for ordering cards
+    public int Order { get; set; } = 0;
 }

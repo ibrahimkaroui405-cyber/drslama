@@ -47,6 +47,12 @@
                     </select>
                     <input type="text" asp-for="Category" id="category-input" required class="w-full p-3.5 bg-[#0c0d10] border border-gold/20 text-white text-xs focus:outline-none focus:border-gold" oninput="onCategoryInput(this.value)" />
                 </div>
+
+                <!-- Order input -->
+                <div class="mb-4">
+                    <label class="block text-xs font-bold text-gold uppercase mb-2">ORDRE (numérique) *</label>
+                    <input type="number" asp-for="Order" min="0" class="w-full p-3.5 bg-[#0c0d10] border border-gold/20 text-white text-xs" />
+                </div>
             </div>
 
             <div>
