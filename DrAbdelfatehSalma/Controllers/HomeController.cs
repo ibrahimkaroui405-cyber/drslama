@@ -21,7 +21,6 @@ public class HomeController : Controller
 
     public async Task<IActionResult> Index()
     {
-        DbInitializer.Initialize(_context);
         ViewBag.Resultats = await _context.Resultats.ToListAsync();
         ViewBag.Temoignages = await _context.Temoignages.ToListAsync();
         ViewBag.Chirurgies = await _context.Chirurgies.ToListAsync();
@@ -63,7 +62,6 @@ public class HomeController : Controller
 
     public async Task<IActionResult> Temoignages()
     {
-        DbInitializer.Initialize(_context);
         var list = await _context.Temoignages.OrderByDescending(t => t.Id).ToListAsync();
         ViewBag.Actualites = await _context.Actualites.OrderByDescending(a => a.IsFeatured).ThenByDescending(a => a.CreatedAt).ToListAsync();
         return View(list);

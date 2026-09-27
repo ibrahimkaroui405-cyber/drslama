@@ -685,10 +685,12 @@ public static class DbInitializer
             {
                 act.Title = "L’approche globale du rajeunissement du visage : Harmoniser le visage sans le transformer";
                 act.Excerpt = "Avec le temps, le visage vieillit par l’apparition des rides et la diminution des volumes. En effet, les tissus s’affaissent, la qualité de la peau évolue et certains muscles deviennent plus actifs. Ces phénomènes modifient progressivement l’équilibre du visage. Notre philosophie est d’analyser l’ensemble de ces changements et proposer un plan de traitement personnalisé qui permet de préserver l’harmonie du visage tout en respectant son identité.";
+                act.ImageUrl = "/uploads/ec1bf786-4296-4987-b71b-25fcd8cf3eea_WhatsApp Image 2026-09-04 at 21.17.17.jpeg";
             }
             if (act.Title.Contains("RHINOPLASTIE", StringComparison.OrdinalIgnoreCase))
             {
                 act.Title = "RHINOPLASTIE ULTRASONIQUE : Remodelage du nez en douceur";
+                act.ImageUrl = "/uploads/723e4115-d86d-474b-82c7-cf171cdf92af_b8bd7587-fb53-4c32-974b-5f456da68811.jpg";
             }
         }
         context.SaveChanges();
@@ -735,7 +737,7 @@ Les procédés de chirurgie esthétique :
 En résumé :
 L’approche globale du rajeunissement du visage représente aujourd’hui l’approche la plus moderne de la médecine et de la chirurgie esthétique. Plutôt que de traiter une zone de façon isolée, il s’appuie sur une analyse globale du visage afin de restaurer l’harmonie et sublimer les traits de manière naturelle.
 Pour nous, chaque plan de traitement est personnalisé. L’objectif est simple : révéler une version harmonieuse et naturelle de votre visage, sans jamais le transformer.",
-                    ImageUrl = "/images/dr_slama_portrait.png",
+                    ImageUrl = "/uploads/ec1bf786-4296-4987-b71b-25fcd8cf3eea_WhatsApp Image 2026-09-04 at 21.17.17.jpeg",
                     Tags = "#Rajeunissement,#Harmonie,#MédecineEsthétique,#ChirurgieEsthétique",
                     DateLabel = "AOÛT 2026",
                     IsFeatured = true,
@@ -767,7 +769,7 @@ La rhinoplastie ultrasonique se déroule sous anesthésie générale et dure deu
 
 Lors de l’intervention, le piézotome agit comme un bistouri, dont la lame soumise à des oscillations passe aisément à travers l’os, sans forcer. En effet, les lignes de fracture des os du nez sont très précises et sans risques de traits de fractures incontrôlés. En plus, l’os est coupé sans endommager les tissus mous adjacents (la peau, les muqueuses, les vaisseaux et les cartilages) ce qui diminue le saignement, l’ecchymose, le gonflement et la douleur post-opératoires.
 Cette technologie piézoélectrique innovante permet donc un geste osseux plus précis et moins invasif.  La bosse sur le nez est ainsi éliminée, le nez est affiné et retrouve une belle harmonie avec un résultat plus naturel.",
-                    ImageUrl = "/images/dr_slama_details.png",
+                    ImageUrl = "/uploads/723e4115-d86d-474b-82c7-cf171cdf92af_b8bd7587-fb53-4c32-974b-5f456da68811.jpg",
                     Tags = "#Rhinoplastie,#PiezoUltrasons,#PrécisionChirurgicale,#Sousse",
                     DateLabel = "JUILLET 2026",
                     IsFeatured = false,

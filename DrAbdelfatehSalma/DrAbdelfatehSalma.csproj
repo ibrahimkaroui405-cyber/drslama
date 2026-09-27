@@ -12,7 +12,10 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Update="dr_slama.db">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <CopyToPublishDirectory>Always</CopyToPublishDirectory>
+    </None>
     <Watch Remove="*.db;*.db-wal;*.db-shm" />
   </ItemGroup>
-
 </Project>
