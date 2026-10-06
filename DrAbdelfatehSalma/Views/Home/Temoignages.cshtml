@@ -32,7 +32,7 @@
             </p>
             <div class="flex justify-center items-center">
                 <a asp-controller="Home" asp-action="Contact" class="gold-gradient text-white font-label-caps text-[10px] tracking-wider px-6 py-2.5 rounded-full font-bold shadow-lg hover:opacity-95 transition-all">
-                    PRENDRE RENDEZ-VOUS
+                    NOUS CONTACTER
                 </a>
             </div>
         </div>
@@ -55,16 +55,10 @@
             <!-- Mobile CTA Quick Button -->
             <div class="flex sm:hidden flex-col gap-2.5 pt-6">
                 <a asp-controller="Home" asp-action="Contact" class="gold-gradient text-white font-label-caps text-[10px] tracking-wider px-6 py-3 rounded-full font-bold shadow-lg transition-all text-center">
-                    PRENDRE RENDEZ-VOUS
+                    NOUS CONTACTER
                 </a>
             </div>
         </div>
-    </div>
-
-    <!-- Scroll Indicator (Bottom Left) -->
-    <div class="hidden sm:flex absolute bottom-10 left-6 md:left-margin-desktop items-center gap-4">
-        <div class="h-16 w-[1px] bg-gold"></div>
-        <span class="font-label-caps text-[10px] vertical-text text-gold font-bold" style="writing-mode: vertical-rl; transform: rotate(180deg);">SCROLL</span>
     </div>
 </section>
 
@@ -140,79 +134,75 @@
                             ?? testimonialsList.FirstOrDefault(t => t.Type == "video") 
                             ?? testimonialsList.FirstOrDefault();
     }
-    <section class="py-16 px-6 md:px-margin-desktop bg-white border-b border-gold/20">
-        <div class="max-w-container-max mx-auto">
-            <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center bg-white p-8 md:p-12 border border-gold/20 shadow-sm">
-            
-                <div class="lg:col-span-4 text-center lg:text-left border-b lg:border-b-0 lg:border-r border-gold/20 pb-8 lg:pb-0 lg:pr-8">
-                    <div class="flex items-center justify-center lg:justify-start gap-2 mb-2">
-                        <span class="font-display-lg text-6xl font-black text-primary">@avgScoreFormatted</span>
-                        <span class="text-2xl text-primary/40 font-light">/ 5.0</span>
-                    </div>
-                    <div class="flex justify-center lg:justify-start gap-1 text-gold mb-3">
-                        @for (int i = 1; i <= 5; i++)
-                        {
-                            if (i <= roundedScore)
+    @if (totalReviews > 0)
+    {
+        <section class="py-16 px-6 md:px-margin-desktop bg-white border-b border-gold/20">
+            <div class="max-w-container-max mx-auto">
+                <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center bg-white p-8 md:p-12 border border-gold/20 shadow-sm">
+                
+                    <div class="lg:col-span-4 text-center lg:text-left border-b lg:border-b-0 lg:border-r border-gold/20 pb-8 lg:pb-0 lg:pr-8">
+                        <div class="flex items-center justify-center lg:justify-start gap-2 mb-2">
+                            <span class="font-display-lg text-6xl font-black text-primary">@avgScoreFormatted</span>
+                            <span class="text-2xl text-primary/40 font-light">/ 5.0</span>
+                        </div>
+                        <div class="flex justify-center lg:justify-start gap-1 text-gold mb-3">
+                            @for (int i = 1; i <= 5; i++)
                             {
-                                <span class="material-symbols-outlined text-xl fill-1">star</span>
+                                if (i <= roundedScore)
+                                {
+                                    <span class="material-symbols-outlined text-xl fill-1">star</span>
+                                }
+                                else
+                                {
+                                    <span class="material-symbols-outlined text-xl text-neutral-300">star</span>
+                                }
                             }
-                            else
-                            {
-                                <span class="material-symbols-outlined text-xl text-neutral-300">star</span>
-                            }
-                        }
-                    </div>
-                    <p class="font-label-caps text-xs font-bold text-primary">AVIS PATIENTS CERTIFIÉS</p>
-                    <p class="font-body-md text-xs text-primary/60 mt-1">
-                        @if (totalReviews > 0)
-                        {
+                        </div>
+                        <p class="font-label-caps text-xs font-bold text-primary">AVIS PATIENTS CERTIFIÉS</p>
+                        <p class="font-body-md text-xs text-primary/60 mt-1">
                             <span>Basé sur @totalReviews avis patient@(totalReviews > 1 ? "s" : "") vérifié@(totalReviews > 1 ? "s" : "") et suivi@(totalReviews > 1 ? "s" : "") en cabinet à Sousse.</span>
-                        }
-                        else
-                        {
-                            <span>Évaluations indépendantes et suivis cliniques au cabinet.</span>
-                        }
-                    </p>
+                        </p>
+                    </div>
+
+                    <div class="lg:col-span-8 grid grid-cols-1 md:grid-cols-3 gap-6 text-center md:text-left">
+                        <div class="p-4 bg-white border border-gold/20">
+                            <div class="flex items-center justify-between mb-2">
+                                <span class="font-label-caps text-[10px] font-bold text-primary">ÉCOUTE & PRÉPARATOIRE</span>
+                                <span class="font-bold text-gold text-xs">@ecouteFormatted / 5</span>
+                            </div>
+                            <div class="w-full h-1.5 bg-neutral-200 overflow-hidden">
+                                <div class="h-full gold-gradient transition-all duration-700" style="width: @(ecoutePct)%;"></div>
+                            </div>
+                            <p class="font-body-md text-[11px] text-primary/60 mt-2">Prise en compte des souhaits & consultations approfondies.</p>
+                        </div>
+
+                        <div class="p-4 bg-white border border-gold/20">
+                            <div class="flex items-center justify-between mb-2">
+                                <span class="font-label-caps text-[10px] font-bold text-primary">NATUREL DES RÉSULTATS</span>
+                                <span class="font-bold text-gold text-xs">@naturelFormatted / 5</span>
+                            </div>
+                            <div class="w-full h-1.5 bg-neutral-200 overflow-hidden">
+                                <div class="h-full gold-gradient transition-all duration-700" style="width: @(naturelPct)%;"></div>
+                            </div>
+                            <p class="font-body-md text-[11px] text-primary/60 mt-2">Respect des harmonies du visage et discrétion des gestes.</p>
+                        </div>
+
+                        <div class="p-4 bg-white border border-gold/20">
+                            <div class="flex items-center justify-between mb-2">
+                                <span class="font-label-caps text-[10px] font-bold text-primary">SUIVI POST-OPÉRATOIRE</span>
+                                <span class="font-bold text-gold text-xs">@suiviFormatted / 5</span>
+                            </div>
+                            <div class="w-full h-1.5 bg-neutral-200 overflow-hidden">
+                                <div class="h-full gold-gradient transition-all duration-700" style="width: @(suiviPct)%;"></div>
+                            </div>
+                            <p class="font-body-md text-[11px] text-primary/60 mt-2">Présence constante et disponibilité d'urgence 24/7.</p>
+                        </div>
+                    </div>
+
                 </div>
-
-                <div class="lg:col-span-8 grid grid-cols-1 md:grid-cols-3 gap-6 text-center md:text-left">
-                    <div class="p-4 bg-white border border-gold/20">
-                        <div class="flex items-center justify-between mb-2">
-                            <span class="font-label-caps text-[10px] font-bold text-primary">ÉCOUTE & PRÉPARATOIRE</span>
-                            <span class="font-bold text-gold text-xs">@ecouteFormatted / 5</span>
-                        </div>
-                        <div class="w-full h-1.5 bg-neutral-200 overflow-hidden">
-                            <div class="h-full gold-gradient transition-all duration-700" style="width: @(ecoutePct)%;"></div>
-                        </div>
-                        <p class="font-body-md text-[11px] text-primary/60 mt-2">Prise en compte des souhaits & consultations approfondies.</p>
-                    </div>
-
-                    <div class="p-4 bg-white border border-gold/20">
-                        <div class="flex items-center justify-between mb-2">
-                            <span class="font-label-caps text-[10px] font-bold text-primary">NATUREL DES RÉSULTATS</span>
-                            <span class="font-bold text-gold text-xs">@naturelFormatted / 5</span>
-                        </div>
-                        <div class="w-full h-1.5 bg-neutral-200 overflow-hidden">
-                            <div class="h-full gold-gradient transition-all duration-700" style="width: @(naturelPct)%;"></div>
-                        </div>
-                        <p class="font-body-md text-[11px] text-primary/60 mt-2">Respect des harmonies du visage et discrétion des gestes.</p>
-                    </div>
-
-                    <div class="p-4 bg-white border border-gold/20">
-                        <div class="flex items-center justify-between mb-2">
-                            <span class="font-label-caps text-[10px] font-bold text-primary">SUIVI POST-OPÉRATOIRE</span>
-                            <span class="font-bold text-gold text-xs">@suiviFormatted / 5</span>
-                        </div>
-                        <div class="w-full h-1.5 bg-neutral-200 overflow-hidden">
-                            <div class="h-full gold-gradient transition-all duration-700" style="width: @(suiviPct)%;"></div>
-                        </div>
-                        <p class="font-body-md text-[11px] text-primary/60 mt-2">Présence constante et disponibilité d'urgence 24/7.</p>
-                    </div>
-                </div>
-
             </div>
-        </div>
-    </section>
+        </section>
+    }
 
     <!-- ============================================ -->
     <!-- 3. FEATURED PATIENT STORY SPOTLIGHT (DYNAMIC) -->
@@ -299,9 +289,12 @@
             <h2 class="font-display-lg text-4xl md:text-6xl font-bold text-primary">Vidéos & Avis Écrits</h2>
         </div>
         <div class="flex flex-wrap items-center gap-3">
-            <button onclick="filterPageTestimonials('all')" class="page-tab active px-5 py-2.5 font-label-caps text-xs gold-gradient text-white font-bold transition-all shadow-md">TOUT VOIR</button>
-            <button onclick="filterPageTestimonials('video')" class="page-tab px-5 py-2.5 font-label-caps text-xs bg-white border border-gold/30 text-primary hover:border-gold hover:text-gold transition-all">VIDÉOS 🎥</button>
-            <button onclick="filterPageTestimonials('text')" class="page-tab px-5 py-2.5 font-label-caps text-xs bg-white border border-gold/30 text-primary hover:border-gold hover:text-gold transition-all">AVIS ÉCRITS ✍️</button>
+            @if (totalReviews > 0)
+            {
+                <button onclick="filterPageTestimonials('all')" class="page-tab active px-5 py-2.5 font-label-caps text-xs gold-gradient text-white font-bold transition-all shadow-md">TOUT VOIR</button>
+                <button onclick="filterPageTestimonials('video')" class="page-tab px-5 py-2.5 font-label-caps text-xs bg-white border border-gold/30 text-primary hover:border-gold hover:text-gold transition-all">VIDÉOS 🎥</button>
+                <button onclick="filterPageTestimonials('text')" class="page-tab px-5 py-2.5 font-label-caps text-xs bg-white border border-gold/30 text-primary hover:border-gold hover:text-gold transition-all">AVIS ÉCRITS ✍️</button>
+            }
             <button onclick="openShareModal()" class="px-5 py-2.5 font-label-caps text-xs bg-primary text-gold border border-gold hover:bg-gold hover:text-white transition-all font-bold shadow-sm flex items-center gap-1.5">
                 <span class="material-symbols-outlined text-sm">edit_square</span> LAISSER UN AVIS
             </button>
@@ -415,7 +408,7 @@
                     <span class="material-symbols-outlined text-amber-300 text-3xl mb-4">verified</span>
                     <h4 class="font-headline-sm text-base font-bold text-white mb-2">Résultats 100% Naturels</h4>
                     <p class="font-body-md text-xs text-white/70 leading-relaxed">
-                        Refus systématique de la surcorrection pour préserver les mimiques expressives et la structure originelle du visage.
+                        Résultat 100% Naturel : respect de l’identité et des expressions naturelles avec un résultat harmonieux.
                     </p>
                 </div>
             </div>

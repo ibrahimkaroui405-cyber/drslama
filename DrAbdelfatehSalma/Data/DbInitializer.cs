@@ -143,6 +143,17 @@ public static class DbInitializer
             context.SaveChanges();
         }
 
+        // Fix overview text for genioplastie in existing DBs
+        var outdatedChir = existingChirurgies.Where(x => x.Overview != null && x.Overview.Contains("parfaite profiloplastie")).ToList();
+        if (outdatedChir.Any())
+        {
+            foreach (var c in outdatedChir)
+            {
+                c.Overview = c.Overview.Replace("parfaite profiloplastie", "un profil équilibré");
+            }
+            context.SaveChanges();
+        }
+
         // 1. Seed / Upsert Chirurgies
         var defaultChirurgies = new List<Chirurgie>
         {
@@ -205,7 +216,7 @@ public static class DbInitializer
                 Anesthesie = "Générale",
                 Eviction = "7 jours",
                 Hospitalisation = "24h d'hospitalisation",
-                Overview = "• Le menton doit être en équilibre et en harmonie avec les lèvres, le nez et les joues.\n• La génioplastie corrige un menton fuyant, saillant ou dévié pour rétablir une parfaite profiloplastie.",
+                Overview = "• Le menton doit être en équilibre et en harmonie avec les lèvres, le nez et les joues.\n• La génioplastie corrige un menton fuyant, saillant ou dévié pour rétablir un profil équilibré.",
                 Indications = "Menton fuyant (rétrognathie);Menton saillant (prognathie);Asymétrie ou déviation du menton",
                 Faqs = "Durée d'hospitalisation ? 24 heures d'hospitalisation.;Convalescence ? Environ 7 jours."
             },
