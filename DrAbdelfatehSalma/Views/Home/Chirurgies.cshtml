@@ -339,33 +339,49 @@
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8" id="results-branch-grid">
                 @if (resultatsList.Any())
                 {
+                    var idx = 0;
                     foreach (var item in resultatsList)
                     {
                         var catKey = string.IsNullOrEmpty(item.CategoryKey) ? "visage" : item.CategoryKey.ToLower();
                         var catTitle = string.IsNullOrEmpty(item.CategoryTitle) ? "CHIRURGIE" : item.CategoryTitle.ToUpper();
-                        <div class="result-branch-card bg-white border border-gold/30 rounded-2xl overflow-hidden shadow-md group transition-all duration-300" data-cat="@catKey">
-                            <div class="relative aspect-[4/3] overflow-hidden bg-black/5 select-none ba-card-slider">
-                                <img src="@item.AfterImageUrl" class="absolute inset-0 w-full h-full object-cover" alt="Après — @item.Title" />
-                                <span class="absolute top-3 right-3 bg-primary text-white font-label-caps text-[8px] px-2 py-0.5 font-bold z-10 shadow">APRÈS</span>
-                                
-                                <img src="@item.BeforeImageUrl" class="ba-card-before absolute inset-0 w-full h-full object-cover z-10" style="clip-path: inset(0 50% 0 0);" alt="Avant — @item.Title" />
-                                <span class="absolute top-3 left-3 bg-black/90 text-white font-label-caps text-[8px] px-2 py-0.5 font-bold z-20 shadow">AVANT</span>
+                        <div class="result-branch-card bg-white border border-gold/30 rounded-2xl overflow-hidden shadow-md group transition-all duration-300 flex flex-col justify-between" data-cat="@catKey">
+                            <div>
+                                <div class="relative aspect-[4/3] overflow-hidden bg-black/5 select-none ba-card-slider">
+                                    <img src="@item.AfterImageUrl" class="absolute inset-0 w-full h-full object-cover cursor-pointer" alt="Après — @item.Title" onclick="openCaseModal(@idx)" />
+                                    <span class="absolute top-3 right-3 bg-primary text-white font-label-caps text-[8px] px-2 py-0.5 font-bold z-10 shadow">APRÈS</span>
+                                    
+                                    <img src="@item.BeforeImageUrl" class="ba-card-before absolute inset-0 w-full h-full object-cover z-10 cursor-pointer" style="clip-path: inset(0 50% 0 0);" alt="Avant — @item.Title" onclick="openCaseModal(@idx)" />
+                                    <span class="absolute top-3 left-3 bg-black/90 text-white font-label-caps text-[8px] px-2 py-0.5 font-bold z-20 shadow">AVANT</span>
 
-                                <div class="ba-card-handle absolute top-0 bottom-0 w-[2px] bg-white z-30 shadow-2xl flex items-center justify-center cursor-ew-resize" style="left: 50%;">
-                                    <div class="w-6 h-6 rounded-full bg-white text-black flex items-center justify-center shadow-lg text-[10px] font-bold border border-black/20">
-                                        ↔
+                                    <div class="ba-card-handle absolute top-0 bottom-0 w-[2px] bg-white z-30 shadow-2xl flex items-center justify-center cursor-ew-resize" style="left: 50%;">
+                                        <div class="w-6 h-6 rounded-full bg-white text-black flex items-center justify-center shadow-lg text-[10px] font-bold border border-black/20">
+                                            ↔
+                                        </div>
                                     </div>
+                                    <span class="absolute bottom-3 left-1/2 -translate-x-1/2 bg-black/80 text-white font-label-caps text-[8px] px-2.5 py-1 z-20 shadow-md pointer-events-none">@catTitle</span>
+
+                                    <!-- Quick Zoom Button -->
+                                    <button type="button" onclick="openCaseModal(@idx)" class="absolute bottom-3 right-3 bg-white/95 hover:bg-gold text-primary hover:text-white p-2 rounded-full z-30 shadow-lg transition-all flex items-center justify-center" title="Agrandir en grand écran">
+                                        <span class="material-symbols-outlined text-sm font-bold">zoom_in</span>
+                                    </button>
                                 </div>
-                                <span class="absolute bottom-3 left-1/2 -translate-x-1/2 bg-black/80 text-white font-label-caps text-[8px] px-2.5 py-1 z-20 shadow-md pointer-events-none">@catTitle</span>
+                                <div class="p-5">
+                                    <h4 class="font-display-lg text-lg font-bold mb-1 text-primary cursor-pointer hover:text-gold transition-colors" onclick="openCaseModal(@idx)">@item.Title</h4>
+                                    @if (!string.IsNullOrWhiteSpace(item.Description))
+                                    {
+                                        <p class="font-body-md text-xs text-primary/70 leading-relaxed mb-2">@item.Description</p>
+                                    }
+                                </div>
                             </div>
-                            <div class="p-5">
-                                <h4 class="font-display-lg text-lg font-bold mb-1 text-primary">@item.Title</h4>
-                                @if (!string.IsNullOrWhiteSpace(item.Description))
-                                {
-                                    <p class="font-body-md text-xs text-primary/70 leading-relaxed mb-2">@item.Description</p>
-                                }
+                            <div class="px-5 pb-5 pt-0 mt-auto flex items-center justify-between border-t border-gold/10 pt-3">
+                                <span class="font-label-caps text-[10px] text-primary/50 font-semibold">@catTitle</span>
+                                <button type="button" onclick="openCaseModal(@idx)" class="gold-gradient text-white font-label-caps text-[9px] px-3.5 py-2 hover:opacity-90 transition-all font-bold tracking-widest flex items-center gap-1.5 shadow rounded-lg">
+                                    <span>VOIR EN GRAND</span>
+                                    <span class="material-symbols-outlined text-xs">zoom_in</span>
+                                </button>
                             </div>
                         </div>
+                        idx++;
                     }
                 }
                 else
@@ -473,6 +489,109 @@
         </div>
     </div>
 </section>
+
+<!-- ============================================ -->
+<!-- CLINICAL CASE LIGHTBOX MODAL (HIGH RESOLUTION) -->
+<!-- ============================================ -->
+<div id="case-modal" class="fixed inset-0 z-50 hidden items-center justify-center p-4 md:p-6 bg-black/85 backdrop-blur-md">
+    <!-- Modal Background Click to Close -->
+    <div class="absolute inset-0 cursor-pointer" onclick="closeCaseModal()"></div>
+
+    <!-- Modal Content Window -->
+    <div class="relative z-10 w-full max-w-5xl bg-neutral-900 border border-white/20 shadow-2xl overflow-hidden flex flex-col max-h-[92vh] transition-transform duration-300">
+        
+        <!-- Modal Top Bar -->
+        <div class="flex justify-between items-center px-6 py-4 border-b border-gold/20 bg-black/80 backdrop-blur-md">
+            <div class="flex items-center gap-3">
+                <span id="modal-category" class="font-label-caps text-[9px] tracking-[0.25em] text-gold font-bold uppercase bg-gold/10 border border-gold/30 px-3 py-1">
+                    CHIRURGIE
+                </span>
+                <span class="text-white/40 text-xs hidden sm:inline">•</span>
+                <span class="font-label-caps text-[10px] text-white/60 tracking-widest hidden sm:inline">GLISSEZ LE CURSEUR POUR COMPARER AVANT / APRÈS</span>
+            </div>
+
+            <!-- Close Button -->
+            <button onclick="closeCaseModal()" class="w-10 h-10 rounded-full bg-white/10 hover:bg-white/20 text-white flex items-center justify-center transition-colors" title="Fermer (Échap)">
+                <span class="material-symbols-outlined text-xl">close</span>
+            </button>
+        </div>
+
+        <!-- Modal Body (Split: Interactive Large Slider on Left, Details on Right) -->
+        <div class="overflow-y-auto flex-1 p-6 md:p-8 grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+            
+            <!-- Left/Top: High-Res Interactive Before/After Drag Slider -->
+            <div class="lg:col-span-8">
+                <div id="modal-ba-slider" class="relative w-full aspect-[4/3] md:aspect-[16/10] overflow-hidden select-none border border-gold/30 bg-black shadow-2xl group cursor-ew-resize">
+                    <!-- AFTER Image -->
+                    <img id="modal-img-after" src="" alt="Après" class="absolute inset-0 w-full h-full object-cover" />
+                    <span class="absolute top-4 right-4 gold-gradient text-white font-label-caps text-[10px] px-3 py-1.5 font-bold z-10 tracking-widest shadow-md">
+                        APRÈS
+                    </span>
+
+                    <!-- BEFORE Image -->
+                    <img id="modal-img-before" src="" alt="Avant" class="modal-ba-before absolute inset-0 w-full h-full object-cover z-10" style="clip-path: inset(0 50% 0 0);" />
+                    <span class="absolute top-4 left-4 bg-black/90 text-white font-label-caps text-[10px] px-3 py-1.5 font-bold z-20 shadow-md border border-gold/30">
+                        AVANT
+                    </span>
+
+                    <!-- Draggable Handle Bar -->
+                    <div id="modal-ba-handle" class="modal-ba-handle absolute top-0 bottom-0 w-[2px] bg-white z-30 shadow-2xl flex items-center justify-center" style="left: 50%;">
+                        <div class="w-10 h-10 rounded-full gold-gradient text-white flex items-center justify-center shadow-2xl border border-white text-sm font-bold">
+                            ↔
+                        </div>
+                    </div>
+                </div>
+
+                <div class="flex justify-between items-center mt-3 text-xs font-label-caps text-white/50">
+                    <span>◄ Glisser vers la gauche (AVANT)</span>
+                    <span>Glisser vers la droite (APRÈS) ►</span>
+                </div>
+            </div>
+
+            <!-- Right/Bottom: Case Info & Navigation -->
+            <div class="lg:col-span-4 flex flex-col justify-between h-full space-y-6 text-white">
+                <div>
+                    <h3 id="modal-title" class="font-display-lg text-2xl md:text-3xl text-white mb-4 leading-tight">
+                        Titre
+                    </h3>
+                    <p id="modal-desc" class="font-body-md text-white/70 text-sm leading-relaxed mb-6">
+                        Description
+                    </p>
+
+                    <div class="space-y-3 border-t border-b border-gold/20 py-5">
+                        <div class="flex justify-between text-xs">
+                            <span class="font-label-caps text-white/40">CHIRURGIEN :</span>
+                            <span id="modal-spec" class="font-bold text-gold">Dr. Abdelfateh Slama</span>
+                        </div>
+                        <div class="flex justify-between text-xs">
+                            <span class="font-label-caps text-white/40">SPÉCIALITÉ :</span>
+                            <span id="modal-tag1" class="font-bold text-white/90">Chirurgie Plastique</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Navigation between cases & CTAs -->
+                <div class="space-y-4 pt-2">
+                    <div class="flex gap-3">
+                        <button onclick="navigateResultsPageModal(-1)" class="flex-1 bg-white/10 hover:bg-white/20 text-white font-label-caps text-[10px] tracking-widest py-3 px-4 transition-all flex items-center justify-center gap-2 border border-gold/30 font-bold">
+                            <span class="material-symbols-outlined text-sm text-gold">west</span>
+                            <span>PRÉCÉDENT</span>
+                        </button>
+                        <button onclick="navigateResultsPageModal(1)" class="flex-1 bg-white/10 hover:bg-white/20 text-white font-label-caps text-[10px] tracking-widest py-3 px-4 transition-all flex items-center justify-center gap-2 border border-gold/30 font-bold">
+                            <span>SUIVANT</span>
+                            <span class="material-symbols-outlined text-sm text-gold">east</span>
+                        </button>
+                    </div>
+
+                    <a asp-controller="Home" asp-action="Contact" class="w-full block text-center gold-gradient text-white hover:opacity-90 font-label-caps text-[11px] tracking-widest py-4 px-6 transition-all font-bold shadow-lg">
+                        PRENDRE RENDEZ-VOUS →
+                    </a>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
 
 @section Scripts {
 <script>
@@ -646,9 +765,145 @@
     // No session restore — password required on every page load
     function checkResultsUnlockStatus() {}
 
+    // ============================================
+    // LIGHTBOX CASE MODAL CONTROLLER
+    // ============================================
+    const resultsPageData = @Html.Raw(System.Text.Json.JsonSerializer.Serialize(resultatsList.Select((r, i) => new {
+        id = i,
+        key = "case-" + r.Id,
+        category = string.IsNullOrEmpty(r.CategoryTitle) ? "CHIRURGIE" : r.CategoryTitle.ToUpper(),
+        title = r.Title,
+        desc = r.Description ?? "",
+        beforeImg = r.BeforeImageUrl,
+        afterImg = r.AfterImageUrl,
+        spec = "Dr. Abdelfateh Slama",
+        tag1 = string.IsNullOrEmpty(r.CategoryTitle) ? "Chirurgie Esthétique" : r.CategoryTitle
+    })));
+
+    let currentResultsPageModalIndex = 0;
+
+    function openCaseModal(param) {
+        let index = 0;
+        if (typeof param === 'number') {
+            index = param;
+        } else if (typeof param === 'string') {
+            const foundIdx = resultsPageData.findIndex(item => item.key === param);
+            if (foundIdx !== -1) index = foundIdx;
+        }
+
+        currentResultsPageModalIndex = index;
+        const data = resultsPageData[index];
+        if (!data) return;
+
+        const catEl = document.getElementById('modal-category');
+        if (catEl) catEl.innerText = data.category;
+        const titleEl = document.getElementById('modal-title');
+        if (titleEl) titleEl.innerText = data.title;
+        const descEl = document.getElementById('modal-desc');
+        if (descEl) descEl.innerText = data.desc;
+        const tag1El = document.getElementById('modal-tag1');
+        if (tag1El) tag1El.innerText = data.tag1;
+
+        const beforeImg = document.getElementById('modal-img-before');
+        const afterImg = document.getElementById('modal-img-after');
+        const handle = document.getElementById('modal-ba-handle');
+
+        if (beforeImg && afterImg && handle) {
+            beforeImg.src = data.beforeImg;
+            afterImg.src = data.afterImg;
+            beforeImg.style.clipPath = 'inset(0 50% 0 0)';
+            handle.style.left = '50%';
+        }
+
+        const modal = document.getElementById('case-modal');
+        if (modal) {
+            modal.classList.remove('hidden');
+            modal.classList.add('flex');
+            document.body.classList.add('overflow-hidden');
+        }
+    }
+
+    function closeCaseModal() {
+        const modal = document.getElementById('case-modal');
+        if (modal) {
+            modal.classList.add('hidden');
+            modal.classList.remove('flex');
+            document.body.classList.remove('overflow-hidden');
+        }
+    }
+
+    function navigateResultsPageModal(direction) {
+        if (!resultsPageData || resultsPageData.length === 0) return;
+        let newIndex = currentResultsPageModalIndex + direction;
+        if (newIndex < 0) newIndex = resultsPageData.length - 1;
+        if (newIndex >= resultsPageData.length) newIndex = 0;
+        openCaseModal(newIndex);
+    }
+
+    function initModalSlider() {
+        const slider = document.getElementById('modal-ba-slider');
+        const beforeImg = document.getElementById('modal-img-before');
+        const handle = document.getElementById('modal-ba-handle');
+        let isDragging = false;
+
+        if (!slider || !beforeImg || !handle) return;
+
+        function setModalPos(clientX) {
+            const rect = slider.getBoundingClientRect();
+            let x = clientX - rect.left;
+            if (x < 0) x = 0;
+            if (x > rect.width) x = rect.width;
+            const pct = (x / rect.width) * 100;
+            beforeImg.style.clipPath = 'inset(0 ' + (100 - pct) + '% 0 0)';
+            handle.style.left = pct + '%';
+        }
+
+        slider.addEventListener('mousedown', (e) => {
+            isDragging = true;
+            setModalPos(e.clientX);
+        });
+
+        window.addEventListener('mousemove', (e) => {
+            if (!isDragging) return;
+            setModalPos(e.clientX);
+        });
+
+        window.addEventListener('mouseup', () => {
+            isDragging = false;
+        });
+
+        slider.addEventListener('touchstart', (e) => {
+            isDragging = true;
+            if (e.touches && e.touches[0]) setModalPos(e.touches[0].clientX);
+        });
+
+        window.addEventListener('touchmove', (e) => {
+            if (!isDragging) return;
+            if (e.touches && e.touches[0]) setModalPos(e.touches[0].clientX);
+        });
+
+        window.addEventListener('touchend', () => {
+            isDragging = false;
+        });
+    }
+
+    window.addEventListener('keydown', (e) => {
+        const modal = document.getElementById('case-modal');
+        if (!modal || modal.classList.contains('hidden')) return;
+
+        if (e.key === 'Escape') {
+            closeCaseModal();
+        } else if (e.key === 'ArrowLeft') {
+            navigateResultsPageModal(-1);
+        } else if (e.key === 'ArrowRight') {
+            navigateResultsPageModal(1);
+        }
+    });
+
     document.addEventListener('DOMContentLoaded', () => {
         checkResultsUnlockStatus();
         initMiniCardSliders();
+        initModalSlider();
     });
 </script>
 }
