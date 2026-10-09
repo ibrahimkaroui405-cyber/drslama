@@ -594,11 +594,11 @@ public class AdminController : Controller
         existing.Title = model.Title;
         existing.CategoryKey = model.CategoryKey;
         existing.CategoryTitle = model.CategoryTitle;
-        existing.Description = model.Description;
-        existing.PatientInfo = model.PatientInfo;
-        existing.Technique = model.Technique;
-        existing.Anesthesia = model.Anesthesia;
-        existing.RecoveryTime = model.RecoveryTime;
+        existing.Description = model.Description ?? string.Empty;
+        existing.PatientInfo = model.PatientInfo ?? string.Empty;
+        existing.Technique = model.Technique ?? string.Empty;
+        existing.Anesthesia = model.Anesthesia ?? string.Empty;
+        existing.RecoveryTime = model.RecoveryTime ?? string.Empty;
         existing.IsFeatured = model.IsFeatured;
 
         await _context.SaveChangesAsync();
