@@ -440,12 +440,6 @@
                         <span class="absolute top-3 right-3 gold-gradient text-white font-label-caps text-[9px] px-2.5 py-1 font-bold z-10 shadow-md rounded">APRÈS</span>
                     </div>
                 </div>
-
-                <div id="modal-slider-hints" class="flex justify-between items-center mt-2.5 text-[11px] font-label-caps text-white/50">
-                    <span>◄ Glisser vers la gauche (AVANT)</span>
-                    <span class="text-gold font-bold">Image 100% Intégrale (Non Rognée)</span>
-                    <span>Glisser vers la droite (APRÈS) ►</span>
-                </div>
             </div>
 
             <!-- Right/Bottom: Case Info & Navigation -->
@@ -670,7 +664,6 @@
         const handle = document.getElementById('modal-ba-handle');
         const badgeBefore = document.getElementById('badge-before');
         const badgeAfter = document.getElementById('badge-after');
-        const hints = document.getElementById('modal-slider-hints');
 
         const btnSlider = document.getElementById('btn-mode-slider');
         const btnAfter = document.getElementById('btn-mode-after');
@@ -690,9 +683,6 @@
             if (handle) { handle.style.display = 'flex'; handle.style.left = '50%'; }
             if (badgeBefore) badgeBefore.style.display = 'block';
             if (badgeAfter) badgeAfter.style.display = 'block';
-            if (hints) {
-                hints.innerHTML = '<span>◄ Glisser vers la gauche (AVANT)</span><span class="text-gold font-bold">Image 100% Intégrale (Non Rognée)</span><span>Glisser vers la droite (APRÈS) ►</span>';
-            }
         } else if (mode === 'after') {
             if (btnAfter) btnAfter.className = activeBtn;
             if (slider) slider.classList.remove('hidden');
@@ -701,9 +691,6 @@
             if (handle) handle.style.display = 'none';
             if (badgeBefore) badgeBefore.style.display = 'none';
             if (badgeAfter) badgeAfter.style.display = 'block';
-            if (hints) {
-                hints.innerHTML = '<span></span><span class="text-gold font-bold">Vue Complète : Photo APRÈS (100% Entière)</span><span></span>';
-            }
         } else if (mode === 'before') {
             if (btnBefore) btnBefore.className = activeBtn;
             if (slider) slider.classList.remove('hidden');
@@ -712,16 +699,10 @@
             if (handle) handle.style.display = 'none';
             if (badgeBefore) badgeBefore.style.display = 'block';
             if (badgeAfter) badgeAfter.style.display = 'none';
-            if (hints) {
-                hints.innerHTML = '<span></span><span class="text-gold font-bold">Vue Complète : Photo AVANT (100% Entière)</span><span></span>';
-            }
         } else if (mode === 'side') {
             if (btnSide) btnSide.className = activeBtn;
             if (slider) slider.classList.add('hidden');
             if (sideWrapper) { sideWrapper.classList.remove('hidden'); sideWrapper.classList.add('flex'); }
-            if (hints) {
-                hints.innerHTML = '<span>Photo AVANT (Gauche)</span><span class="text-gold font-bold">Comparaison Côte à Côte (Non Rognées)</span><span>Photo APRÈS (Droite)</span>';
-            }
         }
     }
 
