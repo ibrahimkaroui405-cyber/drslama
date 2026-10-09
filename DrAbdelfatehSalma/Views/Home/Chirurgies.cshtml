@@ -346,11 +346,11 @@
                         var catTitle = string.IsNullOrEmpty(item.CategoryTitle) ? "CHIRURGIE" : item.CategoryTitle.ToUpper();
                         <div class="result-branch-card bg-white border border-gold/30 rounded-2xl overflow-hidden shadow-md group transition-all duration-300 flex flex-col justify-between" data-cat="@catKey">
                             <div>
-                                <div class="relative aspect-[4/3] overflow-hidden bg-black/5 select-none ba-card-slider">
-                                    <img src="@item.AfterImageUrl" class="absolute inset-0 w-full h-full object-cover cursor-pointer" alt="Après — @item.Title" onclick="openCaseModal(@idx)" />
+                                <div class="relative aspect-[4/3] overflow-hidden bg-[#0a0a0c] select-none ba-card-slider">
+                                    <img src="@item.AfterImageUrl" class="absolute inset-0 w-full h-full object-contain cursor-pointer" alt="Après — @item.Title" onclick="openCaseModal(@idx)" />
                                     <span class="absolute top-3 right-3 bg-primary text-white font-label-caps text-[8px] px-2 py-0.5 font-bold z-10 shadow">APRÈS</span>
                                     
-                                    <img src="@item.BeforeImageUrl" class="ba-card-before absolute inset-0 w-full h-full object-cover z-10 cursor-pointer" style="clip-path: inset(0 50% 0 0);" alt="Avant — @item.Title" onclick="openCaseModal(@idx)" />
+                                    <img src="@item.BeforeImageUrl" class="ba-card-before absolute inset-0 w-full h-full object-contain z-10 cursor-pointer" style="clip-path: inset(0 50% 0 0);" alt="Avant — @item.Title" onclick="openCaseModal(@idx)" />
                                     <span class="absolute top-3 left-3 bg-black/90 text-white font-label-caps text-[8px] px-2 py-0.5 font-bold z-20 shadow">AVANT</span>
 
                                     <div class="ba-card-handle absolute top-0 bottom-0 w-[2px] bg-white z-30 shadow-2xl flex items-center justify-center cursor-ew-resize" style="left: 50%;">
@@ -520,30 +520,60 @@
         <div class="overflow-y-auto flex-1 p-6 md:p-8 grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
             
             <!-- Left/Top: High-Res Interactive Before/After Drag Slider -->
-            <div class="lg:col-span-8">
-                <div id="modal-ba-slider" class="relative w-full aspect-[4/3] md:aspect-[16/10] overflow-hidden select-none border border-gold/30 bg-black shadow-2xl group cursor-ew-resize">
+            <div class="lg:col-span-8 flex flex-col">
+                <!-- View Mode Selector -->
+                <div class="flex flex-wrap items-center gap-2 mb-3">
+                    <button type="button" id="btn-mode-slider" onclick="setModalViewMode('slider')" class="px-3 py-1.5 rounded text-[10px] font-label-caps font-bold gold-gradient text-white shadow transition-all">
+                        Curseur Comparatif
+                    </button>
+                    <button type="button" id="btn-mode-after" onclick="setModalViewMode('after')" class="px-3 py-1.5 rounded text-[10px] font-label-caps font-bold bg-white/10 hover:bg-white/20 text-white/80 hover:text-white transition-all">
+                        Photo Après (100% Entière)
+                    </button>
+                    <button type="button" id="btn-mode-before" onclick="setModalViewMode('before')" class="px-3 py-1.5 rounded text-[10px] font-label-caps font-bold bg-white/10 hover:bg-white/20 text-white/80 hover:text-white transition-all">
+                        Photo Avant (100% Entière)
+                    </button>
+                    <button type="button" id="btn-mode-side" onclick="setModalViewMode('side')" class="px-3 py-1.5 rounded text-[10px] font-label-caps font-bold bg-white/10 hover:bg-white/20 text-white/80 hover:text-white transition-all">
+                        Côte à Côte
+                    </button>
+                </div>
+
+                <!-- Slider Container (Full image visible, never cropped) -->
+                <div id="modal-ba-slider" class="relative w-full h-[52vh] md:h-[65vh] min-h-[350px] max-h-[700px] overflow-hidden select-none border border-gold/30 bg-[#08080a] shadow-2xl group cursor-ew-resize rounded-lg flex items-center justify-center">
                     <!-- AFTER Image -->
-                    <img id="modal-img-after" src="" alt="Après" class="absolute inset-0 w-full h-full object-cover" />
-                    <span class="absolute top-4 right-4 gold-gradient text-white font-label-caps text-[10px] px-3 py-1.5 font-bold z-10 tracking-widest shadow-md">
+                    <img id="modal-img-after" src="" alt="Après" class="absolute inset-0 w-full h-full object-contain pointer-events-none" />
+                    <span id="badge-after" class="absolute top-3 right-3 gold-gradient text-white font-label-caps text-[9px] px-2.5 py-1 font-bold z-20 tracking-widest shadow-md rounded">
                         APRÈS
                     </span>
 
                     <!-- BEFORE Image -->
-                    <img id="modal-img-before" src="" alt="Avant" class="modal-ba-before absolute inset-0 w-full h-full object-cover z-10" style="clip-path: inset(0 50% 0 0);" />
-                    <span class="absolute top-4 left-4 bg-black/90 text-white font-label-caps text-[10px] px-3 py-1.5 font-bold z-20 shadow-md border border-gold/30">
+                    <img id="modal-img-before" src="" alt="Avant" class="modal-ba-before absolute inset-0 w-full h-full object-contain z-10 pointer-events-none" style="clip-path: inset(0 50% 0 0);" />
+                    <span id="badge-before" class="absolute top-3 left-3 bg-black/90 text-white font-label-caps text-[9px] px-2.5 py-1 font-bold z-20 shadow-md border border-gold/30 rounded">
                         AVANT
                     </span>
 
                     <!-- Draggable Handle Bar -->
                     <div id="modal-ba-handle" class="modal-ba-handle absolute top-0 bottom-0 w-[2px] bg-white z-30 shadow-2xl flex items-center justify-center" style="left: 50%;">
-                        <div class="w-10 h-10 rounded-full gold-gradient text-white flex items-center justify-center shadow-2xl border border-white text-sm font-bold">
+                        <div class="w-9 h-9 rounded-full gold-gradient text-white flex items-center justify-center shadow-2xl border-2 border-white text-xs font-bold transition-transform group-hover:scale-110">
                             ↔
                         </div>
                     </div>
                 </div>
 
-                <div class="flex justify-between items-center mt-3 text-xs font-label-caps text-white/50">
+                <!-- Side-by-side Container (Hidden by default, active when 'side' mode selected) -->
+                <div id="modal-side-wrapper" class="hidden w-full h-[52vh] md:h-[65vh] min-h-[350px] max-h-[700px] gap-2">
+                    <div class="relative w-1/2 h-full bg-[#08080a] border border-gold/20 rounded-lg overflow-hidden flex items-center justify-center">
+                        <img id="modal-side-img-before" src="" alt="Avant" class="w-full h-full object-contain" />
+                        <span class="absolute top-3 left-3 bg-black/90 text-white font-label-caps text-[9px] px-2.5 py-1 font-bold z-10 shadow-md border border-gold/30 rounded">AVANT</span>
+                    </div>
+                    <div class="relative w-1/2 h-full bg-[#08080a] border border-gold/20 rounded-lg overflow-hidden flex items-center justify-center">
+                        <img id="modal-side-img-after" src="" alt="Après" class="w-full h-full object-contain" />
+                        <span class="absolute top-3 right-3 gold-gradient text-white font-label-caps text-[9px] px-2.5 py-1 font-bold z-10 shadow-md rounded">APRÈS</span>
+                    </div>
+                </div>
+
+                <div id="modal-slider-hints" class="flex justify-between items-center mt-2.5 text-[11px] font-label-caps text-white/50">
                     <span>◄ Glisser vers la gauche (AVANT)</span>
+                    <span class="text-gold font-bold">Image 100% Intégrale (Non Rognée)</span>
                     <span>Glisser vers la droite (APRÈS) ►</span>
                 </div>
             </div>
@@ -807,19 +837,89 @@
         const beforeImg = document.getElementById('modal-img-before');
         const afterImg = document.getElementById('modal-img-after');
         const handle = document.getElementById('modal-ba-handle');
+        const sideBefore = document.getElementById('modal-side-img-before');
+        const sideAfter = document.getElementById('modal-side-img-after');
 
-        if (beforeImg && afterImg && handle) {
+        if (beforeImg && afterImg) {
             beforeImg.src = data.beforeImg;
             afterImg.src = data.afterImg;
-            beforeImg.style.clipPath = 'inset(0 50% 0 0)';
-            handle.style.left = '50%';
         }
+
+        if (sideBefore && sideAfter) {
+            sideBefore.src = data.beforeImg;
+            sideAfter.src = data.afterImg;
+        }
+
+        setModalViewMode('slider');
 
         const modal = document.getElementById('case-modal');
         if (modal) {
             modal.classList.remove('hidden');
             modal.classList.add('flex');
             document.body.classList.add('overflow-hidden');
+        }
+    }
+
+    function setModalViewMode(mode) {
+        const slider = document.getElementById('modal-ba-slider');
+        const sideWrapper = document.getElementById('modal-side-wrapper');
+        const beforeImg = document.getElementById('modal-img-before');
+        const afterImg = document.getElementById('modal-img-after');
+        const handle = document.getElementById('modal-ba-handle');
+        const badgeBefore = document.getElementById('badge-before');
+        const badgeAfter = document.getElementById('badge-after');
+        const hints = document.getElementById('modal-slider-hints');
+
+        const btnSlider = document.getElementById('btn-mode-slider');
+        const btnAfter = document.getElementById('btn-mode-after');
+        const btnBefore = document.getElementById('btn-mode-before');
+        const btnSide = document.getElementById('btn-mode-side');
+
+        const normalBtn = "px-3 py-1.5 rounded text-[10px] font-label-caps font-bold bg-white/10 hover:bg-white/20 text-white/80 hover:text-white transition-all";
+        const activeBtn = "px-3 py-1.5 rounded text-[10px] font-label-caps font-bold gold-gradient text-white shadow transition-all";
+
+        [btnSlider, btnAfter, btnBefore, btnSide].forEach(b => { if (b) b.className = normalBtn; });
+
+        if (mode === 'slider') {
+            if (btnSlider) btnSlider.className = activeBtn;
+            if (slider) slider.classList.remove('hidden');
+            if (sideWrapper) { sideWrapper.classList.add('hidden'); sideWrapper.classList.remove('flex'); }
+            if (beforeImg) { beforeImg.style.clipPath = 'inset(0 50% 0 0)'; }
+            if (handle) { handle.style.display = 'flex'; handle.style.left = '50%'; }
+            if (badgeBefore) badgeBefore.style.display = 'block';
+            if (badgeAfter) badgeAfter.style.display = 'block';
+            if (hints) {
+                hints.innerHTML = '<span>◄ Glisser vers la gauche (AVANT)</span><span class="text-gold font-bold">Image 100% Intégrale (Non Rognée)</span><span>Glisser vers la droite (APRÈS) ►</span>';
+            }
+        } else if (mode === 'after') {
+            if (btnAfter) btnAfter.className = activeBtn;
+            if (slider) slider.classList.remove('hidden');
+            if (sideWrapper) { sideWrapper.classList.add('hidden'); sideWrapper.classList.remove('flex'); }
+            if (beforeImg) beforeImg.style.clipPath = 'inset(0 100% 0 0)';
+            if (handle) handle.style.display = 'none';
+            if (badgeBefore) badgeBefore.style.display = 'none';
+            if (badgeAfter) badgeAfter.style.display = 'block';
+            if (hints) {
+                hints.innerHTML = '<span></span><span class="text-gold font-bold">Vue Complète : Photo APRÈS (100% Entière)</span><span></span>';
+            }
+        } else if (mode === 'before') {
+            if (btnBefore) btnBefore.className = activeBtn;
+            if (slider) slider.classList.remove('hidden');
+            if (sideWrapper) { sideWrapper.classList.add('hidden'); sideWrapper.classList.remove('flex'); }
+            if (beforeImg) beforeImg.style.clipPath = 'inset(0 0 0 0)';
+            if (handle) handle.style.display = 'none';
+            if (badgeBefore) badgeBefore.style.display = 'block';
+            if (badgeAfter) badgeAfter.style.display = 'none';
+            if (hints) {
+                hints.innerHTML = '<span></span><span class="text-gold font-bold">Vue Complète : Photo AVANT (100% Entière)</span><span></span>';
+            }
+        } else if (mode === 'side') {
+            if (btnSide) btnSide.className = activeBtn;
+            if (slider) slider.classList.add('hidden');
+            if (sideWrapper) { sideWrapper.classList.remove('hidden'); sideWrapper.classList.add('flex'); }
+            if (hints) {
+                hints.innerHTML = '<span>Photo AVANT (Gauche)</span><span class="text-gold font-bold">Comparaison Côte à Côte (Non Rognées)</span><span>Photo APRÈS (Droite)</span>';
+            }
         }
     }
 
