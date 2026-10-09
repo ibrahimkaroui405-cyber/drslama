@@ -15,6 +15,7 @@
             categories.Add(dCat);
         }
     }
+    var resultatsList = ViewBag.Resultats as List<DrAbdelfatehSalma.Models.Resultat> ?? new List<DrAbdelfatehSalma.Models.Resultat>();
 }
 
 <!-- ============================================ -->
@@ -336,116 +337,44 @@
 
             <!-- Results Grid with Interactive Before/After Sliders -->
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8" id="results-branch-grid">
-                <!-- Visage Case 1 -->
-                <div class="result-branch-card bg-white border border-gold/30 rounded-2xl overflow-hidden shadow-md group transition-all duration-300" data-cat="visage">
-                    <div class="relative aspect-[4/3] overflow-hidden bg-black/5 select-none ba-card-slider">
-                        <img src="/images/rhino_after.png" class="absolute inset-0 w-full h-full object-cover" alt="Après — Rhinoplastie" />
-                        <span class="absolute top-3 right-3 bg-primary text-white font-label-caps text-[8px] px-2 py-0.5 font-bold z-10 shadow">APRÈS</span>
-                        
-                        <img src="/images/rhino_before.png" class="ba-card-before absolute inset-0 w-full h-full object-cover z-10" style="clip-path: inset(0 50% 0 0);" alt="Avant — Rhinoplastie" />
-                        <span class="absolute top-3 left-3 bg-black/90 text-white font-label-caps text-[8px] px-2 py-0.5 font-bold z-20 shadow">AVANT</span>
+                @if (resultatsList.Any())
+                {
+                    foreach (var item in resultatsList)
+                    {
+                        var catKey = string.IsNullOrEmpty(item.CategoryKey) ? "visage" : item.CategoryKey.ToLower();
+                        var catTitle = string.IsNullOrEmpty(item.CategoryTitle) ? "CHIRURGIE" : item.CategoryTitle.ToUpper();
+                        <div class="result-branch-card bg-white border border-gold/30 rounded-2xl overflow-hidden shadow-md group transition-all duration-300" data-cat="@catKey">
+                            <div class="relative aspect-[4/3] overflow-hidden bg-black/5 select-none ba-card-slider">
+                                <img src="@item.AfterImageUrl" class="absolute inset-0 w-full h-full object-cover" alt="Après — @item.Title" />
+                                <span class="absolute top-3 right-3 bg-primary text-white font-label-caps text-[8px] px-2 py-0.5 font-bold z-10 shadow">APRÈS</span>
+                                
+                                <img src="@item.BeforeImageUrl" class="ba-card-before absolute inset-0 w-full h-full object-cover z-10" style="clip-path: inset(0 50% 0 0);" alt="Avant — @item.Title" />
+                                <span class="absolute top-3 left-3 bg-black/90 text-white font-label-caps text-[8px] px-2 py-0.5 font-bold z-20 shadow">AVANT</span>
 
-                        <div class="ba-card-handle absolute top-0 bottom-0 w-[2px] bg-white z-30 shadow-2xl flex items-center justify-center cursor-ew-resize" style="left: 50%;">
-                            <div class="w-6 h-6 rounded-full bg-white text-black flex items-center justify-center shadow-lg text-[10px] font-bold border border-black/20">
-                                ↔
+                                <div class="ba-card-handle absolute top-0 bottom-0 w-[2px] bg-white z-30 shadow-2xl flex items-center justify-center cursor-ew-resize" style="left: 50%;">
+                                    <div class="w-6 h-6 rounded-full bg-white text-black flex items-center justify-center shadow-lg text-[10px] font-bold border border-black/20">
+                                        ↔
+                                    </div>
+                                </div>
+                                <span class="absolute bottom-3 left-1/2 -translate-x-1/2 bg-black/80 text-white font-label-caps text-[8px] px-2.5 py-1 z-20 shadow-md pointer-events-none">@catTitle</span>
+                            </div>
+                            <div class="p-5">
+                                <h4 class="font-display-lg text-lg font-bold mb-1 text-primary">@item.Title</h4>
+                                @if (!string.IsNullOrWhiteSpace(item.Description))
+                                {
+                                    <p class="font-body-md text-xs text-primary/70 leading-relaxed mb-2">@item.Description</p>
+                                }
                             </div>
                         </div>
-                        <span class="absolute bottom-3 left-1/2 -translate-x-1/2 bg-black/80 text-white font-label-caps text-[8px] px-2.5 py-1 z-20 shadow-md pointer-events-none">VISAGE</span>
+                    }
+                }
+                else
+                {
+                    <div class="col-span-full text-center py-12 text-gray-500">
+                        <p class="font-body-lg text-base">Aucun résultat disponible pour le moment.</p>
                     </div>
-                    <div class="p-5">
-                        <h4 class="font-display-lg text-lg font-bold mb-1 text-primary">Rhinoplastie Ultrasonique</h4>
-                        <p class="font-body-md text-xs text-primary/70 leading-relaxed mb-2">Correction de la bosse ostéo-cartilagineuse et harmonisation du profil sans hématome majeur par piezotome.</p>
-                    </div>
-                </div>
-
-                <!-- Visage Case 2 -->
-                <div class="result-branch-card bg-white border border-gold/30 rounded-2xl overflow-hidden shadow-md group transition-all duration-300" data-cat="visage">
-                    <div class="relative aspect-[4/3] overflow-hidden bg-black/5 select-none ba-card-slider">
-                        <img src="/images/facelift_after.png" class="absolute inset-0 w-full h-full object-cover" alt="Après — Deep Plane Facelift" />
-                        <span class="absolute top-3 right-3 bg-primary text-white font-label-caps text-[8px] px-2 py-0.5 font-bold z-10 shadow">APRÈS</span>
-                        
-                        <img src="/images/facelift_before.png" class="ba-card-before absolute inset-0 w-full h-full object-cover z-10" style="clip-path: inset(0 50% 0 0);" alt="Avant — Deep Plane Facelift" />
-                        <span class="absolute top-3 left-3 bg-black/90 text-white font-label-caps text-[8px] px-2 py-0.5 font-bold z-20 shadow">AVANT</span>
-
-                        <div class="ba-card-handle absolute top-0 bottom-0 w-[2px] bg-white z-30 shadow-2xl flex items-center justify-center cursor-ew-resize" style="left: 50%;">
-                            <div class="w-6 h-6 rounded-full bg-white text-black flex items-center justify-center shadow-lg text-[10px] font-bold border border-black/20">
-                                ↔
-                            </div>
-                        </div>
-                        <span class="absolute bottom-3 left-1/2 -translate-x-1/2 bg-black/80 text-white font-label-caps text-[8px] px-2.5 py-1 z-20 shadow-md pointer-events-none">VISAGE</span>
-                    </div>
-                    <div class="p-5">
-                        <h4 class="font-display-lg text-lg font-bold mb-1 text-primary">Lifting Cervico-Facial (Deep Plane)</h4>
-                        <p class="font-body-md text-xs text-primary/70 leading-relaxed mb-2">Redéfinition de l'ovale du visage et du cou avec repositionnement musculaire naturel.</p>
-                    </div>
-                </div>
-
-                <!-- Poitrine Case -->
-                <div class="result-branch-card bg-white border border-gold/30 rounded-2xl overflow-hidden shadow-md group transition-all duration-300" data-cat="poitrine">
-                    <div class="relative aspect-[4/3] overflow-hidden bg-black/5 select-none ba-card-slider">
-                        <img src="/images/injections_after.png" class="absolute inset-0 w-full h-full object-cover" alt="Après — Augmentation Mammaire" />
-                        <span class="absolute top-3 right-3 bg-primary text-white font-label-caps text-[8px] px-2 py-0.5 font-bold z-10 shadow">APRÈS</span>
-                        
-                        <img src="/images/injections_before.png" class="ba-card-before absolute inset-0 w-full h-full object-cover z-10" style="clip-path: inset(0 50% 0 0);" alt="Avant — Augmentation Mammaire" />
-                        <span class="absolute top-3 left-3 bg-black/90 text-white font-label-caps text-[8px] px-2 py-0.5 font-bold z-20 shadow">AVANT</span>
-
-                        <div class="ba-card-handle absolute top-0 bottom-0 w-[2px] bg-white z-30 shadow-2xl flex items-center justify-center cursor-ew-resize" style="left: 50%;">
-                            <div class="w-6 h-6 rounded-full bg-white text-black flex items-center justify-center shadow-lg text-[10px] font-bold border border-black/20">
-                                ↔
-                            </div>
-                        </div>
-                        <span class="absolute bottom-3 left-1/2 -translate-x-1/2 bg-black/80 text-white font-label-caps text-[8px] px-2.5 py-1 z-20 shadow-md pointer-events-none">POITRINE</span>
-                    </div>
-                    <div class="p-5">
-                        <h4 class="font-display-lg text-lg font-bold mb-1 text-primary">Augmentation Mammaire Sur-Mesure</h4>
-                        <p class="font-body-md text-xs text-primary/70 leading-relaxed mb-2">Restauration des galbes naturels et galbe harmonieux du décolleté.</p>
-                    </div>
-                </div>
-
-                <!-- Silhouette Case -->
-                <div class="result-branch-card bg-white border border-gold/30 rounded-2xl overflow-hidden shadow-md group transition-all duration-300" data-cat="silhouette">
-                    <div class="relative aspect-[4/3] overflow-hidden bg-black/5 select-none ba-card-slider">
-                        <img src="/images/rhino_after.png" class="absolute inset-0 w-full h-full object-cover" alt="Après — Liposculpture Vaser" />
-                        <span class="absolute top-3 right-3 bg-primary text-white font-label-caps text-[8px] px-2 py-0.5 font-bold z-10 shadow">APRÈS</span>
-                        
-                        <img src="/images/rhino_before.png" class="ba-card-before absolute inset-0 w-full h-full object-cover z-10" style="clip-path: inset(0 50% 0 0);" alt="Avant — Liposculpture Vaser" />
-                        <span class="absolute top-3 left-3 bg-black/90 text-white font-label-caps text-[8px] px-2 py-0.5 font-bold z-20 shadow">AVANT</span>
-
-                        <div class="ba-card-handle absolute top-0 bottom-0 w-[2px] bg-white z-30 shadow-2xl flex items-center justify-center cursor-ew-resize" style="left: 50%;">
-                            <div class="w-6 h-6 rounded-full bg-white text-black flex items-center justify-center shadow-lg text-[10px] font-bold border border-black/20">
-                                ↔
-                            </div>
-                        </div>
-                        <span class="absolute bottom-3 left-1/2 -translate-x-1/2 bg-black/80 text-white font-label-caps text-[8px] px-2.5 py-1 z-20 shadow-md pointer-events-none">SILHOUETTE</span>
-                    </div>
-                    <div class="p-5">
-                        <h4 class="font-display-lg text-lg font-bold mb-1 text-primary">Liposculpture Vaser HD</h4>
-                        <p class="font-body-md text-xs text-primary/70 leading-relaxed mb-2">Sculpture tridimensionnelle des contours abdominaux et taille affinée.</p>
-                    </div>
-                </div>
-
-                <!-- Visage Case 3 -->
-                <div class="result-branch-card bg-white border border-gold/30 rounded-2xl overflow-hidden shadow-md group transition-all duration-300" data-cat="visage">
-                    <div class="relative aspect-[4/3] overflow-hidden bg-black/5 select-none ba-card-slider">
-                        <img src="/images/bleph_after.png" class="absolute inset-0 w-full h-full object-cover" alt="Après — Blépharoplastie" />
-                        <span class="absolute top-3 right-3 bg-primary text-white font-label-caps text-[8px] px-2 py-0.5 font-bold z-10 shadow">APRÈS</span>
-                        
-                        <img src="/images/bleph_before.png" class="ba-card-before absolute inset-0 w-full h-full object-cover z-10" style="clip-path: inset(0 50% 0 0);" alt="Avant — Blépharoplastie" />
-                        <span class="absolute top-3 left-3 bg-black/90 text-white font-label-caps text-[8px] px-2 py-0.5 font-bold z-20 shadow">AVANT</span>
-
-                        <div class="ba-card-handle absolute top-0 bottom-0 w-[2px] bg-white z-30 shadow-2xl flex items-center justify-center cursor-ew-resize" style="left: 50%;">
-                            <div class="w-6 h-6 rounded-full bg-white text-black flex items-center justify-center shadow-lg text-[10px] font-bold border border-black/20">
-                                ↔
-                            </div>
-                        </div>
-                        <span class="absolute bottom-3 left-1/2 -translate-x-1/2 bg-black/80 text-white font-label-caps text-[8px] px-2.5 py-1 z-20 shadow-md pointer-events-none">VISAGE</span>
-                    </div>
-                    <div class="p-5">
-                        <h4 class="font-display-lg text-lg font-bold mb-1 text-primary">Blépharoplastie 4 Paupières</h4>
-                        <p class="font-body-md text-xs text-primary/70 leading-relaxed mb-2">Rajeunissement complet du regard par exérèse des poches graisseuses.</p>
-                    </div>
-                </div>
-                </div>
+                }
+            </div>
             </div>
         </div>
 
