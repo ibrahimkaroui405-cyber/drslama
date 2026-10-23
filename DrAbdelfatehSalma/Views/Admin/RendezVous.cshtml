@@ -8,8 +8,35 @@
     <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 border-b border-gold/20 pb-6">
         <div>
             <h1 class="font-display-lg text-2xl font-bold text-white mb-1">Demandes de Rendez-vous & Consultations</h1>
-            <p class="text-xs text-gray-400">Consulter et traiter les demandes reçues via le formulaire de contact du site.</p>
+            <p class="text-xs text-gray-400">Consulter et traiter les demandes reçues via le formulaire de contact et le formulaire « Demander le code » de la galerie.</p>
         </div>
+    </div>
+
+    @{
+        var activeType = ViewBag.Type as string;
+        var galleryCode = ViewBag.GalleryCode as string ?? "";
+        string TabCls(bool active) => active
+            ? "gold-gradient text-white shadow"
+            : "bg-[#121419] text-gray-300 border border-gold/20 hover:border-gold hover:text-gold";
+    }
+
+    <!-- Filter tabs -->
+    <div class="flex flex-wrap gap-2">
+        <a asp-controller="Admin" asp-action="RendezVous" id="tab-all"
+           class="px-4 py-2.5 rounded text-xs font-bold flex items-center gap-2 transition-all @TabCls(string.IsNullOrEmpty(activeType))">
+            <span class="material-symbols-outlined text-sm">inbox</span>
+            Toutes (@ViewBag.CountAll)
+        </a>
+        <a asp-controller="Admin" asp-action="RendezVous" asp-route-type="rdv" id="tab-rdv"
+           class="px-4 py-2.5 rounded text-xs font-bold flex items-center gap-2 transition-all @TabCls(activeType == "rdv")">
+            <span class="material-symbols-outlined text-sm">calendar_month</span>
+            Rendez-vous (@ViewBag.CountRdv)
+        </a>
+        <a asp-controller="Admin" asp-action="RendezVous" asp-route-type="code" id="tab-code"
+           class="px-4 py-2.5 rounded text-xs font-bold flex items-center gap-2 transition-all @TabCls(activeType == "code")">
+            <span class="material-symbols-outlined text-sm">key</span>
+            Demandes de code galerie (@ViewBag.CountCode)
+        </a>
     </div>
 
     <div class="bg-[#121419] border border-gold/20 overflow-hidden">
@@ -18,6 +45,7 @@
                 <thead class="bg-[#0c0d10] text-gold font-label-caps text-[10px] uppercase border-b border-gold/20">
                     <tr>
                         <th class="p-4">Date</th>
+                        <th class="p-4">Type</th>
                         <th class="p-4">Patient</th>
                         <th class="p-4">Téléphone</th>
                         <th class="p-4">Email</th>
@@ -36,9 +64,38 @@
                             var msg = !string.IsNullOrWhiteSpace(item.Message) ? item.Message : (!string.IsNullOrWhiteSpace(item.Objet) ? item.Objet : "-");
                             <tr class="hover:bg-white/5 transition-colors">
                                 <td class="p-4 text-gray-400">@item.CreatedAt.ToString("dd/MM/yyyy HH:mm")</td>
+                                <td class="p-4">
+                                    @if (item.IsGalleryCodeRequest)
+                                    {
+                                        <span class="inline-flex items-center gap-1 px-2.5 py-1 rounded bg-purple-500/10 text-purple-300 text-[10px] font-bold border border-purple-500/30 whitespace-nowrap">
+                                            <span class="material-symbols-outlined text-xs">key</span> CODE GALERIE
+                                        </span>
+                                    }
+                                    else
+                                    {
+                                        <span class="inline-flex items-center gap-1 px-2.5 py-1 rounded bg-sky-500/10 text-sky-300 text-[10px] font-bold border border-sky-500/30 whitespace-nowrap">
+                                            <span class="material-symbols-outlined text-xs">calendar_month</span> RDV
+                                        </span>
+                                    }
+                                </td>
                                 <td class="p-4 font-bold text-white">@item.FullName</td>
-                                <td class="p-4 font-bold text-gold">
-                                    <a href="tel:@item.Phone" class="hover:underline">@item.Phone</a>
+                                <td class="p-4">
+                                    <div class="flex items-center gap-2">
+                                        <a href="tel:@item.Phone" class="font-bold text-gold hover:underline whitespace-nowrap">@item.Phone</a>
+                                        @{
+                                            var cleanPhone = new string((item.Phone ?? "").Where(char.IsDigit).ToArray());
+                                        }
+                                        @if (!string.IsNullOrEmpty(cleanPhone))
+                                        {
+                                            var waText = item.IsGalleryCodeRequest
+                                                ? $"Bonjour {item.FullName}, suite à votre demande, voici votre code d'accès confidentiel pour la galerie Avant / Après : {galleryCode}"
+                                                : $"Bonjour {item.FullName}, nous avons bien reçu votre demande de rendez-vous pour '{item.ConsultationType}'. ";
+                                            var waTitle = item.IsGalleryCodeRequest ? "Envoyer le code galerie par WhatsApp" : "Répondre par WhatsApp";
+                                            <a href="https://wa.me/@cleanPhone?text=@Uri.EscapeDataString(waText)" target="_blank" title="@waTitle" class="w-6 h-6 rounded-full bg-emerald-600 hover:bg-emerald-500 text-white flex items-center justify-center transition-all shadow-xs flex-shrink-0">
+                                                <span class="material-symbols-outlined text-[13px]">@(item.IsGalleryCodeRequest ? "key" : "chat")</span>
+                                            </a>
+                                        }
+                                    </div>
                                 </td>
                                 <td class="p-4">
                                     <a href="mailto:@item.Email" class="hover:underline">@item.Email</a>
@@ -86,7 +143,7 @@
                     else
                     {
                         <tr>
-                            <td colspan="9" class="p-8 text-center text-gray-500 italic">Aucune demande de rendez-vous enregistrée pour le moment.</td>
+                            <td colspan="10" class="p-8 text-center text-gray-500 italic">Aucune demande enregistrée pour le moment.</td>
                         </tr>
                     }
                 </tbody>

@@ -103,6 +103,56 @@ public class AdminController : Controller
     }
 
     // ============================================
+    // 2b. CODE D'ACCÈS GALERIE AVANT / APRÈS
+    // ============================================
+    [Authorize]
+    [HttpGet]
+    public async Task<IActionResult> CodeGalerie()
+    {
+        ViewData["ActiveNav"] = "CodeGalerie";
+        var setting = await _context.SiteSettings
+            .FirstOrDefaultAsync(s => s.Key == SiteSetting.GalleryAccessCodeKey);
+        return View(setting);
+    }
+
+    [Authorize]
+    [HttpPost]
+    [ValidateAntiForgeryToken]
+    public async Task<IActionResult> CodeGalerie(string newCode, string confirmCode)
+    {
+        newCode = (newCode ?? string.Empty).Trim();
+        confirmCode = (confirmCode ?? string.Empty).Trim();
+
+        if (newCode.Length < 6 || newCode.Length > 100)
+        {
+            TempData["ErrorMessage"] = "Le code doit contenir entre 6 et 100 caractères.";
+            return RedirectToAction(nameof(CodeGalerie));
+        }
+
+        if (newCode != confirmCode)
+        {
+            TempData["ErrorMessage"] = "Les deux codes saisis ne correspondent pas.";
+            return RedirectToAction(nameof(CodeGalerie));
+        }
+
+        var setting = await _context.SiteSettings
+            .FirstOrDefaultAsync(s => s.Key == SiteSetting.GalleryAccessCodeKey);
+
+        if (setting == null)
+        {
+            setting = new SiteSetting { Key = SiteSetting.GalleryAccessCodeKey };
+            _context.SiteSettings.Add(setting);
+        }
+
+        setting.Value = newCode;
+        setting.UpdatedAt = DateTime.Now;
+        await _context.SaveChangesAsync();
+
+        TempData["SuccessMessage"] = "Nouveau code d'accès enregistré. L'ancien code ne fonctionne plus.";
+        return RedirectToAction(nameof(CodeGalerie));
+    }
+
+    // ============================================
     // 3. CRUD: CHIRURGIES
     // ============================================
     [Authorize]
@@ -737,10 +787,27 @@ public class AdminController : Controller
     // 7. DEMANDES DE RENDEZ-VOUS
     // ============================================
     [Authorize]
-    public async Task<IActionResult> RendezVous()
+    public async Task<IActionResult> RendezVous(string? type)
     {
         ViewData["ActiveNav"] = "RendezVous";
-        var list = await _context.DemandesContact.OrderByDescending(d => d.CreatedAt).ToListAsync();
+        var all = await _context.DemandesContact.OrderByDescending(d => d.CreatedAt).ToListAsync();
+
+        ViewBag.CountAll = all.Count;
+        ViewBag.CountCode = all.Count(d => d.IsGalleryCodeRequest);
+        ViewBag.CountRdv = all.Count(d => !d.IsGalleryCodeRequest);
+        ViewBag.Type = type;
+
+        ViewBag.GalleryCode = await _context.SiteSettings
+            .Where(s => s.Key == SiteSetting.GalleryAccessCodeKey)
+            .Select(s => s.Value)
+            .FirstOrDefaultAsync() ?? SiteSetting.DefaultGalleryAccessCode;
+
+        var list = type switch
+        {
+            "code" => all.Where(d => d.IsGalleryCodeRequest).ToList(),
+            "rdv" => all.Where(d => !d.IsGalleryCodeRequest).ToList(),
+            _ => all
+        };
         return View(list);
     }
 

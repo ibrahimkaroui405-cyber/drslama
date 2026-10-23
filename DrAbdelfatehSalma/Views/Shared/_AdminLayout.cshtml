@@ -89,6 +89,11 @@
                     <span>Résultats (Avant/Après)</span>
                 </a>
 
+                <a asp-controller="Admin" asp-action="CodeGalerie" class="flex items-center gap-3 px-4 py-3 rounded-lg transition-colors hover:bg-gold/10 hover:text-gold @(ViewData["ActiveNav"]?.ToString() == "CodeGalerie" ? "bg-gold/15 text-gold font-bold border-l-4 border-gold" : "text-gray-300")">
+                    <span class="material-symbols-outlined text-lg">key</span>
+                    <span>Code Galerie</span>
+                </a>
+
                 <a asp-controller="Admin" asp-action="Temoignages" class="flex items-center gap-3 px-4 py-3 rounded-lg transition-colors hover:bg-gold/10 hover:text-gold @(ViewData["ActiveNav"]?.ToString() == "Temoignages" ? "bg-gold/15 text-gold font-bold border-l-4 border-gold" : "text-gray-300")">
                     <span class="material-symbols-outlined text-lg">rate_review</span>
                     <span>Témoignages</span>

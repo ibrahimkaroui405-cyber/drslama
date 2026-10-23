@@ -1,4 +1,5 @@
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace DrAbdelfatehSalma.Models;
 
@@ -38,5 +39,14 @@ public class DemandeContact
     public DateTime CreatedAt { get; set; } = DateTime.Now;
 
     public bool IsProcessed { get; set; } = false;
+
+    /// <summary>Objet sent by the "Demander le code" form of the Before/After gallery.</summary>
+    public const string GalleryCodeObjet = "Demande de Code Secret Galerie Avant/Après";
+
+    /// <summary>True when this request asks for the gallery access code (not an appointment).</summary>
+    [NotMapped]
+    public bool IsGalleryCodeRequest =>
+        (Objet ?? string.Empty).Contains("Code Secret Galerie", StringComparison.OrdinalIgnoreCase)
+        || string.Equals(ConsultationType, "Demande Code Galerie", StringComparison.OrdinalIgnoreCase);
 }
 

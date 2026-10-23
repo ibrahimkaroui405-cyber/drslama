@@ -54,6 +54,19 @@ public static class DbInitializer
             }
             catch { }
 
+            // Ensure SiteSettings table exists (gallery access code, etc.)
+            try
+            {
+                context.Database.ExecuteSqlRaw(@"
+                    CREATE TABLE IF NOT EXISTS ""SiteSettings"" (
+                        ""Key"" TEXT NOT NULL PRIMARY KEY,
+                        ""Value"" TEXT NULL,
+                        ""UpdatedAt"" TEXT NOT NULL DEFAULT (datetime('now'))
+                    );
+                ");
+            }
+            catch { }
+
             // Ensure new columns in DemandesContact exist in SQLite safely
             try
             {
@@ -125,7 +138,36 @@ public static class DbInitializer
                 context.Database.ExecuteSqlRaw(@"ALTER TABLE IF EXISTS ""Chirurgies"" ADD COLUMN IF NOT EXISTS ""Order"" integer NOT NULL DEFAULT 0;");
             }
             catch { }
+
+            // PostgreSQL: ensure SiteSettings table exists
+            try
+            {
+                context.Database.ExecuteSqlRaw(@"
+                    CREATE TABLE IF NOT EXISTS ""SiteSettings"" (
+                        ""Key"" varchar(100) NOT NULL PRIMARY KEY,
+                        ""Value"" text NULL,
+                        ""UpdatedAt"" timestamp without time zone NOT NULL DEFAULT now()
+                    );
+                ");
+            }
+            catch { }
         }
+
+        // Seed default gallery access code (only if the doctor never set one)
+        try
+        {
+            if (!context.SiteSettings.Any(s => s.Key == SiteSetting.GalleryAccessCodeKey))
+            {
+                context.SiteSettings.Add(new SiteSetting
+                {
+                    Key = SiteSetting.GalleryAccessCodeKey,
+                    Value = SiteSetting.DefaultGalleryAccessCode,
+                    UpdatedAt = DateTime.Now
+                });
+                context.SaveChanges();
+            }
+        }
+        catch { }
 
         // Schema & ordering safe checks
         var existingChirurgies = context.Chirurgies.ToList();

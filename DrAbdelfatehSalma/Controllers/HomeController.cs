@@ -245,6 +245,107 @@ public class HomeController : Controller
         return View();
     }
 
+    [HttpPost]
+    [IgnoreAntiforgeryToken]
+    public async Task<IActionResult> VerifyGalleryCode(string? code)
+    {
+        var input = (code ?? string.Empty).Trim();
+
+        var stored = await _context.SiteSettings
+            .Where(s => s.Key == SiteSetting.GalleryAccessCodeKey)
+            .Select(s => s.Value)
+            .FirstOrDefaultAsync();
+
+        if (string.IsNullOrWhiteSpace(stored))
+        {
+            stored = SiteSetting.DefaultGalleryAccessCode;
+        }
+
+        var ok = input.Length > 0 && string.Equals(input, stored.Trim(), StringComparison.OrdinalIgnoreCase);
+
+        if (!ok)
+        {
+            // Small delay to slow down brute-force guessing
+            await Task.Delay(800);
+        }
+
+        return Json(new { success = ok });
+    }
+
+    [HttpPost]
+    [IgnoreAntiforgeryToken]
+    public async Task<IActionResult> DemandeCodeGalerie(DemandeContact model, IFormFile? photoFile)
+    {
+        if (model == null)
+        {
+            return Json(new { success = false, message = "Données invalides." });
+        }
+
+        try
+        {
+            if (string.IsNullOrWhiteSpace(model.FullName))
+            {
+                model.FullName = $"{model.Nom} {model.Prenom}".Trim();
+                if (string.IsNullOrWhiteSpace(model.FullName))
+                {
+                    model.FullName = "Patient";
+                }
+            }
+
+            if (!string.IsNullOrWhiteSpace(model.Indicatif) && !string.IsNullOrWhiteSpace(model.Phone) && !model.Phone.StartsWith("+"))
+            {
+                model.Phone = $"{model.Indicatif} {model.Phone}".Trim();
+            }
+
+            if (photoFile != null && photoFile.Length > 0)
+            {
+                try
+                {
+                    var uploadsDir = Path.Combine(_env.WebRootPath, "uploads");
+                    if (!Directory.Exists(uploadsDir)) Directory.CreateDirectory(uploadsDir);
+                    var fileName = Guid.NewGuid().ToString() + "_" + Path.GetFileName(photoFile.FileName);
+                    var filePath = Path.Combine(uploadsDir, fileName);
+                    using (var stream = new FileStream(filePath, FileMode.Create))
+                    {
+                        await photoFile.CopyToAsync(stream);
+                    }
+                    model.PhotoPath = "/uploads/" + fileName;
+                }
+                catch (Exception ex)
+                {
+                    _logger.LogError(ex, "Erreur upload photo demande code galerie.");
+                }
+            }
+
+            model.Objet = !string.IsNullOrWhiteSpace(model.Objet) 
+                ? model.Objet 
+                : "Demande de Code Secret Galerie Avant/Après";
+
+            if (string.IsNullOrWhiteSpace(model.ConsultationType))
+            {
+                model.ConsultationType = "Demande Code Galerie";
+            }
+
+            if (string.IsNullOrWhiteSpace(model.Email))
+            {
+                model.Email = "whatsapp-lead@drslama.com";
+            }
+
+            model.CreatedAt = DateTime.Now;
+            model.IsProcessed = false;
+
+            _context.DemandesContact.Add(model);
+            await _context.SaveChangesAsync();
+
+            return Json(new { success = true });
+        }
+        catch (Exception ex)
+        {
+            _logger.LogError(ex, "Erreur enregistrement demande code galerie.");
+            return Json(new { success = false, message = ex.Message });
+        }
+    }
+
     [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
     public IActionResult Error()
     {

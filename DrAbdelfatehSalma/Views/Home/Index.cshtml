@@ -759,13 +759,7 @@
     // ==========================================
     // RESULTS GALLERY PASSWORD PROTECTION
     // ==========================================
-    // Same authorized codes as Chirurgies & Esthetique results gallery
-    const RESULTS_VALID_CODES = [
-        'slama-vip-2026!',
-        'afs-resultats-2026#',
-        'clinique-slama-2026',
-        'slama2026'
-    ];
+    // Code is verified on the server (managed by the doctor in Admin > Code Galerie)
     let _resultsUnlocked = false; // resets on every page reload
 
     function isResultsUnlocked() {
@@ -803,11 +797,25 @@
         document.body.classList.remove('overflow-hidden');
     }
 
-    function submitResultsPassword() {
+    async function submitResultsPassword() {
         const input = document.getElementById('results-password-input');
         const err = document.getElementById('results-password-error');
         if (!input) return;
-        if (RESULTS_VALID_CODES.includes(input.value.trim().toLowerCase())) {
+        const code = input.value.trim();
+        let ok = false;
+        if (code) {
+            try {
+                const body = new FormData();
+                body.append('code', code);
+                const res = await fetch('/Home/VerifyGalleryCode', { method: 'POST', body });
+                const data = await res.json();
+                ok = !!(data && data.success);
+            } catch (ex) {
+                console.error('Gallery code verification failed:', ex);
+            }
+        }
+        if (ok) {
+            if (err) err.classList.add('hidden');
             _resultsUnlocked = true;
             applyResultsBlurState();
             closeResultsPasswordModal();

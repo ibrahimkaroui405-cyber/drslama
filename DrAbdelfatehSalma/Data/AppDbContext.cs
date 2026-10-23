@@ -16,4 +16,5 @@ public class AppDbContext : DbContext
     public DbSet<Temoignage> Temoignages { get; set; } = null!;
     public DbSet<Actualite> Actualites { get; set; } = null!;
     public DbSet<DemandeContact> DemandesContact { get; set; } = null!;
+    public DbSet<SiteSetting> SiteSettings { get; set; } = null!;
 }
