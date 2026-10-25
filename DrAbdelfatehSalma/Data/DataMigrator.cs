@@ -189,6 +189,8 @@ public static class DataMigrator
                 {
                     CategoryKey = item.CategoryKey,
                     CategoryTitle = item.CategoryTitle,
+                    SubCategoryKey = item.SubCategoryKey,
+                    SubCategoryTitle = item.SubCategoryTitle,
                     Title = item.Title,
                     Description = item.Description,
                     BeforeImageUrl = item.BeforeImageUrl,
@@ -204,6 +206,8 @@ public static class DataMigrator
             {
                 pgItem.CategoryKey = item.CategoryKey;
                 pgItem.CategoryTitle = item.CategoryTitle;
+                pgItem.SubCategoryKey = item.SubCategoryKey;
+                pgItem.SubCategoryTitle = item.SubCategoryTitle;
                 pgItem.Title = item.Title;
                 pgItem.Description = item.Description;
                 pgItem.BeforeImageUrl = item.BeforeImageUrl;

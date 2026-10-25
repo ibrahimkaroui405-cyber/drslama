@@ -143,20 +143,27 @@
             </p>
         </div>
 
-        <!-- Filter Buttons -->
-        <div class="flex flex-wrap gap-2.5 justify-center mb-12 border-b border-gold/20 pb-6">
-            <button onclick="filterResults('all')" id="res-btn-all" class="result-tab active px-6 py-3.5 font-label-caps text-xs tracking-widest gold-gradient text-white font-bold transition-all shadow-md">
+        <!-- Main Category Filter Tabs (Pill style matching luxury aesthetic) -->
+        <div class="flex flex-wrap gap-3 justify-center mb-6">
+            <button onclick="filterResults('all')" id="res-btn-all" class="result-tab active px-6 py-3 font-label-caps text-xs tracking-widest gold-gradient text-white font-bold transition-all shadow-md rounded-full uppercase">
                 TOUS LES RÉSULTATS (@resultatsList.Count)
             </button>
-            <button onclick="filterResults('visage')" id="res-btn-visage" class="result-tab px-6 py-3.5 font-label-caps text-xs tracking-widest bg-white border border-gold/30 text-primary hover:border-gold hover:text-gold transition-all shadow-sm">
+            <button onclick="filterResults('visage')" id="res-btn-visage" class="result-tab px-6 py-3 font-label-caps text-xs tracking-widest bg-white border border-gold/40 text-primary hover:border-gold hover:text-gold transition-all shadow-sm rounded-full uppercase font-bold">
                 CHIRURGIE DU VISAGE (@resultatsList.Count(r => (r.CategoryKey ?? "").ToLower().Contains("visage") || (r.CategoryTitle ?? "").ToLower().Contains("visage")))
             </button>
-            <button onclick="filterResults('poitrine')" id="res-btn-poitrine" class="result-tab px-6 py-3.5 font-label-caps text-xs tracking-widest bg-white border border-gold/30 text-primary hover:border-gold hover:text-gold transition-all shadow-sm">
+            <button onclick="filterResults('poitrine')" id="res-btn-poitrine" class="result-tab px-6 py-3 font-label-caps text-xs tracking-widest bg-white border border-gold/40 text-primary hover:border-gold hover:text-gold transition-all shadow-sm rounded-full uppercase font-bold">
                 CHIRURGIE DU SEIN (POITRINE) (@resultatsList.Count(r => (r.CategoryKey ?? "").ToLower().Contains("poitrine") || (r.CategoryTitle ?? "").ToLower().Contains("sein") || (r.CategoryTitle ?? "").ToLower().Contains("poitrine") || (r.CategoryKey ?? "").ToLower().Contains("mammaire")))
             </button>
-            <button onclick="filterResults('silhouette')" id="res-btn-silhouette" class="result-tab px-6 py-3.5 font-label-caps text-xs tracking-widest bg-white border border-gold/30 text-primary hover:border-gold hover:text-gold transition-all shadow-sm">
+            <button onclick="filterResults('silhouette')" id="res-btn-silhouette" class="result-tab px-6 py-3 font-label-caps text-xs tracking-widest bg-white border border-gold/40 text-primary hover:border-gold hover:text-gold transition-all shadow-sm rounded-full uppercase font-bold">
                 CHIRURGIE DE LA SILHOUETTE (@resultatsList.Count(r => (r.CategoryKey ?? "").ToLower().Contains("silhouette") || (r.CategoryTitle ?? "").ToLower().Contains("silhouette")))
             </button>
+        </div>
+
+        <!-- Sub-Category Filter Container (Dynamically reveals the sub-categories of the active category) -->
+        <div id="subcat-filter-container" class="mb-12 border-b border-gold/20 pb-6 transition-all duration-300">
+            <div id="subcat-buttons" class="flex flex-wrap gap-2 justify-center items-center">
+                <!-- Dynamically populated via JS -->
+            </div>
         </div>
 
         <!-- Grid of Result Cards -->
@@ -167,8 +174,11 @@
                 foreach (var item in resultatsList)
                 {
                     var catKey = string.IsNullOrEmpty(item.CategoryKey) ? "visage" : item.CategoryKey.ToLower();
+                    var subKey = string.IsNullOrEmpty(item.SubCategoryKey) ? DrAbdelfatehSalma.Models.ResultatTaxonomy.GetDefaultSubCategoryKey(catKey) : item.SubCategoryKey.ToLower();
                     var catTitle = string.IsNullOrEmpty(item.CategoryTitle) ? "CHIRURGIE" : item.CategoryTitle.ToUpper();
-                    <div class="result-card bg-white border border-gold/30 rounded-2xl overflow-hidden shadow-md hover:shadow-xl transition-all duration-300 flex flex-col" data-category="@catKey">
+                    var subTitle = string.IsNullOrEmpty(item.SubCategoryTitle) ? DrAbdelfatehSalma.Models.ResultatTaxonomy.GetSubCategoryTitle(catKey, subKey) : item.SubCategoryTitle;
+
+                    <div class="result-card bg-white border border-gold/30 rounded-2xl overflow-hidden shadow-md hover:shadow-xl transition-all duration-300 flex flex-col" data-category="@catKey" data-subcategory="@subKey">
                         <div>
                             <!-- BIG CLEAR SIDE-BY-SIDE BEFORE / AFTER IMAGES (FULL DETAILS UNCROPPED) -->
                             <div class="grid grid-cols-2 bg-neutral-900 border-b border-gold/20 divide-x divide-white/10 cursor-pointer group" onclick="openCaseModal(@idx)" title="Cliquer pour agrandir">
@@ -191,10 +201,19 @@
 
                             <!-- COMPACT DETAILS (NO WASTED WHITE SPACE) -->
                             <div class="p-3.5 sm:p-4">
-                                <div class="flex items-center justify-between gap-2 mb-1">
-                                    <span class="font-label-caps text-[9px] text-gold font-bold uppercase tracking-wider truncate">
-                                        @catTitle
-                                    </span>
+                                <div class="flex items-center justify-between gap-2 mb-1.5 flex-wrap">
+                                    <div class="flex items-center gap-1.5 flex-wrap">
+                                        <span class="font-label-caps text-[9px] text-gold font-bold uppercase tracking-wider">
+                                            @catTitle
+                                        </span>
+                                        @if (!string.IsNullOrEmpty(subTitle))
+                                        {
+                                            <span class="text-gold/40 text-[9px]">•</span>
+                                            <span class="px-2 py-0.5 rounded-full bg-gold/10 text-gold text-[9px] font-label-caps font-bold uppercase border border-gold/25 tracking-wider">
+                                                @subTitle
+                                            </span>
+                                        }
+                                    </div>
                                     <button type="button" onclick="openCaseModal(@idx)" class="text-gold hover:text-primary font-label-caps text-[9px] font-bold tracking-wider flex items-center gap-0.5 transition-colors flex-shrink-0">
                                         <span>VOIR EN GRAND</span>
                                         <span class="material-symbols-outlined text-xs">zoom_in</span>
@@ -221,6 +240,10 @@
                     <p class="font-body-lg text-base">Aucun cas clinique disponible pour le moment.</p>
                 </div>
             }
+            <div id="no-filter-match-msg" class="col-span-full text-center py-12 text-gray-400 hidden">
+                <span class="material-symbols-outlined text-4xl text-gold/40 mb-2 block">filter_alt_off</span>
+                <p class="font-body-md text-sm text-primary/70">Aucun cas clinique pour cette intervention pour le moment.</p>
+            </div>
         </div>
 
     </div>
@@ -546,28 +569,135 @@
     }
 
     // ============================================
-    // 3. FILTER RESULTS CATEGORY TABS
+    // 3. FILTER RESULTS CATEGORY & SUB-CATEGORY TABS
     // ============================================
-    function filterResults(category) {
+    const clientTaxonomy = {
+        visage: {
+            title: "Chirurgie du Visage",
+            subCategories: [
+                { key: "rhinoplastie", title: "Rhinoplastie" },
+                { key: "lifting-visage", title: "Lifting visage" },
+                { key: "blepharoplastie", title: "Blépharoplastie" },
+                { key: "genioplastie", title: "Génioplastie" },
+                { key: "otoplastie", title: "Otoplastie" }
+            ]
+        },
+        poitrine: {
+            title: "Chirurgie du Sein (Poitrine)",
+            subCategories: [
+                { key: "augmentation-mammaire", title: "Augmentation Mammaire" },
+                { key: "reduction-mammaire", title: "Réduction Mammaire" },
+                { key: "lifting-seins", title: "Lifting des seins" }
+            ]
+        },
+        silhouette: {
+            title: "Chirurgie de la Silhouette",
+            subCategories: [
+                { key: "liposuccion", title: "Liposuccion" },
+                { key: "abdominoplastie", title: "Abdominoplastie" },
+                { key: "lifting-bras", title: "Lifting des bras" }
+            ]
+        }
+    };
+
+    let currentCategory = 'all';
+    let currentSubCategory = 'all';
+
+    function filterResults(category, subCategory = 'all') {
+        currentCategory = category;
+        currentSubCategory = subCategory;
+
+        // Update main category buttons
         document.querySelectorAll('.result-tab').forEach(btn => {
             btn.classList.remove('gold-gradient', 'text-white', 'shadow-md');
-            btn.classList.add('bg-white', 'text-primary', 'border-gold/30', 'shadow-sm');
+            btn.classList.add('bg-white', 'text-primary', 'border-gold/40', 'shadow-sm');
         });
 
         const activeBtn = document.getElementById('res-btn-' + category);
         if (activeBtn) {
-            activeBtn.classList.remove('bg-white', 'text-primary', 'border-gold/30', 'shadow-sm');
+            activeBtn.classList.remove('bg-white', 'text-primary', 'border-gold/40', 'shadow-sm');
             activeBtn.classList.add('gold-gradient', 'text-white', 'shadow-md');
         }
 
+        renderSubCategories(category, subCategory);
+        applyCardFiltering();
+    }
+
+    function renderSubCategories(category, activeSub = 'all') {
+        const subContainer = document.getElementById('subcat-buttons');
+        if (!subContainer) return;
+        subContainer.innerHTML = '';
+
+        if (category === 'all') {
+            const btn = document.createElement('button');
+            btn.type = 'button';
+            btn.className = 'px-4 py-2 text-[11px] font-label-caps tracking-widest font-bold uppercase rounded-full transition-all gold-gradient text-white shadow-sm';
+            btn.textContent = 'TOUTES LES INTERVENTIONS';
+            subContainer.appendChild(btn);
+            return;
+        }
+
+        const catData = clientTaxonomy[category];
+        if (!catData) return;
+
+        // 1. "Tout" button for the category
+        const allBtn = document.createElement('button');
+        allBtn.type = 'button';
+        const isAllActive = (activeSub === 'all');
+        allBtn.className = 'subcat-btn px-4 py-2 text-[11px] font-label-caps tracking-wider font-bold uppercase rounded-full transition-all ' + 
+            (isAllActive 
+                ? 'gold-gradient text-white shadow-sm' 
+                : 'bg-white hover:bg-gold/15 text-primary border border-gold/30 shadow-sm');
+        allBtn.textContent = 'TOUT (' + (category === 'visage' ? 'VISAGE' : category === 'poitrine' ? 'POITRINE' : 'SILHOUETTE') + ')';
+        allBtn.onclick = () => filterResults(category, 'all');
+        subContainer.appendChild(allBtn);
+
+        // 2. Subcategory pills
+        catData.subCategories.forEach(sub => {
+            const count = countCards(category, sub.key);
+            const btn = document.createElement('button');
+            btn.type = 'button';
+            const isActive = (activeSub === sub.key);
+            btn.className = 'subcat-btn px-4 py-2 text-[11px] font-label-caps tracking-wider font-bold uppercase rounded-full transition-all ' +
+                (isActive 
+                    ? 'gold-gradient text-white shadow-sm' 
+                    : 'bg-white hover:bg-gold/10 text-primary border border-gold/30 shadow-sm');
+            btn.innerHTML = `${sub.title} <span class="ml-1 opacity-75 text-[10px]">(${count})</span>`;
+            btn.onclick = () => filterResults(category, sub.key);
+            subContainer.appendChild(btn);
+        });
+    }
+
+    function countCards(category, subCategory) {
         const cards = document.querySelectorAll('.result-card');
+        let count = 0;
         cards.forEach(card => {
-            if (category === 'all' || card.dataset.category === category) {
+            const matchCat = card.dataset.category === category;
+            const matchSub = card.dataset.subcategory === subCategory;
+            if (matchCat && matchSub) count++;
+        });
+        return count;
+    }
+
+    function applyCardFiltering() {
+        const cards = document.querySelectorAll('.result-card');
+        let visibleCount = 0;
+        cards.forEach(card => {
+            const matchCat = (currentCategory === 'all' || card.dataset.category === currentCategory);
+            const matchSub = (currentSubCategory === 'all' || card.dataset.subcategory === currentSubCategory);
+            if (matchCat && matchSub) {
                 card.style.display = 'flex';
+                visibleCount++;
             } else {
                 card.style.display = 'none';
             }
         });
+
+        const noMsg = document.getElementById('no-filter-match-msg');
+        if (noMsg) {
+            if (visibleCount === 0) noMsg.classList.remove('hidden');
+            else noMsg.classList.add('hidden');
+        }
     }
 
     // ============================================
@@ -577,12 +707,13 @@
         id = i,
         key = "case-" + r.Id,
         category = string.IsNullOrEmpty(r.CategoryTitle) ? "CHIRURGIE" : r.CategoryTitle.ToUpper(),
+        subCategory = string.IsNullOrEmpty(r.SubCategoryTitle) ? "" : r.SubCategoryTitle,
         title = r.Title,
         desc = r.Description ?? "",
         beforeImg = r.BeforeImageUrl,
         afterImg = r.AfterImageUrl,
         spec = "Dr. Abdelfateh Slama",
-        tag1 = string.IsNullOrEmpty(r.CategoryTitle) ? "Résultat Clinique" : r.CategoryTitle,
+        tag1 = string.IsNullOrEmpty(r.SubCategoryTitle) ? (r.CategoryTitle ?? "Chirurgie") : r.SubCategoryTitle,
         tag2 = "Avant / Après"
     })));
 
@@ -602,7 +733,11 @@
         if (!data) return;
 
         const catEl = document.getElementById('modal-category');
-        if (catEl) catEl.innerText = data.category;
+        if (catEl) {
+            catEl.innerText = data.subCategory 
+                ? `${data.category} • ${data.subCategory.toUpperCase()}`
+                : data.category;
+        }
         const titleEl = document.getElementById('modal-title');
         if (titleEl) titleEl.innerText = data.title;
         const descEl = document.getElementById('modal-desc');
@@ -654,6 +789,7 @@
 
     document.addEventListener('DOMContentLoaded', () => {
         checkResultsUnlockStatus();
+        filterResults('all');
     });
 </script>
 }

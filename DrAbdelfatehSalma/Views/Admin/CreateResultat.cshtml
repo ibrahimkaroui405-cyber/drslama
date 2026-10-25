@@ -22,14 +22,24 @@
             <input type="text" asp-for="Title" required placeholder="Ex: Rhinoplastie Primaire Ultrasonique" class="w-full p-3.5 bg-[#0c0d10] border border-gold/20 text-white text-xs focus:outline-none focus:border-gold" />
         </div>
 
-        <div>
-            <label class="block text-xs font-bold text-gold uppercase mb-2">CATÉGORIE DU CAS CLINIQUE *</label>
-            <select asp-for="CategoryKey" required class="w-full p-3.5 bg-[#0c0d10] border border-gold/20 text-white text-xs focus:outline-none focus:border-gold cursor-pointer" onchange="document.getElementById('category-title-input').value = this.options[this.selectedIndex].text">
-                <option value="visage" selected="@(Model.CategoryKey == "visage" ? "selected" : null)">CHIRURGIE DU VISAGE</option>
-                <option value="poitrine" selected="@(Model.CategoryKey == "poitrine" ? "selected" : null)">CHIRURGIE DU SEIN (POITRINE)</option>
-                <option value="silhouette" selected="@(Model.CategoryKey == "silhouette" ? "selected" : null)">CHIRURGIE DE LA SILHOUETTE</option>
-            </select>
-            <input type="hidden" asp-for="CategoryTitle" id="category-title-input" value="@(string.IsNullOrEmpty(Model.CategoryTitle) ? "CHIRURGIE DU VISAGE" : Model.CategoryTitle)" />
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div>
+                <label class="block text-xs font-bold text-gold uppercase mb-2">CATÉGORIE PRINCIPALE *</label>
+                <select asp-for="CategoryKey" id="category-select" required class="w-full p-3.5 bg-[#0c0d10] border border-gold/20 text-white text-xs focus:outline-none focus:border-gold cursor-pointer">
+                    <option value="visage">CHIRURGIE DU VISAGE</option>
+                    <option value="poitrine">CHIRURGIE DU SEIN (POITRINE)</option>
+                    <option value="silhouette">CHIRURGIE DE LA SILHOUETTE</option>
+                </select>
+                <input type="hidden" asp-for="CategoryTitle" id="category-title-input" value="@(string.IsNullOrEmpty(Model.CategoryTitle) ? "CHIRURGIE DU VISAGE" : Model.CategoryTitle)" />
+            </div>
+
+            <div>
+                <label class="block text-xs font-bold text-gold uppercase mb-2">SOUS-CATÉGORIE (INTERVENTION) *</label>
+                <select asp-for="SubCategoryKey" id="subcategory-select" required class="w-full p-3.5 bg-[#0c0d10] border border-gold/20 text-white text-xs focus:outline-none focus:border-gold cursor-pointer">
+                    <!-- Options populated dynamically based on selected category -->
+                </select>
+                <input type="hidden" asp-for="SubCategoryTitle" id="subcategory-title-input" value="@(string.IsNullOrEmpty(Model.SubCategoryTitle) ? "Rhinoplastie" : Model.SubCategoryTitle)" />
+            </div>
         </div>
 
         <!-- Before & After Images Upload -->
@@ -55,3 +65,80 @@
 
     </form>
 </div>
+
+@section Scripts {
+<script>
+    const categoryTaxonomy = {
+        visage: {
+            title: "CHIRURGIE DU VISAGE",
+            subCategories: [
+                { key: "rhinoplastie", title: "Rhinoplastie" },
+                { key: "lifting-visage", title: "Lifting visage" },
+                { key: "blepharoplastie", title: "Blépharoplastie" },
+                { key: "genioplastie", title: "Génioplastie" },
+                { key: "otoplastie", title: "Otoplastie" }
+            ]
+        },
+        poitrine: {
+            title: "CHIRURGIE DU SEIN (POITRINE)",
+            subCategories: [
+                { key: "augmentation-mammaire", title: "Augmentation Mammaire" },
+                { key: "reduction-mammaire", title: "Réduction Mammaire" },
+                { key: "lifting-seins", title: "Lifting des seins" }
+            ]
+        },
+        silhouette: {
+            title: "CHIRURGIE DE LA SILHOUETTE",
+            subCategories: [
+                { key: "liposuccion", title: "Liposuccion" },
+                { key: "abdominoplastie", title: "Abdominoplastie" },
+                { key: "lifting-bras", title: "Lifting des bras" }
+            ]
+        }
+    };
+
+    const catSelect = document.getElementById('category-select');
+    const subSelect = document.getElementById('subcategory-select');
+    const catTitleInput = document.getElementById('category-title-input');
+    const subTitleInput = document.getElementById('subcategory-title-input');
+
+    let initialSub = "@(Model.SubCategoryKey ?? "")";
+
+    function updateSubCategories(preselectedSub) {
+        const catKey = catSelect.value;
+        const catData = categoryTaxonomy[catKey];
+        if (!catData) return;
+
+        catTitleInput.value = catData.title;
+
+        subSelect.innerHTML = '';
+        catData.subCategories.forEach((sub, idx) => {
+            const opt = document.createElement('option');
+            opt.value = sub.key;
+            opt.textContent = sub.title;
+            if (preselectedSub ? sub.key === preselectedSub : idx === 0) {
+                opt.selected = true;
+            }
+            subSelect.appendChild(opt);
+        });
+
+        syncSubCategoryTitle();
+    }
+
+    function syncSubCategoryTitle() {
+        if (subSelect.selectedIndex >= 0) {
+            subTitleInput.value = subSelect.options[subSelect.selectedIndex].text;
+        }
+    }
+
+    catSelect.addEventListener('change', () => {
+        updateSubCategories();
+    });
+
+    subSelect.addEventListener('change', syncSubCategoryTitle);
+
+    document.addEventListener('DOMContentLoaded', () => {
+        updateSubCategories(initialSub);
+    });
+</script>
+}

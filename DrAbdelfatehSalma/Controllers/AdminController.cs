@@ -563,7 +563,14 @@ public class AdminController : Controller
     {
         ViewData["ActiveNav"] = "Resultats";
         ViewBag.ExistingCategories = await GetResultatCategoriesAsync();
-        return View(new Resultat());
+        ViewBag.Taxonomy = ResultatTaxonomy.Categories;
+        return View(new Resultat
+        {
+            CategoryKey = "visage",
+            CategoryTitle = "CHIRURGIE DU VISAGE",
+            SubCategoryKey = "rhinoplastie",
+            SubCategoryTitle = "Rhinoplastie"
+        });
     }
 
     [HttpPost]
@@ -589,7 +596,18 @@ public class AdminController : Controller
         {
             model.CategoryKey = model.CategoryTitle.ToLower().Replace(" ", "-");
         }
-        model.CategoryKey ??= string.Empty;
+        model.CategoryKey ??= "visage";
+
+        // Validate or resolve SubCategory
+        if (string.IsNullOrWhiteSpace(model.SubCategoryKey))
+        {
+            model.SubCategoryKey = ResultatTaxonomy.GetDefaultSubCategoryKey(model.CategoryKey);
+        }
+        if (string.IsNullOrWhiteSpace(model.SubCategoryTitle))
+        {
+            model.SubCategoryTitle = ResultatTaxonomy.GetSubCategoryTitle(model.CategoryKey, model.SubCategoryKey);
+        }
+
         model.Description ??= string.Empty;
         model.BeforeImageUrl ??= string.Empty;
         model.AfterImageUrl ??= string.Empty;
@@ -600,7 +618,7 @@ public class AdminController : Controller
 
         _context.Resultats.Add(model);
         await _context.SaveChangesAsync();
-        TempData["SuccessMessage"] = "Cas de résultat Avant/Après ajouté !";
+        TempData["SuccessMessage"] = "Cas de résultat Avant/Après ajouté avec succès !";
         return RedirectToAction("Resultats");
     }
 
@@ -611,6 +629,7 @@ public class AdminController : Controller
         var item = await _context.Resultats.FindAsync(id);
         if (item == null) return NotFound();
         ViewBag.ExistingCategories = await GetResultatCategoriesAsync();
+        ViewBag.Taxonomy = ResultatTaxonomy.Categories;
         return View(item);
     }
 
@@ -644,6 +663,15 @@ public class AdminController : Controller
         existing.Title = model.Title;
         existing.CategoryKey = model.CategoryKey;
         existing.CategoryTitle = model.CategoryTitle;
+
+        // SubCategory
+        existing.SubCategoryKey = string.IsNullOrWhiteSpace(model.SubCategoryKey)
+            ? ResultatTaxonomy.GetDefaultSubCategoryKey(model.CategoryKey)
+            : model.SubCategoryKey;
+        existing.SubCategoryTitle = string.IsNullOrWhiteSpace(model.SubCategoryTitle)
+            ? ResultatTaxonomy.GetSubCategoryTitle(existing.CategoryKey, existing.SubCategoryKey)
+            : model.SubCategoryTitle;
+
         existing.Description = model.Description ?? string.Empty;
         existing.PatientInfo = model.PatientInfo ?? string.Empty;
         existing.Technique = model.Technique ?? string.Empty;

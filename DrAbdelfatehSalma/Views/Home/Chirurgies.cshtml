@@ -320,19 +320,26 @@
                 </div>
 
                 <!-- Results Sub-Category Filter (Visage, Poitrine, Silhouette) -->
-                <div class="flex flex-wrap gap-3 justify-center border-b border-gold/20 pb-8">
-                    <button onclick="filterResultsBranch('all')" id="res-btn-all" class="res-tab px-6 py-3 font-label-caps text-xs tracking-widest gold-gradient text-white font-bold transition-all shadow-md uppercase rounded-full">
-                        TOUS LES RÉSULTATS
+                <div class="flex flex-wrap gap-3 justify-center mb-6">
+                    <button onclick="filterResultsBranch('all')" id="res-branch-btn-all" class="res-branch-tab px-6 py-3 font-label-caps text-xs tracking-widest gold-gradient text-white font-bold transition-all shadow-md uppercase rounded-full">
+                        TOUS LES RÉSULTATS (@resultatsList.Count)
                     </button>
-                    <button onclick="filterResultsBranch('visage')" id="res-btn-visage" class="res-tab px-6 py-3 font-label-caps text-xs tracking-widest bg-white border border-gold/30 text-primary hover:border-gold hover:text-gold transition-all shadow-sm uppercase font-bold rounded-full">
-                        CHIRURGIE DU VISAGE
+                    <button onclick="filterResultsBranch('visage')" id="res-branch-btn-visage" class="res-branch-tab px-6 py-3 font-label-caps text-xs tracking-widest bg-white border border-gold/40 text-primary hover:border-gold hover:text-gold transition-all shadow-sm uppercase font-bold rounded-full">
+                        CHIRURGIE DU VISAGE (@resultatsList.Count(r => (r.CategoryKey ?? "").ToLower().Contains("visage") || (r.CategoryTitle ?? "").ToLower().Contains("visage")))
                     </button>
-                    <button onclick="filterResultsBranch('poitrine')" id="res-btn-poitrine" class="res-tab px-6 py-3 font-label-caps text-xs tracking-widest bg-white border border-gold/30 text-primary hover:border-gold hover:text-gold transition-all shadow-sm uppercase font-bold rounded-full">
-                        CHIRURGIE DU SEIN (POITRINE)
+                    <button onclick="filterResultsBranch('poitrine')" id="res-branch-btn-poitrine" class="res-branch-tab px-6 py-3 font-label-caps text-xs tracking-widest bg-white border border-gold/40 text-primary hover:border-gold hover:text-gold transition-all shadow-sm uppercase font-bold rounded-full">
+                        CHIRURGIE DU SEIN (POITRINE) (@resultatsList.Count(r => (r.CategoryKey ?? "").ToLower().Contains("poitrine") || (r.CategoryTitle ?? "").ToLower().Contains("sein") || (r.CategoryTitle ?? "").ToLower().Contains("poitrine") || (r.CategoryKey ?? "").ToLower().Contains("mammaire")))
                     </button>
-                    <button onclick="filterResultsBranch('silhouette')" id="res-btn-silhouette" class="res-tab px-6 py-3 font-label-caps text-xs tracking-widest bg-white border border-gold/30 text-primary hover:border-gold hover:text-gold transition-all shadow-sm uppercase font-bold rounded-full">
-                        CHIRURGIE DE LA SILHOUETTE
+                    <button onclick="filterResultsBranch('silhouette')" id="res-branch-btn-silhouette" class="res-branch-tab px-6 py-3 font-label-caps text-xs tracking-widest bg-white border border-gold/40 text-primary hover:border-gold hover:text-gold transition-all shadow-sm uppercase font-bold rounded-full">
+                        CHIRURGIE DE LA SILHOUETTE (@resultatsList.Count(r => (r.CategoryKey ?? "").ToLower().Contains("silhouette") || (r.CategoryTitle ?? "").ToLower().Contains("silhouette")))
                     </button>
+                </div>
+
+                <!-- Sub-Category Filter Container (Reveals sub-categories when clicking each category) -->
+                <div id="subcat-branch-filter-container" class="mb-10 border-b border-gold/20 pb-6 transition-all duration-300">
+                    <div id="subcat-branch-buttons" class="flex flex-wrap gap-2 justify-center items-center">
+                        <!-- Dynamically populated via JS -->
+                    </div>
                 </div>
 
             <!-- Results Grid with Interactive Before/After Sliders -->
@@ -343,8 +350,11 @@
                     foreach (var item in resultatsList)
                     {
                         var catKey = string.IsNullOrEmpty(item.CategoryKey) ? "visage" : item.CategoryKey.ToLower();
+                        var subKey = string.IsNullOrEmpty(item.SubCategoryKey) ? DrAbdelfatehSalma.Models.ResultatTaxonomy.GetDefaultSubCategoryKey(catKey) : item.SubCategoryKey.ToLower();
                         var catTitle = string.IsNullOrEmpty(item.CategoryTitle) ? "CHIRURGIE" : item.CategoryTitle.ToUpper();
-                        <div class="result-branch-card bg-white border border-gold/30 rounded-2xl overflow-hidden shadow-md hover:shadow-xl transition-all duration-300 flex flex-col" data-cat="@catKey">
+                        var subTitle = string.IsNullOrEmpty(item.SubCategoryTitle) ? DrAbdelfatehSalma.Models.ResultatTaxonomy.GetSubCategoryTitle(catKey, subKey) : item.SubCategoryTitle;
+
+                        <div class="result-branch-card bg-white border border-gold/30 rounded-2xl overflow-hidden shadow-md hover:shadow-xl transition-all duration-300 flex flex-col" data-cat="@catKey" data-subcat="@subKey">
                             <div>
                                 <!-- BIG CLEAR SIDE-BY-SIDE BEFORE / AFTER IMAGES (FULL DETAILS UNCROPPED) -->
                                 <div class="grid grid-cols-2 bg-neutral-900 border-b border-gold/20 divide-x divide-white/10 cursor-pointer group" onclick="openCaseModal(@idx)" title="Cliquer pour agrandir">
@@ -367,10 +377,19 @@
 
                                 <!-- COMPACT DETAILS (NO WASTED WHITE SPACE) -->
                                 <div class="p-3.5 sm:p-4">
-                                    <div class="flex items-center justify-between gap-2 mb-1">
-                                        <span class="font-label-caps text-[9px] text-gold font-bold uppercase tracking-wider truncate">
-                                            @catTitle
-                                        </span>
+                                    <div class="flex items-center justify-between gap-2 mb-1.5 flex-wrap">
+                                        <div class="flex items-center gap-1.5 flex-wrap">
+                                            <span class="font-label-caps text-[9px] text-gold font-bold uppercase tracking-wider">
+                                                @catTitle
+                                            </span>
+                                            @if (!string.IsNullOrEmpty(subTitle))
+                                            {
+                                                <span class="text-gold/40 text-[9px]">•</span>
+                                                <span class="px-2 py-0.5 rounded-full bg-gold/10 text-gold text-[9px] font-label-caps font-bold uppercase border border-gold/25 tracking-wider">
+                                                    @subTitle
+                                                </span>
+                                            }
+                                        </div>
                                         <button type="button" onclick="openCaseModal(@idx)" class="text-gold hover:text-primary font-label-caps text-[9px] font-bold tracking-wider flex items-center gap-0.5 transition-colors flex-shrink-0">
                                             <span>VOIR EN GRAND</span>
                                             <span class="material-symbols-outlined text-xs">zoom_in</span>
@@ -397,6 +416,10 @@
                         <p class="font-body-lg text-base">Aucun résultat disponible pour le moment.</p>
                     </div>
                 }
+                <div id="no-filter-branch-match-msg" class="col-span-full text-center py-12 text-gray-400 hidden">
+                    <span class="material-symbols-outlined text-4xl text-gold/40 mb-2 block">filter_alt_off</span>
+                    <p class="font-body-md text-sm text-primary/70">Aucun cas clinique pour cette intervention pour le moment.</p>
+                </div>
             </div>
             </div>
         </div>
@@ -987,18 +1010,151 @@
     function checkResultsUnlockStatus() {}
 
     // ============================================
+    // RESULTS BRANCH FILTER & SUB-CATEGORY SYSTEM
+    // ============================================
+    const branchTaxonomy = {
+        visage: {
+            title: "Chirurgie du Visage",
+            subCategories: [
+                { key: "rhinoplastie", title: "Rhinoplastie" },
+                { key: "lifting-visage", title: "Lifting visage" },
+                { key: "blepharoplastie", title: "Blépharoplastie" },
+                { key: "genioplastie", title: "Génioplastie" },
+                { key: "otoplastie", title: "Otoplastie" }
+            ]
+        },
+        poitrine: {
+            title: "Chirurgie du Sein (Poitrine)",
+            subCategories: [
+                { key: "augmentation-mammaire", title: "Augmentation Mammaire" },
+                { key: "reduction-mammaire", title: "Réduction Mammaire" },
+                { key: "lifting-seins", title: "Lifting des seins" }
+            ]
+        },
+        silhouette: {
+            title: "Chirurgie de la Silhouette",
+            subCategories: [
+                { key: "liposuccion", title: "Liposuccion" },
+                { key: "abdominoplastie", title: "Abdominoplastie" },
+                { key: "lifting-bras", title: "Lifting des bras" }
+            ]
+        }
+    };
+
+    let currentBranchCat = 'all';
+    let currentBranchSub = 'all';
+
+    function filterResultsBranch(category, subCategory = 'all') {
+        currentBranchCat = category;
+        currentBranchSub = subCategory;
+
+        // Update active main category button
+        document.querySelectorAll('.res-branch-tab').forEach(btn => {
+            btn.classList.remove('gold-gradient', 'text-white', 'shadow-md');
+            btn.classList.add('bg-white', 'text-primary', 'border-gold/40', 'shadow-sm');
+        });
+
+        const activeBtn = document.getElementById('res-branch-btn-' + category);
+        if (activeBtn) {
+            activeBtn.classList.remove('bg-white', 'text-primary', 'border-gold/40', 'shadow-sm');
+            activeBtn.classList.add('gold-gradient', 'text-white', 'shadow-md');
+        }
+
+        renderSubCategoriesBranch(category, subCategory);
+        applyBranchCardFiltering();
+    }
+
+    function renderSubCategoriesBranch(category, activeSub = 'all') {
+        const subContainer = document.getElementById('subcat-branch-buttons');
+        if (!subContainer) return;
+        subContainer.innerHTML = '';
+
+        if (category === 'all') {
+            const btn = document.createElement('button');
+            btn.type = 'button';
+            btn.className = 'px-4 py-2 text-[11px] font-label-caps tracking-widest font-bold uppercase rounded-full transition-all gold-gradient text-white shadow-sm';
+            btn.textContent = 'TOUTES LES INTERVENTIONS';
+            subContainer.appendChild(btn);
+            return;
+        }
+
+        const catData = branchTaxonomy[category];
+        if (!catData) return;
+
+        // 1. "Tout" button for the category
+        const allBtn = document.createElement('button');
+        allBtn.type = 'button';
+        const isAllActive = (activeSub === 'all');
+        allBtn.className = 'subcat-branch-btn px-4 py-2 text-[11px] font-label-caps tracking-wider font-bold uppercase rounded-full transition-all ' + 
+            (isAllActive 
+                ? 'gold-gradient text-white shadow-sm' 
+                : 'bg-white hover:bg-gold/15 text-primary border border-gold/30 shadow-sm');
+        allBtn.textContent = 'TOUT (' + (category === 'visage' ? 'VISAGE' : category === 'poitrine' ? 'POITRINE' : 'SILHOUETTE') + ')';
+        allBtn.onclick = () => filterResultsBranch(category, 'all');
+        subContainer.appendChild(allBtn);
+
+        // 2. Subcategory pills with count
+        catData.subCategories.forEach(sub => {
+            const count = countBranchCards(category, sub.key);
+            const btn = document.createElement('button');
+            btn.type = 'button';
+            const isActive = (activeSub === sub.key);
+            btn.className = 'subcat-branch-btn px-4 py-2 text-[11px] font-label-caps tracking-wider font-bold uppercase rounded-full transition-all ' +
+                (isActive 
+                    ? 'gold-gradient text-white shadow-sm' 
+                    : 'bg-white hover:bg-gold/10 text-primary border border-gold/30 shadow-sm');
+            btn.innerHTML = `${sub.title} <span class="ml-1 opacity-75 text-[10px]">(${count})</span>`;
+            btn.onclick = () => filterResultsBranch(category, sub.key);
+            subContainer.appendChild(btn);
+        });
+    }
+
+    function countBranchCards(category, subCategory) {
+        const cards = document.querySelectorAll('.result-branch-card');
+        let count = 0;
+        cards.forEach(card => {
+            const matchCat = card.dataset.cat === category;
+            const matchSub = card.dataset.subcat === subCategory;
+            if (matchCat && matchSub) count++;
+        });
+        return count;
+    }
+
+    function applyBranchCardFiltering() {
+        const cards = document.querySelectorAll('.result-branch-card');
+        let visibleCount = 0;
+        cards.forEach(card => {
+            const matchCat = (currentBranchCat === 'all' || card.dataset.cat === currentBranchCat);
+            const matchSub = (currentBranchSub === 'all' || card.dataset.subcat === currentBranchSub);
+            if (matchCat && matchSub) {
+                card.style.display = 'flex';
+                visibleCount++;
+            } else {
+                card.style.display = 'none';
+            }
+        });
+
+        const noMsg = document.getElementById('no-filter-branch-match-msg');
+        if (noMsg) {
+            if (visibleCount === 0) noMsg.classList.remove('hidden');
+            else noMsg.classList.add('hidden');
+        }
+    }
+
+    // ============================================
     // LIGHTBOX CASE MODAL CONTROLLER
     // ============================================
     const resultsPageData = @Html.Raw(System.Text.Json.JsonSerializer.Serialize(resultatsList.Select((r, i) => new {
         id = i,
         key = "case-" + r.Id,
         category = string.IsNullOrEmpty(r.CategoryTitle) ? "CHIRURGIE" : r.CategoryTitle.ToUpper(),
+        subCategory = string.IsNullOrEmpty(r.SubCategoryTitle) ? "" : r.SubCategoryTitle,
         title = r.Title,
         desc = r.Description ?? "",
         beforeImg = r.BeforeImageUrl,
         afterImg = r.AfterImageUrl,
         spec = "Dr. Abdelfateh Slama",
-        tag1 = string.IsNullOrEmpty(r.CategoryTitle) ? "Chirurgie Esthétique" : r.CategoryTitle
+        tag1 = string.IsNullOrEmpty(r.SubCategoryTitle) ? (r.CategoryTitle ?? "Chirurgie") : r.SubCategoryTitle
     })));
 
     let currentResultsPageModalIndex = 0;
@@ -1017,7 +1173,11 @@
         if (!data) return;
 
         const catEl = document.getElementById('modal-category');
-        if (catEl) catEl.innerText = data.category;
+        if (catEl) {
+            catEl.innerText = data.subCategory 
+                ? `${data.category} • ${data.subCategory.toUpperCase()}`
+                : data.category;
+        }
         const titleEl = document.getElementById('modal-title');
         if (titleEl) titleEl.innerText = data.title;
         const descEl = document.getElementById('modal-desc');
@@ -1204,6 +1364,7 @@
 
     document.addEventListener('DOMContentLoaded', () => {
         checkResultsUnlockStatus();
+        filterResultsBranch('all');
     });
 </script>
 }

@@ -39,7 +39,15 @@
                                     <img src="@item.AfterImageUrl" alt="Après" class="w-12 h-12 object-cover border border-gold/30 rounded" />
                                 </td>
                                 <td class="p-4 font-bold text-white">@item.Title</td>
-                                <td class="p-4 text-gold">@item.CategoryTitle</td>
+                                <td class="p-4">
+                                    <div class="text-white font-semibold">@item.CategoryTitle</div>
+                                    @if (!string.IsNullOrEmpty(item.SubCategoryTitle))
+                                    {
+                                        <span class="inline-block mt-1 px-2 py-0.5 bg-gold/15 text-gold border border-gold/30 rounded text-[10px] font-bold tracking-wide uppercase">
+                                            @item.SubCategoryTitle
+                                        </span>
+                                    }
+                                </td>
                                 <td class="p-4 text-right space-x-2">
                                     <a asp-controller="Admin" asp-action="EditResultat" asp-route-id="@item.Id" class="px-3 py-1.5 bg-gold/20 text-gold hover:bg-gold hover:text-white rounded text-[11px] font-bold transition-all inline-block">
                                         Éditer

@@ -126,6 +126,34 @@ public static class DbInitializer
                     }
                 }
 
+                // Ensure SubCategory columns exist in Resultats table
+                using (var cmd = conn.CreateCommand())
+                {
+                    cmd.CommandText = "PRAGMA table_info(\"Resultats\");";
+                    var columns = new HashSet<string>(StringComparer.OrdinalIgnoreCase);
+                    using (var reader = cmd.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            var colName = reader["name"]?.ToString();
+                            if (!string.IsNullOrEmpty(colName)) columns.Add(colName);
+                        }
+                    }
+
+                    if (!columns.Contains("SubCategoryKey"))
+                    {
+                        using var alterCmd = conn.CreateCommand();
+                        alterCmd.CommandText = "ALTER TABLE \"Resultats\" ADD COLUMN \"SubCategoryKey\" TEXT NULL;";
+                        alterCmd.ExecuteNonQuery();
+                    }
+                    if (!columns.Contains("SubCategoryTitle"))
+                    {
+                        using var alterCmd = conn.CreateCommand();
+                        alterCmd.CommandText = "ALTER TABLE \"Resultats\" ADD COLUMN \"SubCategoryTitle\" TEXT NULL;";
+                        alterCmd.ExecuteNonQuery();
+                    }
+                }
+
                 if (wasClosed) conn.Close();
             }
             catch { }
@@ -136,6 +164,8 @@ public static class DbInitializer
             try
             {
                 context.Database.ExecuteSqlRaw(@"ALTER TABLE IF EXISTS ""Chirurgies"" ADD COLUMN IF NOT EXISTS ""Order"" integer NOT NULL DEFAULT 0;");
+                context.Database.ExecuteSqlRaw(@"ALTER TABLE IF EXISTS ""Resultats"" ADD COLUMN IF NOT EXISTS ""SubCategoryKey"" text NULL;");
+                context.Database.ExecuteSqlRaw(@"ALTER TABLE IF EXISTS ""Resultats"" ADD COLUMN IF NOT EXISTS ""SubCategoryTitle"" text NULL;");
             }
             catch { }
 
@@ -547,6 +577,8 @@ public static class DbInitializer
                 {
                     CategoryKey = "visage",
                     CategoryTitle = "CHIRURGIE DU VISAGE",
+                    SubCategoryKey = "rhinoplastie",
+                    SubCategoryTitle = "Rhinoplastie",
                     Title = "Rhinoplastie Primaire Ultrasonique",
                     Description = "Correction d'une déviation septale avec lissage du profil et projection contrôlée de la pointe. Sculpture piézo-électrique haute précision.",
                     BeforeImageUrl = "/images/rhino_before.png",
@@ -561,6 +593,8 @@ public static class DbInitializer
                 {
                     CategoryKey = "visage",
                     CategoryTitle = "CHIRURGIE DU VISAGE",
+                    SubCategoryKey = "lifting-visage",
+                    SubCategoryTitle = "Lifting visage",
                     Title = "Deep Plane Facelift & Cou",
                     Description = "Repositionnement profond des structures musculaires (SMAS) pour un rajeunissement naturel du visage et du cou sans tension cutanée.",
                     BeforeImageUrl = "/images/facelift_before.png",
@@ -575,6 +609,8 @@ public static class DbInitializer
                 {
                     CategoryKey = "poitrine",
                     CategoryTitle = "CHIRURGIE DU SEIN (POITRINE)",
+                    SubCategoryKey = "augmentation-mammaire",
+                    SubCategoryTitle = "Augmentation Mammaire",
                     Title = "Augmentation Mammaire Sur-Mesure",
                     Description = "Prothèses ergonomiques haute résilience insérées sous le plan pectoral pour un décolleté harmonieux et naturel.",
                     BeforeImageUrl = "/images/rhino_before.png",
@@ -589,6 +625,8 @@ public static class DbInitializer
                 {
                     CategoryKey = "silhouette",
                     CategoryTitle = "CHIRURGIE DE LA SILHOUETTE",
+                    SubCategoryKey = "liposuccion",
+                    SubCategoryTitle = "Liposuccion",
                     Title = "Liposculpture HD & Remodelage",
                     Description = "Remodelage harmonieux des contours de la silhouette avec affinement précis des lignes anatomiques.",
                     BeforeImageUrl = "/images/injections_before.png",
@@ -600,6 +638,7 @@ public static class DbInitializer
                     IsFeatured = false
                 }
             );
+            context.SaveChanges();
         }
 
         var allResultats = context.Resultats.ToList();
@@ -619,6 +658,56 @@ public static class DbInitializer
             {
                 res.CategoryKey = "silhouette";
                 res.CategoryTitle = "CHIRURGIE DE LA SILHOUETTE";
+            }
+
+            // Ensure SubCategoryKey and SubCategoryTitle are filled
+            if (string.IsNullOrWhiteSpace(res.SubCategoryKey))
+            {
+                var titleLower = (res.Title ?? "").ToLower();
+                var descLower = (res.Description ?? "").ToLower();
+
+                if (res.CategoryKey == "visage")
+                {
+                    if (titleLower.Contains("rhino") || descLower.Contains("rhino"))
+                        res.SubCategoryKey = "rhinoplastie";
+                    else if (titleLower.Contains("lift") || descLower.Contains("lift") || titleLower.Contains("face"))
+                        res.SubCategoryKey = "lifting-visage";
+                    else if (titleLower.Contains("bléph") || titleLower.Contains("bleph") || titleLower.Contains("paupière"))
+                        res.SubCategoryKey = "blepharoplastie";
+                    else if (titleLower.Contains("génio") || titleLower.Contains("genio") || titleLower.Contains("menton"))
+                        res.SubCategoryKey = "genioplastie";
+                    else if (titleLower.Contains("oto") || titleLower.Contains("oreille"))
+                        res.SubCategoryKey = "otoplastie";
+                    else
+                        res.SubCategoryKey = "rhinoplastie";
+                }
+                else if (res.CategoryKey == "poitrine")
+                {
+                    if (titleLower.Contains("réduct") || titleLower.Contains("reduct"))
+                        res.SubCategoryKey = "reduction-mammaire";
+                    else if (titleLower.Contains("lift") || titleLower.Contains("ptose"))
+                        res.SubCategoryKey = "lifting-seins";
+                    else
+                        res.SubCategoryKey = "augmentation-mammaire";
+                }
+                else if (res.CategoryKey == "silhouette")
+                {
+                    if (titleLower.Contains("abdomino") || titleLower.Contains("ventre"))
+                        res.SubCategoryKey = "abdominoplastie";
+                    else if (titleLower.Contains("bras") || titleLower.Contains("brachioplastie"))
+                        res.SubCategoryKey = "lifting-bras";
+                    else
+                        res.SubCategoryKey = "liposuccion";
+                }
+                else
+                {
+                    res.SubCategoryKey = ResultatTaxonomy.GetDefaultSubCategoryKey(res.CategoryKey);
+                }
+            }
+
+            if (string.IsNullOrWhiteSpace(res.SubCategoryTitle))
+            {
+                res.SubCategoryTitle = ResultatTaxonomy.GetSubCategoryTitle(res.CategoryKey, res.SubCategoryKey);
             }
         }
         context.SaveChanges();
